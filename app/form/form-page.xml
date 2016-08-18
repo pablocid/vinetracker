@@ -1,0 +1,53 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <Page.actionBar>
+        <ActionBar title="FORM" style="background-color:green; color:white;">
+            <!--<NavigationButton tap="{{goBack}}" text="go back" android.systemIcon = "ic_menu_back" style="background-color:white;"/>-->
+            <ActionBar.actionItems>
+                <ActionItem text="refresh" tap="{{ insert }}" position="left" style="color:white; background-color:white;"/>
+                <ActionItem text="isLogin" tap="{{ isLogin }}" position="left" android.position="popup"/>
+                <ActionItem text="Logout" tap="{{ logout }}" position="left" android.position="popup"/>
+            </ActionBar.actionItems>
+        </ActionBar>
+    </Page.actionBar>
+    <GridLayout rows="*">
+    <TabView>
+        <TabView.items>
+            <TabViewItem title="ID">
+            <TabViewItem.view>
+                <Label text="Label in Tab1" />
+            </TabViewItem.view>
+            </TabViewItem>
+            <TabViewItem title="BRIX">
+            <TabViewItem.view>
+                <Label text="Brix" />
+            </TabViewItem.view>
+            </TabViewItem>
+            <TabViewItem title="Foto">
+            <TabViewItem.view>
+                <Label text="Brix" />
+            </TabViewItem.view>
+            </TabViewItem>
+            <TabViewItem title="Color">
+            <TabViewItem.view>
+                <Label text="Label in Tab1" />
+            </TabViewItem.view>
+            </TabViewItem>
+            <TabViewItem title="Raquis">
+            <TabViewItem.view>
+                <Label text="Brix" />
+            </TabViewItem.view>
+            </TabViewItem>
+            <TabViewItem title="Racimo">
+            <TabViewItem.view>
+                <Label text="Label in Tab1" />
+            </TabViewItem.view>
+            </TabViewItem>
+            <TabViewItem title="SAVE">
+            <TabViewItem.view>
+                <Label text="Brix" />
+            </TabViewItem.view>
+            </TabViewItem>
+        </TabView.items>
+    </TabView>
+    </GridLayout>
+</Page>
