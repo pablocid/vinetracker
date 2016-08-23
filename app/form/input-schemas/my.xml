@@ -1,0 +1,4 @@
+<GridLayout columns="auto, *">
+    <Label text="{{ description }}" col="0"/>
+    <Label text="{{ value }}" col="1"/>
+</GridLayout>

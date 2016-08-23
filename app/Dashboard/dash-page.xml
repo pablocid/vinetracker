@@ -1,9 +1,9 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
     <Page.actionBar>
-        <ActionBar title="Evaluaciones" style="background-color:green; color:white;">
+        <ActionBar title="Dashboard" style="background-color:green; color:white;">
             <!--<NavigationButton tap="{{goBack}}" text="go back" android.systemIcon = "ic_menu_back" style="background-color:white;"/>-->
             <ActionBar.actionItems>
-                <ActionItem text="refresh" tap="{{ insert }}" position="left" style="color:white; background-color:white;"/>
+                <ActionItem text="refresh" tap="{{ insert }}" position="left" android.position="popup" style="color:white; background-color:white;"/>
                 <ActionItem text="isLogin" tap="{{ isLogin }}" position="left" android.position="popup"/>
                 <ActionItem text="Evaluación" tap="{{ toEvaluation }}" position="left" android.position="popup"/>
                 <ActionItem text="Logout" tap="{{ logout }}" position="left" android.position="popup"/>
@@ -11,11 +11,11 @@
         </ActionBar>
     </Page.actionBar>
     <GridLayout rows="*">
-        <ListView items="{{ items }}">
+        <ListView items="{{ items }}" itemTap="{{selectedOption}}">
                 <!--Describing how the element will look like-->
                 <ListView.itemTemplate>
-                    <GridLayout columns="30, *" style="font-size:25; padding:10;">
-                        <Label text="2" col="0" />
+                    <GridLayout columns="30, *" style="font-size:25; padding:10; padding-bottom:50; padding-top:50;">
+                        <Label text="" col="0" />
                         <Label text="{{ name }}" col="0" textWrap="true" col="1"/>
                     </GridLayout>
                 </ListView.itemTemplate>

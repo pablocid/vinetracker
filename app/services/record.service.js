@@ -1,18 +1,18 @@
-var makeRequest = require('./requestMaker.service').makeRequest;
-var IndividuoSchm = require("./schms-test").Individuo;
-var RecordFactory = require('./record.factory').RecordFactory;
-var urlQueryConfig = require('./helper.service').urlQueryConfig;
-
-exports.FindOne = function(config){
-
+var makeRequest = require('./requestMaker.service');
+var IndividuoSchm = require("./schms-test");
+var RecordFactory = require('./record.factory');
+var urlQueryConfig = require('./helper.service');
+exports.FindOne = function (config) {
     var options = {
-        url: urlQueryConfig(config),
-        method : 'GET',
-    }
-
-    return makeRequest(options).then(function (data) {
-        if(data.totalLength > 1){console.log('Existe más de un registro para este identificador'); }
-        var RecordConstructor = RecordFactory( IndividuoSchm() );
-         return new RecordConstructor(data.items[0]);
+        url: urlQueryConfig.urlQueryConfig(config),
+        method: 'GET',
+    };
+    return makeRequest.makeRequest(options).then(function (data) {
+        if (data.totalLength > 1) {
+            console.log('Existe más de un registro para este identificador');
+        }
+        var RecordConstructor = RecordFactory.RecordFactory(IndividuoSchm.Individuo());
+        return new RecordConstructor(data.items[0]);
     });
-}
+};
+//# sourceMappingURL=record.service.js.map
