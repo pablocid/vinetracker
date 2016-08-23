@@ -20,14 +20,14 @@ exports.createViewModel = function createViewModel() {
         });
     */
     var options = [
-        { name: "Consultar datos de plantas", link: "schema-viewer" },
+        { name: "Consultar datos de plantas", link: "records/record-identifier" },
         { name: "Ver evaluaciones disponibles" },
     ];
     viewModel.set('items', options);
     function selectedOption(args) {
         var itemIndex = args.index;
         if (itemIndex === 0) {
-            Frame.topmost().navigate('schema-viewer');
+            Frame.topmost().navigate('records/record-identifier');
         }
         //console.log(itemIndex);
     }

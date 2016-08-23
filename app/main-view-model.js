@@ -7,7 +7,7 @@ var frame = require('ui/frame');
 var reqAuth = require("./services/auth.service").ReqAuth;
 
 function createViewModel() {
-    frame.topmost().navigate("records/record-identifier");
+    //frame.topmost().navigate("records/record-identifier");
     var viewModel = new Observable();
     var navigationEntry = {
         moduleName: "Dashboard/dash-page",

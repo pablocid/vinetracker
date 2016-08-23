@@ -1,6 +1,6 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
     <Page.actionBar>
-        <ActionBar title="Dashboard" style="background-color:green; color:white;">
+        <ActionBar title="Dashboard" style="background-color:#2196F3; color:white;">
             <!--<NavigationButton tap="{{goBack}}" text="go back" android.systemIcon = "ic_menu_back" style="background-color:white;"/>-->
             <ActionBar.actionItems>
                 <ActionItem text="refresh" tap="{{ insert }}" position="left" android.position="popup" style="color:white; background-color:white;"/>

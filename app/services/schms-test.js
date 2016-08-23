@@ -84,7 +84,7 @@
                         {id:"validate", value:true},
                         {id:"validateType", value:true},
                         {id:"label", value:"Código Individuo"},
-                        {id:"visualization", value:true},
+                        {id:"visualization", value:false},
                         {id:"regex", value:null},
                         {id:"status", value: true},
                     ]
@@ -126,7 +126,7 @@
                         {id:"validate", value:true},
                         {id:"validateType", value:true},
                         {id:"label", value:"Código de cruzamiento"},
-                        {id:"visualization", value:true},
+                        {id:"visualization", value:false},
                         {id:"regex", value:null},
                         {id:"status", value: true},
                     ]

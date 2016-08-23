@@ -1,12 +1,12 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
 <Page.actionBar>
-      <ActionBar title="Welcome" style="background-color:green; color:white;"/>
+      <ActionBar title="Welcome" style="background-color:#2196F3; color:white;"/>
   </Page.actionBar>
   <GridLayout rows="*">
     <ScrollView row="0">
       <StackLayout>
         <Label text="VineTraker" class="title" style="color:black; font-size:50;"/>
-        <Button text="Enter" tap="{{toLoginPage}}" style="margin-top:40; background-color:green; font-size:25; padding:20; border-radius:30; color:white;"/>
+        <Button text="Enter" tap="{{toLoginPage}}" style="margin-top:40; background-color:#2196F3; font-size:40; padding:40; border-radius:50; color:white;"/>
       </StackLayout>
   </ScrollView>  
   </GridLayout>
