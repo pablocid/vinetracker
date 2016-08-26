@@ -4,10 +4,29 @@ var http = require('http');
 var camera = require("camera");
 var dialogs = require("ui/dialogs");
 var frame = require('ui/frame');
-var reqAuth = require("./services/auth.service").ReqAuth;
-
+var CheckLogin = require("./services/auth.service").checkLogin;
+var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
+var loader = new LoadingIndicator();
+ 
+// optional options 
+var options = {
+  message: 'check if is loggin',
+  progress: 0.65,
+  android: {
+    indeterminate: true,
+    cancelable: true,
+    max: 100,
+    progressNumberFormat: "%1d/%2d",
+    progressPercentFormat: 0.53,
+    progressStyle: 1,
+    secondaryProgress: 1
+  }
+};
 function createViewModel() {
-    //frame.topmost().navigate("records/record-identifier");
+    //frame.topmost().navigate("Dashboard/evaluation-availables");
+    frame.topmost().navigate("records/record-identifier");
+    //frame.topmost().navigate("testmodal/modal-view");
+    
     var viewModel = new Observable();
     var navigationEntry = {
         moduleName: "Dashboard/dash-page",
@@ -20,12 +39,15 @@ function createViewModel() {
     };
 
     viewModel.toLoginPage = function () {
-        if(reqAuth().isAuth()){
-            frame.topmost().navigate(navigationEntry);
-        }else{
-            frame.topmost().navigate("login/login-page");
-        }
-        
+        loader.show(options);
+        CheckLogin(function(isLog){
+            loader.hide();
+            if(isLog){
+                frame.topmost().navigate(navigationEntry);
+            }else{
+                frame.topmost().navigate("login/login-page");
+            }
+        });
     };
 
     return viewModel;

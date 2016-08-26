@@ -25,9 +25,10 @@ exports.createPage = function () {
         var navigationOptions = {
             moduleName: 'records/record-viewer',
             context: {
-                idCode: idCode,
+                id: idCode,
                 schm: "57a4e02ec830e2bdff1a1608",
-                filter: [{ key: 'cod_indiv', value: idCode, datatype: 'string' }]
+                key: "cod_indiv",
+                datatype: 'string'
             }
         };
         frame.topmost().navigate(navigationOptions);
@@ -48,7 +49,7 @@ exports.createPage = function () {
     navBtn.android.systemIcon = "ic_menu_back";
     var page = new page_1.Page();
     page.actionBar.title = "Plant identifier";
-    page.actionBar.actionItems.addItem(navBtn);
+    //page.actionBar.actionItems.addItem(navBtn);
     page.actionBar.setInlineStyle("background-color:#2196F3; color:white;");
     page.content = grid;
     page._applyXmlAttribute('xmlns', "http://schemas.nativescript.org/tns.xsd");

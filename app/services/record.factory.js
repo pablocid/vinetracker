@@ -8,59 +8,7 @@ exports.RecordFactory = function (schema) {
 
     RecordConstructor.prototype.schema = schema;
 
-    RecordConstructor.prototype.getListOfAttr = function(){
-
-        //filtrar por status;
-        var inputs = this.schema.inputs.filter(x=>x.status);
-        return inputs.map(x => {
-            return {
-                description : x.description,
-                value: this.getValueByIdAndDataType(x.id, x.dataType) 
-            }  
-        } );
-    }
-
-    RecordConstructor.prototype.getValueByIdAndDataType = function(id, dt){
-        var index = this.attributes.map(x=>x.id).indexOf(id);
-        if(index ===-1){ return false;}
-        return this.attributes[index][dt];
-    }
-
-    RecordConstructor.prototype.getListOfKeyAttrs = function () {
-
-        return this.getInputIds();
-    }
-    RecordConstructor.prototype.getAttrById = function(id){
-        var index = this.attributes.map(x=>x.id).indexOf(id);
-        if(index ===-1){ return null;}
-        
-        return this.attributes[index];
-    }
-    RecordConstructor.prototype.getDataTypeAttrById = function(id){
-        return this.getInputIds();
-    }
-
-    RecordConstructor.prototype.getInputIds = function(){
-        var keys =[];
-        for (var i = 0; i < this.schema.inputs.length; i++) {
-            var element = this.schema.inputs[i];
-            keys.push(element.id);
-        }
-        return keys;
-    }
-
-    RecordConstructor.prototype.getDataTypeById = function(id){
-        console.log('getDataTypeById');
-        var index = this.schema.inputs.map(x=>x.id).indexOf(id);
-        if(index !==-1){
-            console.log(this.schema.inputs[index].dataType)
-            return this.schema.inputs[index].dataType;
-        }else{
-            return null;
-        }
-    }
-
-    RecordConstructor.prototype.getIdsForShow = function(){
+    RecordConstructor.prototype.getIdsForShow = function(showNull){
 
         var self = this;
 
@@ -70,12 +18,13 @@ exports.RecordFactory = function (schema) {
             var dataType = self.findValueByVarHelper(x.attrSchm.input.attributes, "id", "dataType", "value");
             var attrValue;
             if(dataType){
-                attrValue = self.findValueByVarHelper(self.attributes, "id", x.id, dataType);
+                attrValue = self.findValueByVarHelper(self.attributes, "id", x.attrSchm.id, dataType);
             }
 
             //console.log(attrValue);
+            if(showNull){ attrValue="";}
             if(status && vis && attrValue !==null){
-                return x.id;
+                return x.attrSchm.id;
             }else{
                 return null;
             }
@@ -86,17 +35,11 @@ exports.RecordFactory = function (schema) {
     }
     RecordConstructor.prototype.getSchmAttr = function (attrId, key,type){
         var self = this;
-        var schmItem = this.findValueByVarHelper(self.schema.attributes, "id", attrId, null);
+        var schmItem = this.findValueByVarHelper(self.schema.attributes, "attrSchm.id", attrId, null);
         if(schmItem === null){ return null;}
 
         var value;
-
-        value = this.findValueByVarHelper(schmItem.attributes, "id", key, "value");
-        if(value != null ){ return value;}
-
-        value = this.findValueByVarHelper(schmItem.attrSchm.attributes, "id", key, "value");
-        if(value != null){ return value;}
-        
+        // con la opcion type debe tener prioridad de ejecución -  implementación del input/output
         if(type === "input"){
             value = this.findValueByVarHelper(schmItem.attrSchm.input.attributes, "id", key, "value");
             if(value !== null){ 
@@ -110,6 +53,13 @@ exports.RecordFactory = function (schema) {
                 return value;
             }
         }
+        // prioridad 2 la tiene la implementación del schema
+        value = this.findValueByVarHelper(schmItem.attributes, "id", key, "value");
+        if(value != null ){ return value;}
+
+        //prioridad 3 el la implementacion del atributo
+        value = this.findValueByVarHelper(schmItem.attrSchm.attributes, "id", key, "value");
+        if(value != null){ return value;}
 
         return null;
     }
@@ -135,10 +85,17 @@ exports.RecordFactory = function (schema) {
         
         return schmItem.attrSchm.input.name;
     }
+    
+    RecordConstructor.prototype.dottedKey= function(key, x){
+        return key.split('.').reduce(function (obj,i) {return obj[i]}, x)
+        
+    }
 
     RecordConstructor.prototype.findValueByVarHelper = function(array, key, value, target){
+        var self = this;
         if(!array.length){return null;}
-        var index = array.map(x=>x[key]).indexOf(value);
+
+        var index = array.map(x=> self.dottedKey(key, x) ).indexOf(value);
         if(index !== -1){
             if(target === null){
                 return array[index];

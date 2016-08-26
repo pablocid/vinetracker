@@ -9,14 +9,14 @@ import xml = require("xml");
 import builder = require("ui/builder");
 exports.Scan = function Scan(conf) {
     var self = this;
-    //conf.cb('683(10).6');
     //Elements
     var scan = new Button.Button();
     scan.text = "Scan";
     scan.setInlineStyle("background-color:#1565C0; color:white; border-radius:60; margin-top:100; padding: 30;");
     scan.on('tap',function(){
         //conf.cb('683(10).6');
-
+        conf.cb('57a8d8dfef44961377526953');
+/*
         //frame.topmost().goBack();
         barcodescanner.hasCameraPermission().then(
             function(granted) {
@@ -48,7 +48,7 @@ exports.Scan = function Scan(conf) {
                 console.log("No scan: " + error);
             }
         )
-
+*/
     });
 
     //Layout

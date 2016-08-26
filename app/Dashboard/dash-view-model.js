@@ -5,20 +5,6 @@ var Frame = require('ui/frame');
 var dialogs = require("ui/dialogs");
 exports.createViewModel = function createViewModel() {
     var viewModel = new observable_1.Observable();
-    /*
-    http.request({
-            url: "https://pmg-restful-dev.herokuapp.com/api/things",
-            method: "GET"
-        }).then(function (response) {
-            //var items = new ObsArray(response.content.toJSON());
-            var items = response.content.toJSON();
-            viewModel.set('items',items);
-        }, function (e) {
-             console.log("Error: "+ e.toJSON());
-             appSet.remove("Authorization");
-             return e;
-        });
-    */
     var options = [
         { name: "Consultar datos de plantas", link: "records/record-identifier" },
         { name: "Ver evaluaciones disponibles" },
@@ -29,23 +15,15 @@ exports.createViewModel = function createViewModel() {
         if (itemIndex === 0) {
             Frame.topmost().navigate('records/record-identifier');
         }
-        //console.log(itemIndex);
     }
     viewModel.set('selectedOption', selectedOption);
     function isLogin() {
-        Auth.isLogged(function (code) {
-            if (code === 200) {
-                //console.log('El usuario esta logeado');
-                dialogs.confirm("El usuario esta logeado").then(function (result) {
-                    console.log("Dialog result: " + result);
-                });
+        Auth.checkLogin(function (isLog) {
+            if (isLog) {
+                dialogs.alert("the user is logged");
             }
-            if (code === 401) {
-                //console.log('No autorizado');
-                dialogs.alert("El usuario no esta logeado")
-                    .then(function () {
-                    console.log("Dialog closed!");
-                });
+            else {
+                dialogs.alert("the user is NOT logged");
             }
         });
     }
@@ -57,8 +35,9 @@ exports.createViewModel = function createViewModel() {
     ;
     viewModel.set('toEvaluation', toEvaluation);
     function logout() {
-        Auth.logout();
-        Frame.topmost().navigate('main-page');
+        Auth.logout(function () {
+            Frame.topmost().navigate('main-page');
+        });
     }
     viewModel.set('logout', logout);
     function goBack() {

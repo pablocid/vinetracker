@@ -4,15 +4,20 @@ var  RecordFactory = require('./record.factory');
 var urlQueryConfig = require('./helper.service');
 
 exports.FindOne = function(config){
+    // config debe tener un id:string y un query:obj -  aparte debe tener la propiedad dir antes de entrar en urlQueryFindOne
+    config.dir = 'api/records';
+    if(config.id){
+        config.dir +='/'+config.id;
+    }else{ return null; }
 
     var options = {
-        url: urlQueryConfig.urlQueryConfig(config),
+        url: urlQueryConfig.urlQueryFindOne(config),
         method : 'GET',
     }
 
     return makeRequest.makeRequest(options).then(function (data) {
-        if(data.totalLength > 1){console.log('Existe más de un registro para este identificador'); }
+        //if(data.totalLength > 1){console.log('Existe más de un registro para este identificador'); }
         var RecordConstructor = RecordFactory.RecordFactory( IndividuoSchm.Individuo() );
-         return new RecordConstructor(data.items[0]);
+         return new RecordConstructor(data.record);
     });
 }

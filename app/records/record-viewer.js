@@ -1,4 +1,7 @@
 "use strict";
+/*
+    Esta página toma un identificador (, un schema y un filtro en el caso de no ser un ObjectId) como parámetro para entregar la visualización del registro
+*/
 var page_1 = require('ui/page');
 var action_bar_1 = require("ui/action-bar");
 var grid_layout_1 = require('ui/layouts/grid-layout');
@@ -27,16 +30,17 @@ var options = {
 function onNavigatedTo(args) {
     loader.show(options);
     var page = args.object;
-    var idCode = page.navigationContext.idCode;
+    var id = page.navigationContext.id;
     var schm = page.navigationContext.schm;
-    var filter = page.navigationContext.filter;
+    var key = page.navigationContext.key;
+    var datatype = page.navigationContext.datatype;
+    //console.log(id+" - "+schm+" - "+key+" - "+datatype);
     var config = {
-        dir: 'api/records',
+        id: id,
         query: {
-            page: '',
-            items: '',
             schm: schm,
-            filter: filter
+            key: key,
+            datatype: datatype
         }
     };
     var grid = new grid_layout_1.GridLayout();
@@ -45,8 +49,8 @@ function onNavigatedTo(args) {
         var tab = new tab_view_1.TabView();
         tab.items = [];
         for (var e = 0; e < data.getIdsForShow().length; e++) {
-            var identif = data.getIdsForShow()[e];
-            console.log(data.getAttr(identif));
+            var identif = data.getIdsForShow(false)[e];
+            //console.log(data.getAttr(identif));
             var config = {
                 bindingContext: {
                     value: data.getAttr(identif),
@@ -73,11 +77,13 @@ function onNavigatedTo(args) {
         .then(function (tab) {
         grid.addChild(tab);
         loader.hide();
+    }, function (err) {
+        loader.hide();
     });
     var navBtn = new action_bar_1.NavigationButton();
     navBtn.android.systemIcon = "ic_menu_back";
     page.actionBar.title = "Plant info";
-    page.actionBar.actionItems.addItem(navBtn);
+    //page.actionBar.actionItems.addItem(navBtn);
     page.actionBar.setInlineStyle("background-color:#2196F3; color:white;");
     page.content = grid;
 }

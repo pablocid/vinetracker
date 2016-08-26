@@ -1,6 +1,6 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
   <Page.actionBar>
-      <ActionBar title="Form Access" style="background-color:green; color:white;"/>
+      <ActionBar title="Form Access" style="background-color:#2196F3; color:white;"/>
   </Page.actionBar>
   <GridLayout rows="*">
     <ScrollView row="0">

@@ -12,13 +12,13 @@
     </Page.actionBar>
     <GridLayout rows="*">
         <ListView items="{{ items }}" itemTap="{{selectedOption}}">
-                <!--Describing how the element will look like-->
-                <ListView.itemTemplate>
-                    <GridLayout columns="30, *" style="font-size:25; padding:10; padding-bottom:50; padding-top:50;">
-                        <Label text="" col="0" />
-                        <Label text="{{ name }}" col="0" textWrap="true" col="1"/>
-                    </GridLayout>
-                </ListView.itemTemplate>
-            </ListView>
+            <!--Describing how the element will look like-->
+            <ListView.itemTemplate>
+                <GridLayout columns="30, *" style="font-size:25; padding:10; padding-bottom:50; padding-top:50;">
+                    <Label text="" col="0" />
+                    <Label text="{{ name }}" col="0" textWrap="true" col="1"/>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
     </GridLayout>
 </Page>

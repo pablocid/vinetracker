@@ -28,3 +28,19 @@ exports.urlQueryConfig = function urlConfig(config) {
     // ULR config ********************************************/
     return url;
 }
+
+exports.urlQueryFindOne = function urlConfig(config) {
+    // ULR config ********************************************/
+    var url = '';
+    // if dir is set, add to url var
+    if(config.dir){ url += config.dir; }
+    // query
+    if(config.query){
+        url += "?";
+        if(config.query.schm){ url += "schm="+ config.query.schm+"&"}else{console.log("no schema")}
+        if(config.query.key){ url += "key="+ config.query.key+"&"}else{console.log("no key")}
+        if(config.query.datatype){ url += "datatype="+ config.query.datatype+"&"}else{console.log("no datatype")}
+    }
+    // ULR config ********************************************/
+    return url;
+}
