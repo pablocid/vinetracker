@@ -334,7 +334,7 @@
             ]
         };
  }
-
+/* En este diseño es obligatorio que cada schema tenga un attributo y a su vez, cada attributo tengo un registro asociado attrConfig*/
  exports.newIndividuo = function(){
     return [
         { //campaña
@@ -366,7 +366,7 @@
                 {id:"type", string:"attribute"},
                 {id:"name", string:"código de individuo"},
                 {id:"input", reference:"57c0c529c8307cd5b82f445c"},
-                {id:"regex", value:"\d{1-5}(\d{2})\.\d{1-4}"},
+                {id:"regex", string:"\d{1-5}(\d{2})\.\d{1-4}"},
             ]
         },
         {
@@ -394,7 +394,8 @@
                 {id:"visualization", boolean:true},
                 {id:"validate", boolean:true},
                 {id:"required", boolean:true},
-                {id:"shortName", string:"old id"},
+                {id:"label", string:"Antiguo ID Perrinesco"},
+                {id:"shortName", string:"id antiguo"},
             ]
         },
         {
@@ -404,6 +405,34 @@
                 {id:"schema", reference:"57a4e02ec830e2bdff1a1608"},
                 {id:"attribute", reference:"cod_indiv"},
                 {id:"visualization", boolean:true},
+                {id:"outputLabel", string:"Código Individuo de la base de datos"},
+                {id:"inputLabel", string:"Scan the qr code"},
+                {id:"label", string:"Plant code"},
+                {id:"shortName", string:"codigo individuo"},
+                {id:"status", boolean:false},
+            ]
+        },
+        {
+            _id: "57c0e5eac8307cd5b82f4463",
+            attributes:[
+                {id:"type", string:"attrDatatype"},
+                {id:"schema", string:"reference"},
+                {id:"attribute", string:"reference"},
+                {id:"visualization", string:"boolean"},
+                {id:"outputLabel", string:"string"},
+                {id:"inputLabel", string:"string"},
+                {id:"label", string:"string"},
+                {id:"shortName", string:"string"},
+                {id:"status", string:"boolean"},
+                {id:"dataType", string:"string"},
+                {id:"name", string:"string"},
+                {id:"regex", string:"string"},
+                {id:"editable", string:"boolean"},
+                {id:"status", string:"boolean"},
+                {id:"registrationStart", string:"date"},
+                {id:"identifyMode", string:"string"},
+                {id:"identifyByAttr", string:"string"},
+                {id:"attrItems",string:"list" },
             ]
         }
     ]

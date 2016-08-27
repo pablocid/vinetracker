@@ -10,7 +10,7 @@ exports.makeRequest =function makeRequest(opts) {
     //if(!opts.content){ delete opts.content; }
 
     opts.headers = { "Content-Type": "application/json", "Authorization":appSet.getString("Authorization")};
-    console.log(JSON.stringify(opts));
+    //console.log(JSON.stringify(opts));
     var def = q.defer();
     http.request(opts)
         .then(

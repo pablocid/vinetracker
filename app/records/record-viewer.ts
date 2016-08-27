@@ -57,21 +57,22 @@ function onNavigatedTo(args) {
     var obs = new Observable();
 
     function tabItemMaker (data) {
+        console.log(data.getSchmAttr("registrationStart") )
         var tab = new TabView();
         tab.items = [];
-
-        for (var e = 0; e < data.getIdsForShow().length; e++) {
-            var identif = data.getIdsForShow(false)[e];
+        var validIds = data.getIdsForShow();
+        for (var e = 0; e < validIds.length; e++) {
+            var identif = validIds[e];
             //console.log(data.getAttr(identif));
             var config = {
                 bindingContext:{
                     value: data.getAttr(identif),
-                    description: data.getSchmAttr(identif, "label")
+                    description: data.getInputAttr(identif, "label")
                 },
                 cb:''
             };
             var tabItem = new TabViewItem();
-            tabItem.title =  data.getSchmAttr(identif,"shortName");
+            tabItem.title =  data.getInputAttr(identif,"shortName");
             tabItem.view = new SimpleText.SimpleText(config).getView();
             tab.items.push(tabItem);
             

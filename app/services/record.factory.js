@@ -1,17 +1,22 @@
 var _ = require("lodash");
 
-exports.RecordFactory = function (schema) {
+exports.RecordFactory = function (schema, newschema) {
     
     function RecordConstructor(record){
         _.assignIn(this,record);
     }
 
     RecordConstructor.prototype.schema = schema;
-
+    RecordConstructor.prototype.newschema = newschema;
     RecordConstructor.prototype.getIdsForShow = function(showNull){
 
         var self = this;
+        return this.newschema
+        .filter(o=>self.findValueByVarHelper(o.attributes, "id","type", "string") ==='attrConfig' && self.findValueByVarHelper(o.attributes, "id", "visualization","boolean") === true)
+        .map(x=>self.findValueByVarHelper(x.attributes,'id','attribute','reference') );
 
+/*
+        console.log(this.newschema);
         var idsArray = this.schema.attributes.map(x=>{
             var status = self.findValueByVarHelper(x.attributes, "id", "status", "value");
             var vis = self.findValueByVarHelper(x.attributes, "id", "visualization", "value");
@@ -32,36 +37,66 @@ exports.RecordFactory = function (schema) {
         }).filter(x=>x);
 
         return idsArray;
+*/
+
     }
-    RecordConstructor.prototype.getSchmAttr = function (attrId, key,type){
+    RecordConstructor.prototype.getSchmAttr = function (key){
         var self = this;
-        var schmItem = this.findValueByVarHelper(self.schema.attributes, "attrSchm.id", attrId, null);
-        if(schmItem === null){ return null;}
-
-        var value;
-        // con la opcion type debe tener prioridad de ejecución -  implementación del input/output
-        if(type === "input"){
-            value = this.findValueByVarHelper(schmItem.attrSchm.input.attributes, "id", key, "value");
-            if(value !== null){ 
-                return value;
-            }
+        
+        var dataTypes =  this.newschema
+        .filter(o=>self.findValueByVarHelper(o.attributes, "id","type", "string") ==='attrDatatype');
+        if(dataTypes.length === 1 && dataTypes[0].attributes){
+            dataTypes = dataTypes[0].attributes;
+        }else{
+            console.log("Error, error en los datatypes");
+            return null;
+        }
+        
+        var schmAttr =  this.newschema
+        .filter(o=>self.findValueByVarHelper(o.attributes, "id","type", "string") ==='schema');
+        if(schmAttr.length === 1 && schmAttr[0].attributes){
+            schmAttr = schmAttr[0].attributes;
+        }else{
+            console.log("Error, error en los schmAttr");
+            return null;
         }
 
-        if(type === "output"){
-            value = this.findValueByVarHelper(schmItem.attrSchm.output.attributes, "id", key, "value");
-            if(value !== null){ 
-                return value;
-            }
+        return self.findValueByVarHelper(schmAttr, "id", key, self.findValueByVarHelper(dataTypes, "id", key, "string") );
+       
+    }
+    RecordConstructor.prototype.getInputAttr = function (attrId, key){
+        var self = this;
+        
+        var dataTypes =  this.newschema
+        .filter(o=>self.findValueByVarHelper(o.attributes, "id","type", "string") ==='attrDatatype');
+        if(dataTypes.length === 1 && dataTypes[0].attributes){
+            dataTypes = dataTypes[0].attributes;
+        }else{
+            console.log("Error, error en los datatypes");
+            return null;
         }
-        // prioridad 2 la tiene la implementación del schema
-        value = this.findValueByVarHelper(schmItem.attributes, "id", key, "value");
-        if(value != null ){ return value;}
+        
+        var attrConf = this.newschema
+        .filter(o=>self.findValueByVarHelper(o.attributes, "id","type", "string") ==='attrConfig')
+        .filter(o=>self.findValueByVarHelper(o.attributes, "id","attribute", "reference") ===attrId);
+        
+        if(attrConf.length===1 && attrConf[0].attributes){
+            attrConf = attrConf[0].attributes;
+            attrConf = self.findValueByVarHelper(attrConf, "id", key, self.findValueByVarHelper(dataTypes, "id", key, "string") );
+        }else { attrConf = false; }
 
-        //prioridad 3 el la implementacion del atributo
-        value = this.findValueByVarHelper(schmItem.attrSchm.attributes, "id", key, "value");
-        if(value != null){ return value;}
+        var inputAttr = this.newschema
+        .filter(o=>self.findValueByVarHelper(o.attributes, "id","type", "string") ==='input')
+        .filter(o=>self.findValueByVarHelper(o.attributes, "id","attribute", "reference") ===attrId);
+        
+        if(inputAttr.length===1 && inputAttr[0].attributes){
+            inputAttr = inputAttr[0].attributes;
+            inputAttr = self.findValueByVarHelper(inputAttr, "id", key, self.findValueByVarHelper(dataTypes, "id", key, "string") );
+        }else { inputAttr = false; }
 
-        return null;
+        
+        return attrConf || inputAttr || null;
+
     }
     RecordConstructor.prototype.getAttr = function (key){
         var self = this;
@@ -105,6 +140,46 @@ exports.RecordFactory = function (schema) {
         }else{
             return null;
         }
+    }
+
+    /*********** deprecados */
+    RecordConstructor.prototype.getSchmAttrs = function (attrId, key, level){
+        var self = this;
+        //filtrar por attributo attrId
+
+        //si no esta el level la prioridad es schema > attribute > input 
+        // input tiene prioridad
+        if(level ==="input"){ // filtrar type input de solo configuracion
+        }
+
+
+        var schmItem = this.findValueByVarHelper(self.schema.attributes, "attrSchm.id", attrId, null);
+        if(schmItem === null){ return null;}
+
+        var value;
+        // con la opcion type debe tener prioridad de ejecución -  implementación del input/output
+        if(level === "input"){
+            value = this.findValueByVarHelper(schmItem.attrSchm.input.attributes, "id", key, "value");
+            if(value !== null){ 
+                return value;
+            }
+        }
+
+        if(level === "output"){
+            value = this.findValueByVarHelper(schmItem.attrSchm.output.attributes, "id", key, "value");
+            if(value !== null){ 
+                return value;
+            }
+        }
+        // prioridad 2 la tiene la implementación del schema
+        value = this.findValueByVarHelper(schmItem.attributes, "id", key, "value");
+        if(value != null ){ return value;}
+
+        //prioridad 3 el la implementacion del atributo
+        value = this.findValueByVarHelper(schmItem.attrSchm.attributes, "id", key, "value");
+        if(value != null){ return value;}
+
+        return null;
     }
     return RecordConstructor;
 }
