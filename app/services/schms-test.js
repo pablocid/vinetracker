@@ -409,8 +409,7 @@
                 {id:"inputLabel", string:"Scan the qr code"},
                 {id:"label", string:"Plant code"},
                 {id:"shortName", string:"codigo individuo"},
-                {id:"status", boolean:false},
-            ]
+                {id:"status", boolean:false}            ]
         },
         {
             _id: "57c0e5eac8307cd5b82f4463",
