@@ -6,7 +6,7 @@ exports.Evaluacion = function(){
             attributes:[
                 {id:"name", string:"Grados brix 2016-20017 t1"},
                 {id:"type", string:"schema"},
-                {id:"attrItems", list:["indiv_ref", "brix_meter"]}, //list or listOfRef // give order
+                {id:"attrItems", list:["indiv_ref", "grados_brix"]}, //list or listOfRef // give order
                 {id:"editable", boolean:true},
                 {id:"status", boolean:true},
                 {id:"registrationStart", date:"2016-12-15"},
@@ -27,11 +27,12 @@ exports.Evaluacion = function(){
             ]
         },
         {
-            _id:"brix_meter",
+            _id:"grados_brix",
             attributes:[
                 {id:"type", string:"attribute"},
                 {id:"name", string:"ingreso de grados brix"},
                 {id:"input", reference:"57c0c529c8307cd5b82f445c"},
+                {id:"attrItems", list:["indiv_ref", "grados_brix"]}, 
                 {id:"regex", string:"\d{1-2}"},
             ]
         },
@@ -52,29 +53,37 @@ exports.Evaluacion = function(){
             ]
         },
         {
+            _id:"sdadasdadasdasd",
+            attributes:[
+                {id:"name", string:"integer_decimal"},
+                {id:"type", string:"input"},
+                {id:"dataType", string:"number"}
+            ]
+        },
+        {
             _id: "57c0c585c8307cd5b82f445f",
             attributes:[
                 {id:"type", string:"attrConfig"},
-                {id:"schema", reference:"57a4e02ec830e2bdff1a1608"},
-                {id:"attribute", reference:"id"},
+                {id:"schema", reference:"xxxxxxxxxxxxxxxxxxxxxxxxx"},
+                {id:"attribute", reference:"indiv_ref"},
                 {id:"visualization", boolean:true},
                 {id:"validate", boolean:true},
                 {id:"required", boolean:true},
-                {id:"label", string:"Antiguo ID Perrinesco"},
-                {id:"shortName", string:"id antiguo"},
+                {id:"label", string:"Identificado de individuo"},
+                {id:"shortName", string:"individuo"},
             ]
         },
         {
             _id: "57c0c590c8307cd5b82f4461",
             attributes:[
                 {id:"type", string:"attrConfig"},
-                {id:"schema", reference:"57a4e02ec830e2bdff1a1608"},
-                {id:"attribute", reference:"cod_indiv"},
+                {id:"schema", reference:"xxxxxxxxxxxxxxxxxxxxxxxxx"},
+                {id:"attribute", reference:"grados_brix"},
                 {id:"visualization", boolean:true},
-                {id:"outputLabel", string:"Código Individuo de la base de datos"},
+                {id:"outputLabel", string:"Grados brix"},
                 {id:"inputLabel", string:"Scan the qr code"},
-                {id:"label", string:"Plant code"},
-                {id:"shortName", string:"codigo individuo"},
+                {id:"label", string:"Grados brix"},
+                {id:"shortName", string:"brix"},
                 {id:"status", boolean:false}            ]
         },
         {

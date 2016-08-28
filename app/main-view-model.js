@@ -23,7 +23,7 @@ var options = {
   }
 };
 function createViewModel() {
-    //frame.topmost().navigate("Dashboard/evaluation-availables");
+    //frame.topmost().navigate("evaluations/evaluation-create");
     frame.topmost().navigate("records/record-identifier");
     //frame.topmost().navigate("testmodal/modal-view");
     

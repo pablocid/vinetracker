@@ -46,22 +46,24 @@ function onNavigatedTo(args) {
     var grid = new grid_layout_1.GridLayout();
     var obs = new observable_1.Observable();
     function tabItemMaker(data) {
-        console.log(data.getSchmAttr("registrationStart"));
+        //console.log(JSON.stringify(data))
+        //console.log(data.getSchmAttr("registrationStart") )
         var tab = new tab_view_1.TabView();
         tab.items = [];
         var validIds = data.getIdsForShow();
+        //console.log(validIds.length)
         for (var e = 0; e < validIds.length; e++) {
             var identif = validIds[e];
             //console.log(data.getAttr(identif));
             var config = {
                 bindingContext: {
                     value: data.getAttr(identif),
-                    description: data.getInputAttr(identif, "label")
+                    description: data.getAttrInputConf(identif, "label") //data.getSchmAttrInputConf(identif, "visualization")//
                 },
                 cb: ''
             };
             var tabItem = new tab_view_1.TabViewItem();
-            tabItem.title = data.getInputAttr(identif, "shortName");
+            tabItem.title = data.getAttrInputConf(identif, "shortName");
             tabItem.view = new SimpleText.SimpleText(config).getView();
             tab.items.push(tabItem);
         }

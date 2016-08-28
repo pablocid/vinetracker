@@ -7,14 +7,12 @@ exports.createViewModel = function createViewModel() {
     var viewModel = new observable_1.Observable();
     var options = [
         { name: "Consultar datos de plantas", link: "records/record-identifier" },
-        { name: "Ver evaluaciones disponibles" },
+        { name: "Ver evaluaciones disponibles", link: "evaluations/evaluation-availables" },
     ];
     viewModel.set('items', options);
     function selectedOption(args) {
-        var itemIndex = args.index;
-        if (itemIndex === 0) {
-            Frame.topmost().navigate('records/record-identifier');
-        }
+        var index = args.index;
+        Frame.topmost().navigate(options[index].link);
     }
     viewModel.set('selectedOption', selectedOption);
     function isLogin() {

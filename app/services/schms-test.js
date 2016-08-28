@@ -337,60 +337,167 @@
 /* En este diseño es obligatorio que cada schema tenga un attributo y a su vez, cada attributo tengo un registro asociado attrConfig*/
  exports.newIndividuo = function(){
     return [
+        /*** **********  SCHEMA *******************+ */
         { //campaña
             _id:"57a4e02ec830e2bdff1a1608",
+           type:"schema",
             attributes:[
                 {id:"name", string:"individuos"},
-                {id:"type", string:"schema"},
-                {id:"attrItems", list:["id","cod_indiv"]}, //list or listOfRef
+                {id:"attributes", list:["id","cod_indiv"]}, //list or listOfRef
+                {id:"keys", listOfObj:[
+                    {id:"editable", string:"boolean"},
+                    {id:"status", string:"boolean"},
+                    {id:"registrationStart", string:"date"},
+                    {id:"identifyMode", string:"string"},
+                    {id:"identifyByAttr", string:"string"} ]},
                 {id:"editable", boolean:true},
                 {id:"status", boolean:true},
                 {id:"registrationStart", date:"2016-11-1"},
                 {id:"identifyMode", string:"scan"},
-                {id:"identifyByAttr", string:"cod_indiv"},
-                {id:"listOfAttr",  listOfObj:[{id:"editable", value:"boolean"},{id:"attrItems", value:"list"}, ]}
+                {id:"identifyByAttr", string:"cod_indiv"}
             ]
         },
+        /****  ID *******/
         {
-            _id:"id",
+            _id:"57c353b2c8307cd5b82f4479",
+            type:"attribute",
             attributes:[
-                {id:"type", string:"attribute"},//directa implementación
                 {id:"name", string:"id"},
-                {id:"input", reference:"57c0c508c8307cd5b82f445a"},
-                {id:"regex", string:"\d{1-5}"}
-            ]
-        },
-        {
-            _id:"cod_indiv",
-            attributes:[
-                {id:"type", string:"attribute"},
-                {id:"name", string:"código de individuo"},
-                {id:"input", reference:"57c0c529c8307cd5b82f445c"},
-                {id:"regex", string:"\d{1-5}(\d{2})\.\d{1-4}"},
+                {id:"input", reference:"57c0c508c8307cd5b82f445a"}
             ]
         },
         {
             _id:"57c0c508c8307cd5b82f445a",
+            type:"input",
             attributes:[
                 {id:"name", string:"simple_number"},
-                {id:"type", string:"input"},
-                {id:"dataType", string:"number"}
+                {id:"dataType", string:"number"},
+                {id:"attrInputConf", listOfObj:[
+                    {id:"label", string:"string"},
+                    {id:"inputLable", string:"string"},
+                    {id:"shortName",  string:"string"},
+                    {id:"regex", string:"string"},
+                    {id:"rangeMax", string:"number"},
+                    {id:"rangeMin", string:"number"},
+                    {id:"validatorMsg", string:"string"}]},
+                {id:"schmAttrInputConf", listOfObj:[
+                    {id:"visualization", string:"boolean"},
+                    {id:"createble", string:"boolean"},
+                    {id:"editable", string:"boolean"},
+                    {id:"validate", string:"boolean"},
+                    {id:"required", string:"boolean"},
+                    {id:"validatorMsg", string:"string"}]},
+            ]
+        },
+        {
+            _id: "57c0c585c8307cd5b82f445f",
+            type:"attrInputConf",
+            attributes:[
+                {id:"attribute", reference:"57c353b2c8307cd5b82f4479"},
+                {id:"input", reference:"57c0c508c8307cd5b82f445a"},
+                {id:"label", string:"OLDIE ID"},
+                {id:"inputLable", string:"OLDIE ID output"},
+                {id:"shortName", string:"id antiguo"},
+                {id:"regex", string:""},
+                {id:"rangeMax", number:100000},
+                {id:"rangeMin", number:1},
+            ]
+        },
+        {
+            _id: "57c32362c8307cd5b82f446c",
+            type:"schmAttrInputConf",
+            attributes:[
+                {id:"schema", reference:"57a4e02ec830e2bdff1a1608"},
+                {id:"attribute", reference:"57c353b2c8307cd5b82f4479"},
+                {id:"input", reference:"57c0c508c8307cd5b82f445a"},
+                {id:"visualization", boolean:true},
+                {id:"createble", boolean:true},
+                {id:"editable", boolean:true},
+                {id:"validate", boolean:true},
+                {id:"required", boolean:true},
+            ]
+        },
+        /****  COD_INDIV */
+        {
+            _id:"cod_indiv",
+            type:"attribute",
+            attributes:[
+                {id:"name", string:"código de individuo"},
+                {id:"input", reference:"57c3202cc8307cd5b82f4465"},
+            ]
+        },
+        {
+            _id:"57c3202cc8307cd5b82f4465",
+            type:"input",
+            attributes:[
+                {id:"name", string:"simple_text"},
+                {id:"dataType", string:"string"},
+                {id:"attrInputConf", listOfObj:[
+                    {id:"label", string:"string"},
+                    {id:"inputLable", string:"string"},
+                    {id:"shortName",  string:"string"},
+                    {id:"regex", string:"string"},
+                    {id:"validatorMsg", string:"string"}]},
+                {id:"schmAttrInputConf", listOfObj:[
+                    {id:"visualization", string:"boolean"},
+                    {id:"createble", string:"boolean"},
+                    {id:"editable", string:"boolean"},
+                    {id:"validate", string:"boolean"},
+                    {id:"required", string:"boolean"},
+                    {id:"validatorMsg", string:"string"}]},
+            ]
+        },
+        {
+            _id: "57c32665c8307cd5b82f4472",
+            type:"attrInputConf",
+            attributes:[
+                {id:"attribute", reference:"cod_indiv"},
+                {id:"input", reference:"57c3202cc8307cd5b82f4465"},
+                {id:"label", string:"Plant code"},
+                {id:"inputLable", string:"Plant code"},
+                {id:"shortName", string:"cod indiv"},
+                {id:"regex", string:""}
+            ]
+        },
+        {
+            _id: "57c326dcc8307cd5b82f4474",
+            type:"schmAttrInputConf",
+            attributes:[
+                {id:"schema", reference:"57a4e02ec830e2bdff1a1608"},
+                {id:"attribute", reference:"cod_indiv"},
+                {id:"input", reference:"57c3202cc8307cd5b82f4465"},
+                {id:"visualization", boolean:true},
+                {id:"createble", boolean:true},
+                {id:"editable", boolean:true},
+                {id:"validate", boolean:true},
+                {id:"required", boolean:true},
+            ]
+        },
+        /*
+        {
+            _id:"cod_indiv",
+            type:"attribute",
+            attributes:[
+                {id:"type", string:"attribute"},
+                {id:"name", string:"código de individuo"},
+                {id:"input", reference:"57c0c529c8307cd5b82f445c"},
             ]
         },
         {
             _id:"57c0c529c8307cd5b82f445c",
             attributes:[
-                {id:"name", string:"simple_number"},
                 {id:"type", string:"input"},
-                {id:"dataType", string:"string"}
+                {id:"name", string:"simple_number"},
+                {id:"dataType", string:"string"},
+                {id:"optAttr", list:["type","name","dataType"]},
             ]
         },
         {
             _id: "57c0c585c8307cd5b82f445f",
+            type:"attrConfig",
             attributes:[
-                {id:"type", string:"attrConfig"},
-                {id:"schema", reference:"57a4e02ec830e2bdff1a1608"},
                 {id:"attribute", reference:"id"},
+                {id:"input", reference:"57c0c508c8307cd5b82f445a"},
                 {id:"visualization", boolean:true},
                 {id:"validate", boolean:true},
                 {id:"required", boolean:true},
@@ -404,6 +511,8 @@
                 {id:"type", string:"attrConfig"},
                 {id:"schema", reference:"57a4e02ec830e2bdff1a1608"},
                 {id:"attribute", reference:"cod_indiv"},
+                {id:"input", reference:"57c0c508c8307cd5b82f445a"},
+                {id:"attrItems", list:["type","schema","attribute","input"]},
                 {id:"visualization", boolean:true},
                 {id:"outputLabel", string:"Código Individuo de la base de datos"},
                 {id:"inputLabel", string:"Scan the qr code"},
@@ -413,26 +522,12 @@
         },
         {
             _id: "57c0e5eac8307cd5b82f4463",
+            type:"schmKeyLib",
             attributes:[
-                {id:"type", string:"attrDatatype"},
                 {id:"schema", string:"reference"},
-                {id:"attribute", string:"reference"},
-                {id:"visualization", string:"boolean"},
-                {id:"outputLabel", string:"string"},
-                {id:"inputLabel", string:"string"},
-                {id:"label", string:"string"},
-                {id:"shortName", string:"string"},
-                {id:"status", string:"boolean"},
-                {id:"dataType", string:"string"},
-                {id:"name", string:"string"},
-                {id:"regex", string:"string"},
-                {id:"editable", string:"boolean"},
-                {id:"status", string:"boolean"},
-                {id:"registrationStart", string:"date"},
-                {id:"identifyMode", string:"string"},
-                {id:"identifyByAttr", string:"string"},
-                {id:"attrItems",string:"list" },
+                {id:"description", string:"Esta key hace referencia al schema con respecto a schmAttrInputConf"}
             ]
         }
+        */
     ]
  }

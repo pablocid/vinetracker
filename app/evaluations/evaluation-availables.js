@@ -19,7 +19,7 @@ exports.createPage = function () {
     function onTapItem(args) {
         console.log(args.index);
         var navigationOptions = {
-            moduleName: 'records/record-viewer',
+            moduleName: 'evaluations/evaluation-records',
             context: {
                 schema: array[args.index].schema
             }
