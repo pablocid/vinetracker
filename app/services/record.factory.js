@@ -104,7 +104,7 @@ exports.RecordFactory = function (schema, newschema) {
     RecordConstructor.prototype.getAttr = function (attrId){
         var self = this;
         var dataType = self.getInputAttr(attrId, "dataType");
-
+        console.log("dataType : "+dataType + " -  attrId: "+attrId)
         if(dataType != null ){
             var dato = this.findValueByVarHelper(self.attributes, "id", attrId, dataType);
           return dato;

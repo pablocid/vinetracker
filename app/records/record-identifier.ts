@@ -34,7 +34,7 @@ exports.createPage = function () {
             context:{
                 id: idCode,
                 schm: "57a4e02ec830e2bdff1a1608",
-                key: "cod_indiv",
+                key: "57c3583bc8307cd5b82f447d",
                 datatype:'string'
             }
         }

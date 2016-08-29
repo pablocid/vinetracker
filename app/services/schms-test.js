@@ -336,7 +336,7 @@
  }
 /* En este diseño es obligatorio que cada schema tenga un attributo y a su vez, cada attributo tengo un registro asociado attrConfig*/
  exports.newIndividuo = function(){
-    return [
+    var r1 = [
         /*** **********  SCHEMA *******************+ */
         { //campaña
             _id:"57a4e02ec830e2bdff1a1608",
@@ -419,7 +419,7 @@
         },
         /****  COD_INDIV */
         {
-            _id:"cod_indiv",
+            _id:"57c3583bc8307cd5b82f447d",
             type:"attribute",
             attributes:[
                 {id:"name", string:"código de individuo"},
@@ -451,7 +451,7 @@
             _id: "57c32665c8307cd5b82f4472",
             type:"attrInputConf",
             attributes:[
-                {id:"attribute", reference:"cod_indiv"},
+                {id:"attribute", reference:"57c3583bc8307cd5b82f447d"},
                 {id:"input", reference:"57c3202cc8307cd5b82f4465"},
                 {id:"label", string:"Plant code"},
                 {id:"inputLable", string:"Plant code"},
@@ -464,7 +464,7 @@
             type:"schmAttrInputConf",
             attributes:[
                 {id:"schema", reference:"57a4e02ec830e2bdff1a1608"},
-                {id:"attribute", reference:"cod_indiv"},
+                {id:"attribute", reference:"57c3583bc8307cd5b82f447d"},
                 {id:"input", reference:"57c3202cc8307cd5b82f4465"},
                 {id:"visualization", boolean:true},
                 {id:"createble", boolean:true},
@@ -530,4 +530,375 @@
         }
         */
     ]
+
+
+var r2 = [
+    {
+      "_id": "57a4e02ec830e2bdff1a1608",
+      "name": "individuos",
+      "type": "schema",
+      "attributes": [
+        {
+          "id": "name",
+          "string": "individuos",
+          "list": []
+        },
+        {
+          "id": "attributes",
+          "list": [
+            "57c353b2c8307cd5b82f4479",
+            "57c3583bc8307cd5b82f447d"
+          ]
+        },
+        {
+          "id": "keys",
+          "listOfObj": [
+            {
+              "string": "boolean",
+              "id": "editable"
+            },
+            {
+              "string": "boolean",
+              "id": "status"
+            },
+            {
+              "string": "date",
+              "id": "registrationStart"
+            },
+            {
+              "string": "string",
+              "id": "identifyMode"
+            },
+            {
+              "string": "string",
+              "id": "identifyByAttr"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "editable",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "status",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "registrationStart",
+          "date": "2016-11-01T00:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "identifyMode",
+          "string": "scan",
+          "list": []
+        },
+        {
+          "id": "identifyByAttr",
+          "string": "cod_indiv",
+          "list": []
+        }
+      ],
+      "updated": []
+    },
+    {
+      "_id": "57c353b2c8307cd5b82f4479",
+      "type": "attribute",
+      "attributes": [
+        {
+          "id": "name",
+          "string": "id",
+          "list": []
+        },
+        {
+          "id": "input",
+          "reference": "57c0c508c8307cd5b82f445a",
+          "list": []
+        }
+      ],
+      "updated": []
+    },
+    {
+      "_id": "57c3583bc8307cd5b82f447d",
+      "type": "attribute",
+      "attributes": [
+        {
+          "id": "name",
+          "string": "código de individuo",
+          "list": []
+        },
+        {
+          "id": "input",
+          "reference": "57c3202cc8307cd5b82f4465",
+          "list": []
+        }
+      ],
+      "updated": []
+    },
+    {
+      "_id": "57c3202cc8307cd5b82f4465",
+      "type": "input",
+      "attributes": [
+        {
+          "id": "name",
+          "string": "simple_text",
+          "list": []
+        },
+        {
+          "id": "dataType",
+          "string": "string",
+          "list": []
+        },
+        {
+          "id": "attrInputConf",
+          "listOfObj": [
+            {
+              "string": "string",
+              "id": "label"
+            },
+            {
+              "string": "string",
+              "id": "inputLable"
+            },
+            {
+              "string": "string",
+              "id": "shortName"
+            },
+            {
+              "string": "string",
+              "id": "regex"
+            },
+            {
+              "string": "string",
+              "id": "validatorMsg"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "schmAttrInputConf",
+          "listOfObj": [
+            {
+              "string": "boolean",
+              "id": "visualization"
+            },
+            {
+              "string": "boolean",
+              "id": "createble"
+            },
+            {
+              "string": "boolean",
+              "id": "editable"
+            },
+            {
+              "string": "boolean",
+              "id": "validate"
+            },
+            {
+              "string": "boolean",
+              "id": "required"
+            },
+            {
+              "string": "string",
+              "id": "validatorMsg"
+            }
+          ],
+          "list": []
+        }
+      ],
+      "updated": []
+    },
+    {
+      "_id": "57c32362c8307cd5b82f446c",
+      "type": "schmAttrInputConf",
+      "attributes": [
+        {
+          "id": "schema",
+          "reference": "57a4e02ec830e2bdff1a1608",
+          "list": []
+        },
+        {
+          "id": "attribute",
+          "reference": "57c353b2c8307cd5b82f4479",
+          "list": []
+        },
+        {
+          "id": "input",
+          "reference": "57c0c508c8307cd5b82f445a",
+          "list": []
+        },
+        {
+          "id": "visualization",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "createble",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "editable",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "validate",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "required",
+          "boolean": true,
+          "list": []
+        }
+      ],
+      "updated": []
+    },
+    {
+      "_id": "57c326dcc8307cd5b82f4474",
+      "type": "schmAttrInputConf",
+      "attributes": [
+        {
+          "id": "schema",
+          "reference": "57a4e02ec830e2bdff1a1608",
+          "list": []
+        },
+        {
+          "id": "attribute",
+          "reference": "57c3583bc8307cd5b82f447d",
+          "list": []
+        },
+        {
+          "id": "input",
+          "reference": "57c3202cc8307cd5b82f4465",
+          "list": []
+        },
+        {
+          "id": "visualization",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "createble",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "editable",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "validate",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "required",
+          "boolean": true,
+          "list": []
+        }
+      ],
+      "updated": []
+    },
+    {
+      "_id": "57c0c508c8307cd5b82f445a",
+      "type": "input",
+      "attributes": [
+        {
+          "id": "name",
+          "string": "simple_number",
+          "list": []
+        },
+        {
+          "id": "dataType",
+          "string": "number",
+          "list": []
+        },
+        {
+          "id": "attrInputConf",
+          "listOfObj": [
+            {
+              "string": "string",
+              "id": "label"
+            },
+            {
+              "string": "string",
+              "id": "inputLable"
+            },
+            {
+              "string": "string",
+              "id": "shortName"
+            },
+            {
+              "string": "string",
+              "id": "regex"
+            },
+            {
+              "string": "number",
+              "id": "rangeMax"
+            },
+            {
+              "string": "number",
+              "id": "rangeMin"
+            },
+            {
+              "string": "string",
+              "id": "validatorMsg"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "schmAttrInputConf",
+          "listOfObj": [
+            {
+              "string": "boolean",
+              "id": "visualization"
+            },
+            {
+              "string": "boolean",
+              "id": "createble"
+            },
+            {
+              "string": "boolean",
+              "id": "editable"
+            },
+            {
+              "string": "boolean",
+              "id": "validate"
+            },
+            {
+              "string": "boolean",
+              "id": "required"
+            },
+            {
+              "string": "string",
+              "id": "validatorMsg"
+            }
+          ],
+          "list": []
+        }
+      ],
+      "updated": []
+    },
+    
+  ]
+
+  return r2
+
+
+
+
+
+
+
+
+
  }
+
+

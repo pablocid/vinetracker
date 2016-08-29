@@ -17,7 +17,7 @@ exports.FindOne = function(config){
 
     return makeRequest.makeRequest(options).then(function (data) {
         //if(data.totalLength > 1){console.log('Existe más de un registro para este identificador'); }
-        var RecordConstructor = RecordFactory.RecordFactory( IndividuoSchm.Individuo(), IndividuoSchm.newIndividuo() );
+        var RecordConstructor = RecordFactory.RecordFactory( IndividuoSchm.Individuo(), IndividuoSchm.newIndividuo() /*data.schema*/ );
          return new RecordConstructor(data.record);
     });
 }

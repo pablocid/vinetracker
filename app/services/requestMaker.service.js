@@ -10,6 +10,7 @@ exports.makeRequest = function makeRequest(opts) {
     }
     //if(!opts.headers){ opts.headers = { "Content-Type": "application/json" }
     //if(!opts.content){ delete opts.content; }
+    console.log(JSON.stringify(opts));
     opts.headers = { "Content-Type": "application/json", "Authorization": appSet.getString("Authorization") };
     //console.log(JSON.stringify(opts));
     var def = q.defer();
@@ -42,7 +43,7 @@ exports.makeRequest = function makeRequest(opts) {
         }
         else {
             console.log('Error de codigo ' + err.statusCode + ' no manejado');
-            throw new Error('Error de codigo ' + err.statusCode + ' no manejado');
+            throw new Error(err);
         }
     });
 };

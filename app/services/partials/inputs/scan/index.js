@@ -9,8 +9,8 @@ exports.Scan = function Scan(conf) {
     scan.text = "Scan";
     scan.setInlineStyle("background-color:#1565C0; color:white; border-radius:60; margin-top:100; padding: 30;");
     scan.on('tap', function () {
-        //conf.cb('683(10).6');
-        conf.cb('57a8d8dfef44961377526953');
+        conf.cb('683(10).6');
+        //conf.cb('57a8d8dfef44961377526953');
         /*
                 //frame.topmost().goBack();
                 barcodescanner.hasCameraPermission().then(
