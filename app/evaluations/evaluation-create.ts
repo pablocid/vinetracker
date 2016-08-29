@@ -9,70 +9,81 @@ var SimpleText = require("../services/partials/inputs/simple_text");
 var RecordService = require("../services/record.service");
 var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
  
-var loader = new LoadingIndicator();
 import Builder = require("ui/builder");
 import Frame = require('ui/frame');
 
 
 import actionBarModule = require("ui/action-bar");
 
+var RecordService = require("../services/record.service");
 var RecordFactory = require("../services/record.factory");
 var theSchema = require("./evaluation-schm").Evaluacion();
-console.log(theSchema[0]._id)
+//console.log(theSchema[0]._id)
 // optional options 
-var options = {
-  message: 'loading records...',
-  progress: 0.65,
-  android: {
-    indeterminate: true,
-    cancelable: false,
-    max: 100,
-    progressNumberFormat: "%1d/%2d",
-    progressPercentFormat: 0.53,
-    progressStyle: 1,
-    secondaryProgress: 1
-  }
-};
- 
- // options is optional 
+
+var InputMatcher = require("../services/partials/inputMatcher.service");
 
 function onNavigatedTo(args) {
-    //loader.show(options);
+    var loader = new LoadingIndicator();
+    var options = {
+      message: 'loading records...',
+      progress: 0.65,
+      android: {
+        indeterminate: true,
+        cancelable: false,
+        max: 100,
+        progressNumberFormat: "%1d/%2d",
+        progressPercentFormat: 0.53,
+        progressStyle: 1,
+        secondaryProgress: 1
+      }
+    };
+ 
+    loader.show(options);
     var page = args.object;
     
     /********** TAB ITEMS *********** */
-    var schm = "";//page.navigationContext.schm;
- 
-    function tabItemMaker () {
-        var RecordConstructor = RecordFactory.RecordFactory(null, theSchema );
-        var data =  new RecordConstructor();
-        console.log(data.getSchmAttr("registrationStart") )
+    var schm = "57c42f2fc8307cd5b82f4484";//page.navigationContext.schm;
+ //createNewRecord
+    function tabItemMaker (data) {
+
+        //var RecordConstructor = RecordFactory.RecordFactory(null, theSchema );
+        //var data =  new RecordConstructor();
+        console.log("registrationStart:  "+data.getSchmAttr("registrationStart") )
         
         var tab = new TabView();
 
         tab.items = [];
+        
         var validIds = data.getIdsForEdit();
+        console.log(validIds.length)
         for (var e = 0; e < validIds.length; e++) {
-            var identif = validIds[e];
-            //console.log(data.getAttr(identif));
-            var config = {
-                bindingContext:{
-                    value: "",
-                    description: data.getInputAttr(identif, "label")
-                },
-                cb:''
-            };
             var tabItem = new TabViewItem();
-            tabItem.title =  data.getInputAttr(identif,"shortName");
-            tabItem.view = new SimpleText.EditView(config).getView();
+            var conf = {
+                record:data,
+                attrId:validIds[e],
+                mode:"EditView",
+                cb:''
+            }
+            tabItem.view = InputMatcher.build(conf);
+            tabItem.title =  data.getAttrInputConf(validIds[e],"shortName");
             tab.items.push(tabItem);
         }
         return tab;
         
     }
-    var grid = new GridLayout();
-    grid.addChild(tabItemMaker());
 
+    var grid = new GridLayout();
+
+    RecordService.createNewRecord(schm)
+    .then(tabItemMaker)
+    .then(function(d){
+        loader.hide();
+        grid.addChild(d);
+    }, function(err){
+        loader.hide();
+        console.log(err)
+    });
 
     /********** ACTION BAR *********** */
     var item = new actionBarModule.ActionItem();
@@ -90,7 +101,7 @@ function onNavigatedTo(args) {
         Frame.topmost().navigate(navigationOptions);
     });
   
-    page.actionBar.title = "Registros evaluados";
+    page.actionBar.title = "Evaluación xxx";
     page.actionBar.actionItems.addItem(item);
     page.actionBar.setInlineStyle("background-color:#2196F3; color:white;");
 

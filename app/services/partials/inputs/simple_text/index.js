@@ -18,6 +18,26 @@ exports.SimpleText = function SimpleText(conf) {
         return stack;
     };
 };
+exports.TabView = function (conf) {
+    var self = this;
+    var stack = new stack_layout_1.StackLayout();
+    var b = builder.parse("\n            <Label style=\"font-size:30; \" text=\"{{ description }}\"/>\n            <Label style=\"font-size:30; \" text=\"{{ value }}\" />\n    ");
+    var a = builder.load({
+        name: 'show',
+        path: '~/services/partials/inputs/simple_text'
+    });
+    a.bindingContext = {
+        value: conf.record.getAttr(conf.attrId),
+        description: conf.record.getAttrInputConf(conf.attrId, "label")
+    };
+    stack.orientation = "vertical";
+    //stack.width = 500;
+    //stack.setInlineStyle("background-color:lightgray; margin:0; ");
+    stack.addChild(a);
+    this.getView = function () {
+        return stack;
+    };
+};
 exports.EditView = function (conf) {
     var self = this;
     var stack = new stack_layout_1.StackLayout();

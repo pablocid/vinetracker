@@ -23,8 +23,8 @@ var options = {
   }
 };
 function createViewModel() {
-    //frame.topmost().navigate("evaluations/evaluation-create");
-    frame.topmost().navigate("records/record-identifier");
+    frame.topmost().navigate("evaluations/evaluation-create");
+    //frame.topmost().navigate("records/record-identifier");
     //frame.topmost().navigate("testmodal/modal-view");
     
     var viewModel = new Observable();

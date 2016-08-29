@@ -1,12 +1,12 @@
 
 exports.Evaluacion = function(){
-    var v1=  [
+    return [
         { //campaña
             _id:"xxxxxxxxxxxxxxxxxxxxxxxxx",
             attributes:[
                 {id:"name", string:"Grados brix 2016-20017 t1"},
                 {id:"type", string:"schema"},
-                {id:"attrItems", list:["indiv_ref", "grados_brix"]}, //list or listOfRef // give order
+                {id:"attrItems", list:["indiv_ref", "brix_meter"]}, //list or listOfRef // give order
                 {id:"editable", boolean:true},
                 {id:"status", boolean:true},
                 {id:"registrationStart", date:"2016-12-15"},
@@ -27,12 +27,11 @@ exports.Evaluacion = function(){
             ]
         },
         {
-            _id:"grados_brix",
+            _id:"brix_meter",
             attributes:[
                 {id:"type", string:"attribute"},
                 {id:"name", string:"ingreso de grados brix"},
                 {id:"input", reference:"57c0c529c8307cd5b82f445c"},
-                {id:"attrItems", list:["indiv_ref", "grados_brix"]}, 
                 {id:"regex", string:"\d{1-2}"},
             ]
         },
@@ -53,37 +52,29 @@ exports.Evaluacion = function(){
             ]
         },
         {
-            _id:"sdadasdadasdasd",
-            attributes:[
-                {id:"name", string:"integer_decimal"},
-                {id:"type", string:"input"},
-                {id:"dataType", string:"number"}
-            ]
-        },
-        {
             _id: "57c0c585c8307cd5b82f445f",
             attributes:[
                 {id:"type", string:"attrConfig"},
-                {id:"schema", reference:"xxxxxxxxxxxxxxxxxxxxxxxxx"},
-                {id:"attribute", reference:"indiv_ref"},
+                {id:"schema", reference:"57a4e02ec830e2bdff1a1608"},
+                {id:"attribute", reference:"id"},
                 {id:"visualization", boolean:true},
                 {id:"validate", boolean:true},
                 {id:"required", boolean:true},
-                {id:"label", string:"Identificado de individuo"},
-                {id:"shortName", string:"individuo"},
+                {id:"label", string:"Antiguo ID Perrinesco"},
+                {id:"shortName", string:"id antiguo"},
             ]
         },
         {
             _id: "57c0c590c8307cd5b82f4461",
             attributes:[
                 {id:"type", string:"attrConfig"},
-                {id:"schema", reference:"xxxxxxxxxxxxxxxxxxxxxxxxx"},
-                {id:"attribute", reference:"grados_brix"},
+                {id:"schema", reference:"57a4e02ec830e2bdff1a1608"},
+                {id:"attribute", reference:"cod_indiv"},
                 {id:"visualization", boolean:true},
-                {id:"outputLabel", string:"Grados brix"},
+                {id:"outputLabel", string:"Código Individuo de la base de datos"},
                 {id:"inputLabel", string:"Scan the qr code"},
-                {id:"label", string:"Grados brix"},
-                {id:"shortName", string:"brix"},
+                {id:"label", string:"Plant code"},
+                {id:"shortName", string:"codigo individuo"},
                 {id:"status", boolean:false}            ]
         },
         {
@@ -111,98 +102,6 @@ exports.Evaluacion = function(){
             ]
         }
     ]
-
-    var v2 = [
-        /*** **********  SCHEMA *******************+ */
-        { //campaña
-            _id:"57c42f2fc8307cd5b82f4484",
-           type:"schema",
-            attributes:[
-                {id:"name", string:"Grados Brix primera pasada"},
-                {id:"attributes", list:["57c42f77c8307cd5b82f4486"]}, //list or listOfRef
-                {id:"keys", listOfObj:[
-                    {id:"editable", string:"boolean"},
-                    {id:"status", string:"boolean"},
-                    {id:"registrationStart", string:"date"},
-                    {id:"identifyMode", string:"string"},
-                    {id:"identifyByAttr", string:"string"} ]},
-                {id:"editable", boolean:true},
-                {id:"status", boolean:true},
-                {id:"registrationStart", date:"2016-11-1"},
-                {id:"identifyMode", string:"scan"},
-                {id:"identifyByAttr", string:"cod_indiv"}
-            ]
-        },
-        /****  individuo referencia *******/
-        {
-            _id:"57c42f77c8307cd5b82f4486",
-            type:"attribute",
-            name:"indiv_ref",
-            attributes:[
-                {id:"name", string:"indiv_ref"},
-                {id:"input", reference:"57c431d5c8307cd5b82f448a"},
-                {id:"schema", reference:"57c42f2fc8307cd5b82f4484"}
-            ]
-        },
-        {
-            _id:"57c431d5c8307cd5b82f448a",
-            type:"input",
-            name:"simple_ref",
-            attributes:[
-                {id:"name", string:"simple_ref"},
-                {id:"dataType", string:"reference"},
-                {id:"attrConf", listOfObj:[
-                    {id:"name", string:"string"},
-                    {id:"input", string:"reference"},
-                    {id:"schema", string:"reference"}]},
-                {id:"attrInputConf", listOfObj:[
-                    {id:"label", string:"string"},
-                    {id:"inputLable", string:"string"},
-                    {id:"shortName",  string:"string"},
-                    {id:"regex", string:"string"},
-                    {id:"rangeMax", string:"number"},
-                    {id:"rangeMin", string:"number"},
-                    {id:"validatorMsg", string:"string"}]},
-                {id:"schmAttrInputConf", listOfObj:[
-                    {id:"visualization", string:"boolean"},
-                    {id:"createble", string:"boolean"},
-                    {id:"editable", string:"boolean"},
-                    {id:"validate", string:"boolean"},
-                    {id:"required", string:"boolean"},
-                    {id:"validatorMsg", string:"string"}]},
-            ]
-        },
-        {
-            _id: "57c42fa6c8307cd5b82f4488",
-            type:"attrInputConf",
-            attributes:[
-                {id:"attribute", reference:"57c42f77c8307cd5b82f4486"},
-                {id:"input", reference:"57c431d5c8307cd5b82f448a"},
-                {id:"label", string:"Identificador de individuo"},
-                {id:"inputLable", string:"Scan plant code"},
-                {id:"shortName", string:"individuo"},
-                {id:"regex", string:""},
-                {id:"rangeMax", number:100000},
-                {id:"rangeMin", number:1},
-            ]
-        },
-        {
-            _id: "57c43566c8307cd5b82f448c",
-            type:"schmAttrInputConf",
-            attributes:[
-                {id:"schema", reference:"57c42f2fc8307cd5b82f4484"},
-                {id:"attribute", reference:"57c42f77c8307cd5b82f4486"},
-                {id:"input", reference:"57c431d5c8307cd5b82f448a"},
-                {id:"visualization", boolean:true},
-                {id:"createble", boolean:true},
-                {id:"editable", boolean:true},
-                {id:"validate", boolean:true},
-                {id:"required", boolean:true},
-            ]
-        }
-    ]
-
-    return v2
 }
 
  /*
