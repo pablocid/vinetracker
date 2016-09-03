@@ -6,7 +6,6 @@ import { Observable } from "data/observable";
 var Inputs = require('../form/input-schemas/brix');
 import { ObservableArray } from "data/observable-array";
 var SimpleText = require("../services/partials/inputs/simple_text");
-var RecordService = require("../services/record.service");
 var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
  
 import Builder = require("ui/builder");
@@ -14,6 +13,7 @@ import Frame = require('ui/frame');
 
 
 import actionBarModule = require("ui/action-bar");
+var ViewMaker = require("../services/ViewMaker.service");
 
 var RecordService = require("../services/record.service");
 var RecordFactory = require("../services/record.factory");
@@ -44,39 +44,20 @@ function onNavigatedTo(args) {
     
     /********** TAB ITEMS *********** */
     var schm = "57c42f2fc8307cd5b82f4484";//page.navigationContext.schm;
- //createNewRecord
-    function tabItemMaker (data) {
-
-        //var RecordConstructor = RecordFactory.RecordFactory(null, theSchema );
-        //var data =  new RecordConstructor();
-        console.log("registrationStart:  "+data.getSchmAttr("registrationStart") )
-        
-        var tab = new TabView();
-
-        tab.items = [];
-        
-        var validIds = data.getIdsForEdit();
-        console.log(validIds.length)
-        for (var e = 0; e < validIds.length; e++) {
-            var tabItem = new TabViewItem();
-            var conf = {
-                record:data,
-                attrId:validIds[e],
-                mode:"EditView",
-                cb:''
-            }
-            tabItem.view = InputMatcher.build(conf);
-            tabItem.title =  data.getAttrInputConf(validIds[e],"shortName");
-            tab.items.push(tabItem);
-        }
-        return tab;
-        
-    }
 
     var grid = new GridLayout();
-
+    var elRecord;
     RecordService.createNewRecord(schm)
-    .then(tabItemMaker)
+    .then(function(d){
+        //enlazar un cb para guardar el registro;
+        d.SaveCb = function(){ 
+            //guarda y asigna el resultado a 
+            RecordService.saveRecord(d).then(x=>d._id = x._id);
+        };
+        elRecord = d;
+        return d;
+    })
+    .then(ViewMaker.TabView)
     .then(function(d){
         loader.hide();
         grid.addChild(d);
@@ -90,7 +71,9 @@ function onNavigatedTo(args) {
     
     item.android.systemIcon = "ic_menu_save";
     item.on("tap",function(){
-        console.log("plus tap");
+        console.log("tap de guardado");
+
+        console.log(elRecord.SaveCb());
         var navigationOptions={
             moduleName:'evaluations/evaluation-create',
             context:{
@@ -98,7 +81,7 @@ function onNavigatedTo(args) {
             }
         }
         
-        Frame.topmost().navigate(navigationOptions);
+        //Frame.topmost().navigate(navigationOptions);
     });
   
     page.actionBar.title = "Evaluación xxx";

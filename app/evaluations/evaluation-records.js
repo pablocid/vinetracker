@@ -15,7 +15,7 @@ var options = {
     progress: 0.65,
     android: {
         indeterminate: true,
-        cancelable: false,
+        cancelable: true,
         max: 100,
         progressNumberFormat: "%1d/%2d",
         progressPercentFormat: 0.53,
@@ -25,7 +25,7 @@ var options = {
 };
 // options is optional 
 function onNavigatedTo(args) {
-    //loader.show(options);
+    loader.show(options);
     var page = args.object;
     /********** LIST ITEMS *********** */
     var schm = ""; //page.navigationContext.schm;
@@ -34,7 +34,12 @@ function onNavigatedTo(args) {
             schm: schm,
         }
     };
-    var a = Builder.parse("\n        <ListView items=\"{{ items }}\" itemTap=\"{{selectedOption}}\">\n            <ListView.itemTemplate>\n                <GridLayout columns=\"30, *\" style=\"font-size:25; padding:10; padding-bottom:50; padding-top:50;\">\n                    <Label text=\"\" col=\"0\" />\n                    <Label text=\"{{ name }}\" col=\"0\" textWrap=\"true\" col=\"1\"/>\n                </GridLayout>\n            </ListView.itemTemplate>\n        </ListView>\n    ");
+    var a = Builder.parse("\n        <ListView items=\"{{ items }}\" itemTap=\"{{selectedOption}}\">\n            <ListView.itemTemplate>\n                <GridLayout columns=\"30, *\" style=\"font-size:25; padding:10; padding-bottom:50; padding-top:50;\">\n                    <Label text=\"\" col=\"0\" />\n                    <Label text=\"{{ $value.getAttr('57c8910e98763f100090a891','string') }}\" col=\"0\" textWrap=\"true\" col=\"1\"/>\n                </GridLayout>\n            </ListView.itemTemplate>\n        </ListView>\n    ");
+    var configFind = {
+        query: {
+            schm: "57c42f2fc8307cd5b82f4484"
+        }
+    };
     var array = [
         { name: "Planta E1H1P1", value: "16.5", schema: "xxxxxxx12312312xxxxx", id: "" }
     ];
@@ -51,7 +56,10 @@ function onNavigatedTo(args) {
         };
         //Frame.topmost().navigate(navigationOptions);
     }
-    a.bindingContext = { selectedOption: onTapItem, items: array };
+    RecordService.Find(configFind).then(function (x) {
+        a.bindingContext = { selectedOption: onTapItem, items: x.items };
+        loader.hide();
+    });
     var grid = new grid_layout_1.GridLayout();
     grid.addChild(a);
     /********** ACTION BAR *********** */

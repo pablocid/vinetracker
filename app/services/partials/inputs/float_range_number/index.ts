@@ -3,7 +3,31 @@
 import {StackLayout} from 'ui/layouts/stack-layout';
 import builder = require("ui/builder");
 import {View} from "ui/core/view";
-import { Observable, PropertyChangeData } from "data/observable";
+import { Observable } from "data/observable";
+/*
+exports.SimpleText = function SimpleText (conf) {
+    var self = this;
+    var stack = new StackLayout();
+    var b = builder.parse(`
+            <Label style="font-size:30; " text="{{ description }}"/>
+            <Label style="font-size:30; " text="{{ value }}" />
+    `);
+    var a = builder.load({
+        name:'show',
+        path:'~/services/partials/inputs/simple_text'
+    });
+
+    a.bindingContext = conf.bindingContext;
+    stack.orientation = "vertical";
+    //stack.width = 500;
+    //stack.setInlineStyle("background-color:lightgray; margin:0; ");
+    stack.addChild(a);
+
+    this.getView = function(){
+        return stack;
+    }
+
+}*/
 
 function TabViewBuilder (conf) {
     var self = this;
@@ -34,21 +58,28 @@ exports.TabView = TabViewBuilder;
 function TabViewEditBuilder (conf) {
     var self = this;
     var stack = new StackLayout();
+    var b = builder.parse(`
+            <Label style="font-size:30; " text="{{ description }}"/>
+            <TextView text="{{ value }}" />
+    `);
     var a = builder.load({ //xmlns:dd="nativescript-drop-down"
         name:'create',
         path:'~/services/partials/inputs/simple_text',
     });
-    conf.record.setAttr(conf.attrId, "Esta planta esta rara");
 
     var viewModel = new Observable();
-    viewModel.set("label", conf.record.getAttrAttr(conf.attrId, "label"));
-    viewModel.set("value",conf.record.getAttr(conf.attrId));
+    var enteros =[];
+    for (var i = 1; i <= 30; i++) {
+        enteros.push(i);
+        
+    }
+    viewModel.set("enteros", enteros);
+    viewModel.set("decimales", [0,1,2,3,4,5,6,7,8,9]);
+    viewModel.set("keyboardType", "number");
+
     a.bindingContext = viewModel;
-    viewModel.addEventListener(Observable.propertyChangeEvent,function(v:PropertyChangeData){
-        //console.log(v.object.get("value"));
-        conf.record.setAttr(conf.attrId,v.object.get("value"));
-    });
     stack.orientation = "vertical";
+    //stack.setInlineStyle("background-color:lightgray; margin:0; ");
     stack.addChild(a);
     return stack;
 

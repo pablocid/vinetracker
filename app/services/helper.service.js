@@ -44,3 +44,60 @@ exports.urlQueryFindOne = function urlConfig(config) {
     // ULR config ********************************************/
     return url;
 }
+
+exports.checkParam = function (param, dataType) {
+
+  if(param === null){ return false; }
+  var response = false;
+  
+  if(dataType === 'string'){
+    if(typeof param === 'string' && param.length>0){
+      response = true;
+    }
+  }
+
+  if(dataType === 'number'){
+    //console.log('chequea numero')
+    if(typeof param === 'number'){
+      response = true;
+    }
+    if(typeof param === 'string'){
+      
+      if(/^\d*$/.test( param )){
+        //console.log('es  numero')
+        response = true;
+      }
+    }
+  }
+
+  if(dataType === 'objectId'){
+    if(/^[0-9a-f]{24}$/i.test(param)){
+      response = true;
+    }
+  }
+
+  //filtro de registros
+  if (dataType === 'filter') {
+    //checkeando si hay errores en el parseo a JSON
+    try {
+      var arr = JSON.parse(param);
+      //check if is an Array and if is empty
+      if(arr.length){
+        // verificando si los obj dentro del array tiene las propiedades key, datatype y value
+        var isValid = true;
+        for (var index = 0; index < arr.length; index++) {
+          if(arr[index].key === null || arr[index].value === null || arr[index].datatype === null){
+            isValid = false;
+          }
+        }
+        response = isValid;
+      }
+
+    } catch (err) {
+      response = false;
+      console.log('invalid JSON')
+    }
+  }
+
+  return response;
+}

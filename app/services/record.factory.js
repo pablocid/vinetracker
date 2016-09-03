@@ -26,7 +26,6 @@ exports.RecordFactory = function (schema, newschema) {
         //4.- filtar attrRefs con respecto a saic
         return attrRefs.filter(x=>saic.indexOf(x)!==-1);
     }
-
     RecordConstructor.prototype.getIdsForEdit = function(){
         // los attributos a mostrar dependen del key "attributes" dentro de schema.attributes y del key "visualization" en schmAttrInputConf.attributes
         var self = this;
@@ -45,7 +44,9 @@ exports.RecordFactory = function (schema, newschema) {
 
         var self = this;
         //console.log("RecordConstructor.prototype.getSchmAttr=> Key "+key)
-        var schema = self.findValueByVarHelper(self.newschema,"type","schema");
+        //var schema = self.findValueByVarHelper(self.newschema,"type","schema");
+        // mejor
+        var schema = self.findValueByVarHelper(self.newschema,"_id",this.schm);
         //console.log("RecordConstructor.prototype.getSchmAttr=> schema._id "+schema._id);
         //console.log("RecordConstructor.prototype.getSchmAttr=> schema.attributes.length "+schema.attributes.length);
         var indexKeys = schema.attributes.map(x=>x.id).indexOf("keys")
@@ -53,6 +54,16 @@ exports.RecordFactory = function (schema, newschema) {
         var keys = self.findValueByVarHelper(schema.attributes, "id","keys","listOfObj")
         //console.log("RecordConstructor.prototype.getSchmAttr=> keys "+keys);
         var dt = self.findValueByVarHelper(keys,"id",key,"string");
+
+        return self.findValueByVarHelper(schema.attributes,"id",key,dt);    
+    }
+    RecordConstructor.prototype.getAttrAttr = function (attrId, key,dataType){
+
+        var self = this;
+        var schema = self.findValueByVarHelper(self.newschema,"_id",attrId);
+        var keys = self.findValueByVarHelper(schema.attributes, "id","keys","listOfObj")
+        //console.log("RecordConstructor.prototype.getSchmAttr=> keys "+keys);
+        var dt = dataType || self.findValueByVarHelper(keys,"id",key,"string");
 
         return self.findValueByVarHelper(schema.attributes,"id",key,dt);    
     }

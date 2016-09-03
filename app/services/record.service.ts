@@ -22,6 +22,24 @@ exports.FindOne = function(config){
          return new RecordConstructor(data.record);
     });
 }
+
+exports.Find = function(config){
+    // config debe tener un id:string y un query:obj -  aparte debe tener la propiedad dir antes de entrar en urlQueryFindOne
+    config.dir = 'api/records';
+
+    var options = {
+        url: urlQueryConfig.urlQueryFindOne(config),
+        method : 'GET',
+    }
+
+    return makeRequest.makeRequest(options).then(function (data) {
+        var RecordConstructor = RecordFactory.RecordFactory( IndividuoSchm.Individuo(), data.schema );
+        data.items = data.items.map(x=>new RecordConstructor(x));
+        return data;
+
+    });
+}
+
 exports.createNewRecord = function(schm){
     // config debe tener un id:string y un query:obj -  aparte debe tener la propiedad dir antes de entrar en urlQueryFindOne
     var config = {dir:'',id:''};
@@ -37,7 +55,37 @@ exports.createNewRecord = function(schm){
     }
 
     return makeRequest.makeRequest(options).then(function (data) {
+        console.log(data)
         var RecordConstructor = RecordFactory.RecordFactory( null, data );
-         return new RecordConstructor();
+        var record = new RecordConstructor();
+        record.schm = schm;
+         return record;
     });
+}
+exports.saveRecord = function(record){
+    // config debe tener un id:string y un query:obj -  aparte debe tener la propiedad dir antes de entrar en urlQueryFindOne
+    var dir = 'api/records';
+    var method = 'POST';
+    if(record && record.schm){
+        if(record._id){
+            dir +='/'+record._id;
+            method = 'PUT';
+        }
+    }else{
+        console.log("No se guardó el registro") 
+        return null; 
+    }
+
+    var options = {
+        url: dir,
+        method : method,
+        content: JSON.stringify(record)
+    }
+    console.log(JSON.stringify(record) );
+    
+    return makeRequest.makeRequest(options).then(function (data) {
+        console.log(data._id);
+        return data;
+    });
+    
 }

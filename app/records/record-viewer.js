@@ -50,10 +50,7 @@ function onNavigatedTo(args) {
         console.log(data.getSchmAttr("registrationStart"));
         var tab = new tab_view_1.TabView();
         tab.items = [];
-        var validIds = [
-            "57c353b2c8307cd5b82f4479",
-            "57c3583bc8307cd5b82f447d"
-        ]; //data.getIdsForShow();
+        var validIds = data.getIdsForShow();
         console.log("validIds.length: " + validIds.length);
         for (var e = 0; e < validIds.length; e++) {
             var identif = validIds[e];

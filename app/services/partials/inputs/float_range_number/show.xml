@@ -1,0 +1,12 @@
+  <GridLayout columns="*" rows="auto, *" style="background-color: #0D47A1;" >
+    <Label text="{{description}}" row="0" col="0" 
+    backgroundColor="white" 
+    textWrap="true" 
+    style="font-size:40; text-align:center; color:#616161; padding:30;"/>
+    <ScrollView row="1" col="0" >
+        <Label text="{{value}}" 
+        textWrap="true" 
+        style="font-size:60; text-align:center; vertical-align:center; color:white; "/>
+    </ScrollView> 
+     
+  </GridLayout>
