@@ -12,7 +12,7 @@ export function pageLoaded(args: observable.EventData) {
 
 export function onTap(args: observable.EventData) {
     var fullscreen = (<any>args.object).text.indexOf("(full-screen)") !== -1;
-    page.showModal("testmodal/login-page", "context", function (username: string, password: string) {
+    page.showModal("PlantDashboard/index", "context", function (username: string, password: string) {
         console.log(username + "/" + password);
         label.text = username + "/" + password;
     }, fullscreen);

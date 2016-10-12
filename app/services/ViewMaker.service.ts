@@ -4,29 +4,47 @@ import {TabView, TabViewItem} from "ui/tab-view";
 /********************Inputs************************ */
 var SimpleText = require("./partials/inputs/simple_text");
 var SimpleRef = require("./partials/inputs/simple_ref");
-
+var FloatRangeNumber = require("./partials/inputs/float_range_number");
+var SimpleNumber = require("./partials/inputs/simple_number");
 /************************************************ */
 
+
+
 function TabViewMaker(data) {
+    var tab = new TabView();
+    tab.items = [];
+    
+    var validIds = data.getIdsForShow();
+    console.log("validIds: "+validIds.length)
+
+    validIds.forEach(x=>tab.items.push(TabViewItemMaker(data,x,"TabView")))
+    //tab.items.push(TabViewItemMaker(data,validIds[2], "TabView"))
+    console.log(validIds[0]);
+    return tab;
+}
+exports.TabView = TabViewMaker;
+
+function TabViewEditMaker(data) {
     var tab = new TabView();
     tab.items = [];
     
     var validIds = data.getIdsForEdit();
     console.log("validIds: "+validIds.length)
 
-    validIds.forEach(x=>tab.items.push(TabViewItemMaker(data,x)))
+    validIds.forEach(x=>tab.items.push(TabViewItemMaker(data,x, "TabViewEdit")))
     return tab;
 }
-exports.TabView = TabViewMaker;
+exports.TabViewEdit = TabViewEditMaker;
 
-function TabViewItemMaker (data, attrId){
+function TabViewItemMaker (data, attrId, mode){
     var tabItem = new TabViewItem();
     var conf = {
         record:data,
         attrId:attrId,
-        mode:"TabViewEdit",
+        mode:mode,
         cb:''
     }
+    console.log("TabViewItemMaker");
     tabItem.view = InputMatcher(conf);
     tabItem.title = data.getAttrAttr(attrId,"shortName");
 
@@ -47,17 +65,16 @@ function InputMatcher (conf ){
             console.log("simple_ref: referencia")
             View = SimpleRef.getView(conf);
             break;
-        /*
         case "57c0c508c8307cd5b82f445a": // simple_number
-            //View = new SimpleText.TabView(conf).getView();
+            View = SimpleNumber.getView(conf);
             break;
         case "57c3202cc8307cd5b82f4465": // simple_text
-            //View = new SimpleText.TabView(conf).getView();
+            View = SimpleText.getView(conf);
             break;
-        //case "wwwwwwwwwwwwwwwwwwwwww": // simple_brix
-        //    View = new SimpleBrix.TabView(conf).getView();
-        //    break;
-        */
+    
+        case "57cc674481d64f1000dec599": // float_range_number
+            View = FloatRangeNumber.getView(conf);
+            break;
         default:// simple_text
             console.log("default view")
             View =View = SimpleText.getView(conf);

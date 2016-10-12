@@ -9,6 +9,13 @@ var loader = new LoadingIndicator();
 var Builder = require("ui/builder");
 var Frame = require('ui/frame');
 var actionBarModule = require("ui/action-bar");
+var WaveRefresh = require("nativescript-wave-refresh");
+/******************************** */
+/**
+ * Esta implementación es solo para Plantas (schema: 57a4e02ec830e2bdff1a1608 / individuos)
+ * y los registros listados siempre mostrarán (populate) la ubicación de la planta (ExHxPx)
+ * En cuanto al atributo de grados brix (Schema:Type:attribute => )
+ */
 // optional options 
 var options = {
     message: 'loading records...',
@@ -23,67 +30,185 @@ var options = {
         secondaryProgress: 1
     }
 };
-// options is optional 
 function onNavigatedTo(args) {
+    console.log("onNavigatedTo");
     loader.show(options);
     var page = args.object;
     /********** LIST ITEMS *********** */
-    var schm = ""; //page.navigationContext.schm;
-    var config = {
+    var schm = page.navigationContext.schema;
+    var listViewAttr = page.navigationContext.listViewAttr;
+    var a = Builder.parse("\n        <ListView items=\"{{ items }}\" itemTap=\"{{selectedOption}}\"    >\n            <ListView.itemTemplate >\n                <GridLayout columns=\"30, *\" style=\"font-size:25; padding:10; padding-bottom:50; padding-top:50;\" backgroundColor=\"{{color}}\">\n                    <Label text=\"\" col=\"0\" />\n                    <Label text=\"{{ text}}\" col=\"0\" textWrap=\"true\" col=\"1\"/>\n                </GridLayout>\n            </ListView.itemTemplate>\n        </ListView>\n    ");
+    var a = Builder.parse("\n    \n<StackLayout xmlns:WR=\"nativescript-wave-refresh\">\n\n    <WR:WaveRefresh backgroundColor=\"#2196F3\" refresh=\"{{ stopRefresh }}\"  id=\"waveRefresh\">\n      <ListView items=\"{{ items }}\" itemTap=\"{{selectedOption}}\">\n        <ListView.itemTemplate>\n          <GridLayout columns=\"30, *\" style=\"font-size:25; padding:10; padding-bottom:50; padding-top:50;\" backgroundColor=\"{{color}}\">\n                    <Label text=\"\" col=\"0\" />\n                    <Label text=\"{{ text}}\" col=\"0\" textWrap=\"true\" col=\"1\"/>\n                </GridLayout>\n        </ListView.itemTemplate>\n      </ListView>\n    </WR:WaveRefresh>\n\n</StackLayout>\n    \n    ");
+    var configFind = {
+        //populate by indiv_ref
+        attrId: "57c42f77c8307cd5b82f4486",
         query: {
             schm: schm,
+            populate: "57c42f77c8307cd5b82f4486"
         }
     };
-    var a = Builder.parse("\n        <ListView items=\"{{ items }}\" itemTap=\"{{selectedOption}}\">\n            <ListView.itemTemplate>\n                <GridLayout columns=\"30, *\" style=\"font-size:25; padding:10; padding-bottom:50; padding-top:50;\">\n                    <Label text=\"\" col=\"0\" />\n                    <Label text=\"{{ $value.getAttr('57c8910e98763f100090a891','string') }}\" col=\"0\" textWrap=\"true\" col=\"1\"/>\n                </GridLayout>\n            </ListView.itemTemplate>\n        </ListView>\n    ");
-    var configFind = {
-        query: {
-            schm: "57c42f2fc8307cd5b82f4484"
-        }
-    };
-    var array = [
-        { name: "Planta E1H1P1", value: "16.5", schema: "xxxxxxx12312312xxxxx", id: "" }
-    ];
+    function mix(a, b, v) {
+        return (1 - v) * a + v * b;
+    }
+    function HSVtoRGB(H, S, V) {
+        var V2 = V * (1 - S);
+        var r = ((H >= 0 && H <= 60) || (H >= 300 && H <= 360)) ? V : ((H >= 120 && H <= 240) ? V2 : ((H >= 60 && H <= 120) ? mix(V, V2, (H - 60) / 60) : ((H >= 240 && H <= 300) ? mix(V2, V, (H - 240) / 60) : 0)));
+        var g = (H >= 60 && H <= 180) ? V : ((H >= 240 && H <= 360) ? V2 : ((H >= 0 && H <= 60) ? mix(V2, V, H / 60) : ((H >= 180 && H <= 240) ? mix(V, V2, (H - 180) / 60) : 0)));
+        var b = (H >= 0 && H <= 120) ? V2 : ((H >= 180 && H <= 300) ? V : ((H >= 120 && H <= 180) ? mix(V2, V, (H - 120) / 60) : ((H >= 300 && H <= 360) ? mix(V, V2, (H - 300) / 60) : 0)));
+        return {
+            r: Math.round(r * 255),
+            g: Math.round(g * 255),
+            b: Math.round(b * 255)
+        };
+    }
+    // rango del 170 al 0
+    function brixColor(num) {
+        var n = 270 - num * 270 / 25;
+        var o = HSVtoRGB(n, 1, 1);
+        return "rgb(" + o.r + "," + o.g + "," + o.b + ")";
+        /*
+        if(num <5 ){return "#8081E0";}
+        if(num >=5 && num <13  ){return "#EDEA1C";}
+        if(num >=13 && num <18  ){return "#048C0D";}
+        if( num >=18  ){return "#D60909";}
+        */
+    }
+    var showItems = [];
+    //console.log("SChema que se envia a record")
     function onTapItem(args) {
-        console.log(args.index);
+        //console.log("Tap item "+Object.keys(showItems[args.index])+" ----------------------");
         var navigationOptions = {
-            moduleName: 'records/record-viewer',
+            moduleName: 'evaluations/evaluation-create',
             context: {
-                id: array[args.index].id,
-                schm: "57a4e02ec830e2bdff1a1608",
-                key: "cod_indiv",
-                datatype: 'string'
+                _id: showItems[args.index]._id,
             }
         };
-        //Frame.topmost().navigate(navigationOptions);
+        Frame.topmost().navigate(navigationOptions);
     }
-    RecordService.Find(configFind).then(function (x) {
-        a.bindingContext = { selectedOption: onTapItem, items: x.items };
+    RecordService.FindPop(configFind).then(function (x) {
+        showItems = x.items;
+        var listItems = x.items.map(function (x) {
+            var num = Math.floor(Math.random() * 30 + 1);
+            console.log(num);
+            var text = "Planta ";
+            text += "E" + x.getPopAttr("57c42f77c8307cd5b82f4486", "espaldera", "number");
+            text += "H" + x.getPopAttr("57c42f77c8307cd5b82f4486", "hilera", "number");
+            text += x.getPopAttr("57c42f77c8307cd5b82f4486", "posicion", "number") ? "P" + x.getPopAttr("57c42f77c8307cd5b82f4486", "posicion", "number") : "-";
+            return {
+                text: text + ": " + x.getAttr(listViewAttr),
+                color: brixColor(x.getAttr("57c84628ab66902c2208a855"))
+            };
+        });
+        console.log(showItems);
+        a.bindingContext = { selectedOption: onTapItem, items: listItems, stopRefresh: stopRefresh };
         loader.hide();
     });
+    function stopRefresh(args) {
+        // Load more data here and then set 'refreshing = false' to end the refresh
+        var w = args.object;
+        RecordService.FindPop(configFind).then(function (x) {
+            showItems = x.items;
+            var listItems = x.items.map(function (x) {
+                var num = Math.floor(Math.random() * 30 + 1);
+                console.log(num);
+                var text = "Planta ";
+                text += "E" + x.getPopAttr("57c42f77c8307cd5b82f4486", "espaldera", "number");
+                text += "H" + x.getPopAttr("57c42f77c8307cd5b82f4486", "hilera", "number");
+                text += x.getPopAttr("57c42f77c8307cd5b82f4486", "posicion", "number") ? "P" + x.getPopAttr("57c42f77c8307cd5b82f4486", "posicion", "number") : "-";
+                return {
+                    text: text + ": " + x.getAttr(listViewAttr),
+                    color: brixColor(x.getAttr("57c84628ab66902c2208a855"))
+                };
+            });
+            console.log(showItems);
+            a.bindingContext = { selectedOption: onTapItem, items: listItems, stopRefresh: stopRefresh };
+            //loader.hide();
+            w.refreshing = false;
+        });
+    }
     var grid = new grid_layout_1.GridLayout();
     grid.addChild(a);
+    page.content = grid;
+    console.log(" onNavigatedTo -- page.actionBar.actionItems.getItems.length" + page.actionBar.actionItems.getItems.length);
+    /********** ACTION BAR *********** */
+    /*
+        var item = new actionBarModule.ActionItem();
+        
+        item.android.systemIcon = "ic_menu_add";
+        item.on("tap",function(){
+            console.log("plus tap");
+            var navigationOptions={
+                moduleName:'evaluations/evaluation-create',
+                context:{
+                    schm: schm
+                }
+            }
+            
+            Frame.topmost().navigate(navigationOptions);
+        });
+        page.actionBar.title = "Registros evaluados";
+        //page.actionBar.actionItems.addItem(item);
+        page.actionBar.setInlineStyle("background-color:#2196F3; color:white;");
+    */
+}
+function pageLoaded(args) {
+    console.log("pageLoaded");
+    var page = args.object;
+    var schm = page.navigationContext.schema;
+    /********** ACTION BAR *********** */
+    /*
+      var item = new actionBarModule.ActionItem();
+      
+      item.android.systemIcon = "ic_menu_add";
+      item.on("tap",function(){
+          console.log("plus tap");
+          var navigationOptions={
+              moduleName:'evaluations/evaluation-create',
+              context:{
+                  schm: schm
+              },
+              backstackVisible: false
+          }
+          
+          Frame.topmost().navigate(navigationOptions);
+      });
+    
+      page.actionBar.title = "Registros evaluados";
+      page.actionBar.actionItems.addItem(item);
+  
+      page.actionBar.setInlineStyle("background-color:#2196F3; color:white;");
+      */
+}
+function navigatingTo(args) {
+    console.log("navigatingTo");
+    var page = args.object;
+    var schm = page.navigationContext.schema;
     /********** ACTION BAR *********** */
     var item = new actionBarModule.ActionItem();
+    var navBtn = new actionBarModule.NavigationButton();
     item.android.systemIcon = "ic_menu_add";
     item.on("tap", function () {
         console.log("plus tap");
         var navigationOptions = {
             moduleName: 'evaluations/evaluation-create',
             context: {
-                schema: schm
+                schm: schm
             }
         };
         Frame.topmost().navigate(navigationOptions);
+        //Frame.topmost().re
     });
     page.actionBar.title = "Registros evaluados";
-    page.actionBar.actionItems.addItem(item);
+    page.actionBar.navigationButton = item;
+    //page.actionBar.actionItems = items;  
     page.actionBar.setInlineStyle("background-color:#2196F3; color:white;");
-    page.content = grid;
 }
 exports.createPage = function createPage() {
     var page = new page_1.Page();
     page._applyXmlAttribute('xmlns', "http://schemas.nativescript.org/tns.xsd");
     page.on(page_1.Page.navigatedToEvent, onNavigatedTo);
+    page.on(page_1.Page.loadedEvent, pageLoaded);
+    page.on(page_1.Page.navigatingToEvent, navigatingTo);
     return page;
 };
 //# sourceMappingURL=evaluation-records.js.map

@@ -15,7 +15,7 @@ var RecordService = require("../services/record.service");
 var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
  
 var loader = new LoadingIndicator();
- 
+ var ViewMaker = require("../services/ViewMaker.service");
 // optional options 
 var options = {
   message: 'loading plant info...',
@@ -57,8 +57,8 @@ function onNavigatedTo(args) {
     var obs = new Observable();
 
     function tabItemMaker (data) {
-        console.log(JSON.stringify(data))
-        console.log(data.getSchmAttr("registrationStart") )
+        //console.log(JSON.stringify(data))
+        //console.log(data.getSchmAttr("registrationStart") )
         var tab = new TabView();
         tab.items = [];
         var validIds = data.getIdsForShow();
@@ -75,7 +75,7 @@ function onNavigatedTo(args) {
             };
             var tabItem = new TabViewItem();
             tabItem.title =  data.getAttrInputConf(identif,"shortName");
-            tabItem.view = new SimpleText.SimpleText(config).getView();
+            tabItem.view = SimpleText(config).getView();
             tab.items.push(tabItem);
             
         }
@@ -91,7 +91,7 @@ function onNavigatedTo(args) {
     }
     
     RecordService.FindOne(config)
-        .then(tabItemMaker)
+        .then(ViewMaker.TabView)
         .then(function(tab){
             grid.addChild(tab);
             loader.hide();

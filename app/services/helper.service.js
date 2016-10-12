@@ -1,7 +1,21 @@
-
+/**
+ * Objeto config
+ * ```
+ * {
+ *  dir:'adsf/asdf',
+ *  query:{
+ *    page:
+ *    items:
+ *    schm:
+ *    populate:
+ *    filter:
+ *  } 
+ * }
+ * ```
+ */
 exports.urlQueryConfig = function urlConfig(config) {
-    // ULR config ********************************************/
     var url = '';
+    // ULR config ********************************************/
     // if dir is set, add to url var
     if(config.dir){ url += config.dir; }
     // query
@@ -10,6 +24,7 @@ exports.urlQueryConfig = function urlConfig(config) {
         if(config.query.page){ url += "page="+config.query.page+"&"}
         if(config.query.items){ url += "items="+config.query.page+"&"}
         if(config.query.schm){ url += "schm="+ config.query.schm+"&"}
+        if(config.query.populate){ url += "populate="+ config.query.populate+"&"}
         if(config.query.filter && config.query.filter.length){
             var arr = config.query.filter;
             var isValid = true;

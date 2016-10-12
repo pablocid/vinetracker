@@ -4,6 +4,7 @@ var grid_layout_1 = require('ui/layouts/grid-layout');
 var Inputs = require('../form/input-schemas/brix');
 var SimpleText = require("../services/partials/inputs/simple_text");
 var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
+var Frame = require('ui/frame');
 var actionBarModule = require("ui/action-bar");
 var ViewMaker = require("../services/ViewMaker.service");
 var RecordService = require("../services/record.service");
@@ -30,27 +31,35 @@ function onNavigatedTo(args) {
     loader.show(options);
     var page = args.object;
     /********** TAB ITEMS *********** */
-    var schm = "57c42f2fc8307cd5b82f4484"; //page.navigationContext.schm;
-    var grid = new grid_layout_1.GridLayout();
+    var schm = page.navigationContext.schm;
+    var _id = page.navigationContext._id;
     var elRecord;
-    RecordService.createNewRecord(schm)
-        .then(function (d) {
-        //enlazar un cb para guardar el registro;
-        d.SaveCb = function () {
-            //guarda y asigna el resultado a 
-            RecordService.saveRecord(d).then(function (x) { return d._id = x._id; });
-        };
-        elRecord = d;
-        return d;
-    })
-        .then(ViewMaker.TabView)
-        .then(function (d) {
-        loader.hide();
-        grid.addChild(d);
-    }, function (err) {
-        loader.hide();
-        console.log(err);
-    });
+    if (!schm && !_id) {
+        console.log("el schema y el _id no estan seteado");
+        Frame.topmost().goBack();
+    }
+    else {
+        console.log("Evaluation-create schema: " + schm);
+        var grid = new grid_layout_1.GridLayout();
+        RecordService.createNewRecord(schm, _id)
+            .then(function (d) {
+            //enlazar un cb para guardar el registro;
+            d.SaveCb = function () {
+                //guarda y asigna el resultado a 
+                RecordService.saveRecord(d).then(function (x) { return d._id = x._id; });
+            };
+            elRecord = d;
+            return d;
+        })
+            .then(ViewMaker.TabViewEdit)
+            .then(function (d) {
+            loader.hide();
+            grid.addChild(d);
+        }, function (err) {
+            loader.hide();
+            console.log(err);
+        });
+    }
     /********** ACTION BAR *********** */
     var item = new actionBarModule.ActionItem();
     item.android.systemIcon = "ic_menu_save";
@@ -61,9 +70,10 @@ function onNavigatedTo(args) {
             moduleName: 'evaluations/evaluation-create',
             context: {}
         };
+        Frame.topmost().goBack();
         //Frame.topmost().navigate(navigationOptions);
     });
-    page.actionBar.title = "Evaluación xxx";
+    page.actionBar.title = "Evaluación de grados brix";
     page.actionBar.actionItems.addItem(item);
     page.actionBar.setInlineStyle("background-color:#2196F3; color:white;");
     page.content = grid;

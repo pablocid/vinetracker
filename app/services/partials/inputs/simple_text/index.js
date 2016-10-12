@@ -13,7 +13,7 @@ function TabViewBuilder(conf) {
     });
     a.bindingContext = {
         value: conf.record.getAttr(conf.attrId),
-        description: conf.record.getAttrInputConf(conf.attrId, "label")
+        description: conf.record.getAttrAttr(conf.attrId, "label")
     };
     stack.orientation = "vertical";
     //stack.width = 500;
@@ -29,7 +29,6 @@ function TabViewEditBuilder(conf) {
         name: 'create',
         path: '~/services/partials/inputs/simple_text',
     });
-    conf.record.setAttr(conf.attrId, "Esta planta esta rara");
     var viewModel = new observable_1.Observable();
     viewModel.set("label", conf.record.getAttrAttr(conf.attrId, "label"));
     viewModel.set("value", conf.record.getAttr(conf.attrId));

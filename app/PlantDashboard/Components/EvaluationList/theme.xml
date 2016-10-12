@@ -1,0 +1,17 @@
+<StackLayout style="padding:20">
+    <GridLayout rows="*">
+        <ScrollView row="0">
+            <ListView items="{{ items }}" itemTap="{{ selectedOption }}">
+                <ListView.itemTemplate>
+                    <GridLayout columns="30, *" style="font-size:20; padding:10; padding-bottom:30; padding-top:30;">
+                        <Label text="" col="0" />
+                        <Label text="{{ name }}" col="0" textWrap="true" col="1"/>
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </ScrollView>
+        <StackLayout>
+            <ActivityIndicator busy="{{loading}}" style="color:red; margin-top:15" />
+        </StackLayout>
+    </GridLayout>
+</StackLayout>

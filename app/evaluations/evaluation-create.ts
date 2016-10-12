@@ -41,30 +41,40 @@ function onNavigatedTo(args) {
  
     loader.show(options);
     var page = args.object;
-    
-    /********** TAB ITEMS *********** */
-    var schm = "57c42f2fc8307cd5b82f4484";//page.navigationContext.schm;
 
-    var grid = new GridLayout();
+    /********** TAB ITEMS *********** */
+    var schm = page.navigationContext.schm;
+    var _id = page.navigationContext._id;
+
     var elRecord;
-    RecordService.createNewRecord(schm)
-    .then(function(d){
-        //enlazar un cb para guardar el registro;
-        d.SaveCb = function(){ 
-            //guarda y asigna el resultado a 
-            RecordService.saveRecord(d).then(x=>d._id = x._id);
-        };
-        elRecord = d;
-        return d;
-    })
-    .then(ViewMaker.TabView)
-    .then(function(d){
-        loader.hide();
-        grid.addChild(d);
-    }, function(err){
-        loader.hide();
-        console.log(err)
-    });
+    if(!schm && !_id){
+        console.log("el schema y el _id no estan seteado")
+        Frame.topmost().goBack();
+    }else{
+        console.log("Evaluation-create schema: "+schm);
+        var grid = new GridLayout();
+        
+    
+        RecordService.createNewRecord(schm, _id)
+        .then(function(d){
+            //enlazar un cb para guardar el registro;
+            d.SaveCb = function(){
+                //guarda y asigna el resultado a 
+                RecordService.saveRecord(d).then(x=>d._id = x._id);
+            };
+            elRecord = d;
+            return d;
+        })
+        .then(ViewMaker.TabViewEdit)
+        .then(function(d){
+            loader.hide();
+            grid.addChild(d);
+        }, function(err){
+            loader.hide();
+            console.log(err)
+        });
+    }
+    
 
     /********** ACTION BAR *********** */
     var item = new actionBarModule.ActionItem();
@@ -80,11 +90,11 @@ function onNavigatedTo(args) {
                 ///schema: array[args.index].schema
             }
         }
-        
+        Frame.topmost().goBack();
         //Frame.topmost().navigate(navigationOptions);
     });
   
-    page.actionBar.title = "Evaluación xxx";
+    page.actionBar.title = "Evaluación de grados brix";
     page.actionBar.actionItems.addItem(item);
     page.actionBar.setInlineStyle("background-color:#2196F3; color:white;");
 

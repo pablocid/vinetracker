@@ -8,7 +8,7 @@ function pageLoaded(args) {
 exports.pageLoaded = pageLoaded;
 function onTap(args) {
     var fullscreen = args.object.text.indexOf("(full-screen)") !== -1;
-    page.showModal("testmodal/login-page", "context", function (username, password) {
+    page.showModal("PlantDashboard/index", "context", function (username, password) {
         console.log(username + "/" + password);
         label.text = username + "/" + password;
     }, fullscreen);

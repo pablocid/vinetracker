@@ -23,7 +23,8 @@ var options = {
   }
 };
 function createViewModel() {
-    frame.topmost().navigate("evaluations/evaluation-records");
+    frame.topmost().navigate("PlantDashboard/index");
+    //frame.topmost().navigate({moduleName:'evaluations/evaluation-records',context:{schema: "57c42f2fc8307cd5b82f4484",listViewAttr:"57c84628ab66902c2208a855"}});
     //frame.topmost().navigate("evaluations/evaluation-create");
     //frame.topmost().navigate("records/record-identifier");
     //frame.topmost().navigate("testmodal/modal-view");

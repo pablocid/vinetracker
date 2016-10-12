@@ -1,0 +1,12 @@
+  <GridLayout columns="*" rows="auto, *" >
+    <Label text="{{description}}" row="0" col="0" backgroundColor="white" textWrap="true" 
+    style="font-size:26; text-align:center; color:#616161; padding:15; margin-top:20;"/>
+    <ScrollView row="1" col="0" >
+        <StackLayout>
+            <Button text="Scan" tap="{{onScan}}" style="background-color:#0D47A1; color:white; border-radius:10; margin-top:32; font-size:25; width:200; height:50; "></Button>
+            <Label text="{{ code }}" style="text-align:center;font-size:28; background-color:white; color:#616161; margin-top:50; padding: 5;"/>
+            <Label text="{{ ubicacion }}" style="text-align:center;font-size:28; background-color:white; color:#616161; padding: 5;"/>
+            <ActivityIndicator busy="{{loading}}" style="color:red; margin-top:15" />
+        </StackLayout>
+    </ScrollView> 
+  </GridLayout>

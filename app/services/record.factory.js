@@ -127,10 +127,13 @@ exports.RecordFactory = function (schema, newschema) {
 
         return self.findValueByVarHelper(input.attributes,"id",key,dt);
     }
-    RecordConstructor.prototype.getAttr = function (attrId){
+    RecordConstructor.prototype.getAttr = function (attrId, dt){
         var self = this;
+        if(dt){
+            return this.findValueByVarHelper(self.attributes, "id", attrId, dt);
+        }
         var dataType = self.getInputAttr(attrId, "dataType");
-        console.log("dataType : "+dataType + " -  attrId: "+attrId)
+        //console.log("dataType : "+dataType + " -  attrId: "+attrId)
         if(dataType != null ){
             var dato = this.findValueByVarHelper(self.attributes, "id", attrId, dataType);
           return dato;
@@ -159,12 +162,10 @@ exports.RecordFactory = function (schema, newschema) {
             return null;
         }
     }
-   
     RecordConstructor.prototype.dottedKey= function(key, x){
         return key.split('.').reduce(function (obj,i) {return obj[i]}, x)
         
     }
-
     RecordConstructor.prototype.findValueByVarHelper = function(array, key, value, target){
         var self = this;
         if(!Array.isArray(array)){return null;}
@@ -180,6 +181,12 @@ exports.RecordFactory = function (schema, newschema) {
         }else{
             return null;
         }
+    }
+    RecordConstructor.prototype.getPopAttr = function(popAttrId, attrId, dt){
+        console.log("getPopAttr: ("+popAttrId+", "+attrId+", "+", dt"+")")
+        if(!this[popAttrId] || !this[popAttrId]._id){ return null;}
+
+        return this[popAttrId].getAttr(attrId, dt);
     }
 
     return RecordConstructor;
