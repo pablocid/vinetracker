@@ -17,6 +17,10 @@ sumaryTab.title = "Resumen";
 sumaryTab.view = sumary.getView();
 tab.items = [evalListTab, sumaryTab];
 var ePage = new BasePage_1.BasePage();
+ePage.fnOnLoad = function () {
+    evalList.onLoadedPage();
+    sumary.onLoadedPage();
+};
 ePage.mainContent = tab;
 ePage.setTitleActionBar('Evaluaciones', 'lista de evaluaciones disponibles');
 module.exports = ePage;

@@ -66,17 +66,38 @@ var BasePage = (function () {
         this._page.actionBar = this._actionBar;
         this._page.content = this._sidedrawer;
     };
-    BasePage.prototype.onLoadPage = function (args) {
-        var page = args.object;
-        //if(!this._mainContent){ throw new Error(" the mainView is not set");}
-        //this._sidedrawer.mainContent = this._mainContent;
-        //page.content = this._sidedrawer;
+    Object.defineProperty(BasePage.prototype, "fnOnLoad", {
+        get: function () {
+            return this._fnOnLoad;
+        },
+        set: function (value) {
+            this._fnOnLoad = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    BasePage.prototype.onNavigatedTo = function (args) {
+        console.log('onNavigatedTo');
+        if (this._fnOnLoad) {
+            this._fnOnLoad();
+        }
+    };
+    BasePage.prototype.onLoaded = function (args) {
+        console.log('onLoaded');
+    };
+    BasePage.prototype.onShownModally = function (args) {
+        console.log('onShownModally');
+    };
+    BasePage.prototype.onNavigatingTo = function (args) {
+        console.log('navigatingTo');
     };
     BasePage.prototype.createPage = function () {
+        var _this = this;
         this._setMainContent();
-        //page.on(Page.navigatedToEvent, this.onLoadPage);
-        //page.on(Page.loadedEvent, this.onLoadPage)
-        //page.on(Page.shownModallyEvent, onShownModally);
+        this._page.on(page_1.Page.navigatedToEvent, function (x) { _this.onNavigatedTo(x); });
+        this._page.on(page_1.Page.loadedEvent, function (x) { _this.onLoaded(x); });
+        this._page.on(page_1.Page.shownModallyEvent, function (x) { _this.onLoaded(x); });
+        this._page.on(page_1.Page.navigatingToEvent, function (x) { _this.onNavigatingTo(x); });
         return this._page;
     };
     return BasePage;

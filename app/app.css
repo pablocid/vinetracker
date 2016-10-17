@@ -16,3 +16,7 @@ button {
     margin: 0 20;
     text-align: center;
 }
+.icon {
+   font-family: 'fontawesome-webfont';
+   font-size: 30;
+}

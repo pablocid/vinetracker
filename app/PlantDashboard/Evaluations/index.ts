@@ -8,6 +8,9 @@ import { TabView, TabViewItem } from "ui/tab-view";
 import { EvaluationListView } from '../Components/EvaluationList';
 import { SumaryReport } from '../Components/EvaluationReport';
 import { BasePage } from '../../factories/BasePage';
+import { GridLayout } from 'ui/layouts/grid-layout';
+import { StackLayout } from 'ui/layouts/stack-layout';
+import { parse as Parse, load as Load } from 'ui/builder';
 
 var tab = new TabView();
 
@@ -26,6 +29,10 @@ sumaryTab.view = sumary.getView();
 tab.items = [evalListTab, sumaryTab];
 
 var ePage = new BasePage();
+ePage.fnOnLoad = function(){
+    evalList.onLoadedPage();
+    sumary.onLoadedPage();
+}
 ePage.mainContent = tab;
 ePage.setTitleActionBar('Evaluaciones','lista de evaluaciones disponibles');
 export = ePage;

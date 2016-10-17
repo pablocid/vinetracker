@@ -1,0 +1,9 @@
+<GridLayout columns="*" rows="auto, 100, * " xmlns:MDL="nativescript-materialdropdownlist">
+    <Label text="{{label}}" row="0" col="0" backgroundColor="white" textWrap="true" 
+    style="font-size:26; text-align:center; color:#616161; padding:15; margin-top:20;"/>
+    <ScrollView row="1" col="0" >
+        <StackLayout>
+            <dd:DropDown id="dd" xmlns:dd="nativescript-drop-down" hint="opciones ..." textWrap="true" items="{{ itemsDD }}" selectedIndex="{{ selectedIndex }}" style="font-size:30; text-align:center; background-color: #f44242; color : white; border-radius:20; padding:10; height:80; margin:10;" />
+        </StackLayout>
+    </ScrollView> 
+</GridLayout>

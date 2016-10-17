@@ -28,7 +28,7 @@ export class BaseFind {
         this._queryParser = new QueryParser(this._config);
     }
 
-    public find (){
+    public find ():Promise<Record>{
         var self = this;
         this._setQueryParser();
         let url = this._queryParser.parse();
@@ -73,15 +73,15 @@ export class FindRecord extends BaseFind {
     }
 
     protected makeObj(a:FindOneResponse){
-        var obj = new Record(a.schema.map(x=>new SchmSchemaObj(x)), a.record );
-        return obj;
+        //var obj = new Record(a.schema, a.record );
+        return a;
     }
 }
 
 export class FindPlant extends FindRecord {
     protected makeObj(a:FindOneResponse){
-        var obj = new Plant(a.schema.map(x=>new SchmSchemaObj(x)), a.record );
-        return obj;
+        //var obj = new Plant(a.schema, a.record );
+        return a;
     }
 }
 

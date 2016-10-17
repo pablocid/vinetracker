@@ -1,0 +1,14 @@
+<GridLayout columns="*" rows="auto, *" >
+    <Label text="{{label}}" row="0" col="0" backgroundColor="#388E3C" textWrap="true" color="white"
+    style="font-size:26; text-align:center; padding:15;"/>
+    <ScrollView row="1" col="0">
+    <ListView id="selectedItemId" items="{{ items }}" itemTap="{{ selectedOption }}">
+            <ListView.itemTemplate>
+                <GridLayout rows="*" columns="50,50,20,*" textWrap="true" backgroundColor="{{checked ? '#f44242': 'white'}}" color="{{checked ? 'white': 'gray'}}">
+                    <Switch checked="{{checked}}" row="0" col="1" width="50"/>
+                    <Label row="0" col="3" text="{{ value }}" textWrap="true" style="font-size:20; margin-top:15; margin-bottom:15;" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </ScrollView> 
+</GridLayout>

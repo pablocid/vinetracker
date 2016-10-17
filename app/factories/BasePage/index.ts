@@ -1,3 +1,4 @@
+import {onLoaded} from '../../testmodal/login-page';
 
 import {topmost} from "ui/frame";
 import {Page} from "ui/page";
@@ -20,6 +21,7 @@ export class BasePage {
     private _actionItem:ActionItem;
     private _page:Page;
     private _titleActionBar:string | View;
+    private _fnOnLoad:any;
 
     constructor(){
         this._page = new Page();
@@ -118,21 +120,34 @@ export class BasePage {
         this._page.actionBar = this._actionBar;
         this._page.content = this._sidedrawer;
     }
-    
-    onLoadPage( args:EventData ){
-        let page = <Page>args.object;
-        //if(!this._mainContent){ throw new Error(" the mainView is not set");}
-        //this._sidedrawer.mainContent = this._mainContent;
-        //page.content = this._sidedrawer;
+
+	public get fnOnLoad(): any {
+		return this._fnOnLoad;
+	}
+
+	public set fnOnLoad(value: any) {
+		this._fnOnLoad = value;
+	}
+    onNavigatedTo (args:EventData){
+        console.log('onNavigatedTo');
+        if(this._fnOnLoad){ this._fnOnLoad(); }
     }
 
+    onLoaded (args:EventData){
+        console.log('onLoaded');
+    }
+    onShownModally ( args:EventData){
+        console.log('onShownModally');
+    }
+    onNavigatingTo ( args:EventData){
+        console.log('navigatingTo');
+    }
     createPage(){
         this._setMainContent();
-
-        //page.on(Page.navigatedToEvent, this.onLoadPage);
-        //page.on(Page.loadedEvent, this.onLoadPage)
-        //page.on(Page.shownModallyEvent, onShownModally);
-    
+        this._page.on(Page.navigatedToEvent, x=>{ this.onNavigatedTo(x) });
+        this._page.on(Page.loadedEvent, x=>{ this.onLoaded(x) }) ;
+        this._page.on(Page.shownModallyEvent, x=>{ this.onLoaded(x) } );
+        this._page.on(Page.navigatingToEvent, x=>{ this.onNavigatingTo(x) } );
         return this._page;
     }
 }

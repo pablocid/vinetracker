@@ -1,0 +1,94 @@
+"use strict";
+var BaseComponent_1 = require('../BaseComponent');
+var observable_1 = require('data/observable');
+var observable_array_1 = require("data/observable-array");
+var builder_1 = require('ui/builder');
+var SelectionList = (function (_super) {
+    __extends(SelectionList, _super);
+    function SelectionList(attr) {
+        var _this = this;
+        _super.call(this, attr);
+        this._props = this._properties;
+        this._options = new observable_array_1.ObservableArray(this._props.options.map(function (x, i) {
+            return {
+                backgroundColor: 'white',
+                color: 'gray',
+                value: x.string,
+                key: x.id,
+                index: i,
+                img: _this._setImgUrl(x.id)
+            };
+        }));
+        this._viewModel.set('itemsDD', this._props.options.map(function (x) { return x.string; }));
+        this._viewModel.set('items', this._options);
+        var dropDown = builder_1.load({
+            path: '~/PlantDashboard/Components/SelectionList',
+            name: 'dropdown'
+        });
+        var optionList = builder_1.load({
+            path: '~/PlantDashboard/Components/SelectionList',
+            name: 'optionlist'
+        });
+        var imageList = builder_1.load({
+            path: '~/PlantDashboard/Components/SelectionList',
+            name: 'imageList'
+        });
+        var ft = this._props.formType;
+        console.log(ft);
+        if (ft && ft === 'optionsList' || ft === 'dropDown' || ft === 'imageList') {
+            if (this._props.formType === 'optionsList') {
+                this._theme.addChild(optionList);
+            }
+            if (this._props.formType === 'dropDown') {
+                this._theme.addChild(dropDown);
+            }
+            if (this._props.formType === 'imageList') {
+                this._theme.addChild(imageList);
+            }
+        }
+        else {
+            this._theme.addChild(optionList);
+        }
+        this._viewModel.on(observable_1.Observable.propertyChangeEvent, function (args) {
+            if (args.propertyName === 'selectedIndex') {
+                var item = _this._options.getItem(_this._viewModel.get('selectedIndex'));
+                _this._recordAttr.value = item.key;
+                var imgUri = "~/img/" + item.key + ".png";
+                _this._viewModel.set('selected', { key: item.key, value: item.value, img: imgUri });
+            }
+            _this._callback();
+            console.log(JSON.stringify(_this._recordAttr.data));
+        });
+        this._viewModel.set('selectedOption', function (args) {
+            var index = args.index;
+            _this._viewModel.set('selectedIndex', index);
+            _this._options.map(function (x) {
+                x.backgroundColor = 'white';
+                x.color = 'gray';
+            });
+            var opt = _this._options.getItem(index);
+            opt.color = 'white';
+            opt.backgroundColor = '#f44242';
+            _this._options.setItem(index, opt);
+        });
+        this._setValue();
+        /**** */
+        //this._viewModel.set('icon', String.fromCharCode(&#xf17b;))
+    }
+    SelectionList.prototype._setImgUrl = function (name) {
+        return "~/img/" + name + ".png";
+    };
+    SelectionList.prototype._setValue = function () {
+        var index = this._options.indexOf(this._recordAttr.value);
+        if (index !== -1) {
+            this._viewModel.set('selectedIndex', index);
+        }
+    };
+    SelectionList.prototype._selectedOption = function (args) {
+        //let index = args.index;
+        console.log(args);
+    };
+    return SelectionList;
+}(BaseComponent_1.BaseInputComponent));
+exports.SelectionList = SelectionList;
+//# sourceMappingURL=index.js.map

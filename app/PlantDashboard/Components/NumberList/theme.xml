@@ -1,0 +1,23 @@
+<GridLayout columns="*" rows="auto, 200,* " >
+    <Label text="{{label}}" row="0" col="0" backgroundColor="white" textWrap="true" 
+    style="font-size:26; text-align:center; color:#616161; padding:15; margin-top:20;"/>
+    <Label col="0" row="1" text="{{value}}" style="padding:20; font-size:40; text-align:center; background-color: #f44242; color : white; vertical-align:center;" />
+    <ScrollView row="2" col="0" >
+        <GridLayout columns="*,auto" rows="*,*">
+            <GridLayout row="0" col="0" columns="*" rows="auto, auto, * ">
+                <GridLayout row="0" col="0" height="1" style="background-color:#009688;"></GridLayout>
+                <Label row="1" col="0" text="entero" style="text-align:center; font-size:20; padding:15;"/>
+                <dd:DropDown row="2" col="0" xmlns:dd="nativescript-drop-down" hint="--------" textWrap="true" items="{{ integerItems }}" selectedIndex="{{ intIndex }}" 
+                    style=" padding:20; font-size:25; text-align:center; background-color: #424242; color : white; height:70; " />
+            </GridLayout>
+
+            <GridLayout visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" row="0" col="1" columns="*" rows="auto, auto, * ">
+                <GridLayout row="0" col="0" height="1" style="background-color:#009688;"></GridLayout>
+                <Label row="1" col="0" text="decimal" style="text-align:center; font-size:20; padding:15;"/>
+                <dd:DropDown row="2" col="0" xmlns:dd="nativescript-drop-down" hint="--------" textWrap="true" items="{{ floatItems }}" selectedIndex="{{ floatIndex }}" 
+                    style=" padding:20; font-size:25; text-align:center; background-color: #757575; color : white; height:70; " />
+            </GridLayout>
+
+        </GridLayout>
+    </ScrollView> 
+</GridLayout>

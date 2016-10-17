@@ -85,9 +85,13 @@ export class EvaluationListView {
         this._viewModel.set('items', listItemsView);
      }
 
-     public getView() : View {
-         let rs = new FindSchm(this._config);
+     public onLoadedPage(){
+         this._viewModel.set('loading',true);
+        let rs = new FindSchm(this._config);
          rs.find().then(x=>this._setUpView(x));
+     }
+
+     public getView() : View {
          var grid =  new GridLayout();
          grid.addChild(this._theme);
 

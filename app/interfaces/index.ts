@@ -57,3 +57,41 @@ export interface FindOneResponse{
     schema:any[];
     record:any
 }
+
+export interface AttrProps{
+    label: string;
+    shortName: string;
+}
+export interface SchmProps {
+    name: string;
+    input: string;
+    label: string;
+    shortName: string;
+    visualizaton: boolean;
+    creatable: boolean;
+    editable: boolean;
+    validate: boolean;
+}
+export interface ListOfObj {
+    id:string;
+    string:string;
+}
+export interface SelectionListAttrProps extends AttrProps{
+    options: ListOfObj[];
+    formType?:string;
+}
+
+export interface ListOptionObject {
+    backgroundColor:string;
+    color:string;
+    key:string;
+    value?:string;
+    index?:number;
+    img?:string;
+}
+export interface NumberListAttrProps extends AttrProps{
+    minVal:number;
+    maxVal:number;
+    floatOpt:string;
+    unit:string;
+}

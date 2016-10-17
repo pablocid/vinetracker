@@ -65,10 +65,13 @@ var EvaluationListView = (function () {
         var listItemsView = this._listItems.map(function (s) { return { name: s.getAttr("listViewLabel", "string") }; });
         this._viewModel.set('items', listItemsView);
     };
-    EvaluationListView.prototype.getView = function () {
+    EvaluationListView.prototype.onLoadedPage = function () {
         var _this = this;
+        this._viewModel.set('loading', true);
         var rs = new record_service_1.FindSchm(this._config);
         rs.find().then(function (x) { return _this._setUpView(x); });
+    };
+    EvaluationListView.prototype.getView = function () {
         var grid = new grid_layout_1.GridLayout();
         grid.addChild(this._theme);
         return grid;

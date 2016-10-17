@@ -42,7 +42,7 @@ var SumaryReport = (function () {
         context.schema = evaluacion;
         console.log("evaluacion.id " + evaluacion.id);
         var navOpts = {
-            moduleName: "PlantDashboard/Evaluations/selection",
+            moduleName: "PlantDashboard/index",
             context: context
         };
         frame_1.topmost().navigate(navOpts);
@@ -57,10 +57,13 @@ var SumaryReport = (function () {
         var listItemsView = this._listItems.map(function (s) { return { name: s.getAttr("listViewLabel", "string") }; });
         this._viewModel.set('items', listItemsView);
     };
-    SumaryReport.prototype.getView = function () {
+    SumaryReport.prototype.onLoadedPage = function () {
         var _this = this;
         var rs = new record_service_1.FindSchm(this._config);
         rs.find().then(function (x) { return _this._setUpView(x); });
+        this._viewModel.set('loading', true);
+    };
+    SumaryReport.prototype.getView = function () {
         var grid = new grid_layout_1.GridLayout();
         grid.addChild(this._theme);
         return grid;

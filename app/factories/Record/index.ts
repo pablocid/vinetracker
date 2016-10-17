@@ -1,105 +1,127 @@
-import {SchmSchemaObj} from '../Schema';
+import {SchmSchemaObj, AttrSchm, Attributes, SchemaFull, Updated, BaseSchema, Schema, InputSchm } from '../Schema';
+var checkParam = require('../../services/helper.service').checkParam;
 
-export class Attributes{
-    private _id:string;
-    private _string:string;
-    private _boolean:boolean;
-    private _date: Date;
-    private _number: number;
-    private _reference: string;
-    private _listOfObj:any;
-    private _list: string[];
+export class Record2 extends BaseSchema{
+    private _schm: string;
+    private _schema: SchemaFull;
+    protected _attributes: RecordAttribute[];
 
-    constructor(attr){
-        this._id = attr.id;
-        this._string = attr.string || undefined;
-        this._boolean = attr.boolean!== undefined? attr.boolean: undefined;
-        this._date = attr.date ? new Date(attr.date): undefined;
-        this._number = attr.number|| undefined;
-        this._reference = attr.reference || undefined;
-        this._listOfObj = attr.listOfObject || undefined;
-        this._list = attr.list && attr.list.length ? attr.list: undefined;
-    }
-    get id (){
-        return this._id;
-    }
-    public get string (){
-        return this._string;
-    }
-    public get boolean (){
-        return this._boolean;
-    }
-    get date (){
-        return this._date;
-    }
-    get number(){
-        return this._number;
-    }
-    get reference (){
-        return this._reference;
-    }
-    get listOfObject(){
-        return this._listOfObj
-    }
-    get list (){
-        return this._list;
-    }
-    public getValue(){
-        //return this._string || this._boolean!== undefined? this._boolean: null || this._date || this._number!== undefined? this._number: null || this._reference || this._listOfObj || this._list;
-        return this._string; 
-    }
-}
-export class Updated{
-    private _user:string;
-    private _date:Date;
-    
-    constructor(){}
+    constructor(schm:any[], record?:any){
+        if(!schm || schm.length === 0){ throw new Error('no se pudo crear el Record porque el array schema esta vacío.')}
+        super();
+        
+        this._schema = new SchemaFull(schm);
+        this._setData(record);
 
-    set user(id:string){
-        // check if $oid
-        this._user = id;
     }
-    get user(){
-        return this._user;
+
+    public get schema ():SchemaFull{
+        return this._schema;
     }
-    set date(isoDate: Date){
-        this._date = isoDate;
+
+    public set schema (value : SchemaFull){
+        this._schema = value;
     }
-    get date(){
-        return this._date;
-    }
-    get data(){
-        return {
-            user:this._user,
-            date:this._date
+
+    private _setData( record:any ){
+        if(record){
+            this._id = record._id;
+            this._created = record.created;
+            this._updated = record.updated;
         }
+
+        this._schm = this._schema.schm.id;
+
+        this._attributes = [];
+
+        this._schema.listAttrIds.forEach( l => {
+
+            let indexSchm = this._schema.attrSchms.map(s => s.id).indexOf(l);
+            let indexAttr:any;
+            if(record && record.attributes && record.attributes.length){
+               indexAttr =  record.attributes.map( s => s.id ).indexOf(l);
+            }else{
+                indexAttr = -1;
+            }
+
+            if(indexSchm !== -1 ){
+                if(indexAttr !== -1){
+                    this._attributes.push( 
+                        new RecordAttribute( this._schema.attrSchms[indexSchm] , record.attributes[indexAttr])
+                    );
+                }else{
+                    this._attributes.push(
+                        new RecordAttribute( this._schema.attrSchms[indexSchm])
+                    );
+                }
+            }
+        });
+
+
+        
+    }
+
+    public get data (): any{
+        let data = {};
+        if(this._id){ 
+            data['_id'] =  this._id
+        }
+        data['schm'] = this._schm;
+        data['created'] = this._created;
+        data['updated'] = this._updated;
+        
+        if(this._attributes && this._attributes.length){
+            data['attributes'] = this._attributes.map(x=>x.data);
+        }
+
+        return data;
+    }
+    public set data( record:any ){
+        this._setData(record);
+    }
+    /**
+     * El attributo '(value:string)' corresponde a _id del attribute 
+     */
+    public getAttribute (value:string):RecordAttribute{
+
+        let index = this._attributes.map( x => x.id).indexOf(value);
+        if(index !== -1 ){
+            return this._attributes[index];
+        }
+
     }
 }
+
 export class Record{
     private _id:string;
     private _schm:string;
     private _created:Date;
     private _updated:Updated[];
     private _attributes:Attributes[];
-
-    private _schema:SchmSchemaObj;
-    private _attributeSchms:SchmSchemaObj[];
-    private _schmAttrInputConfSchms:SchmSchemaObj[];
-    private _attrInputConfSchms:SchmSchemaObj[];
     
-    constructor(schm : SchmSchemaObj[], record:any ){
+    private _schema:SchmSchemaObj;
+    public _attrConfs:AttrSchm[];
+    private _schmAttrInputConf:SchmSchemaObj[];
+    private _attrInputConf:SchmSchemaObj[];
+    private _inputSchms:SchmSchemaObj[];
+    
+    constructor(schm , record? ){
 
         this.setData(record);
-        
-        if(schm.filter(x=>x.type==='schema')[0]){
-            this._schema = schm.filter(x=>x.type==='schema')[0];
+        let raw =schm.filter(x=>x.type==='schema')[0];
+
+        if(raw){
+            this._schema = new SchmSchemaObj(raw);
         }else{
             throw new Error ('No existe el objeto tipo schema en el array SchmSchemaObj');
         }
 
-        this._attributeSchms = schm.filter(x=>x.type ==='attribute');
-        this._schmAttrInputConfSchms = schm.filter(x=>x.type ==='schmAttrInputConf');
-        this._attrInputConfSchms = schm.filter(x=>x.type ==='attrInputConf');
+        this._attrConfs = schm.filter(x=>x.type ==='attribute').map( x => new AttrSchm(x) );
+        /*
+        this._schmAttrInputConf = schm.filter(x=>x.type ==='schmAttrInputConf');
+        this._attrInputConf = schm.filter(x=>x.type ==='attrInputConf');
+        this._inputSchms = schm.filter(x=>x.type ==='input');
+        */
     }
 
 	public get id(): string {
@@ -125,6 +147,13 @@ export class Record{
 	public set schema(value: SchmSchemaObj) {
 		this._schema = value;
 	}
+
+    public attrSchema (attrId : string){
+        let as = this._attrConfs.filter(x=>x.id === attrId);
+        if(as && as.length){
+            return 'adf'
+        }
+    }
 
     public setData( record:any ){
         if(record){
@@ -179,4 +208,65 @@ export class Plant extends Record {
         }
         return 'sin información de ubicación';
     }
+}
+
+export class RecordAttribute {
+    private _value : any;
+
+    private _attrSchm:AttrSchm;
+
+    constructor(attrSchm:AttrSchm, attr?){
+        this._attrSchm = attrSchm;
+        
+        this._setAttribute(attr);
+    }
+
+    private _setAttribute (attr){
+        if(attr && attr.id === this._attrSchm.id){
+            this._value = attr[this.dataType];
+        }
+    }
+
+	public get attrSchm(): AttrSchm {
+		return this._attrSchm;
+	}
+
+	public set attrSchm(value: AttrSchm) {
+		this._attrSchm = value;
+	}
+
+    public get dataType (){
+        return this._attrSchm.input.dataType;
+    }
+
+    public get name ():string{
+        return this._attrSchm.name;
+    }
+
+    public get value (){
+        return this._value;
+    }
+
+    public set value (v){
+        //check if value match dataType
+        if(checkParam(v,this.dataType)){
+            this._value = v;
+        }else{
+            throw new Error('El valor '+v+' asignado al attributo '+this.name+' con el _id '+this.id+ ' no coincide con el dataType '+this.dataType);
+        }
+
+    }
+
+    public get id ():string {
+        return this._attrSchm.id;
+    }
+
+    public get data(){
+        var d = {};
+        d['id'] = this.id;
+        d[this.dataType] = this.value;
+
+        return d;
+    }
+    
 }

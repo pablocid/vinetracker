@@ -1,0 +1,32 @@
+<GridLayout columns="*" rows="auto, 100, * " xmlns:MDL="nativescript-materialdropdownlist">
+    <Label text="{{label}}" row="0" col="0" backgroundColor="white" textWrap="true" 
+    style="font-size:26; text-align:center; color:#616161; padding:15; margin-top:20;"/>
+
+            <MDL:MaterialDropdownList row="1" col="0" itemsSeparatorColor="white" itemsRowHeight="500"
+                items="{{ items }}" selectedIndex="{{ selectedIndex }}" >
+            
+                <!--Prompt or Selected Item Template-->
+                <MDL:MaterialDropdownList.selectedItemView>
+                    <StackLayout>
+                        <GridLayout columns="*, auto" rows="*" 
+                            style="background-color:#f44242;text-align:center;font-size: 25; color:white;padding-top:25">
+                        <Label row="0" col="0" text="{{ selected ? selected.value : 'opciones' }}" />
+                        <Label row="0" col="1" row="1" text="&#xf1c5;" style="padding:5; margin-right:5;" class="icon"/>
+                        </GridLayout>
+                        <label style="background-color: gray; height: 1;" />
+                    </StackLayout>
+                </MDL:MaterialDropdownList.selectedItemView>
+            
+                <!--Template to pass to the ListView-->
+                <MDL:MaterialDropdownList.itemsTemplate>
+                    <GridLayout columns="*" rows="*, auto" style="background-color:white; padding:50;">
+                        <Image col="0" row="0" src="{{img}}"/>
+                        <label col="0" row="1" style="background-color: gray; height: 1; margin-top:50;" />
+                    </GridLayout>
+                </MDL:MaterialDropdownList.itemsTemplate>
+            </MDL:MaterialDropdownList>
+            
+            <GridLayout row="2" columns="*" rows="*, 100" style="padding:50;">
+                <Image col="0" row="0" src="{{selected.img}}" />
+            </GridLayout>
+</GridLayout>

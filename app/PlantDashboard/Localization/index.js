@@ -4,13 +4,13 @@ var builder_1 = require('ui/builder');
 var tab_view_1 = require('ui/tab-view');
 var stack_layout_1 = require('ui/layouts/stack-layout');
 var EvaluationReport_1 = require('../Components/EvaluationReport');
-var ScanHStatus_1 = require('../Components/ScanHStatus');
+var PlantScanner_1 = require('../Components/PlantScanner');
 var tab = new tab_view_1.TabView();
 var resumenView = new EvaluationReport_1.SumaryReport();
 /**************** tabitems: SCAN ********************/
 var scan = new tab_view_1.TabViewItem();
 scan.title = 'scan';
-var scanView = new ScanHStatus_1.ScanHStatus();
+var scanView = new PlantScanner_1.PlantScanner();
 scan.view = scanView.getView();
 /**************** tabitems: Ubicacion ********************/
 var ubicacion = new tab_view_1.TabViewItem();

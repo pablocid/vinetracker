@@ -113,6 +113,27 @@ exports.checkParam = function (param, dataType) {
       console.log('invalid JSON')
     }
   }
+  if(dataType === 'list'){
+    if(Array.isArray(param)){
+      response = true;
+    }
+  }
+
+  if (dataType === 'date') {
+    // el valor ingresado debe ser un ISOstring();
+    //checkeando si hay errores en el parseo a Date()
+    try {
+      var date = new Date(param);
+      //check if date === Date().toISOString()
+      if(date.toISOString() === param){
+        response = true;
+      }
+
+    } catch (err) {
+      response = false;
+      console.log('invalid JSON')
+    }
+  }
 
   return response;
 }

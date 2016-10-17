@@ -57,7 +57,7 @@ export class SumaryReport{
         context.schema = evaluacion;
         console.log("evaluacion.id "+evaluacion.id);
         let navOpts = {
-            moduleName:"PlantDashboard/Evaluations/selection",
+            moduleName:"PlantDashboard/index",
             context:context
         }
         Topmost().navigate(navOpts);
@@ -75,10 +75,12 @@ export class SumaryReport{
         let listItemsView = this._listItems.map( s=>{    return { name:s.getAttr("listViewLabel", "string") }    } );
         this._viewModel.set('items', listItemsView);
      }
-
-     public getView(){
-         let rs = new FindSchm(this._config);
+    public onLoadedPage(){
+        let rs = new FindSchm(this._config);
          rs.find().then(x=>this._setUpView(x));
+         this._viewModel.set('loading',true);
+     }
+     public getView(){
          var grid =  new GridLayout();
          grid.addChild(this._theme);
 

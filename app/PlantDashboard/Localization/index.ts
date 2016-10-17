@@ -6,7 +6,7 @@ import { topmost as Topmost} from 'ui/frame';
 import { TabView, TabViewItem } from 'ui/tab-view';
 import { StackLayout } from 'ui/layouts/stack-layout';
 import { SumaryReport } from '../Components/EvaluationReport';
-import { ScanHStatus } from '../Components/ScanHStatus';
+import { PlantScanner } from '../Components/PlantScanner';
 
 var tab = new TabView();
 var resumenView = new SumaryReport();
@@ -14,7 +14,7 @@ var resumenView = new SumaryReport();
 /**************** tabitems: SCAN ********************/
 var scan = new TabViewItem();
 scan.title = 'scan';
-var scanView = new ScanHStatus();
+var scanView = new PlantScanner();
 
 scan.view = scanView.getView();
 
