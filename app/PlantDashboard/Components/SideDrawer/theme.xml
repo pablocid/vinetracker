@@ -1,0 +1,10 @@
+<StackLayout class="sidedrawer">
+    <StackLayout>
+        <Label text="{{title}}" class="sidedrawer-title"/>
+        <ListView items="{{ items }}" tap="{{onTap}}">
+            <ListView.itemTemplate>
+                <Label text="{{ $value }}" textWrap="true" class="sidedrawer-listitem" />
+            </ListView.itemTemplate>
+        </ListView>
+    </StackLayout>
+</StackLayout>

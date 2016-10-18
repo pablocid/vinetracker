@@ -1,6 +1,7 @@
+import {SideDrawerComponent} from '../../PlantDashboard/Components/SideDrawer';
 import {onLoaded} from '../../testmodal/login-page';
 
-import {topmost} from "ui/frame";
+import { topmost as Topmost} from "ui/frame";
 import {Page} from "ui/page";
 import {Observable, EventData} from "data/observable";
 import {View} from "ui/core/view";
@@ -97,19 +98,8 @@ export class BasePage {
     }
 
     private _setSidedrawer():void{
-        this._sidedrawer.drawerContent = Parse(`
-            <StackLayout style="background-color:green; font-size: 20; color:white;">
-                <StackLayout style="font-size: 40;">
-                    <Label text="Header"/>
-                </StackLayout>
-                <StackLayout>
-                    <Label text="Item 1"/>
-                    <Label text="Item 2"/>
-                    <Label text="Item 3"/>
-                    <Label text="Item 4"/>
-                </StackLayout>
-            </StackLayout>
-        `);
+        let sd = new SideDrawerComponent();
+        this._sidedrawer.drawerContent = sd.getView();
     }
 
     private _setMainContent(){
@@ -129,18 +119,18 @@ export class BasePage {
 		this._fnOnLoad = value;
 	}
     onNavigatedTo (args:EventData){
-        console.log('onNavigatedTo');
+        //console.log('onNavigatedTo');
         if(this._fnOnLoad){ this._fnOnLoad(); }
     }
 
     onLoaded (args:EventData){
-        console.log('onLoaded');
+        //console.log('onLoaded');
     }
     onShownModally ( args:EventData){
-        console.log('onShownModally');
+        //console.log('onShownModally');
     }
     onNavigatingTo ( args:EventData){
-        console.log('navigatingTo');
+        //console.log('navigatingTo');
     }
     createPage(){
         this._setMainContent();

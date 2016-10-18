@@ -2,7 +2,7 @@ import http = require('http');
 import { getString } from 'application-settings';
 import appSet = require("application-settings");
 var q = require('q');
-import frame = require('ui/frame');
+import { topmost as Topmost} from 'ui/frame';
 
 export class RequestOpts{
 
@@ -16,6 +16,7 @@ export class RequestOpts{
             method: method,
             headers: { "Content-Type": "application/json", "Authorization":getString("Authorization")}
         };
+        //console.log(JSON.stringify(this._options))
     }
 
 	public get url(): string {
@@ -36,13 +37,14 @@ export class Request{
     
     constructor(opts:RequestOpts){
         this._requestOptions = opts;
-        //console.log(JSON.stringify(opts));
+        //console.log(JSON.stringify(this._requestOptions.options));
     }
     public make (){
         var def = q.defer();
         http.request(this._requestOptions.options)
             .then(
                 function(res){
+
                     if(res.statusCode >= 400){
                        console.log(res.statusCode);
                        if(res.statusCode === 401){
@@ -67,7 +69,8 @@ export class Request{
             function(err){ 
                 if(err.statusCode === 401){
                     //redireccionamiento hacia la pagina de login
-                    frame.topmost().navigate('login/login-page');
+                    //Topmost().navigate('login/login-page');
+                    Topmost().navigate('login/index');
                 }else{
                     console.log('Error de codigo '+err.statusCode+ ' no manejado');
                     throw new Error(err);

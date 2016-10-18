@@ -1,7 +1,7 @@
-import {SchmSchemaObj, AttrSchm, Attributes, SchemaFull, Updated, BaseSchema, Schema, InputSchm } from '../Schema';
+import {AttrSchm, Attributes, SchemaFull, Updated, BaseSchema, Schema, InputSchm } from '../Schema';
 var checkParam = require('../../services/helper.service').checkParam;
 
-export class Record2 extends BaseSchema{
+export class Record extends BaseSchema{
     private _schm: string;
     private _schema: SchemaFull;
     protected _attributes: RecordAttribute[];
@@ -46,12 +46,12 @@ export class Record2 extends BaseSchema{
 
             if(indexSchm !== -1 ){
                 if(indexAttr !== -1){
-                    this._attributes.push( 
-                        new RecordAttribute( this._schema.attrSchms[indexSchm] , record.attributes[indexAttr])
+                    this._attributes.push(
+                        new RecordAttribute(this, this._schema.attrSchms[indexSchm] , record.attributes[indexAttr])
                     );
                 }else{
                     this._attributes.push(
-                        new RecordAttribute( this._schema.attrSchms[indexSchm])
+                        new RecordAttribute(this, this._schema.attrSchms[indexSchm])
                     );
                 }
             }
@@ -88,137 +88,38 @@ export class Record2 extends BaseSchema{
         if(index !== -1 ){
             return this._attributes[index];
         }
-
     }
-}
-
-export class Record{
-    private _id:string;
-    private _schm:string;
-    private _created:Date;
-    private _updated:Updated[];
-    private _attributes:Attributes[];
-    
-    private _schema:SchmSchemaObj;
-    public _attrConfs:AttrSchm[];
-    private _schmAttrInputConf:SchmSchemaObj[];
-    private _attrInputConf:SchmSchemaObj[];
-    private _inputSchms:SchmSchemaObj[];
-    
-    constructor(schm , record? ){
-
-        this.setData(record);
-        let raw =schm.filter(x=>x.type==='schema')[0];
-
-        if(raw){
-            this._schema = new SchmSchemaObj(raw);
-        }else{
-            throw new Error ('No existe el objeto tipo schema en el array SchmSchemaObj');
-        }
-
-        this._attrConfs = schm.filter(x=>x.type ==='attribute').map( x => new AttrSchm(x) );
-        /*
-        this._schmAttrInputConf = schm.filter(x=>x.type ==='schmAttrInputConf');
-        this._attrInputConf = schm.filter(x=>x.type ==='attrInputConf');
-        this._inputSchms = schm.filter(x=>x.type ==='input');
-        */
-    }
-
-	public get id(): string {
-		return this._id;
-	}
-
-	public set id(value: string) {
-		this._id = value;
-	}
-
-	public get schm(): string {
-		return this._schm;
-	}
-
-	public set schm(value: string) {
-		this._schm = value;
-	}
-
-	public get schema(): SchmSchemaObj {
-		return this._schema;
-	}
-
-	public set schema(value: SchmSchemaObj) {
-		this._schema = value;
-	}
-
-    public attrSchema (attrId : string){
-        let as = this._attrConfs.filter(x=>x.id === attrId);
-        if(as && as.length){
-            return 'adf'
-        }
-    }
-
-    public setData( record:any ){
-        if(record){
-            this._id = record._id;
-            this._schm = record._schm;
-            this._created = new Date(record.created);
-            this._updated = record.updated;
-            this._attributes = [];
-            if(record.attributes && record.attributes.length){
-                this._attributes = record.attributes.map(x=>new Attributes(x));
-            }
-        }
-    }
-        
-
-    public getAttr (attrId:string, dt:string){
-        return this.findValueByVarHelper("id", attrId, dt);
-    }
-
-    private findValueByVarHelper(key, value, target){
-        if(key===undefined && value === undefined){ return null;}
-
-        var index = this._attributes.map(x=>x[key]).indexOf(value);
-        if(index === -1){return null}
-
-        if(target === undefined){ return this._attributes[index];}
-
-        return this._attributes[index][target];
-
-    }
-    public getData(){
-        let data : any = {};
-        if(this._id){ data._id = this._id; }
-        data.schm = this._schm;
-        //estas propiedades deberían ser seteadas en el backend
-        data.created = this._created;
-        data.updated = this._updated;
-        /**+++++++++++++++++++++++++++++++++++++++++++++++++++ */
-        data.attributes = this._attributes;
-        return data;
-    }
-
 }
 
 export class Plant extends Record {
     public getUbicación():string{
-        let espaldera = this.getAttr('espaldera','number');
-        let hilera = this.getAttr('hilera','number');
-        let posicion = this.getAttr('posicion','number') || '-';
+        console.log('Plant - getUbicación');
+        /*
+        let espaldera = this.getAttribute('espaldera').value;
+        let hilera = this.getAttribute('hilera').value;
+        let posicion = this.getAttribute('posicion').value || '-';
         if(espaldera && hilera){
             return `E${espaldera} H${hilera} P${posicion}`;
         }
-        return 'sin información de ubicación';
+        */
+        return 'ubicación ***';
     }
 }
 
 export class RecordAttribute {
     private _value : any;
-
     private _attrSchm:AttrSchm;
+    private _reference:Record;
 
-    constructor(attrSchm:AttrSchm, attr?){
+    constructor(reference:Record, attrSchm:AttrSchm, attr?){
         this._attrSchm = attrSchm;
+        this._reference = reference;
         
         this._setAttribute(attr);
+    }
+
+    public get parent (){
+        return this._reference;
     }
 
     private _setAttribute (attr){
@@ -249,10 +150,11 @@ export class RecordAttribute {
 
     public set value (v){
         //check if value match dataType
+        console.log('checking parameter')
         if(checkParam(v,this.dataType)){
             this._value = v;
         }else{
-            throw new Error('El valor '+v+' asignado al attributo '+this.name+' con el _id '+this.id+ ' no coincide con el dataType '+this.dataType);
+            console.log('parameter wrong | '+'El valor '+v+' asignado al attributo '+this.name+' con el _id '+this.id+ ' no coincide con el dataType '+this.dataType)
         }
 
     }

@@ -1,18 +1,164 @@
 "use strict";
+var nativescript_barcodescanner_1 = require('nativescript-barcodescanner');
+var Auth_1 = require('../../../services/Auth');
+var BaseComponent_1 = require('../BaseComponent');
 var builder_1 = require('ui/builder');
 var grid_layout_1 = require('ui/layouts/grid-layout');
+var frame_1 = require('ui/frame');
 var observable_1 = require('data/observable');
 var QueryParser_1 = require('../../../factories/QueryParser');
 var record_service_1 = require('../../../services/record.service');
 var dialogs_1 = require('ui/dialogs');
-//cb('683(10).6');
-//cb('57a8d8dfef44961377526953');
-var barcodescanner = require("nativescript-barcodescanner");
+var AppSet = require("application-settings");
+var Scanner = (function (_super) {
+    __extends(Scanner, _super);
+    function Scanner(attr) {
+        var _this = this;
+        _super.call(this, attr);
+        /**** optino default */
+        this._evaluatedCheck = true;
+        /**** */
+        this._props = this._properties;
+        this._barcodescanner = new nativescript_barcodescanner_1.BarcodeScanner();
+        this._barcodeOpts = {
+            orientation: 'portrait',
+            cancelLabel: 'Stop scannig',
+            formats: 'QR_CODE',
+            message: 'Escanea una etiqueta',
+            preferFrontCamera: false,
+            showFlipCameraButton: false
+        };
+        this._theme.addChild(builder_1.load({ name: 'theme', path: '~/PlantDashboard/Components/PlantScanner' }));
+        this._viewModel.set('onScan', function (args) { _this._onTapScan(args); });
+        this._viewModel.set('description', this._props.label);
+        this._hastPermission();
+        this.onLoadedPage();
+        this._setValue();
+    }
+    Scanner.prototype._setValue = function () {
+        var value = this._recordAttr.value;
+        if (value) {
+            this._viewModel.set('loading', true);
+        }
+    };
+    Scanner.prototype.onLoadedPage = function () {
+        var _this = this;
+        var l = new Auth_1.Logged();
+        //this._
+        l.check().then(function (x) {
+            if (!x) {
+                frame_1.topmost().navigate('login/index');
+                _this._viewModel.set('code', AppSet.getString('Authorization'));
+            }
+        });
+    };
+    Scanner.prototype._onTapScan = function (args) {
+        var _this = this;
+        console.log("_onTapScan");
+        this._barcodescanner.scan(this._barcodeOpts).then(function (r) {
+            _this._findRecord(r);
+        });
+    };
+    Scanner.prototype._findRecord = function (s) {
+        var _this = this;
+        this._viewModel.set('loading', true);
+        var config = new QueryParser_1.QueryConfig();
+        config.id = s.text;
+        if (!/^[0-9a-f]{24}$/i.test(s.text)) {
+            //plant schema
+            config.schm = '57a4e02ec830e2bdff1a1608';
+            // cod_indiv
+            config.key = '57c3583bc8307cd5b82f447d';
+            config.datatype = 'string';
+        }
+        var findOne = new record_service_1.FindPlant(config);
+        findOne.find().then(function (res) {
+            _this._viewModel.set('loading', false);
+            if (!res.id) {
+                _this._errorAlert();
+                _this._unsetViewModelData();
+            }
+            else {
+                _this._viewModel.set('code', s.text);
+                _this._viewModel.set('ubicacion', res.getUbicación());
+                //checkIfEvaluated
+                if (_this._evaluatedCheck) {
+                    _this._checkIfEvaluated(res.id).then(function (x) {
+                        if (x) {
+                            // alert si se queriere evaluar denuevo o no
+                            console.log(' ya se realizó la evaluación');
+                        }
+                        else {
+                            console.log('planta nunca antes evaluada');
+                            _this._saveValue(res.id);
+                        }
+                    });
+                }
+                else {
+                    _this._saveValue(res.id);
+                }
+            }
+        });
+    };
+    Scanner.prototype._saveValue = function (value) {
+        this._recordAttr.value = value;
+        console.log(JSON.stringify(this._recordAttr.data));
+    };
+    Scanner.prototype._unsetViewModelData = function () {
+        this._viewModel.set('ubicacion', '');
+        this._viewModel.set('code', '');
+    };
+    Scanner.prototype._errorAlert = function () {
+        var alertOpts = {};
+        alertOpts.title = 'Planta no encontrada';
+        alertOpts.message = 'El código escaneado no tiene referencia con ninguna planta en la base de datos.';
+        alertOpts.okButtonText = 'entendido';
+        alertOpts.cancelable = false;
+        dialogs_1.alert(alertOpts);
+    };
+    Scanner.prototype._hastPermission = function () {
+        var _this = this;
+        this._barcodescanner.hasCameraPermission().then(function (granted) {
+            if (!granted) {
+                _this._barcodescanner.requestCameraPermission().then(function (permission) {
+                    if (permission) {
+                        console.log('permiso a la cámara concedido');
+                    }
+                    else {
+                        console.log('permiso a la cámara denegado');
+                    }
+                });
+            }
+        });
+    };
+    Scanner.prototype._checkIfEvaluated = function (id) {
+        console.log('_checkIfEvaluated');
+        var opts = new QueryParser_1.QueryConfig();
+        opts.id = id;
+        opts.schm = this._recordAttr.parent.schema.schm.id;
+        opts.key = this._recordAttr.id;
+        opts.datatype = 'reference';
+        var evaluationRecord = new record_service_1.FindRecord(opts);
+        return evaluationRecord.find().then(function (record) {
+            if (record.id) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+        //schm evaluation = 57c42f2fc8307cd5b82f4484
+        //schm attributo referencia = 57c42f77c8307cd5b82f4486
+        //
+    };
+    return Scanner;
+}(BaseComponent_1.BaseInputComponent));
+exports.Scanner = Scanner;
 var PlantScanner = (function () {
     function PlantScanner(code) {
         var _this = this;
-        this._theme = builder_1.load({ name: 'theme', path: '~/PlantDashboard/Components/ScanHStatus' });
-        this._barcode = barcodescanner;
+        this._theme = builder_1.load({ name: 'theme', path: '~/PlantDashboard/Components/PlantScanner' });
+        this._barcode = new nativescript_barcodescanner_1.BarcodeScanner();
         this._viewModel = new observable_1.Observable();
         this._viewModel.set('onScan', function (args) { _this._onTapScan(args); });
         this._viewModel.set('description', 'Escanea una planta para establecer la hilera');
@@ -182,6 +328,7 @@ var PlantScanner = (function () {
         }
         this._findOne = new record_service_1.FindPlant(this._config);
         this._findOne.find().then(function (res) {
+            //console.log(JSON.stringify(res))
             _this._viewModel.set('loading', false);
             if (!res.id) {
                 _this._errorAlert();

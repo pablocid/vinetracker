@@ -72,7 +72,7 @@ export class FindRecord extends BaseFind {
         this._factory = true;
     }
 
-    protected makeObj(a:FindOneResponse){
+    protected makeObj(a){
         //var obj = new Record(a.schema, a.record );
         return a;
     }
@@ -80,8 +80,8 @@ export class FindRecord extends BaseFind {
 
 export class FindPlant extends FindRecord {
     protected makeObj(a:FindOneResponse){
-        //var obj = new Plant(a.schema, a.record );
-        return a;
+        var obj = new Plant(a.schema, a.record );
+        return obj;
     }
 }
 

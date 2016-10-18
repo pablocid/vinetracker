@@ -2,7 +2,7 @@
 var http = require('http');
 var application_settings_1 = require('application-settings');
 var q = require('q');
-var frame = require('ui/frame');
+var frame_1 = require('ui/frame');
 var RequestOpts = (function () {
     function RequestOpts(url, method) {
         if (url === '') {
@@ -16,6 +16,7 @@ var RequestOpts = (function () {
             method: method,
             headers: { "Content-Type": "application/json", "Authorization": application_settings_1.getString("Authorization") }
         };
+        //console.log(JSON.stringify(this._options))
     }
     Object.defineProperty(RequestOpts.prototype, "url", {
         get: function () {
@@ -44,7 +45,7 @@ exports.RequestOpts = RequestOpts;
 var Request = (function () {
     function Request(opts) {
         this._requestOptions = opts;
-        //console.log(JSON.stringify(opts));
+        //console.log(JSON.stringify(this._requestOptions.options));
     }
     Request.prototype.make = function () {
         var def = q.defer();
@@ -73,7 +74,8 @@ var Request = (function () {
         return def.promise.then(function (data) { return data; }, function (err) {
             if (err.statusCode === 401) {
                 //redireccionamiento hacia la pagina de login
-                frame.topmost().navigate('login/login-page');
+                //Topmost().navigate('login/login-page');
+                frame_1.topmost().navigate('login/index');
             }
             else {
                 console.log('Error de codigo ' + err.statusCode + ' no manejado');

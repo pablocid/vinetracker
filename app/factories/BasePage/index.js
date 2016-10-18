@@ -1,4 +1,5 @@
 "use strict";
+var SideDrawer_1 = require('../../PlantDashboard/Components/SideDrawer');
 var page_1 = require("ui/page");
 var observable_1 = require("data/observable");
 var action_bar_1 = require("ui/action-bar");
@@ -57,7 +58,8 @@ var BasePage = (function () {
         this._actionBar.actionItems.addItem(item);
     };
     BasePage.prototype._setSidedrawer = function () {
-        this._sidedrawer.drawerContent = builder_1.parse("\n            <StackLayout style=\"background-color:green; font-size: 20; color:white;\">\n                <StackLayout style=\"font-size: 40;\">\n                    <Label text=\"Header\"/>\n                </StackLayout>\n                <StackLayout>\n                    <Label text=\"Item 1\"/>\n                    <Label text=\"Item 2\"/>\n                    <Label text=\"Item 3\"/>\n                    <Label text=\"Item 4\"/>\n                </StackLayout>\n            </StackLayout>\n        ");
+        var sd = new SideDrawer_1.SideDrawerComponent();
+        this._sidedrawer.drawerContent = sd.getView();
     };
     BasePage.prototype._setMainContent = function () {
         this._sidedrawer.mainContent = this._mainContent;
@@ -77,19 +79,19 @@ var BasePage = (function () {
         configurable: true
     });
     BasePage.prototype.onNavigatedTo = function (args) {
-        console.log('onNavigatedTo');
+        //console.log('onNavigatedTo');
         if (this._fnOnLoad) {
             this._fnOnLoad();
         }
     };
     BasePage.prototype.onLoaded = function (args) {
-        console.log('onLoaded');
+        //console.log('onLoaded');
     };
     BasePage.prototype.onShownModally = function (args) {
-        console.log('onShownModally');
+        //console.log('onShownModally');
     };
     BasePage.prototype.onNavigatingTo = function (args) {
-        console.log('navigatingTo');
+        //console.log('navigatingTo');
     };
     BasePage.prototype.createPage = function () {
         var _this = this;

@@ -1,22 +1,17 @@
-﻿.title {
-    font-size: 30;
-    horizontal-align: center;
-    margin: 20;
-}
-
-button {
-    font-size: 42;
-    horizontal-align: center;
-}
-
-.message {
-    font-size: 20;
-    color: #284848;
-    horizontal-align: center;
-    margin: 0 20;
-    text-align: center;
-}
+﻿
 .icon {
    font-family: 'fontawesome-webfont';
    font-size: 30;
+}
+.sidedrawer-listitem{
+    font-size:40;
+    margin-left: 50;
+    color:'white';
+}
+.sidedrawer-title{
+    font-size: 30;
+    color:'white';
+}
+.sidedrawer{
+    background-color: #43A047;
 }

@@ -5,6 +5,7 @@ var RecordFactory = require('./record.factory');
 var urlQueryConfig = require('./helper.service');
 var Request_1 = require('./Request');
 var QueryParser_1 = require('../factories/QueryParser');
+var Record_1 = require('../factories/Record');
 var BaseFind = (function () {
     function BaseFind(config, method) {
         this._config = config;
@@ -77,8 +78,8 @@ var FindPlant = (function (_super) {
         _super.apply(this, arguments);
     }
     FindPlant.prototype.makeObj = function (a) {
-        //var obj = new Plant(a.schema, a.record );
-        return a;
+        var obj = new Record_1.Plant(a.schema, a.record);
+        return obj;
     };
     return FindPlant;
 }(FindRecord));

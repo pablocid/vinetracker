@@ -1,7 +1,6 @@
 "use strict";
 var observable_1 = require('data/observable');
 var grid_layout_1 = require('ui/layouts/grid-layout');
-var sdf = require('nativescript-drop-down');
 var BaseComponent = (function () {
     function BaseComponent() {
         this._viewModel = new observable_1.Observable();

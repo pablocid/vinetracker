@@ -1,9 +1,9 @@
 "use strict";
 var Schema_1 = require('../Schema');
 var checkParam = require('../../services/helper.service').checkParam;
-var Record2 = (function (_super) {
-    __extends(Record2, _super);
-    function Record2(schm, record) {
+var Record = (function (_super) {
+    __extends(Record, _super);
+    function Record(schm, record) {
         if (!schm || schm.length === 0) {
             throw new Error('no se pudo crear el Record porque el array schema esta vacío.');
         }
@@ -11,7 +11,7 @@ var Record2 = (function (_super) {
         this._schema = new Schema_1.SchemaFull(schm);
         this._setData(record);
     }
-    Object.defineProperty(Record2.prototype, "schema", {
+    Object.defineProperty(Record.prototype, "schema", {
         get: function () {
             return this._schema;
         },
@@ -21,7 +21,7 @@ var Record2 = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Record2.prototype._setData = function (record) {
+    Record.prototype._setData = function (record) {
         var _this = this;
         if (record) {
             this._id = record._id;
@@ -41,15 +41,15 @@ var Record2 = (function (_super) {
             }
             if (indexSchm !== -1) {
                 if (indexAttr !== -1) {
-                    _this._attributes.push(new RecordAttribute(_this._schema.attrSchms[indexSchm], record.attributes[indexAttr]));
+                    _this._attributes.push(new RecordAttribute(_this, _this._schema.attrSchms[indexSchm], record.attributes[indexAttr]));
                 }
                 else {
-                    _this._attributes.push(new RecordAttribute(_this._schema.attrSchms[indexSchm]));
+                    _this._attributes.push(new RecordAttribute(_this, _this._schema.attrSchms[indexSchm]));
                 }
             }
         });
     };
-    Object.defineProperty(Record2.prototype, "data", {
+    Object.defineProperty(Record.prototype, "data", {
         get: function () {
             var data = {};
             if (this._id) {
@@ -72,111 +72,14 @@ var Record2 = (function (_super) {
     /**
      * El attributo '(value:string)' corresponde a _id del attribute
      */
-    Record2.prototype.getAttribute = function (value) {
+    Record.prototype.getAttribute = function (value) {
         var index = this._attributes.map(function (x) { return x.id; }).indexOf(value);
         if (index !== -1) {
             return this._attributes[index];
         }
     };
-    return Record2;
-}(Schema_1.BaseSchema));
-exports.Record2 = Record2;
-var Record = (function () {
-    function Record(schm, record) {
-        this.setData(record);
-        var raw = schm.filter(function (x) { return x.type === 'schema'; })[0];
-        if (raw) {
-            this._schema = new Schema_1.SchmSchemaObj(raw);
-        }
-        else {
-            throw new Error('No existe el objeto tipo schema en el array SchmSchemaObj');
-        }
-        this._attrConfs = schm.filter(function (x) { return x.type === 'attribute'; }).map(function (x) { return new Schema_1.AttrSchm(x); });
-        /*
-        this._schmAttrInputConf = schm.filter(x=>x.type ==='schmAttrInputConf');
-        this._attrInputConf = schm.filter(x=>x.type ==='attrInputConf');
-        this._inputSchms = schm.filter(x=>x.type ==='input');
-        */
-    }
-    Object.defineProperty(Record.prototype, "id", {
-        get: function () {
-            return this._id;
-        },
-        set: function (value) {
-            this._id = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Record.prototype, "schm", {
-        get: function () {
-            return this._schm;
-        },
-        set: function (value) {
-            this._schm = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Record.prototype, "schema", {
-        get: function () {
-            return this._schema;
-        },
-        set: function (value) {
-            this._schema = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Record.prototype.attrSchema = function (attrId) {
-        var as = this._attrConfs.filter(function (x) { return x.id === attrId; });
-        if (as && as.length) {
-            return 'adf';
-        }
-    };
-    Record.prototype.setData = function (record) {
-        if (record) {
-            this._id = record._id;
-            this._schm = record._schm;
-            this._created = new Date(record.created);
-            this._updated = record.updated;
-            this._attributes = [];
-            if (record.attributes && record.attributes.length) {
-                this._attributes = record.attributes.map(function (x) { return new Schema_1.Attributes(x); });
-            }
-        }
-    };
-    Record.prototype.getAttr = function (attrId, dt) {
-        return this.findValueByVarHelper("id", attrId, dt);
-    };
-    Record.prototype.findValueByVarHelper = function (key, value, target) {
-        if (key === undefined && value === undefined) {
-            return null;
-        }
-        var index = this._attributes.map(function (x) { return x[key]; }).indexOf(value);
-        if (index === -1) {
-            return null;
-        }
-        if (target === undefined) {
-            return this._attributes[index];
-        }
-        return this._attributes[index][target];
-    };
-    Record.prototype.getData = function () {
-        var data = {};
-        if (this._id) {
-            data._id = this._id;
-        }
-        data.schm = this._schm;
-        //estas propiedades deberían ser seteadas en el backend
-        data.created = this._created;
-        data.updated = this._updated;
-        /**+++++++++++++++++++++++++++++++++++++++++++++++++++ */
-        data.attributes = this._attributes;
-        return data;
-    };
     return Record;
-}());
+}(Schema_1.BaseSchema));
 exports.Record = Record;
 var Plant = (function (_super) {
     __extends(Plant, _super);
@@ -184,22 +87,33 @@ var Plant = (function (_super) {
         _super.apply(this, arguments);
     }
     Plant.prototype.getUbicación = function () {
-        var espaldera = this.getAttr('espaldera', 'number');
-        var hilera = this.getAttr('hilera', 'number');
-        var posicion = this.getAttr('posicion', 'number') || '-';
-        if (espaldera && hilera) {
-            return "E" + espaldera + " H" + hilera + " P" + posicion;
+        console.log('Plant - getUbicación');
+        /*
+        let espaldera = this.getAttribute('espaldera').value;
+        let hilera = this.getAttribute('hilera').value;
+        let posicion = this.getAttribute('posicion').value || '-';
+        if(espaldera && hilera){
+            return `E${espaldera} H${hilera} P${posicion}`;
         }
-        return 'sin información de ubicación';
+        */
+        return 'ubicación ***';
     };
     return Plant;
 }(Record));
 exports.Plant = Plant;
 var RecordAttribute = (function () {
-    function RecordAttribute(attrSchm, attr) {
+    function RecordAttribute(reference, attrSchm, attr) {
         this._attrSchm = attrSchm;
+        this._reference = reference;
         this._setAttribute(attr);
     }
+    Object.defineProperty(RecordAttribute.prototype, "parent", {
+        get: function () {
+            return this._reference;
+        },
+        enumerable: true,
+        configurable: true
+    });
     RecordAttribute.prototype._setAttribute = function (attr) {
         if (attr && attr.id === this._attrSchm.id) {
             this._value = attr[this.dataType];
@@ -235,10 +149,13 @@ var RecordAttribute = (function () {
         },
         set: function (v) {
             //check if value match dataType
+            console.log('checking parameter');
             if (checkParam(v, this.dataType)) {
+                console.log('parameter OK');
                 this._value = v;
             }
             else {
+                console.log('parameter wrong');
                 throw new Error('El valor ' + v + ' asignado al attributo ' + this.name + ' con el _id ' + this.id + ' no coincide con el dataType ' + this.dataType);
             }
         },

@@ -1,0 +1,16 @@
+<GridLayout rows="*">
+    <ScrollView row="0">
+      <StackLayout style="padding:20">
+        <Label text="VineTracker Access" class="title" style="color:black"/>
+        <StackLayout>
+          <Label text="Email" />
+          <TextField text="{{email}}" keyboardType="email" returnKeyType="next" />
+          <Label text="Password" />
+          <TextField id="passTF" text="{{password}}" secure="true" returnPress="{{ login }}" />
+        </StackLayout>
+        <Label text="{{messageError}}" style="color:red; padding:10 " />
+        <ActivityIndicator busy="{{loging}}" style="color:red; margin-top:15" />
+        <Button tap="{{login}}" color="white" style="margin-top:40; background-color:green; font-size:25; padding:20; border-radius:30;" text="Login" />
+      </StackLayout>
+  </ScrollView>  
+  </GridLayout>

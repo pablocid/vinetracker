@@ -91,6 +91,12 @@ exports.checkParam = function (param, dataType) {
     }
   }
 
+  if(dataType === 'reference'){
+    if(/^[0-9a-f]{24}$/i.test(param)){
+      response = true;
+    }
+  }
+
   //filtro de registros
   if (dataType === 'filter') {
     //checkeando si hay errores en el parseo a JSON

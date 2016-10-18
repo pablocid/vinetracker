@@ -1,20 +1,7 @@
 import { View } from 'ui/core/view';
-import { Observable, PropertyChangeData } from 'data/observable';
-import { Record, Plant, Record2, RecordAttribute } from '../../../factories/Record';
-import { Schema } from '../../../factories/Schema';
-import { GridLayout, ItemSpec } from 'ui/layouts/grid-layout';
-
-import { parse as Parse, load as Load } from 'ui/builder';
-import { ListView , ItemEventData } from 'ui/list-view';
-import { SelectionListAttrProps } from '../../../interfaces';
-
-import {Color} from 'color';
-
-import { RadSideDrawer } from 'nativescript-telerik-ui/sidedrawer';
-import { RadListView } from 'nativescript-telerik-ui/listview';
-var sdf =  require('nativescript-drop-down');
-
-import { ObservableArray } from "data/observable-array";
+import { Observable } from 'data/observable';
+import { RecordAttribute } from '../../../factories/Record';
+import { GridLayout } from 'ui/layouts/grid-layout';
 
 export class BaseComponent {
     protected _viewModel:Observable;
