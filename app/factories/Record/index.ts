@@ -1,7 +1,7 @@
+import {ParamChecker} from '../../services/Helper';
 import {AttrSchm, Attributes, SchemaFull, Updated, BaseSchema, Schema, InputSchm } from '../Schema';
-var checkParam = require('../../services/helper.service').checkParam;
 
-export class Record extends BaseSchema{
+export class Record extends BaseSchema {
     private _schm: string;
     private _schema: SchemaFull;
     protected _attributes: RecordAttribute[];
@@ -93,15 +93,14 @@ export class Record extends BaseSchema{
 
 export class Plant extends Record {
     public getUbicación():string{
-        console.log('Plant - getUbicación');
-        /*
-        let espaldera = this.getAttribute('espaldera').value;
-        let hilera = this.getAttribute('hilera').value;
-        let posicion = this.getAttribute('posicion').value || '-';
+        //console.log('Plant - getUbicación');
+        let espaldera = this.getAttribute('5807af5f31f55d0010aaffe4').value;
+        let hilera = this.getAttribute('5807af9231f55d0010aaffe5').value;
+        let posicion = this.getAttribute('5807afe331f55d0010aaffe6').value || '-';
         if(espaldera && hilera){
             return `E${espaldera} H${hilera} P${posicion}`;
         }
-        */
+        
         return 'ubicación ***';
     }
 }
@@ -149,12 +148,14 @@ export class RecordAttribute {
     }
 
     public set value (v){
-        //check if value match dataType
-        console.log('checking parameter')
-        if(checkParam(v,this.dataType)){
-            this._value = v;
+        let pcheck = new ParamChecker(v, this.dataType);
+        if(pcheck.check){ 
+            this._value = v; 
         }else{
-            console.log('parameter wrong | '+'El valor '+v+' asignado al attributo '+this.name+' con el _id '+this.id+ ' no coincide con el dataType '+this.dataType)
+            console.log(`
+                Parameter wrong | El valor ${v} asignado al attributo ${this.name} 
+                con el _id ${this.id} no coincide con el dataType ${this.dataType}
+            `);
         }
 
     }

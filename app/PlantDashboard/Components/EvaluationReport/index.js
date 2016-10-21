@@ -1,12 +1,11 @@
 "use strict";
+var RecordService_1 = require('../../../services/RecordService');
 var builder_1 = require('ui/builder');
 var grid_layout_1 = require('ui/layouts/grid-layout');
 var frame_1 = require('ui/frame');
 var observable_1 = require('data/observable');
-var Schema_1 = require('../../../factories/Schema');
 var Context_1 = require('../../../factories/Context');
 var QueryParser_1 = require('../../../factories/QueryParser');
-var record_service_1 = require('../../../services/record.service');
 var SumaryReport = (function () {
     function SumaryReport() {
         var _this = this;
@@ -38,9 +37,6 @@ var SumaryReport = (function () {
     }
     SumaryReport.prototype._onTapItem = function (index) {
         var context = new Context_1.Context();
-        var evaluacion = this._listItems[index];
-        context.schema = evaluacion;
-        console.log("evaluacion.id " + evaluacion.id);
         var navOpts = {
             moduleName: "PlantDashboard/index",
             context: context
@@ -48,19 +44,9 @@ var SumaryReport = (function () {
         frame_1.topmost().navigate(navOpts);
     };
     SumaryReport.prototype._setUpView = function (data) {
-        var items = data.items;
-        //construcción de objeto SchmSchema
-        items = items.map(function (c) { return new Schema_1.SchmSchemaObj(c); });
-        //filtrar items por createble
-        this._listItems = items.filter(function (u) { return u.getAttr("creatable", "boolean"); });
-        this._viewModel.set('loading', false);
-        var listItemsView = this._listItems.map(function (s) { return { name: s.getAttr("listViewLabel", "string") }; });
-        this._viewModel.set('items', listItemsView);
     };
     SumaryReport.prototype.onLoadedPage = function () {
-        var _this = this;
-        var rs = new record_service_1.FindSchm(this._config);
-        rs.find().then(function (x) { return _this._setUpView(x); });
+        var rs = new RecordService_1.FindSchm(this._config);
         this._viewModel.set('loading', true);
     };
     SumaryReport.prototype.getView = function () {

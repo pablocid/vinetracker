@@ -1,0 +1,854 @@
+[
+            {
+              "_id": "57a4e02ec830e2bdff1a1608",
+              "name": "individuos",
+              "type": "schema",
+              "__v": 4,
+              "attributes": [
+                {
+                  "id": "name",
+                  "string": "individuos",
+                  "list": []
+                },
+                {
+                  "id": "attributes",
+                  "list": [
+                    "57c353b2c8307cd5b82f4479",
+                    "57c3583bc8307cd5b82f447d",
+                    "57c8910e98763f100090a891",
+                    "5807af5f31f55d0010aaffe4",
+                    "5807af9231f55d0010aaffe5",
+                    "5807afe331f55d0010aaffe6"
+                  ]
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "editable",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "status",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "identifyMode",
+                      "string": "string"
+                    },
+                    {
+                      "id": "identifyByAttr",
+                      "string": "string"
+                    },
+                    {
+                      "id": "relationalAttribute",
+                      "string": "reference"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "editable",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "status",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "identifyMode",
+                  "string": "scan",
+                  "list": []
+                },
+                {
+                  "id": "identifyByAttr",
+                  "string": "cod_indiv",
+                  "list": []
+                },
+                {
+                  "id": "description",
+                  "string": "Es el schema que aloja la información fija que cada planta",
+                  "list": []
+                },
+                {
+                  "id": "relationalAttribute",
+                  "reference": "57c42f77c8307cd5b82f4486",
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-09-01T19:54:10.276Z"
+            },
+            {
+              "_id": "57c353b2c8307cd5b82f4479",
+              "type": "attribute",
+              "__v": 4,
+              "attributes": [
+                {
+                  "id": "name",
+                  "string": "id",
+                  "list": []
+                },
+                {
+                  "id": "input",
+                  "reference": "57c0c508c8307cd5b82f445a",
+                  "list": []
+                },
+                {
+                  "id": "description",
+                  "string": "Id correlativo auto-incremental utilizado en la base de dato MySQL que implementó Doctor Carlos Aguirre",
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "shortName",
+                      "string": "string"
+                    },
+                    {
+                      "id": "label",
+                      "string": "string"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "shortName",
+                  "string": "old ID",
+                  "list": []
+                },
+                {
+                  "id": "label",
+                  "string": "Antiguo ID de Doctor Perrin",
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-09-01T19:55:10.791Z"
+            },
+            {
+              "_id": "57c3583bc8307cd5b82f447d",
+              "type": "attribute",
+              "name": "code_indiv",
+              "__v": 4,
+              "attributes": [
+                {
+                  "id": "name",
+                  "string": "code_indiv",
+                  "list": []
+                },
+                {
+                  "id": "input",
+                  "reference": "57c3202cc8307cd5b82f4465",
+                  "list": []
+                },
+                {
+                  "id": "description",
+                  "string": "Código de individuo compuesto por un ID correlativo y el año ?? de plantación",
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "shortName",
+                      "string": "string"
+                    },
+                    {
+                      "id": "label",
+                      "string": "string"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "shortName",
+                  "string": "cod_indiv",
+                  "list": []
+                },
+                {
+                  "id": "label",
+                  "string": "Codigo de individuo (otro antiguo)",
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-09-01T15:26:50.499Z"
+            },
+            {
+              "_id": "57c8910e98763f100090a891",
+              "type": "attribute",
+              "name": "ubicacion",
+              "__v": 2,
+              "attributes": [
+                {
+                  "id": "name",
+                  "string": "ubicacion",
+                  "list": []
+                },
+                {
+                  "id": "description",
+                  "string": "Ubicación en el campo con el formato E#H#P#",
+                  "list": []
+                },
+                {
+                  "id": "input",
+                  "reference": "57c3202cc8307cd5b82f4465",
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "shortName",
+                      "string": "string"
+                    },
+                    {
+                      "id": "label",
+                      "string": "string"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "shortName",
+                  "string": "ubicación",
+                  "list": []
+                },
+                {
+                  "id": "label",
+                  "string": "Ubicación en el campo",
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-09-01T20:35:26.336Z"
+            },
+            {
+              "_id": "5807af5f31f55d0010aaffe4",
+              "type": "attribute",
+              "name": "espaldera",
+              "__v": 0,
+              "attributes": [
+                {
+                  "id": "name",
+                  "string": "espaldera",
+                  "list": []
+                },
+                {
+                  "id": "description",
+                  "string": "Espaldera de campo: conjunto de hileras y posiciones",
+                  "list": []
+                },
+                {
+                  "id": "input",
+                  "reference": "57c0c508c8307cd5b82f445a",
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "label",
+                      "string": "string"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "label",
+                  "string": "espaldera",
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-10-19T17:37:35.558Z"
+            },
+            {
+              "_id": "5807af9231f55d0010aaffe5",
+              "type": "attribute",
+              "name": "hilera",
+              "__v": 0,
+              "attributes": [
+                {
+                  "id": "name",
+                  "string": "hilera",
+                  "list": []
+                },
+                {
+                  "id": "description",
+                  "string": "Hilera de campo: conjunto de posiciones",
+                  "list": []
+                },
+                {
+                  "id": "input",
+                  "reference": "57c0c508c8307cd5b82f445a",
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "label",
+                      "string": "string"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "label",
+                  "string": "hilera",
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-10-19T17:38:26.529Z"
+            },
+            {
+              "_id": "5807afe331f55d0010aaffe6",
+              "type": "attribute",
+              "name": "posicion",
+              "__v": 0,
+              "attributes": [
+                {
+                  "id": "name",
+                  "string": "posicion",
+                  "list": []
+                },
+                {
+                  "id": "description",
+                  "string": "Posición en campo: corresponde al lugar donde se encuentra un individuo (planta)",
+                  "list": []
+                },
+                {
+                  "id": "input",
+                  "reference": "57c0c508c8307cd5b82f445a",
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "label",
+                      "string": "string"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "label",
+                  "string": "posicion",
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-10-19T17:39:47.135Z"
+            },
+            {
+              "_id": "57c8983398763f100090a892",
+              "type": "schmAttrInputConf",
+              "name": "individuo-ubicacion-simple_text",
+              "__v": 0,
+              "attributes": [
+                {
+                  "id": "name",
+                  "string": "individuo-ubicacion-simple_text",
+                  "list": []
+                },
+                {
+                  "id": "schema",
+                  "reference": "57a4e02ec830e2bdff1a1608",
+                  "list": []
+                },
+                {
+                  "id": "attribute",
+                  "reference": "57c8910e98763f100090a891",
+                  "list": []
+                },
+                {
+                  "id": "input",
+                  "reference": "57c3202cc8307cd5b82f4465",
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "visualization",
+                      "string": "boolean"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "visualization",
+                  "boolean": true,
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-09-01T21:05:55.892Z"
+            },
+            {
+              "_id": "57c32362c8307cd5b82f446c",
+              "type": "schmAttrInputConf",
+              "__v": 3,
+              "name": "individuo-id",
+              "attributes": [
+                {
+                  "id": "schema",
+                  "reference": "57a4e02ec830e2bdff1a1608",
+                  "list": []
+                },
+                {
+                  "id": "attribute",
+                  "reference": "57c353b2c8307cd5b82f4479",
+                  "list": []
+                },
+                {
+                  "id": "input",
+                  "reference": "57c0c508c8307cd5b82f445a",
+                  "list": []
+                },
+                {
+                  "id": "visualization",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "createble",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "editable",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "validate",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "required",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "visualization",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "createble",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "editable",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "validate",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "required",
+                      "string": "boolean"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "description",
+                  "string": "individuo-id",
+                  "list": []
+                },
+                {
+                  "id": "name",
+                  "string": "individuo-id",
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-09-01T21:29:52.097Z"
+            },
+            {
+              "_id": "57c326dcc8307cd5b82f4474",
+              "type": "schmAttrInputConf",
+              "__v": 2,
+              "name": "individuo-_code_indiv",
+              "attributes": [
+                {
+                  "id": "schema",
+                  "reference": "57a4e02ec830e2bdff1a1608",
+                  "list": []
+                },
+                {
+                  "id": "attribute",
+                  "reference": "57c3583bc8307cd5b82f447d",
+                  "list": []
+                },
+                {
+                  "id": "input",
+                  "reference": "57c3202cc8307cd5b82f4465",
+                  "list": []
+                },
+                {
+                  "id": "visualization",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "createble",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "editable",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "validate",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "required",
+                  "boolean": true,
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "visualization",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "createble",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "editable",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "validate",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "required",
+                      "string": "boolean"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "name",
+                  "string": "individuo-_code_indiv",
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-09-01T21:31:36.186Z"
+            },
+            {
+              "_id": "57c0c585c8307cd5b82f445f",
+              "type": "attrInputConf",
+              "name": "id-simple_number",
+              "__v": 3,
+              "attributes": [
+                {
+                  "id": "attribute",
+                  "reference": "57c353b2c8307cd5b82f4479",
+                  "list": []
+                },
+                {
+                  "id": "input",
+                  "reference": "57c0c508c8307cd5b82f445a",
+                  "list": []
+                },
+                {
+                  "id": "label",
+                  "string": "ID Correlativo",
+                  "list": []
+                },
+                {
+                  "id": "shortName",
+                  "string": "id numeric",
+                  "list": []
+                },
+                {
+                  "id": "regex",
+                  "string": "",
+                  "list": []
+                },
+                {
+                  "id": "rangeMax",
+                  "string": "",
+                  "number": 100000,
+                  "list": []
+                },
+                {
+                  "id": "rangeMin",
+                  "number": 1,
+                  "list": []
+                },
+                {
+                  "id": "name",
+                  "number": 1,
+                  "string": "id-simple_number",
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "string": "id-simple_number",
+                  "listOfObj": [
+                    {
+                      "id": "label",
+                      "string": "string"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "label",
+                      "string": "string"
+                    }
+                  ],
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-09-01T17:52:38.138Z"
+            },
+            {
+              "_id": "57c32665c8307cd5b82f4472",
+              "type": "attrInputConf",
+              "name": "code_indiv-simple_text",
+              "__v": 2,
+              "attributes": [
+                {
+                  "id": "attribute",
+                  "reference": "57c3583bc8307cd5b82f447d",
+                  "list": []
+                },
+                {
+                  "id": "input",
+                  "reference": "57c3202cc8307cd5b82f4465",
+                  "list": []
+                },
+                {
+                  "id": "label",
+                  "string": "Plant code",
+                  "list": []
+                },
+                {
+                  "id": "inputLable",
+                  "string": "Plant code",
+                  "list": []
+                },
+                {
+                  "id": "shortName",
+                  "string": "individuo",
+                  "list": []
+                },
+                {
+                  "id": "regex",
+                  "string": "",
+                  "list": []
+                },
+                {
+                  "id": "name",
+                  "string": "code_indiv-simple_text",
+                  "list": []
+                },
+                {
+                  "id": "keys",
+                  "listOfObj": [
+                    {
+                      "id": "shortName",
+                      "string": "string"
+                    }
+                  ],
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-09-01T18:25:34.036Z"
+            },
+            {
+              "_id": "57c0c508c8307cd5b82f445a",
+              "type": "input",
+              "name": "simple_number",
+              "__v": 1,
+              "attributes": [
+                {
+                  "id": "name",
+                  "string": "simple_number",
+                  "list": []
+                },
+                {
+                  "id": "dataType",
+                  "string": "number",
+                  "list": []
+                },
+                {
+                  "id": "attrInputConf",
+                  "listOfObj": [
+                    {
+                      "string": "string",
+                      "id": "label"
+                    },
+                    {
+                      "string": "string",
+                      "id": "inputLable"
+                    },
+                    {
+                      "string": "string",
+                      "id": "shortName"
+                    },
+                    {
+                      "string": "string",
+                      "id": "regex"
+                    },
+                    {
+                      "string": "number",
+                      "id": "rangeMax"
+                    },
+                    {
+                      "string": "number",
+                      "id": "rangeMin"
+                    },
+                    {
+                      "string": "string",
+                      "id": "validatorMsg"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "schmAttrInputConf",
+                  "listOfObj": [
+                    {
+                      "string": "boolean",
+                      "id": "visualization"
+                    },
+                    {
+                      "string": "boolean",
+                      "id": "createble"
+                    },
+                    {
+                      "string": "boolean",
+                      "id": "editable"
+                    },
+                    {
+                      "string": "boolean",
+                      "id": "validate"
+                    },
+                    {
+                      "string": "boolean",
+                      "id": "required"
+                    },
+                    {
+                      "string": "string",
+                      "id": "validatorMsg"
+                    }
+                  ],
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-09-01T17:42:00.535Z"
+            },
+            {
+              "_id": "57c3202cc8307cd5b82f4465",
+              "type": "input",
+              "__v": 1,
+              "attributes": [
+                {
+                  "id": "name",
+                  "string": "simple_text",
+                  "list": []
+                },
+                {
+                  "id": "dataType",
+                  "string": "string",
+                  "list": []
+                },
+                {
+                  "id": "attrInputConf",
+                  "listOfObj": [
+                    {
+                      "id": "label",
+                      "string": "string"
+                    },
+                    {
+                      "id": "inputLable",
+                      "string": "string"
+                    },
+                    {
+                      "id": "shortName",
+                      "string": "string"
+                    },
+                    {
+                      "id": "regex",
+                      "string": "string"
+                    },
+                    {
+                      "id": "validatorMsg",
+                      "string": "string"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "schmAttrInputConf",
+                  "listOfObj": [
+                    {
+                      "id": "visualization",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "createble",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "editable",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "validate",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "required",
+                      "string": "boolean"
+                    },
+                    {
+                      "id": "validatorMsg",
+                      "string": "string"
+                    }
+                  ],
+                  "list": []
+                },
+                {
+                  "id": "description",
+                  "string": "Ingreso de texto simple",
+                  "list": []
+                }
+              ],
+              "updated": [],
+              "created": "2016-09-01T20:07:07.439Z"
+            }
+          ]

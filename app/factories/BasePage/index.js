@@ -20,6 +20,13 @@ var BasePage = (function () {
         /*************** ADDING ITEMS *******************/
         this._setPageContent();
     }
+    Object.defineProperty(BasePage.prototype, "page", {
+        get: function () {
+            return this._page;
+        },
+        enumerable: true,
+        configurable: true
+    });
     BasePage.prototype.setTitleActionBar = function (title, subTitle) {
         var theme;
         if (subTitle) {

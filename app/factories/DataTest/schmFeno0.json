@@ -1,0 +1,98 @@
+{ 
+    "_id" : "57febcf1179c960010e41f66", 
+    "type" : "schema", 
+    "name" : "fenotipado_0", 
+    "attributes" : [
+        {
+            "id" : "name", 
+            "string" : "fenotipado_0", 
+            "list" : [
+
+            ]
+        }, 
+        {
+            "id" : "description", 
+            "string" : "Primera fenotipado de la temporada", 
+            "list" : [
+
+            ]
+        }, 
+        {
+            "id" : "attributes", 
+            "list" : [
+                "57c42f77c8307cd5b82f4486",
+                "57c431d5c8307cd5b82f448a", 
+                "57feb94b179c960010e41f65", 
+                "5808d0fdd48d17001006e43b"
+            ]
+        }, 
+        {
+            "id" : "keys", 
+            "listOfObj" : [
+                {
+                    "string" : "boolean", 
+                    "id" : "editable"
+                }, 
+                {
+                    "string" : "boolean", 
+                    "id" : "status"
+                }, 
+                {
+                    "string" : "boolean", 
+                    "id" : "visible"
+                }, 
+                {
+                    "string" : "boolean", 
+                    "id" : "creatable"
+                }, 
+                {
+                    "string" : "string", 
+                    "id" : "listViewLabel"
+                }
+            ], 
+            "list" : [
+
+            ]
+        }, 
+        {
+            "id" : "editable", 
+            "boolean" : true, 
+            "list" : [
+
+            ]
+        }, 
+        {
+            "id" : "status", 
+            "boolean" : true, 
+            "list" : [
+
+            ]
+        }, 
+        {
+            "id" : "visible", 
+            "boolean" : true, 
+            "list" : [
+
+            ]
+        }, 
+        {
+            "id" : "creatable", 
+            "boolean" : true, 
+            "list" : [
+
+            ]
+        }, 
+        {
+            "id" : "listViewLabel", 
+            "string" : "Fenotipado 0", 
+            "list" : [
+
+            ]
+        }
+    ], 
+    "updated" : [
+
+    ], 
+    "created" : "2016-10-12T22:45:05.955+0000", 
+    "__v" : 4
+}

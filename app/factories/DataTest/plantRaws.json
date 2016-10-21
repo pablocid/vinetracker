@@ -1,0 +1,3722 @@
+[
+    {
+      "_id": "57a8d8dfef44961377525d79",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43917,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "405(07).186",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "405(07)",
+          "reference": "57a8d8bbef4496137751b45d",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 186,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 62,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43917,\"cod_indiv\":\"405(07).186\",\"cruzamiento\":\"405(07)\",\"num_indiv\":186,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":62,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.046Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.046Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d7a",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43918,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "405(07).187",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "405(07)",
+          "reference": "57a8d8bbef4496137751b45d",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 187,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 63,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43918,\"cod_indiv\":\"405(07).187\",\"cruzamiento\":\"405(07)\",\"num_indiv\":187,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":63,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.046Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.046Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d7b",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43919,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "405(07).188",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "405(07)",
+          "reference": "57a8d8bbef4496137751b45d",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 188,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 64,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43919,\"cod_indiv\":\"405(07).188\",\"cruzamiento\":\"405(07)\",\"num_indiv\":188,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":64,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.046Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.046Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d7c",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43920,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "405(07).189",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "405(07)",
+          "reference": "57a8d8bbef4496137751b45d",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 189,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 65,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43920,\"cod_indiv\":\"405(07).189\",\"cruzamiento\":\"405(07)\",\"num_indiv\":189,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":65,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.046Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.046Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d7d",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43921,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "405(07).190",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "405(07)",
+          "reference": "57a8d8bbef4496137751b45d",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 190,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 66,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43921,\"cod_indiv\":\"405(07).190\",\"cruzamiento\":\"405(07)\",\"num_indiv\":190,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":66,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.046Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.046Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d7e",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43922,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "405(07).191",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "405(07)",
+          "reference": "57a8d8bbef4496137751b45d",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 191,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 67,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43922,\"cod_indiv\":\"405(07).191\",\"cruzamiento\":\"405(07)\",\"num_indiv\":191,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":67,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.046Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.046Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d7f",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43923,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "409(07).27",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "409(07)",
+          "reference": "57a8d8bbef4496137751b452",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 27,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 70,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43923,\"cod_indiv\":\"409(07).27\",\"cruzamiento\":\"409(07)\",\"num_indiv\":27,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":70,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.046Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.046Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d80",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43924,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "410(07).46",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "410(07)",
+          "reference": "57a8d8bbef4496137751b451",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 46,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 71,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43924,\"cod_indiv\":\"410(07).46\",\"cruzamiento\":\"410(07)\",\"num_indiv\":46,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":71,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.046Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.046Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d3b",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43855,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "353(07).178",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "353(07)",
+          "reference": "57a8d8bbef4496137751b4c3",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 178,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 52,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43855,\"cod_indiv\":\"353(07).178\",\"cruzamiento\":\"353(07)\",\"num_indiv\":178,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":52,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.045Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.045Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d3d",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43857,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "362(07).161",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "362(07)",
+          "reference": "57a8d8bbef4496137751b4bb",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 161,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 54,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43857,\"cod_indiv\":\"362(07).161\",\"cruzamiento\":\"362(07)\",\"num_indiv\":161,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":54,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.045Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.045Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d3e",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43858,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "362(07).162",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "362(07)",
+          "reference": "57a8d8bbef4496137751b4bb",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 162,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 55,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43858,\"cod_indiv\":\"362(07).162\",\"cruzamiento\":\"362(07)\",\"num_indiv\":162,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":55,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.045Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.045Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d3f",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43859,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "362(07).163",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "362(07)",
+          "reference": "57a8d8bbef4496137751b4bb",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 163,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 56,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43859,\"cod_indiv\":\"362(07).163\",\"cruzamiento\":\"362(07)\",\"num_indiv\":163,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":56,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.045Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.045Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d54",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43880,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "373(07).169",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "373(07)",
+          "reference": "57a8d8bbef4496137751b4a9",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 169,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 57,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43880,\"cod_indiv\":\"373(07).169\",\"cruzamiento\":\"373(07)\",\"num_indiv\":169,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":57,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.045Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.045Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d55",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43881,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "373(07).170",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "373(07)",
+          "reference": "57a8d8bbef4496137751b4a9",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 170,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 58,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43881,\"cod_indiv\":\"373(07).170\",\"cruzamiento\":\"373(07)\",\"num_indiv\":170,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":58,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.045Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.045Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d56",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43882,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "373(07).171",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "373(07)",
+          "reference": "57a8d8bbef4496137751b4a9",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 171,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 59,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43882,\"cod_indiv\":\"373(07).171\",\"cruzamiento\":\"373(07)\",\"num_indiv\":171,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":59,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.045Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.045Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d14",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43816,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "292(07).148",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "292(07)",
+          "reference": "57a8d8bbef4496137751b51b",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 148,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 34,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43816,\"cod_indiv\":\"292(07).148\",\"cruzamiento\":\"292(07)\",\"num_indiv\":148,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":34,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.044Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.044Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d15",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43817,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "292(07).149",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "292(07)",
+          "reference": "57a8d8bbef4496137751b51b",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 149,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 35,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43817,\"cod_indiv\":\"292(07).149\",\"cruzamiento\":\"292(07)\",\"num_indiv\":149,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":35,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.044Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.044Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d16",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43818,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "292(07).150",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "292(07)",
+          "reference": "57a8d8bbef4496137751b51b",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 150,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 36,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43818,\"cod_indiv\":\"292(07).150\",\"cruzamiento\":\"292(07)\",\"num_indiv\":150,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":36,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.044Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.044Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d17",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43819,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "292(07).151",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "292(07)",
+          "reference": "57a8d8bbef4496137751b51b",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 151,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 37,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43819,\"cod_indiv\":\"292(07).151\",\"cruzamiento\":\"292(07)\",\"num_indiv\":151,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":37,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.044Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.044Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d18",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43820,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "292(07).152",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "292(07)",
+          "reference": "57a8d8bbef4496137751b51b",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 152,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 39,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43820,\"cod_indiv\":\"292(07).152\",\"cruzamiento\":\"292(07)\",\"num_indiv\":152,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":39,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.044Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.044Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d19",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43821,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "292(07).153",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "292(07)",
+          "reference": "57a8d8bbef4496137751b51b",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 153,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 41,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43821,\"cod_indiv\":\"292(07).153\",\"cruzamiento\":\"292(07)\",\"num_indiv\":153,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":41,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.044Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.044Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d1a",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43822,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "292(07).154",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "292(07)",
+          "reference": "57a8d8bbef4496137751b51b",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 154,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 42,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43822,\"cod_indiv\":\"292(07).154\",\"cruzamiento\":\"292(07)\",\"num_indiv\":154,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":42,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.044Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.044Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d1b",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43823,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "292(07).155",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "292(07)",
+          "reference": "57a8d8bbef4496137751b51b",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 155,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 43,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43823,\"cod_indiv\":\"292(07).155\",\"cruzamiento\":\"292(07)\",\"num_indiv\":155,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":43,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.044Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.044Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d20",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43828,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "315(07).151",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "315(07)",
+          "reference": "57a8d8bbef4496137751b4f8",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 151,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 46,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43828,\"cod_indiv\":\"315(07).151\",\"cruzamiento\":\"315(07)\",\"num_indiv\":151,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":46,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.044Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.044Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d21",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43829,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "316(07).1",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "316(07)",
+          "reference": "57a8d8bbef4496137751b4f7",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 47,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43829,\"cod_indiv\":\"316(07).1\",\"cruzamiento\":\"316(07)\",\"num_indiv\":1,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":47,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.044Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.044Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525d22",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43830,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "318(07).79",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "318(07)",
+          "reference": "57a8d8bbef4496137751b4f0",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 79,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 48,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43830,\"cod_indiv\":\"318(07).79\",\"cruzamiento\":\"318(07)\",\"num_indiv\":79,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":48,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.044Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.044Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525ba9",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43453,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "233(07).174",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "233(07)",
+          "reference": "57a8d8bbef4496137751b571",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 174,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 32,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43453,\"cod_indiv\":\"233(07).174\",\"cruzamiento\":\"233(07)\",\"num_indiv\":174,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":32,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.040Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.040Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525b9b",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43439,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "199(07).68",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "199(07)",
+          "reference": "57a8d8bbef4496137751b590",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 68,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 25,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43439,\"cod_indiv\":\"199(07).68\",\"cruzamiento\":\"199(07)\",\"num_indiv\":68,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":25,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.039Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.039Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525b9c",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43440,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "199(07).69",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "199(07)",
+          "reference": "57a8d8bbef4496137751b590",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 69,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 26,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43440,\"cod_indiv\":\"199(07).69\",\"cruzamiento\":\"199(07)\",\"num_indiv\":69,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":26,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.039Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.039Z"
+    },
+    {
+      "_id": "57a8d8dfef44961377525b9d",
+      "schm": "57a4e02ec830e2bdff1a1608",
+      "attributes": [
+        {
+          "id": "57c353b2c8307cd5b82f4479",
+          "number": 43441,
+          "list": []
+        },
+        {
+          "id": "57c3583bc8307cd5b82f447d",
+          "string": "199(07).70",
+          "list": []
+        },
+        {
+          "id": "cruzamiento",
+          "string": "199(07)",
+          "reference": "57a8d8bbef4496137751b590",
+          "list": []
+        },
+        {
+          "id": "num_indiv",
+          "number": 70,
+          "list": []
+        },
+        {
+          "id": "fecha_identific",
+          "date": "2015-12-22T03:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "invernadero",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "sombra",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "campo",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "fecha_inv",
+          "date": null,
+          "list": []
+        },
+        {
+          "id": "fecha_campo",
+          "date": "2012-12-10T02:00:00.000Z",
+          "list": []
+        },
+        {
+          "id": "etapa_primaria",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "etapa_intermedia",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "etapa_avanzada",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "seleccionado",
+          "string": "No seleccionado",
+          "list": []
+        },
+        {
+          "id": "eliminar",
+          "boolean": false,
+          "list": []
+        },
+        {
+          "id": "eliminado_causa",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "5807af5f31f55d0010aaffe4",
+          "number": 4,
+          "list": []
+        },
+        {
+          "id": "5807af9231f55d0010aaffe5",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "5807afe331f55d0010aaffe6",
+          "number": 28,
+          "list": []
+        },
+        {
+          "id": "57c8910e98763f100090a891",
+          "string": null,
+          "list": []
+        },
+        {
+          "id": "copias_impresion",
+          "number": 0,
+          "list": []
+        },
+        {
+          "id": "itemOld",
+          "string": "{\"id\":43441,\"cod_indiv\":\"199(07).70\",\"cruzamiento\":\"199(07)\",\"num_indiv\":70,\"fecha_identific\":\"2015-12-22\",\"invernadero\":0,\"sombra\":0,\"campo\":1,\"fecha_inv\":null,\"fecha_sombra\":null,\"fecha_campo\":\"2012-12-10\",\"etapa_primaria\":1,\"etapa_intermedia\":0,\"etapa_avanzada\":0,\"seleccionado\":0,\"eliminar\":0,\"eliminado_causa\":null,\"espaldera\":4,\"hilera\":1,\"posicion\":28,\"ubicacion\":null,\"copias_impresion\":0}",
+          "list": []
+        }
+      ],
+      "updated": [
+        {
+          "user": "5792659bc4e0730f00417cbb",
+          "date": "2016-08-06T22:04:13.039Z"
+        }
+      ],
+      "created": "2016-08-06T22:04:13.039Z"
+    }
+  ]

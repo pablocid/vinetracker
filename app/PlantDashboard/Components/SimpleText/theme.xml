@@ -1,0 +1,5 @@
+<GridLayout columns="*" rows="auto,* " >
+    <Label text="{{label}}" row="0" col="0" cssClass="rojo" textWrap="true" 
+    style="font-size:26; text-align:center; padding:15; "/>
+    <TextView hint="escribe un comentario ..." row="1" col="0" text="{{ value }}" />  
+</GridLayout>

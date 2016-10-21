@@ -1,3 +1,5 @@
+import {Plant} from '../../factories/Record';
+import {Context} from '../../factories/Context';
 
 import { BasePage } from '../../factories/BasePage';
 import { parse as Parse, load as Load } from 'ui/builder';
@@ -29,6 +31,7 @@ sl.addChild(Parse(`
 `))
 ubicacion.view = sl;
 
+/**************** tabitems: resumen ********************/
 var resumen = new TabViewItem();
 resumen.title = 'resumen';
 resumen.view = resumenView.getView();
@@ -36,6 +39,15 @@ resumen.view = resumenView.getView();
 tab.items = [scan, ubicacion, resumen];
 
 var localization = new BasePage();
+scanView.callback = function(plant:Plant){
+    let context = <Context>localization.page.navigationContext;
+    context.plant = plant;
+    let navOpts = {
+        moduleName:'PlantDashboard/index',
+        context:context
+    }
+    Topmost().navigate(navOpts);
+}
 localization.mainContent = tab;
 localization.setTitleActionBar('Localización','Elige la hilera que quires evaluar');
 

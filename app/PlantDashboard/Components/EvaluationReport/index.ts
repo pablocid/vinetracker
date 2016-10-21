@@ -1,3 +1,4 @@
+import {FindSchm} from '../../../services/RecordService';
 
 import { load as Load, LoadOptions } from 'ui/builder';
 import {View} from 'ui/core/view';
@@ -8,7 +9,6 @@ import { Observable } from 'data/observable';
 import { SchmSchemaObj } from '../../../factories/Schema';
 import { Context } from '../../../factories/Context';
 import { QueryConfig, Filter } from '../../../factories/QueryParser';
-import { FindSchm } from '../../../services/record.service';
 
 export class SumaryReport{
     private _config:QueryConfig;
@@ -53,9 +53,6 @@ export class SumaryReport{
 
     private _onTapItem(index){
         var context = new Context();
-        var evaluacion = this._listItems[index];
-        context.schema = evaluacion;
-        console.log("evaluacion.id "+evaluacion.id);
         let navOpts = {
             moduleName:"PlantDashboard/index",
             context:context
@@ -65,19 +62,9 @@ export class SumaryReport{
 
      private _setUpView(data){
 
-        let items = data.items;
-        //construcción de objeto SchmSchema
-        items = items.map(c=> new SchmSchemaObj(c));
-        //filtrar items por createble
-        this._listItems =  items.filter(u=> u.getAttr("creatable","boolean"));
-        this._viewModel.set('loading',false);
-
-        let listItemsView = this._listItems.map( s=>{    return { name:s.getAttr("listViewLabel", "string") }    } );
-        this._viewModel.set('items', listItemsView);
      }
     public onLoadedPage(){
         let rs = new FindSchm(this._config);
-         rs.find().then(x=>this._setUpView(x));
          this._viewModel.set('loading',true);
      }
      public getView(){

@@ -58,6 +58,15 @@ export interface FindOneResponse{
     record:any
 }
 
+export interface FindRecordsResponse {
+    page:number;
+    pages:number;
+    length:number;
+    totalLength:number;
+    schema:any[];
+    items:any[];
+}
+
 export interface AttrProps{
     label: string;
     shortName: string;
@@ -95,3 +104,4 @@ export interface NumberListAttrProps extends AttrProps{
     floatOpt:string;
     unit:string;
 }
+

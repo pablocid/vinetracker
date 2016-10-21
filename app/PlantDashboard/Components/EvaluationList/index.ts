@@ -1,12 +1,11 @@
-
+import {FindSchm} from '../../../services/RecordService';
+import {Schema} from '../../../factories/Schema';
 import { parse as Parse, load as Load, LoadOptions } from 'ui/builder';
 import { View } from 'ui/core/view';
 import { GridLayout } from 'ui/layouts/grid-layout';
 import { EventData } from 'data/observable';
-import { FindSchm } from '../../../services/record.service';
 import { topmost as Topmost } from 'ui/frame';
 import { Observable } from 'data/observable';
-import { SchmSchemaObj } from '../../../factories/Schema';
 import { Context } from '../../../factories/Context';
 import { QueryConfig, Filter } from '../../../factories/QueryParser';
 import {action as Action} from 'ui/dialogs';
@@ -16,9 +15,10 @@ export class EvaluationListView {
     private _config:QueryConfig;
     private _viewModel:Observable;
     public _test:string;
-    private _listItems: SchmSchemaObj[];
+    private _listItems: Schema[];
     private _theme:View;
     private _filter: Filter;
+    private _context: Context;
 
     constructor(){
 
@@ -27,6 +27,7 @@ export class EvaluationListView {
             path:'~/PlantDashboard/Components/EvaluationList'
         });
         this._config = new QueryConfig();
+        this._context = new Context();
 
         this._filter = new Filter();
         this._filter.key = 'attributes';
@@ -45,9 +46,8 @@ export class EvaluationListView {
     }
 
     private _onTapItem(index) : void {
-        var context = new Context();
         var evaluacion = this._listItems[index];
-        context.schema = evaluacion;
+        this._context.schema = evaluacion;
         console.log("evaluacion.id "+evaluacion.id);
 
         var msg = "Evaluar "+evaluacion.getAttr("listViewLabel", "string")+ ' por ...';
@@ -62,7 +62,7 @@ export class EvaluationListView {
                 console.log("La primera opción");
                 let navOpts = {
                     moduleName:"PlantDashboard/Localization/index",
-                    context:context
+                    context:this._context
                 }
                 Topmost().navigate(navOpts);
             }
@@ -72,11 +72,8 @@ export class EvaluationListView {
         });
      }
 
-     private _setUpView(data) : void {
-
-        let items = data.items;
-        //construcción de objeto SchmSchema
-        items = items.map(c=> new SchmSchemaObj(c));
+     private _setUpView(items : Schema[]) : void {
+        
         //filtrar items por createble
         this._listItems =  items.filter(u=> u.getAttr("creatable","boolean"));
         this._viewModel.set('loading',false);

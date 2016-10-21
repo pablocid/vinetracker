@@ -1,4 +1,5 @@
-import { FindOneResponse} from '../../interfaces';
+import {Schema} from '../../factories/Schema';
+import {FindOneResponse, FindRecordsResponse} from '../../interfaces';
 import { RequestOpts, Request} from '../Request';
 import { Plant, Record} from '../../factories/Record';
 import { QueryConfig, QueryParser} from '../../factories/QueryParser';
@@ -18,7 +19,7 @@ export class BaseFind {
         return a;
     }
 
-    private _setQueryParser(){
+    protected _setQueryParser(){
         this._queryParser = new QueryParser(this._config);
     }
 
@@ -28,12 +29,42 @@ export class BaseFind {
         let url = this._queryParser.parse();
         let o = new RequestOpts(url,this._method);
         let r = new Request(o);
-        
+        console.log(JSON.stringify(o.url))
+        console.log(JSON.stringify(o.options))
+
         return r.make().then( (a)=>{
             if(this._factory){
                 return this.makeObj(a);
             }else{
                 return a;
+            }
+        });
+    }
+}
+
+export class Aggregate extends BaseFind {
+
+    constructor(config: QueryConfig){
+        super(config, 'GET');
+    }
+    public find ():Promise<any>{
+
+        this._setQueryParser();
+        let url = this._queryParser.parse();
+        let o = new RequestOpts(url,this._method);
+        let r = new Request(o);
+        console.log(JSON.stringify(o.url))
+        console.log(JSON.stringify(o.options))
+
+        return r.make();
+    }
+
+    public exist (): Promise<boolean> {
+        return this.find().then(x=>{
+            if(x && x.length){
+                return true;
+            }else{
+                return false;
             }
         });
     }
@@ -47,14 +78,77 @@ export class FindRecord extends BaseFind {
         this._factory = true;
     }
 
-    protected makeObj(a){
+    protected makeObj(a):any{
         return new Record(a.schema, a.record );
     }
 }
 
 export class FindPlant extends FindRecord {
     protected makeObj(a:FindOneResponse){
-        return new Plant(a.schema, a.record );
+        let f = new Plant(a.schema, a.record );
+        console.log(f.id);
+        return f
+    }
+}
+
+export class FindPlants extends FindRecord {
+    protected makeObj(a:FindRecordsResponse):Plant[]{
+        //let f = new Plant(a.schema, a.record );
+        //console.log(" in FindPlants ...");
+        //console.log(a.length);
+        if(a.length === 0){
+            return [new Plant(a.schema)];
+        }
+        return a.items.map(x=>{
+            //console.log('creating plants ...')
+            return new Plant(a.schema, x );
+        });
+    }
+    public finds ():Promise<Plant[]>{
+
+        this._setQueryParser();
+        let url = this._queryParser.parse();
+        let o = new RequestOpts(url,this._method);
+        let r = new Request(o);
+        console.log(JSON.stringify(o.url))
+        console.log(JSON.stringify(o.options))
+
+        return r.make().then( (a)=>{
+            if(this._factory){
+                return this.makeObj(a);
+            }else{
+                return a;
+            }
+        });
+    }
+}
+
+export class FindRecords extends FindRecord {
+    protected makeObj(a:FindRecordsResponse):Record[]{
+        if(a.length === 0){
+            return [new Record(a.schema)];
+        }
+        return a.items.map(x=>{
+            //console.log('creating plants ...')
+            return new Record(a.schema, x );
+        });
+    }
+    public finds ():Promise<Record[]>{
+
+        this._setQueryParser();
+        let url = this._queryParser.parse();
+        let o = new RequestOpts(url,this._method);
+        let r = new Request(o);
+        console.log(JSON.stringify(o.url))
+        console.log(JSON.stringify(o.options))
+
+        return r.make().then( (a)=>{
+            if(this._factory){
+                return this.makeObj(a);
+            }else{
+                return a;
+            }
+        });
     }
 }
 
@@ -70,7 +164,20 @@ export class FindSchm {
         this._method = 'GET';
     }
 
-    public find (){
+    public find ():Promise<Schema[]>{
+        let url = this._queryParser.parse();
+        let o = new RequestOpts(url,this._method);
+        let r = new Request(o);
+        return r.make().then(x=>{
+            if(x.items && x.items.length){
+                return x.items.map(x => new Schema(x));
+            }else{
+                return [];
+            }
+        });
+    }
+
+    public rawFind (){
         let url = this._queryParser.parse();
         let o = new RequestOpts(url,this._method);
         let r = new Request(o);

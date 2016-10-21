@@ -1,15 +1,14 @@
 "use strict";
+var RecordService_1 = require('../../../services/RecordService');
 var nativescript_barcodescanner_1 = require('nativescript-barcodescanner');
-var Auth_1 = require('../../../services/Auth');
 var BaseComponent_1 = require('../BaseComponent');
 var builder_1 = require('ui/builder');
 var grid_layout_1 = require('ui/layouts/grid-layout');
 var frame_1 = require('ui/frame');
 var observable_1 = require('data/observable');
 var QueryParser_1 = require('../../../factories/QueryParser');
-var record_service_1 = require('../../../services/record.service');
 var dialogs_1 = require('ui/dialogs');
-var AppSet = require("application-settings");
+var Q = require('q');
 var Scanner = (function (_super) {
     __extends(Scanner, _super);
     function Scanner(attr) {
@@ -38,48 +37,40 @@ var Scanner = (function (_super) {
     Scanner.prototype._setValue = function () {
         var value = this._recordAttr.value;
         if (value) {
-            this._viewModel.set('loading', true);
+            this._findRecord(value);
         }
     };
     Scanner.prototype.onLoadedPage = function () {
-        var _this = this;
-        var l = new Auth_1.Logged();
-        //this._
-        l.check().then(function (x) {
-            if (!x) {
-                frame_1.topmost().navigate('login/index');
-                _this._viewModel.set('code', AppSet.getString('Authorization'));
-            }
-        });
     };
     Scanner.prototype._onTapScan = function (args) {
         var _this = this;
         console.log("_onTapScan");
         this._barcodescanner.scan(this._barcodeOpts).then(function (r) {
-            _this._findRecord(r);
+            _this._findRecord(r.text);
         });
     };
-    Scanner.prototype._findRecord = function (s) {
+    Scanner.prototype._findRecord = function (code) {
         var _this = this;
         this._viewModel.set('loading', true);
         var config = new QueryParser_1.QueryConfig();
-        config.id = s.text;
-        if (!/^[0-9a-f]{24}$/i.test(s.text)) {
+        config.id = code;
+        if (!/^[0-9a-f]{24}$/i.test(code)) {
             //plant schema
             config.schm = '57a4e02ec830e2bdff1a1608';
             // cod_indiv
             config.key = '57c3583bc8307cd5b82f447d';
             config.datatype = 'string';
         }
-        var findOne = new record_service_1.FindPlant(config);
+        var findOne = new RecordService_1.FindPlant(config);
         findOne.find().then(function (res) {
             _this._viewModel.set('loading', false);
+            console.log(JSON.stringify(res.data));
             if (!res.id) {
                 _this._errorAlert();
                 _this._unsetViewModelData();
             }
             else {
-                _this._viewModel.set('code', s.text);
+                _this._viewModel.set('code', res.getAttribute('57c3583bc8307cd5b82f447d').value);
                 _this._viewModel.set('ubicacion', res.getUbicación());
                 //checkIfEvaluated
                 if (_this._evaluatedCheck) {
@@ -87,10 +78,21 @@ var Scanner = (function (_super) {
                         if (x) {
                             // alert si se queriere evaluar denuevo o no
                             console.log(' ya se realizó la evaluación');
+                            _this._evaluatedAction();
                         }
                         else {
                             console.log('planta nunca antes evaluada');
-                            _this._saveValue(res.id);
+                            //checkear si cumple con las restrincciones impuestas en el schema
+                            _this._restrictionChecker().then(function (x) {
+                                if (x) {
+                                    _this._saveValue(res.id);
+                                }
+                                else {
+                                    dialogs_1.alert('Esta planta no cumple con las restricciones impuestas por la evaluación anterios').then(function (x) {
+                                        frame_1.topmost().goBack();
+                                    });
+                                }
+                            });
                         }
                     });
                 }
@@ -100,9 +102,35 @@ var Scanner = (function (_super) {
             }
         });
     };
+    Scanner.prototype._restrictionChecker = function () {
+        var deffered = Q.defer();
+        var filter = this._recordAttr.parent.schema.schm.getAttr('restriction_filter', 'string');
+        if (filter) {
+            //reemplazar _(id_plant)_
+            var f = filter.replace('_(id_plant)_', this._recordAttr.parent.id);
+            this._aggregateRequest(f).then(function (x) {
+                if (x) {
+                    deffered.resolve(true);
+                }
+                else {
+                    deffered.resolve(false);
+                }
+            });
+        }
+        else {
+            deffered.resolve(true);
+        }
+        return deffered.promise;
+    };
     Scanner.prototype._saveValue = function (value) {
         this._recordAttr.value = value;
         console.log(JSON.stringify(this._recordAttr.data));
+    };
+    Scanner.prototype._aggregateRequest = function (query) {
+        var opts = new QueryParser_1.QueryConfig();
+        opts.query = query;
+        opts.id = 'aggregate';
+        return new RecordService_1.Aggregate(opts).exist();
     };
     Scanner.prototype._unsetViewModelData = function () {
         this._viewModel.set('ubicacion', '');
@@ -115,6 +143,19 @@ var Scanner = (function (_super) {
         alertOpts.okButtonText = 'entendido';
         alertOpts.cancelable = false;
         dialogs_1.alert(alertOpts);
+    };
+    Scanner.prototype._evaluatedAction = function () {
+        var opt = {};
+        opt.cancelable = false;
+        opt.title = '¿Deseas evaluar esta planta nuevamente ?';
+        opt.actions = ['Si', 'No'];
+        dialogs_1.action(opt).then(function (value) {
+            if (value === 'Si') {
+            }
+            else {
+                frame_1.topmost().goBack();
+            }
+        });
     };
     Scanner.prototype._hastPermission = function () {
         var _this = this;
@@ -138,7 +179,7 @@ var Scanner = (function (_super) {
         opts.schm = this._recordAttr.parent.schema.schm.id;
         opts.key = this._recordAttr.id;
         opts.datatype = 'reference';
-        var evaluationRecord = new record_service_1.FindRecord(opts);
+        var evaluationRecord = new RecordService_1.FindRecord(opts);
         return evaluationRecord.find().then(function (record) {
             if (record.id) {
                 return true;
@@ -326,7 +367,7 @@ var PlantScanner = (function () {
             this._config.key = '57c3583bc8307cd5b82f447d';
             this._config.datatype = 'string';
         }
-        this._findOne = new record_service_1.FindPlant(this._config);
+        this._findOne = new RecordService_1.FindPlant(this._config);
         this._findOne.find().then(function (res) {
             //console.log(JSON.stringify(res))
             _this._viewModel.set('loading', false);
@@ -336,6 +377,7 @@ var PlantScanner = (function () {
             }
             else {
                 _this._viewModel.set("ubicacion", res.getUbicación());
+                _this._callback(res);
                 //chechear si el registro ha sido ingresado
                 if (_this._evaluatedCheck && _this._attrEvaluation && _this._schmEvaluation) {
                     _this._viewModel.set('loading', true);
@@ -373,7 +415,7 @@ var PlantScanner = (function () {
         opts.schm = this._schmEvaluation;
         opts.key = this._attrEvaluation;
         opts.datatype = 'reference';
-        var evaluationRecord = new record_service_1.FindRecord(opts);
+        var evaluationRecord = new RecordService_1.FindRecord(opts);
         return evaluationRecord.find().then(function (record) {
             if (record.id) {
                 return _this._evaluatedAction();

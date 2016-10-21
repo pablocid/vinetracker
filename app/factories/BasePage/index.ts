@@ -43,6 +43,10 @@ export class BasePage {
 
     }
 
+    public get page ():Page{
+        return this._page;
+    }
+
 	public setTitleActionBar(title : string, subTitle ?: string) {
         let theme;
         if(subTitle){

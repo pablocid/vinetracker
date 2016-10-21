@@ -1,3 +1,4 @@
+import {Aggregate, FindPlant, FindRecord} from '../../../services/RecordService';
 import {BarcodeScanner, ScanOptions} from 'nativescript-barcodescanner';
 import {Logged} from '../../../services/Auth';
 import {BaseInputComponent} from '../BaseComponent';
@@ -12,24 +13,23 @@ import { Observable } from 'data/observable';
 import { SchmSchemaObj } from '../../../factories/Schema';
 import { Context } from '../../../factories/Context';
 import { QueryConfig, Filter } from '../../../factories/QueryParser';
-import { FindSchm, FindRecord, FindPlant } from '../../../services/record.service';
 import { BarcodeResult } from '../../../interfaces';
 import { action as Action, ActionOptions, alert as Alert, AlertOptions} from 'ui/dialogs';
 import { Button } from 'ui/button';
 
 import AppSet = require("application-settings");
 
+var Q = require('q');
+
 //cb('683(10).6');
 //cb('57a8d8dfef44961377526953');
 interface ScannerProps{
-    label:string,
-
+    label:string
 }
 
 export class Scanner extends BaseInputComponent{
     private _props: ScannerProps;
     private _evaluatedCheck:boolean;
-    private _evaluatedAction:any;
     private _barcodescanner: BarcodeScanner;
     private _barcodeOpts : ScanOptions;
     
@@ -61,36 +61,28 @@ export class Scanner extends BaseInputComponent{
     private _setValue(){
         let value = this._recordAttr.value;
         if(value){
-            this._viewModel.set('loading', true);
-            //check current evaluation availability
+            this._findRecord(value);
         }
     }
 
     public onLoadedPage (){
-        let l = new Logged();
-        //this._
-        l.check().then(x=>{
-            if(!x){
-                Topmost().navigate('login/index');
-                this._viewModel.set('code', AppSet.getString('Authorization'))
-            }
-        })
+
     }
 
     private _onTapScan(args){
         console.log("_onTapScan")
         this._barcodescanner.scan(this._barcodeOpts).then( (r: BarcodeResult)=>{
-            this._findRecord(r);
+            this._findRecord(r.text);
         })
     }
 
-    private _findRecord(s:BarcodeResult){
+    private _findRecord(code: string){
         this._viewModel.set('loading', true);
         
         let config = new QueryConfig();
 
-        config.id = s.text;
-        if(!/^[0-9a-f]{24}$/i.test(s.text)){
+        config.id = code;
+        if(!/^[0-9a-f]{24}$/i.test(code)){
             //plant schema
             config.schm = '57a4e02ec830e2bdff1a1608';
             // cod_indiv
@@ -101,11 +93,12 @@ export class Scanner extends BaseInputComponent{
         let findOne = new FindPlant(config);
         findOne.find().then( (res:Plant) => {
             this._viewModel.set('loading', false);
+            console.log(JSON.stringify(res.data))
             if(!res.id){
                 this._errorAlert();
                 this._unsetViewModelData(); 
             }else{
-                this._viewModel.set( 'code',s.text );
+                this._viewModel.set( 'code', res.getAttribute('57c3583bc8307cd5b82f447d').value );
                 this._viewModel.set( 'ubicacion', res.getUbicación() );
                 //checkIfEvaluated
                 if(this._evaluatedCheck){
@@ -113,12 +106,23 @@ export class Scanner extends BaseInputComponent{
                         if(x){
                             // alert si se queriere evaluar denuevo o no
                             console.log(' ya se realizó la evaluación');
+                            this._evaluatedAction();
                         }else{
                             console.log('planta nunca antes evaluada');
-                            this._saveValue(res.id);
+                            //checkear si cumple con las restrincciones impuestas en el schema
+                            this._restrictionChecker().then(x=>{
+                                if(x){
+                                    this._saveValue(res.id);
+                                }else{
+                                    Alert('Esta planta no cumple con las restricciones impuestas por la evaluación anterios').then(x=>{
+                                        Topmost().goBack();
+                                    })
+                                }
+                            });
                         }
                     });
                 }else{
+                    
                     this._saveValue(res.id);
                 }
                 
@@ -127,9 +131,37 @@ export class Scanner extends BaseInputComponent{
         });
     }
 
+    private _restrictionChecker () : Promise<boolean>{
+        var deffered = Q.defer();
+        let filter = this._recordAttr.parent.schema.schm.getAttr('restriction_filter','string');
+        if(filter){
+            //reemplazar _(id_plant)_
+            let f = filter.replace('_(id_plant)_',this._recordAttr.parent.id);
+            this._aggregateRequest(f).then(x=>{
+                if(x){
+                    deffered.resolve(true);
+                }else{
+                    deffered.resolve(false);
+                }
+            });
+        }else{
+            deffered.resolve(true);
+        }
+
+        return deffered.promise;
+    }
+
     private _saveValue(value:string){
         this._recordAttr.value = value;
         console.log(JSON.stringify(this._recordAttr.data));
+    }
+
+    private _aggregateRequest(query:string):Promise<boolean>{
+        let opts = new QueryConfig();
+        opts.query = query;
+        opts.id = 'aggregate';
+
+        return new Aggregate(opts).exist();
     }
 
     private _unsetViewModelData(){
@@ -144,6 +176,20 @@ export class Scanner extends BaseInputComponent{
         alertOpts.okButtonText = 'entendido';
         alertOpts.cancelable = false;
         Alert(alertOpts)
+    }
+
+    private _evaluatedAction(){
+        let opt: ActionOptions = {};
+        opt.cancelable = false;
+        opt.title = '¿Deseas evaluar esta planta nuevamente ?'
+        opt.actions = ['Si', 'No'];
+        Action(opt).then(function(value){
+            if(value === 'Si'){
+                
+            }else{
+                Topmost().goBack();
+            }
+        });
     }
 
     private _hastPermission():void{
@@ -369,7 +415,7 @@ export class PlantScanner{
                 this._unsetViewModelData(); 
             }else{
                 this._viewModel.set("ubicacion", res.getUbicación() );
-
+                this._callback(res);
                 //chechear si el registro ha sido ingresado
                 if(this._evaluatedCheck && this._attrEvaluation && this._schmEvaluation){
                     this._viewModel.set('loading', true);

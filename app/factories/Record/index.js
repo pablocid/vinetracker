@@ -1,6 +1,6 @@
 "use strict";
+var Helper_1 = require('../../services/Helper');
 var Schema_1 = require('../Schema');
-var checkParam = require('../../services/helper.service').checkParam;
 var Record = (function (_super) {
     __extends(Record, _super);
     function Record(schm, record) {
@@ -87,15 +87,13 @@ var Plant = (function (_super) {
         _super.apply(this, arguments);
     }
     Plant.prototype.getUbicación = function () {
-        console.log('Plant - getUbicación');
-        /*
-        let espaldera = this.getAttribute('espaldera').value;
-        let hilera = this.getAttribute('hilera').value;
-        let posicion = this.getAttribute('posicion').value || '-';
-        if(espaldera && hilera){
-            return `E${espaldera} H${hilera} P${posicion}`;
+        //console.log('Plant - getUbicación');
+        var espaldera = this.getAttribute('5807af5f31f55d0010aaffe4').value;
+        var hilera = this.getAttribute('5807af9231f55d0010aaffe5').value;
+        var posicion = this.getAttribute('5807afe331f55d0010aaffe6').value || '-';
+        if (espaldera && hilera) {
+            return "E" + espaldera + " H" + hilera + " P" + posicion;
         }
-        */
         return 'ubicación ***';
     };
     return Plant;
@@ -148,15 +146,12 @@ var RecordAttribute = (function () {
             return this._value;
         },
         set: function (v) {
-            //check if value match dataType
-            console.log('checking parameter');
-            if (checkParam(v, this.dataType)) {
-                console.log('parameter OK');
+            var pcheck = new Helper_1.ParamChecker(v, this.dataType);
+            if (pcheck.check) {
                 this._value = v;
             }
             else {
-                console.log('parameter wrong');
-                throw new Error('El valor ' + v + ' asignado al attributo ' + this.name + ' con el _id ' + this.id + ' no coincide con el dataType ' + this.dataType);
+                console.log("\n                Parameter wrong | El valor " + v + " asignado al attributo " + this.name + " \n                con el _id " + this.id + " no coincide con el dataType " + this.dataType + "\n            ");
             }
         },
         enumerable: true,
