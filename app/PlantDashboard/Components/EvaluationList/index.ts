@@ -48,11 +48,18 @@ export class EvaluationListView {
     private _onTapItem(index) : void {
         var evaluacion = this._listItems[index];
         this._context.schema = evaluacion;
-        console.log("evaluacion.id "+evaluacion.id);
+        //console.log("evaluacion.id "+evaluacion.id);
 
         var msg = "Evaluar "+evaluacion.getAttr("listViewLabel", "string")+ ' por ...';
         var opt1 = "hilera";
         var opt2 = "planta (Código QR)";
+        
+        let navOpts = {
+            moduleName:"PlantDashboard/Localization/index",
+            context:this._context
+        }
+        Topmost().navigate(navOpts);
+        /*
         Action({
           message: msg,
           cancelButtonText: "cancelar",
@@ -70,6 +77,7 @@ export class EvaluationListView {
                 console.log("La segunda opción")
             }
         });
+        */
      }
 
      private _setUpView(items : Schema[]) : void {

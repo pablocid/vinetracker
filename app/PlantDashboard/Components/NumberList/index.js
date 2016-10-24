@@ -7,6 +7,7 @@ var NumberList = (function (_super) {
     function NumberList(attr) {
         _super.call(this, attr);
         this._props = this._properties;
+        this._viewModel.set('unit', this._props.unit);
         this._setIntegers();
         this._setFloat();
         /*** template ***/

@@ -6,7 +6,6 @@ var frame_1 = require('ui/frame');
 var observable_1 = require('data/observable');
 var Context_1 = require('../../../factories/Context');
 var QueryParser_1 = require('../../../factories/QueryParser');
-var dialogs_1 = require('ui/dialogs');
 var EvaluationListView = (function () {
     function EvaluationListView() {
         var _this = this;
@@ -30,30 +29,36 @@ var EvaluationListView = (function () {
         this._theme.bindingContext = this._viewModel;
     }
     EvaluationListView.prototype._onTapItem = function (index) {
-        var _this = this;
         var evaluacion = this._listItems[index];
         this._context.schema = evaluacion;
-        console.log("evaluacion.id " + evaluacion.id);
+        //console.log("evaluacion.id "+evaluacion.id);
         var msg = "Evaluar " + evaluacion.getAttr("listViewLabel", "string") + ' por ...';
         var opt1 = "hilera";
         var opt2 = "planta (Código QR)";
-        dialogs_1.action({
-            message: msg,
-            cancelButtonText: "cancelar",
-            actions: [opt1, opt2]
-        }).then(function (result) {
-            if (result === opt1) {
+        var navOpts = {
+            moduleName: "PlantDashboard/Localization/index",
+            context: this._context
+        };
+        frame_1.topmost().navigate(navOpts);
+        /*
+        Action({
+          message: msg,
+          cancelButtonText: "cancelar",
+          actions: [opt1, opt2]
+        }).then(result => {
+            if(result === opt1){
                 console.log("La primera opción");
-                var navOpts = {
-                    moduleName: "PlantDashboard/Localization/index",
-                    context: _this._context
-                };
-                frame_1.topmost().navigate(navOpts);
+                let navOpts = {
+                    moduleName:"PlantDashboard/Localization/index",
+                    context:this._context
+                }
+                Topmost().navigate(navOpts);
             }
-            if (result === opt2) {
-                console.log("La segunda opción");
+            if(result === opt2){
+                console.log("La segunda opción")
             }
         });
+        */
     };
     EvaluationListView.prototype._setUpView = function (items) {
         //filtrar items por createble

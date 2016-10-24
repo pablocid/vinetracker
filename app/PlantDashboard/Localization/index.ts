@@ -1,3 +1,4 @@
+import {PlantTest} from '../../factories/DataTest';
 import {Plant} from '../../factories/Record';
 import {Context} from '../../factories/Context';
 
@@ -10,7 +11,23 @@ import { StackLayout } from 'ui/layouts/stack-layout';
 import { SumaryReport } from '../Components/EvaluationReport';
 import { PlantScanner } from '../Components/PlantScanner';
 
+/***test */
+/*
+var plantTest = new PlantTest();
+var schmTest = plantTest.getSchm();
+var context = new Context();
+context.schema = schmTest;
+*/
+/*** */
+
+var localization = new BasePage();
 var tab = new TabView();
+localization.mainContent = tab;
+localization.setTitleActionBar('Localización','Elige la hilera que quires evaluar');
+
+/***************************onLoad ************************** */
+localization.fnOnLoad = function(){
+
 var resumenView = new SumaryReport();
 
 /**************** tabitems: SCAN ********************/
@@ -36,19 +53,20 @@ var resumen = new TabViewItem();
 resumen.title = 'resumen';
 resumen.view = resumenView.getView();
 
-tab.items = [scan, ubicacion, resumen];
+tab.items = [scan /*, ubicacion, resumen*/];
 
-var localization = new BasePage();
+
 scanView.callback = function(plant:Plant){
     let context = <Context>localization.page.navigationContext;
     context.plant = plant;
     let navOpts = {
-        moduleName:'PlantDashboard/index',
+        moduleName:'PlantDashboard/HileraStatus/index',
         context:context
     }
     Topmost().navigate(navOpts);
 }
-localization.mainContent = tab;
-localization.setTitleActionBar('Localización','Elige la hilera que quires evaluar');
+
+
+}/*************************** END onLoad ************************** */
 
 export = localization;

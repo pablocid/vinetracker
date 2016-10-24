@@ -11,6 +11,36 @@ var Record = (function (_super) {
         this._schema = new Schema_1.SchemaFull(schm);
         this._setData(record);
     }
+    Object.defineProperty(Record.prototype, "espaldera", {
+        get: function () {
+            return this._espaldera;
+        },
+        set: function (value) {
+            this._espaldera = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Record.prototype, "hilera", {
+        get: function () {
+            return this._hilera;
+        },
+        set: function (value) {
+            this._hilera = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Record.prototype, "posicion", {
+        get: function () {
+            return this._posicion;
+        },
+        set: function (value) {
+            this._posicion = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Record.prototype, "schema", {
         get: function () {
             return this._schema;
@@ -60,6 +90,15 @@ var Record = (function (_super) {
             data['updated'] = this._updated;
             if (this._attributes && this._attributes.length) {
                 data['attributes'] = this._attributes.map(function (x) { return x.data; });
+            }
+            if (this._espaldera) {
+                data['attributes'].push({ id: 'espaldera', number: this._espaldera });
+            }
+            if (this._hilera) {
+                data['attributes'].push({ id: 'hilera', number: this._hilera });
+            }
+            if (this._posicion) {
+                data['attributes'].push({ id: 'posicion', number: this._posicion });
             }
             return data;
         },

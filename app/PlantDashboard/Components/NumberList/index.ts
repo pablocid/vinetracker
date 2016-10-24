@@ -16,6 +16,7 @@ export class NumberList extends BaseInputComponent{
     constructor(attr: RecordAttribute){
         super(attr);
         this._props = <NumberListAttrProps>this._properties;
+        this._viewModel.set('unit',this._props.unit);
         this._setIntegers();
         this._setFloat();
 

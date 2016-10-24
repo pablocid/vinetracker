@@ -27,6 +27,30 @@ import { QueryParser, QueryConfig } from '../factories/QueryParser';
 import { Record } from '../factories/Record';
 import { FindSchm } from  "../services/record.service";
 
+import fs = require("file-system");
+
+var documents = fs.knownFolders.documents();
+var file = documents.getFile("schemas.json");
+console.log(documents.path)
+// Writing text to the file.
+var aaa = {id:'nez', string:'zio'}
+
+file.writeText(JSON.stringify(aaa))
+    .then(function () {
+        // Succeeded writing to the file.
+        console.log('esta escribío')
+        file.readText().then(function(content){
+            var sd = JSON.parse(content);
+
+            console.log(sd.id)
+        })
+    }, function (error) {
+        // Failed to write to the file.
+    });
+
+
+
+
 var newView = new HelperViewer();
 var style = {
     paddingBT:30,

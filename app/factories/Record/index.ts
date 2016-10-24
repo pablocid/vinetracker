@@ -5,6 +5,9 @@ export class Record extends BaseSchema {
     private _schm: string;
     private _schema: SchemaFull;
     protected _attributes: RecordAttribute[];
+    private _espaldera:number;
+    private _hilera:number;
+    private _posicion:number;
 
     constructor(schm:any[], record?:any){
         if(!schm || schm.length === 0){ throw new Error('no se pudo crear el Record porque el array schema esta vacío.')}
@@ -14,6 +17,31 @@ export class Record extends BaseSchema {
         this._setData(record);
 
     }
+
+	public get espaldera(): number {
+		return this._espaldera;
+	}
+
+	public set espaldera(value: number) {
+		this._espaldera = value;
+	}
+
+	public get hilera(): number {
+		return this._hilera;
+	}
+
+	public set hilera(value: number) {
+		this._hilera = value;
+	}
+
+	public get posicion(): number {
+		return this._posicion;
+	}
+
+	public set posicion(value: number) {
+		this._posicion = value;
+	}
+    
 
     public get schema ():SchemaFull{
         return this._schema;
@@ -72,6 +100,15 @@ export class Record extends BaseSchema {
         
         if(this._attributes && this._attributes.length){
             data['attributes'] = this._attributes.map(x=>x.data);
+        }
+        if(this._espaldera){
+            data['attributes'].push({id:'espaldera', number:this._espaldera})
+        }
+        if(this._hilera){
+            data['attributes'].push({id:'hilera', number:this._hilera})
+        }
+        if(this._posicion){
+            data['attributes'].push({id:'posicion', number:this._posicion})
         }
 
         return data;

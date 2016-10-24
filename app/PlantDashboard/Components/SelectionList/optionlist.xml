@@ -1,6 +1,6 @@
 <GridLayout columns="*" rows="auto, *" >
     <Label text="{{label}}" row="0" col="0" backgroundColor="#388E3C" textWrap="true" color="white"
-    style="font-size:26; text-align:center; padding:15; margin-top:20;"/>
+    style="font-size:26; text-align:center; padding:15;"/>
     <ScrollView row="1" col="0" id="scrollViewInsert">
     <ListView id="selectedItemId" items="{{ items }}" itemTap="{{ selectedOption }}">
             <ListView.itemTemplate>

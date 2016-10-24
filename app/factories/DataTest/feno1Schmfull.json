@@ -1,0 +1,783 @@
+ [
+    {
+      "_id": "580c05b412e1240010cd9d62",
+      "type": "schema",
+      "name": "fenotipado_1",
+      "__v": 8,
+      "attributes": [
+        {
+          "id": "name",
+          "string": "fenotipado_1",
+          "list": []
+        },
+        {
+          "id": "description",
+          "string": "Fenotipado de pre-cosecha",
+          "list": []
+        },
+        {
+          "id": "attributes",
+          "list": [
+            "57c42f77c8307cd5b82f4486",
+            "580c082b12e1240010cd9d64",
+            "580c0caf90cc2700100db1d2",
+            "580c121390cc2700100db1d3",
+            "57c8a0cca774d31000b71cd4"
+          ]
+        },
+        {
+          "id": "keys",
+          "listOfObj": [
+            {
+              "id": "editable",
+              "string": "boolean"
+            },
+            {
+              "id": "creatable",
+              "string": "boolean"
+            },
+            {
+              "id": "visible",
+              "string": "boolean"
+            },
+            {
+              "id": "listViewLabel",
+              "string": "string"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "editable",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "creatable",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "visible",
+          "boolean": true,
+          "list": []
+        },
+        {
+          "id": "listViewLabel",
+          "string": "Fenotipado 1: precosecha",
+          "list": []
+        }
+      ],
+      "updated": [],
+      "created": "2016-10-23T00:35:00.478Z"
+    },
+    {
+      "_id": "57c42f77c8307cd5b82f4486",
+      "type": "attribute",
+      "name": "indiv_ref",
+      "__v": 5,
+      "attributes": [
+        {
+          "id": "name",
+          "string": "indiv_ref",
+          "list": []
+        },
+        {
+          "id": "input",
+          "reference": "57c431d5c8307cd5b82f448a",
+          "list": []
+        },
+        {
+          "id": "description",
+          "string": "Referencia con el schema de Individuos",
+          "list": []
+        },
+        {
+          "id": "keys",
+          "listOfObj": [
+            {
+              "id": "shortName",
+              "string": "string"
+            },
+            {
+              "id": "schema_reference",
+              "string": "reference"
+            },
+            {
+              "id": "identifyByAttrId",
+              "string": "reference"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "shortName",
+          "string": "plant code",
+          "list": []
+        },
+        {
+          "id": "schema_reference",
+          "reference": "57a4e02ec830e2bdff1a1608",
+          "list": []
+        },
+        {
+          "id": "identifyByAttrId",
+          "reference": "57c3583bc8307cd5b82f447d",
+          "list": []
+        }
+      ],
+      "updated": [],
+      "created": "2016-09-01T14:46:16.927Z"
+    },
+    {
+      "_id": "57c8a0cca774d31000b71cd4",
+      "type": "attribute",
+      "name": "field_notes",
+      "__v": 2,
+      "attributes": [
+        {
+          "id": "name",
+          "string": "field_notes",
+          "list": []
+        },
+        {
+          "id": "description",
+          "string": "Anotaciones de campo",
+          "list": []
+        },
+        {
+          "id": "input",
+          "reference": "57c3202cc8307cd5b82f4465",
+          "list": []
+        },
+        {
+          "id": "keys",
+          "listOfObj": [
+            {
+              "id": "shortName",
+              "string": "string"
+            },
+            {
+              "id": "label",
+              "string": "string"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "shortName",
+          "string": "notes",
+          "list": []
+        },
+        {
+          "id": "label",
+          "string": "Notas de campo",
+          "list": []
+        }
+      ],
+      "updated": [],
+      "created": "2016-09-01T21:42:36.957Z"
+    },
+    {
+      "_id": "580c082b12e1240010cd9d64",
+      "type": "attribute",
+      "name": "vigor",
+      "__v": 1,
+      "attributes": [
+        {
+          "id": "name",
+          "string": "vigor",
+          "list": []
+        },
+        {
+          "id": "description",
+          "string": "Vigor de la planta",
+          "list": []
+        },
+        {
+          "id": "input",
+          "reference": "57fe942a45be360010073dbc",
+          "list": []
+        },
+        {
+          "id": "keys",
+          "listOfObj": [
+            {
+              "id": "label",
+              "string": "string"
+            },
+            {
+              "id": "shortName",
+              "string": "string"
+            },
+            {
+              "id": "formType",
+              "string": "string"
+            },
+            {
+              "id": "options",
+              "string": "listOfObj"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "label",
+          "string": "Vigor de la planta",
+          "list": []
+        },
+        {
+          "id": "shortName",
+          "string": "vigor",
+          "list": []
+        },
+        {
+          "id": "formType",
+          "string": "optionsList",
+          "list": []
+        },
+        {
+          "id": "options",
+          "listOfObj": [
+            {
+              "id": "alto",
+              "string": "Vigor alto"
+            },
+            {
+              "id": "medio",
+              "string": "Vigor medio"
+            },
+            {
+              "id": "bajo",
+              "string": "Vigor bajo"
+            }
+          ],
+          "list": []
+        }
+      ],
+      "updated": [],
+      "created": "2016-10-23T00:45:31.694Z"
+    },
+    {
+      "_id": "580c0caf90cc2700100db1d2",
+      "type": "attribute",
+      "name": "forma_baya",
+      "__v": 4,
+      "attributes": [
+        {
+          "id": "name",
+          "string": "forma_baya",
+          "list": []
+        },
+        {
+          "id": "description",
+          "string": "Forma de baya",
+          "list": []
+        },
+        {
+          "id": "input",
+          "reference": "57fe942a45be360010073dbc",
+          "list": []
+        },
+        {
+          "id": "keys",
+          "listOfObj": [
+            {
+              "id": "label",
+              "string": "string"
+            },
+            {
+              "id": "shortName",
+              "string": "string"
+            },
+            {
+              "id": "options",
+              "string": "listOfObj"
+            },
+            {
+              "id": "formType",
+              "string": "string"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "label",
+          "string": "Forma de baya",
+          "list": []
+        },
+        {
+          "id": "shortName",
+          "string": "baya",
+          "list": []
+        },
+        {
+          "id": "options",
+          "listOfObj": [
+            {
+              "id": "oblong",
+              "string": "Baya alargada"
+            },
+            {
+              "id": "elliptic",
+              "string": "Baya elíptica"
+            },
+            {
+              "id": "round",
+              "string": "Baya redonda"
+            },
+            {
+              "id": "ovate",
+              "string": "Baya ovoide"
+            },
+            {
+              "id": "other_choice",
+              "string": "Otra forma"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "formType",
+          "string": "imageList",
+          "list": []
+        }
+      ],
+      "updated": [],
+      "created": "2016-10-23T01:04:47.200Z"
+    },
+    {
+      "_id": "580c121390cc2700100db1d3",
+      "type": "attribute",
+      "name": "forma_racimo",
+      "__v": 1,
+      "attributes": [
+        {
+          "id": "name",
+          "string": "forma_racimo",
+          "list": []
+        },
+        {
+          "id": "description",
+          "string": "Forma de racimo",
+          "list": []
+        },
+        {
+          "id": "input",
+          "reference": "57fe942a45be360010073dbc",
+          "list": []
+        },
+        {
+          "id": "keys",
+          "listOfObj": [
+            {
+              "id": "label",
+              "string": "string"
+            },
+            {
+              "id": "shortName",
+              "string": "string"
+            },
+            {
+              "id": "options",
+              "string": "listOfObj"
+            },
+            {
+              "id": "formType",
+              "string": "string"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "label",
+          "string": "Forma de racimo",
+          "list": []
+        },
+        {
+          "id": "shortName",
+          "string": "racimo",
+          "list": []
+        },
+        {
+          "id": "options",
+          "listOfObj": [
+            {
+              "id": "cylindrical",
+              "string": "Racimo cilíndrico"
+            },
+            {
+              "id": "winged",
+              "string": "Racimo globoso"
+            },
+            {
+              "id": "conical",
+              "string": "Racimo cónico"
+            },
+            {
+              "id": "other_choice",
+              "string": "Otra forma"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "formType",
+          "string": "imageList",
+          "list": []
+        }
+      ],
+      "updated": [],
+      "created": "2016-10-23T01:27:47.978Z"
+    },
+    {
+      "_id": "57c8a28aa774d31000b71cd6",
+      "type": "attrInputConf",
+      "name": "field_notes_simple_text",
+      "__v": 1,
+      "attributes": [
+        {
+          "id": "name",
+          "string": "field_notes_simple_text",
+          "list": []
+        },
+        {
+          "id": "attribute",
+          "reference": "57c8a0cca774d31000b71cd4",
+          "list": []
+        },
+        {
+          "id": "input",
+          "reference": "57c3202cc8307cd5b82f4465",
+          "list": []
+        },
+        {
+          "id": "keys",
+          "listOfObj": [
+            {
+              "id": "shortName",
+              "string": "string"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "shortName",
+          "string": "notes",
+          "list": []
+        }
+      ],
+      "updated": [],
+      "created": "2016-09-01T21:50:02.093Z"
+    },
+    {
+      "_id": "57c42fa6c8307cd5b82f4488",
+      "type": "attrInputConf",
+      "name": "indiv_ref-simple_ref",
+      "__v": 3,
+      "attributes": [
+        {
+          "id": "attribute",
+          "reference": "57c42f77c8307cd5b82f4486",
+          "list": []
+        },
+        {
+          "id": "input",
+          "reference": "57c431d5c8307cd5b82f448a",
+          "list": []
+        },
+        {
+          "id": "label",
+          "string": "Plant identifier",
+          "list": []
+        },
+        {
+          "id": "inputLable",
+          "string": "Scan plant code",
+          "list": []
+        },
+        {
+          "id": "shortName",
+          "string": "individuo",
+          "list": []
+        },
+        {
+          "id": "rangeMax",
+          "number": 100000,
+          "list": []
+        },
+        {
+          "id": "rangeMin",
+          "number": 1,
+          "list": []
+        },
+        {
+          "id": "name",
+          "string": "indiv_ref-simple_ref",
+          "list": []
+        },
+        {
+          "id": "keys",
+          "listOfObj": [
+            {
+              "id": "label",
+              "string": "string"
+            },
+            {
+              "id": "inputLable",
+              "string": "string"
+            },
+            {
+              "id": "shortName",
+              "string": "string"
+            }
+          ],
+          "list": []
+        }
+      ],
+      "updated": [],
+      "created": "2016-09-01T18:28:06.278Z"
+    },
+    {
+      "_id": "57c3202cc8307cd5b82f4465",
+      "type": "input",
+      "__v": 1,
+      "attributes": [
+        {
+          "id": "name",
+          "string": "simple_text",
+          "list": []
+        },
+        {
+          "id": "dataType",
+          "string": "string",
+          "list": []
+        },
+        {
+          "id": "attrInputConf",
+          "listOfObj": [
+            {
+              "id": "label",
+              "string": "string"
+            },
+            {
+              "id": "inputLable",
+              "string": "string"
+            },
+            {
+              "id": "shortName",
+              "string": "string"
+            },
+            {
+              "id": "regex",
+              "string": "string"
+            },
+            {
+              "id": "validatorMsg",
+              "string": "string"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "schmAttrInputConf",
+          "listOfObj": [
+            {
+              "id": "visualization",
+              "string": "boolean"
+            },
+            {
+              "id": "createble",
+              "string": "boolean"
+            },
+            {
+              "id": "editable",
+              "string": "boolean"
+            },
+            {
+              "id": "validate",
+              "string": "boolean"
+            },
+            {
+              "id": "required",
+              "string": "boolean"
+            },
+            {
+              "id": "validatorMsg",
+              "string": "string"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "description",
+          "string": "Ingreso de texto simple",
+          "list": []
+        }
+      ],
+      "updated": [],
+      "created": "2016-09-01T20:07:07.439Z"
+    },
+    {
+      "_id": "57c431d5c8307cd5b82f448a",
+      "type": "input",
+      "name": "simple_ref",
+      "__v": 1,
+      "attributes": [
+        {
+          "id": "name",
+          "string": "simple_ref",
+          "list": []
+        },
+        {
+          "id": "dataType",
+          "string": "reference",
+          "list": []
+        },
+        {
+          "id": "attrConf",
+          "listOfObj": [
+            {
+              "id": "name",
+              "string": "string"
+            },
+            {
+              "id": "input",
+              "string": "reference"
+            },
+            {
+              "id": "schema",
+              "string": "reference"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "attrInputConf",
+          "listOfObj": [
+            {
+              "id": "label",
+              "string": "string"
+            },
+            {
+              "id": "inputLable",
+              "string": "string"
+            },
+            {
+              "id": "shortName",
+              "string": "string"
+            },
+            {
+              "id": "regex",
+              "string": "string"
+            },
+            {
+              "id": "rangeMax",
+              "string": "number"
+            },
+            {
+              "id": "rangeMin",
+              "string": "number"
+            },
+            {
+              "id": "validatorMsg",
+              "string": "string"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "schmAttrInputConf",
+          "listOfObj": [
+            {
+              "id": "visualization",
+              "string": "boolean"
+            },
+            {
+              "id": "createble",
+              "string": "boolean"
+            },
+            {
+              "id": "editable",
+              "string": "boolean"
+            },
+            {
+              "id": "validate",
+              "string": "boolean"
+            },
+            {
+              "id": "required",
+              "string": "boolean"
+            },
+            {
+              "id": "validatorMsg",
+              "string": "string"
+            }
+          ],
+          "list": []
+        },
+        {
+          "id": "description",
+          "string": "Input para asociar dos schemas a través de su ObjectId o identificador único de la collection Records",
+          "list": []
+        }
+      ],
+      "updated": [],
+      "created": "2016-09-01T20:01:55.790Z"
+    },
+    {
+      "_id": "57fe942a45be360010073dbc",
+      "type": "input",
+      "name": "selection_list",
+      "__v": 2,
+      "attributes": [
+        {
+          "id": "name",
+          "string": "selection_list",
+          "list": []
+        },
+        {
+          "id": "description",
+          "string": "Lista de opciones para seleccionar. Se puede elegir solo una opción",
+          "list": []
+        },
+        {
+          "id": "dataType",
+          "string": "string",
+          "list": []
+        },
+        {
+          "id": "shortName",
+          "string": "string",
+          "list": []
+        },
+        {
+          "id": "label",
+          "string": "string",
+          "list": []
+        },
+        {
+          "id": "options",
+          "string": "list",
+          "list": []
+        },
+        {
+          "id": "shortName",
+          "string": "string",
+          "list": []
+        },
+        {
+          "id": "label",
+          "string": "string",
+          "list": []
+        },
+        {
+          "id": "options",
+          "string": "list",
+          "list": []
+        }
+      ],
+      "updated": [],
+      "created": "2016-10-12T19:51:06.161Z"
+    }
+  ]

@@ -8,13 +8,14 @@ export class RequestOpts{
 
     private _options: http.HttpRequestOptions;
 
-    constructor(url:string, method: string){
+    constructor(url:string, method: string, content?:string){
         if(url===''){ throw new Error('url is undefined');}
         if(method===''){ throw new Error('method is undefined');}
         this._options = {
             url:getString('baseUrl') + url,
             method: method,
-            headers: { "Content-Type": "application/json", "Authorization":getString("Authorization")}
+            headers: { "Content-Type": "application/json", "Authorization":getString("Authorization")},
+            content:content
         };
         //console.log(JSON.stringify(this._options))
     }

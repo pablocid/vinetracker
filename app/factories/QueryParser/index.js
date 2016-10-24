@@ -129,7 +129,13 @@ var Filter = (function () {
             return this._value;
         },
         set: function (value) {
-            this._value = value;
+            if (/^[\[|\{](\s|.*|\w)*[\]|\}]$/.test(value) && typeof value === 'string') {
+                //console.log('El valor '+value+' es un JSONNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN ****************************************')
+                this._value = JSON.parse(value);
+            }
+            else {
+                this._value = value;
+            }
         },
         enumerable: true,
         configurable: true
@@ -252,7 +258,7 @@ var QueryParser = (function () {
             var arr = this._filter;
             var isValid = true;
             for (var index = 0; index < arr.length; index++) {
-                if (arr[index].key === null || arr[index].value === null || arr[index].datatype === null) {
+                if (arr[index].key === undefined || arr[index].value === undefined || arr[index].datatype === undefined) {
                     isValid = false;
                 }
             }

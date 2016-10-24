@@ -184,3 +184,31 @@ export class FindSchm {
         return r.make();
     }
 }
+
+export class SaveRecord {
+    private _config : QueryConfig;
+    private _queryParser : QueryParser;
+    private _method: string;
+    private _content:string;
+
+    constructor(record:Record){
+        this._config = new QueryConfig();
+        this._config.url = 'api/records';
+        this._content = JSON.stringify(record.data);
+        if(record.id){
+            this._config.id = record.id;
+            this._method = 'PUT';
+        }else{
+            this._method = 'POST'
+        }
+        this._queryParser = new QueryParser(this._config);
+    }
+
+    public save ():Promise<any>{
+        let url = this._queryParser.parse();
+        let content = this._content
+        let o = new RequestOpts(url,this._method, this._content);
+        let r = new Request(o);
+        return r.make()
+    }
+}

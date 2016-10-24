@@ -1,0 +1,634 @@
+[
+  {
+    "_id": "57febcf1179c960010e41f66",
+    "type": "schema",
+    "name": "fenotipado_0",
+    "__v": 9,
+    "attributes": [
+      {
+        "id": "name",
+        "string": "fenotipado_0",
+        "list": []
+      },
+      {
+        "id": "description",
+        "string": "Primera fenotipado de la temporada",
+        "list": []
+      },
+      {
+        "id": "attributes",
+        "list": [
+          "57c42f77c8307cd5b82f4486",
+          "57feb94b179c960010e41f65",
+          "5808d1e9d48d17001006e43c",
+          "5808de89832db50010d3192c"
+        ]
+      },
+      {
+        "id": "keys",
+        "listOfObj": [
+          {
+            "id": "editable",
+            "string": "boolean"
+          },
+          {
+            "id": "status",
+            "string": "boolean"
+          },
+          {
+            "id": "visible",
+            "string": "boolean"
+          },
+          {
+            "id": "creatable",
+            "string": "boolean"
+          },
+          {
+            "id": "listViewLabel",
+            "string": "string"
+          }
+        ],
+        "list": []
+      },
+      {
+        "id": "editable",
+        "boolean": true,
+        "list": []
+      },
+      {
+        "id": "status",
+        "boolean": true,
+        "list": []
+      },
+      {
+        "id": "visible",
+        "boolean": true,
+        "list": []
+      },
+      {
+        "id": "creatable",
+        "boolean": true,
+        "list": []
+      },
+      {
+        "id": "listViewLabel",
+        "string": "Fenotipado 0",
+        "list": []
+      }
+    ],
+    "updated": [],
+    "created": "2016-10-12T22:45:05.955Z"
+  },
+  {
+    "_id": "57c42f77c8307cd5b82f4486",
+    "type": "attribute",
+    "name": "indiv_ref",
+    "__v": 5,
+    "attributes": [
+      {
+        "id": "name",
+        "string": "indiv_ref",
+        "list": []
+      },
+      {
+        "id": "input",
+        "reference": "57c431d5c8307cd5b82f448a",
+        "list": []
+      },
+      {
+        "id": "description",
+        "string": "Referencia con el schema de Individuos",
+        "list": []
+      },
+      {
+        "id": "keys",
+        "listOfObj": [
+          {
+            "id": "shortName",
+            "string": "string"
+          },
+          {
+            "id": "schema_reference",
+            "string": "reference"
+          },
+          {
+            "id": "identifyByAttrId",
+            "string": "reference"
+          }
+        ],
+        "list": []
+      },
+      {
+        "id": "shortName",
+        "string": "plant code",
+        "list": []
+      },
+      {
+        "id": "schema_reference",
+        "reference": "57a4e02ec830e2bdff1a1608",
+        "list": []
+      },
+      {
+        "id": "identifyByAttrId",
+        "reference": "57c3583bc8307cd5b82f447d",
+        "list": []
+      }
+    ],
+    "updated": [],
+    "created": "2016-09-01T14:46:16.927Z"
+  },
+  {
+    "_id": "57feb94b179c960010e41f65",
+    "type": "attribute",
+    "name": "habito_fructificacion",
+    "__v": 4,
+    "attributes": [
+      {
+        "id": "name",
+        "string": "habito_fructificacion",
+        "list": []
+      },
+      {
+        "id": "description",
+        "string": "Establece desde donde se genera la fruta en el cargador",
+        "list": []
+      },
+      {
+        "id": "input",
+        "reference": "57fe942a45be360010073dbc",
+        "list": []
+      },
+      {
+        "id": "keys",
+        "listOfObj": [
+          {
+            "id": "shortName",
+            "string": "string"
+          },
+          {
+            "id": "label",
+            "string": "string"
+          },
+          {
+            "id": "options",
+            "string": "listOfObj"
+          },
+          {
+            "id": "formType",
+            "string": "string"
+          }
+        ],
+        "list": []
+      },
+      {
+        "id": "shortName",
+        "string": "fructificación",
+        "list": []
+      },
+      {
+        "id": "label",
+        "string": "Hábito de frutificación",
+        "list": []
+      },
+      {
+        "id": "options",
+        "listOfObj": [
+          {
+            "id": "basal",
+            "string": "frutificación basal"
+          },
+          {
+            "id": "media",
+            "string": "fructificación media"
+          },
+          {
+            "id": "apical",
+            "string": "fructificación apical"
+          }
+        ],
+        "list": []
+      },
+      {
+        "id": "formType",
+        "string": "optionsList",
+        "list": []
+      }
+    ],
+    "updated": [],
+    "created": "2016-10-12T22:29:31.425Z"
+  },
+  {
+    "_id": "5808d1e9d48d17001006e43c",
+    "type": "attribute",
+    "name": "numero_racimos",
+    "__v": 1,
+    "attributes": [
+      {
+        "id": "name",
+        "string": "numero_racimos",
+        "list": []
+      },
+      {
+        "id": "description",
+        "string": "Conteo de racimos por planta",
+        "list": []
+      },
+      {
+        "id": "input",
+        "reference": "5808d0fdd48d17001006e43b",
+        "list": []
+      },
+      {
+        "id": "keys",
+        "listOfObj": [
+          {
+            "id": "label",
+            "string": "string"
+          },
+          {
+            "id": "shortName",
+            "string": "string"
+          },
+          {
+            "id": "maxVal",
+            "string": "number"
+          },
+          {
+            "id": "minVal",
+            "string": "number"
+          },
+          {
+            "id": "unit",
+            "string": "string"
+          }
+        ],
+        "list": []
+      },
+      {
+        "id": "label",
+        "string": "Número de racimos por planta",
+        "list": []
+      },
+      {
+        "id": "shortName",
+        "string": "n° racimos",
+        "list": []
+      },
+      {
+        "id": "maxVal",
+        "number": 20,
+        "list": []
+      },
+      {
+        "id": "unit",
+        "string": "racimo(s)",
+        "list": []
+      }
+    ],
+    "updated": [],
+    "created": "2016-10-20T14:17:13.035Z"
+  },
+  {
+    "_id": "5808de89832db50010d3192c",
+    "type": "attribute",
+    "name": "observaciones",
+    "__v": 4,
+    "attributes": [
+      {
+        "id": "name",
+        "string": "observaciones",
+        "list": []
+      },
+      {
+        "id": "description",
+        "string": "Lista de características presentes en la planta",
+        "list": []
+      },
+      {
+        "id": "input",
+        "reference": "5808dc55832db50010d3192b",
+        "list": []
+      },
+      {
+        "id": "keys",
+        "listOfObj": [
+          {
+            "id": "options",
+            "string": "listOfObj"
+          },
+          {
+            "id": "label",
+            "string": "string"
+          },
+          {
+            "id": "shortName",
+            "string": "string"
+          }
+        ],
+        "list": []
+      },
+      {
+        "id": "options",
+        "listOfObj": [
+          {
+            "id": "dead_pant",
+            "string": "Planta muerta"
+          }
+        ],
+        "list": []
+      },
+      {
+        "id": "label",
+        "string": "Observaciones",
+        "list": []
+      },
+      {
+        "id": "shortName",
+        "string": "obs",
+        "list": []
+      }
+    ],
+    "updated": [],
+    "created": "2016-10-20T15:11:05.284Z"
+  },
+  {
+    "_id": "57c42fa6c8307cd5b82f4488",
+    "type": "attrInputConf",
+    "name": "indiv_ref-simple_ref",
+    "__v": 3,
+    "attributes": [
+      {
+        "id": "attribute",
+        "reference": "57c42f77c8307cd5b82f4486",
+        "list": []
+      },
+      {
+        "id": "input",
+        "reference": "57c431d5c8307cd5b82f448a",
+        "list": []
+      },
+      {
+        "id": "label",
+        "string": "Plant identifier",
+        "list": []
+      },
+      {
+        "id": "inputLable",
+        "string": "Scan plant code",
+        "list": []
+      },
+      {
+        "id": "shortName",
+        "string": "individuo",
+        "list": []
+      },
+      {
+        "id": "rangeMax",
+        "number": 100000,
+        "list": []
+      },
+      {
+        "id": "rangeMin",
+        "number": 1,
+        "list": []
+      },
+      {
+        "id": "name",
+        "string": "indiv_ref-simple_ref",
+        "list": []
+      },
+      {
+        "id": "keys",
+        "listOfObj": [
+          {
+            "id": "label",
+            "string": "string"
+          },
+          {
+            "id": "inputLable",
+            "string": "string"
+          },
+          {
+            "id": "shortName",
+            "string": "string"
+          }
+        ],
+        "list": []
+      }
+    ],
+    "updated": [],
+    "created": "2016-09-01T18:28:06.278Z"
+  },
+  {
+    "_id": "57c431d5c8307cd5b82f448a",
+    "type": "input",
+    "name": "simple_ref",
+    "__v": 1,
+    "attributes": [
+      {
+        "id": "name",
+        "string": "simple_ref",
+        "list": []
+      },
+      {
+        "id": "dataType",
+        "string": "reference",
+        "list": []
+      },
+      {
+        "id": "attrConf",
+        "listOfObj": [
+          {
+            "id": "name",
+            "string": "string"
+          },
+          {
+            "id": "input",
+            "string": "reference"
+          },
+          {
+            "id": "schema",
+            "string": "reference"
+          }
+        ],
+        "list": []
+      },
+      {
+        "id": "attrInputConf",
+        "listOfObj": [
+          {
+            "id": "label",
+            "string": "string"
+          },
+          {
+            "id": "inputLable",
+            "string": "string"
+          },
+          {
+            "id": "shortName",
+            "string": "string"
+          },
+          {
+            "id": "regex",
+            "string": "string"
+          },
+          {
+            "id": "rangeMax",
+            "string": "number"
+          },
+          {
+            "id": "rangeMin",
+            "string": "number"
+          },
+          {
+            "id": "validatorMsg",
+            "string": "string"
+          }
+        ],
+        "list": []
+      },
+      {
+        "id": "schmAttrInputConf",
+        "listOfObj": [
+          {
+            "id": "visualization",
+            "string": "boolean"
+          },
+          {
+            "id": "createble",
+            "string": "boolean"
+          },
+          {
+            "id": "editable",
+            "string": "boolean"
+          },
+          {
+            "id": "validate",
+            "string": "boolean"
+          },
+          {
+            "id": "required",
+            "string": "boolean"
+          },
+          {
+            "id": "validatorMsg",
+            "string": "string"
+          }
+        ],
+        "list": []
+      },
+      {
+        "id": "description",
+        "string": "Input para asociar dos schemas a través de su ObjectId o identificador único de la collection Records",
+        "list": []
+      }
+    ],
+    "updated": [],
+    "created": "2016-09-01T20:01:55.790Z"
+  },
+  {
+    "_id": "57fe942a45be360010073dbc",
+    "type": "input",
+    "name": "selection_list",
+    "__v": 2,
+    "attributes": [
+      {
+        "id": "name",
+        "string": "selection_list",
+        "list": []
+      },
+      {
+        "id": "description",
+        "string": "Lista de opciones para seleccionar. Se puede elegir solo una opción",
+        "list": []
+      },
+      {
+        "id": "dataType",
+        "string": "string",
+        "list": []
+      },
+      {
+        "id": "shortName",
+        "string": "string",
+        "list": []
+      },
+      {
+        "id": "label",
+        "string": "string",
+        "list": []
+      },
+      {
+        "id": "options",
+        "string": "list",
+        "list": []
+      },
+      {
+        "id": "shortName",
+        "string": "string",
+        "list": []
+      },
+      {
+        "id": "label",
+        "string": "string",
+        "list": []
+      },
+      {
+        "id": "options",
+        "string": "list",
+        "list": []
+      }
+    ],
+    "updated": [],
+    "created": "2016-10-12T19:51:06.161Z"
+  },
+  {
+    "_id": "5808d0fdd48d17001006e43b",
+    "type": "input",
+    "name": "number_list",
+    "__v": 0,
+    "attributes": [
+      {
+        "id": "name",
+        "string": "number_list",
+        "list": []
+      },
+      {
+        "id": "description",
+        "string": "Número dependiendo de rangos mix y max",
+        "list": []
+      },
+      {
+        "id": "dataType",
+        "string": "number",
+        "list": []
+      }
+    ],
+    "updated": [],
+    "created": "2016-10-20T14:13:17.200Z"
+  },
+  {
+    "_id": "5808dc55832db50010d3192b",
+    "type": "input",
+    "name": "multiple_selection",
+    "__v": 0,
+    "attributes": [
+      {
+        "id": "name",
+        "string": "multiple_selection",
+        "list": []
+      },
+      {
+        "id": "description",
+        "string": "Selección de núltiples opciones en un array",
+        "list": []
+      },
+      {
+        "id": "dataType",
+        "string": "list",
+        "list": []
+      }
+    ],
+    "updated": [],
+    "created": "2016-10-20T15:01:41.961Z"
+  }
+]

@@ -26,12 +26,8 @@ export class SelectionList extends BaseInputComponent {
                 
             })
         );
-
-
-
         this._viewModel.set('itemsDD', this._props.options.map(x=>x.string));
         this._viewModel.set('items', this._options);
-
 
         var dropDown = Load({
             path:'~/PlantDashboard/Components/SelectionList',
@@ -60,37 +56,25 @@ export class SelectionList extends BaseInputComponent {
 
         this._viewModel.on(Observable.propertyChangeEvent,(args: PropertyChangeData) =>{
             if(args.propertyName === 'selectedIndex'){
+                //console.log("PropertyChangeDataPropertyChangeDataPropertyChangeData   "+this._viewModel.get('selectedIndex') )
                 let item = this._options.getItem(this._viewModel.get('selectedIndex') );
+                console.log('item --------------------'+item.key)
                 this._recordAttr.value =item.key;
                 let imgUri = `~/img/${item.key}.png`;
                 this._viewModel.set('selected', {key:item.key, value:item.value, img:imgUri});
+                this._changeView(item.index);
             }
             this._callback();
-            console.log(JSON.stringify(this._recordAttr.data));
+            //console.log(JSON.stringify(this._recordAttr.data));
 
         });
         
         this._viewModel.set('selectedOption', (args:ItemEventData) => {
             let index = args.index;
             this._viewModel.set('selectedIndex', index);
-            this._options.map(x=>{
-                x.backgroundColor = 'white';
-                x.color = 'gray';
-            });
-
-            let opt = this._options.getItem(index);
-            opt.color='white';
-            opt.backgroundColor = '#f44242';
-            this._options.setItem(index,opt);
-
         });
 
         this._setValue();
-
-
-
-        /**** */
-        //this._viewModel.set('icon', String.fromCharCode(&#xf17b;))
 
     }
     private _setImgUrl(name:string):string{
@@ -98,13 +82,24 @@ export class SelectionList extends BaseInputComponent {
     }
 
     private _setValue (){
-        let index = this._options.indexOf(this._recordAttr.value);
+        let index = this._options.map(x=>x.key).indexOf(this._recordAttr.value);
+        console.log('index SelectionList: '+index)
+
         if(index !== -1){
+            console.log('enter')
             this._viewModel.set('selectedIndex', index);
         }
     }
-    private _selectedOption(args : ItemEventData){
-        //let index = args.index;
-        console.log(args)
+
+    private _changeView(index){
+        this._options.map(x=>{
+            x.backgroundColor = 'white';
+            x.color = 'gray';
+        });
+
+        let opt = this._options.getItem(index);
+        opt.color='white';
+        opt.backgroundColor = '#f44242';
+        this._options.setItem(index,opt);
     }
 }

@@ -187,4 +187,28 @@ var FindSchm = (function () {
     return FindSchm;
 }());
 exports.FindSchm = FindSchm;
+var SaveRecord = (function () {
+    function SaveRecord(record) {
+        this._config = new QueryParser_1.QueryConfig();
+        this._config.url = 'api/records';
+        this._content = JSON.stringify(record.data);
+        if (record.id) {
+            this._config.id = record.id;
+            this._method = 'PUT';
+        }
+        else {
+            this._method = 'POST';
+        }
+        this._queryParser = new QueryParser_1.QueryParser(this._config);
+    }
+    SaveRecord.prototype.save = function () {
+        var url = this._queryParser.parse();
+        var content = this._content;
+        var o = new Request_1.RequestOpts(url, this._method, this._content);
+        var r = new Request_1.Request(o);
+        return r.make();
+    };
+    return SaveRecord;
+}());
+exports.SaveRecord = SaveRecord;
 //# sourceMappingURL=index.js.map

@@ -3,6 +3,9 @@ var RecordService_1 = require('../../services/RecordService');
 var QueryParser_1 = require('../QueryParser');
 var Hilera = (function () {
     function Hilera() {
+        /**** testing */
+        this._restriction = [{ id: 'schm', string: '580c05b412e1240010cd9d62' }];
+        /***** */
     }
     Object.defineProperty(Hilera.prototype, "plant", {
         get: function () {
@@ -10,6 +13,16 @@ var Hilera = (function () {
         },
         set: function (value) {
             this._plant = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Hilera.prototype, "restriction", {
+        get: function () {
+            return this._restriction;
+        },
+        set: function (value) {
+            this._restriction = value;
         },
         enumerable: true,
         configurable: true
@@ -44,7 +57,7 @@ var Hilera = (function () {
             throw new Error("Hilera Class: 'plant' no tiene el attributo hilera");
         }
         var qc = new QueryParser_1.QueryConfig();
-        qc.items = "100";
+        qc.items = "300";
         qc.schm = "57a4e02ec830e2bdff1a1608";
         // filtero espaldera
         var filter_espaldera = new QueryParser_1.Filter();
@@ -60,8 +73,73 @@ var Hilera = (function () {
         var plants = new RecordService_1.FindPlants(qc);
         return plants.finds().then(function (x) {
             var a = x.sort(_this.ubicationSort);
-            _this._rowPlants = a;
+            //this._rowPlants = a;
             return a;
+        }).then(function (x) {
+            console.log('applying restriction');
+            return _this._applyRestriction(x);
+        });
+    };
+    Hilera.prototype._applyRestriction = function (plants) {
+        var _this = this;
+        if (!this._restriction || this._restriction.length === 0) {
+            this._rowPlants = plants;
+            return plants;
+        }
+        console.log('este esquema tiene restricciones restriction');
+        var qcRecords = new QueryParser_1.QueryConfig();
+        qcRecords.items = "100";
+        qcRecords.filter = [];
+        var f0_espaldera = new QueryParser_1.Filter();
+        f0_espaldera.key = "espaldera";
+        f0_espaldera.value = this._plant.getAttribute("5807af5f31f55d0010aaffe4").value;
+        ;
+        f0_espaldera.datatype = "number";
+        qcRecords.filter.push(f0_espaldera);
+        var f0_hilera = new QueryParser_1.Filter();
+        f0_hilera.key = 'hilera';
+        f0_hilera.value = this._plant.getAttribute("5807af9231f55d0010aaffe5").value;
+        ;
+        f0_hilera.datatype = "number";
+        qcRecords.filter.push(f0_hilera);
+        for (var index = 0; index < this._restriction.length; index++) {
+            var element = this._restriction[index];
+            if (element.id === 'schm') {
+                qcRecords.schm = element.string;
+            }
+            if (element.id === 'filter') {
+                var f = new QueryParser_1.Filter();
+                var set = element.string.split('|');
+                console.log('/*****************************************************************************/');
+                console.log(set);
+                f.key = set[0];
+                f.value = set[1];
+                f.datatype = set[2];
+                qcRecords.filter.push(f);
+            }
+        }
+        var records = new RecordService_1.FindRecords(qcRecords);
+        //57c42f77c8307cd5b82f4486 es el individuo ref
+        return records.finds()
+            .then(function (d) {
+            //console.log('respuesta*********************************************************************')
+            //console.log(JSON.stringify(d));
+            //console.log(d.length);
+            //console.log('/*****************************************************************************/')
+            return d;
+        })
+            .then(function (x) { return x.map(function (i) { return i.getAttribute("57c42f77c8307cd5b82f4486").value; }); }).then(function (r) {
+            var pass = [];
+            for (var w = 0; w < plants.length; w++) {
+                var index = r.indexOf(plants[w].id);
+                //console.log('/*****************************************************************************/')
+                //console.log('INDEX '+index);
+                if (index !== -1) {
+                    pass.push(plants[w]);
+                }
+            }
+            _this._rowPlants = pass;
+            return pass;
         });
     };
     Hilera.prototype.getEvaluatedId = function () {
@@ -71,11 +149,13 @@ var Hilera = (function () {
         qcRecords.schm = this._schmEvaluation.id;
         var f0_espaldera = new QueryParser_1.Filter();
         f0_espaldera.key = "espaldera";
-        f0_espaldera.value = 4;
+        f0_espaldera.value = this._plant.getAttribute("5807af5f31f55d0010aaffe4").value;
+        ;
         f0_espaldera.datatype = "number";
         var f0_hilera = new QueryParser_1.Filter();
         f0_hilera.key = 'hilera';
-        f0_hilera.value = 1;
+        f0_hilera.value = this._plant.getAttribute("5807af9231f55d0010aaffe5").value;
+        ;
         f0_hilera.datatype = "number";
         qcRecords.filter = [f0_espaldera, f0_hilera];
         var records = new RecordService_1.FindRecords(qcRecords);

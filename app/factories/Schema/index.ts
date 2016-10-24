@@ -219,7 +219,7 @@ export class Schema extends BaseSchema {
             }
         }
     }
-    public get properties(){
+    public get properties():any{
         
         var keyObj = this.getAttr('keys', 'listOfObj'); 
         

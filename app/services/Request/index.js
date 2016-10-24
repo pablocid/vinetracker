@@ -4,7 +4,7 @@ var application_settings_1 = require('application-settings');
 var q = require('q');
 var frame_1 = require('ui/frame');
 var RequestOpts = (function () {
-    function RequestOpts(url, method) {
+    function RequestOpts(url, method, content) {
         if (url === '') {
             throw new Error('url is undefined');
         }
@@ -14,7 +14,8 @@ var RequestOpts = (function () {
         this._options = {
             url: application_settings_1.getString('baseUrl') + url,
             method: method,
-            headers: { "Content-Type": "application/json", "Authorization": application_settings_1.getString("Authorization") }
+            headers: { "Content-Type": "application/json", "Authorization": application_settings_1.getString("Authorization") },
+            content: content
         };
         //console.log(JSON.stringify(this._options))
     }

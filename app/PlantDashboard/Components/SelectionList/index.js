@@ -51,42 +51,43 @@ var SelectionList = (function (_super) {
         }
         this._viewModel.on(observable_1.Observable.propertyChangeEvent, function (args) {
             if (args.propertyName === 'selectedIndex') {
+                //console.log("PropertyChangeDataPropertyChangeDataPropertyChangeData   "+this._viewModel.get('selectedIndex') )
                 var item = _this._options.getItem(_this._viewModel.get('selectedIndex'));
+                console.log('item --------------------' + item.key);
                 _this._recordAttr.value = item.key;
                 var imgUri = "~/img/" + item.key + ".png";
                 _this._viewModel.set('selected', { key: item.key, value: item.value, img: imgUri });
+                _this._changeView(item.index);
             }
             _this._callback();
-            console.log(JSON.stringify(_this._recordAttr.data));
+            //console.log(JSON.stringify(this._recordAttr.data));
         });
         this._viewModel.set('selectedOption', function (args) {
             var index = args.index;
             _this._viewModel.set('selectedIndex', index);
-            _this._options.map(function (x) {
-                x.backgroundColor = 'white';
-                x.color = 'gray';
-            });
-            var opt = _this._options.getItem(index);
-            opt.color = 'white';
-            opt.backgroundColor = '#f44242';
-            _this._options.setItem(index, opt);
         });
         this._setValue();
-        /**** */
-        //this._viewModel.set('icon', String.fromCharCode(&#xf17b;))
     }
     SelectionList.prototype._setImgUrl = function (name) {
         return "~/img/" + name + ".png";
     };
     SelectionList.prototype._setValue = function () {
-        var index = this._options.indexOf(this._recordAttr.value);
+        var index = this._options.map(function (x) { return x.key; }).indexOf(this._recordAttr.value);
+        console.log('index SelectionList: ' + index);
         if (index !== -1) {
+            console.log('enter');
             this._viewModel.set('selectedIndex', index);
         }
     };
-    SelectionList.prototype._selectedOption = function (args) {
-        //let index = args.index;
-        console.log(args);
+    SelectionList.prototype._changeView = function (index) {
+        this._options.map(function (x) {
+            x.backgroundColor = 'white';
+            x.color = 'gray';
+        });
+        var opt = this._options.getItem(index);
+        opt.color = 'white';
+        opt.backgroundColor = '#f44242';
+        this._options.setItem(index, opt);
     };
     return SelectionList;
 }(BaseComponent_1.BaseInputComponent));
