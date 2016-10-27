@@ -74,6 +74,7 @@ export class Request{
                     Topmost().navigate('login/index');
                 }else{
                     console.log('Error de codigo '+err.statusCode+ ' no manejado');
+                    console.log(JSON.stringify(err));
                     throw new Error(err);
                 }
             }

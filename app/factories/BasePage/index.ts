@@ -2,7 +2,7 @@ import {SideDrawerComponent} from '../../PlantDashboard/Components/SideDrawer';
 import {onLoaded} from '../../testmodal/login-page';
 
 import { topmost as Topmost} from "ui/frame";
-import {Page} from "ui/page";
+import {Page, ShownModallyData} from "ui/page";
 import {Observable, EventData} from "data/observable";
 import {View} from "ui/core/view";
 import {NavigationButton, ActionItems, ActionItem ,ActionBar, AndroidActionBarSettings, AndroidActionItemSettings} from "ui/action-bar";
@@ -23,6 +23,7 @@ export class BasePage {
     private _page:Page;
     private _titleActionBar:string | View;
     private _fnOnLoad:any;
+    private _fnOnShownModally:any;
 
     constructor(){
         this._page = new Page();
@@ -122,26 +123,37 @@ export class BasePage {
 	public set fnOnLoad(value: any) {
 		this._fnOnLoad = value;
 	}
+
+	public get fnOnShownModally(): any {
+		return this._fnOnShownModally;
+	}
+
+	public set fnOnShownModally(value: any) {
+		this._fnOnShownModally = value;
+	}
+    
     onNavigatedTo (args:EventData){
         //console.log('onNavigatedTo');
-        if(this._fnOnLoad){ this._fnOnLoad(); }
+        //if(this._fnOnLoad){ this._fnOnLoad(args); }
     }
 
     onLoaded (args:EventData){
         //console.log('onLoaded');
+        if(this._fnOnLoad){ this._fnOnLoad(args); }
     }
     onShownModally ( args:EventData){
         //console.log('onShownModally');
+        if(this._fnOnShownModally){ this._fnOnShownModally(args); }
     }
     onNavigatingTo ( args:EventData){
         //console.log('navigatingTo');
     }
     createPage(){
         this._setMainContent();
-        this._page.on(Page.navigatedToEvent, x=>{ this.onNavigatedTo(x) });
+        //this._page.on(Page.navigatedToEvent, x=>{ this.onNavigatedTo(x) });
         this._page.on(Page.loadedEvent, x=>{ this.onLoaded(x) }) ;
-        this._page.on(Page.shownModallyEvent, x=>{ this.onLoaded(x) } );
-        this._page.on(Page.navigatingToEvent, x=>{ this.onNavigatingTo(x) } );
+        this._page.on(Page.shownModallyEvent, x=>{ this.onShownModally(x) } );
+        //this._page.on(Page.navigatingToEvent, x=>{ this.onNavigatingTo(x) } );
         return this._page;
     }
 }

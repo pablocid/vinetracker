@@ -1,4 +1,7 @@
 "use strict";
+var InfoComponent_1 = require('../Components/InfoComponent');
+var SaveComponent_1 = require('../Components/SaveComponent');
+var ContextFS_1 = require('../../factories/ContextFS');
 var RecordService_1 = require('../../services/RecordService');
 var MultipleSelection_1 = require('../Components/MultipleSelection');
 var NumberList_1 = require('../Components/NumberList');
@@ -8,28 +11,47 @@ var BasePage_1 = require('../../factories/BasePage');
 var tab_view_1 = require("ui/tab-view");
 var action_bar_1 = require('ui/action-bar');
 var frame_1 = require('ui/frame');
+var dialogs_1 = require('ui/dialogs');
 var page = new BasePage_1.BasePage();
 var tab = new tab_view_1.TabView();
 page.mainContent = tab;
-page.fnOnLoad = function () {
-    var context = page.page.navigationContext;
-    /**** for testing */
-    /*
-    var plantTest = new PlantTest();
-    var context = new Context();
-    context.plant = plantTest.getPlant();
-    context.schema = plantTest.getSchm();
-    context.record = plantTest.getRecordFen0();
-    */
-    /**** */
-    //console.log(context.schema.listAttrIds);
-    //console.log(context.record.getAttribute("5808de89832db50010d3192c").attrSchm.input.id)
+var save = new action_bar_1.ActionItem();
+page.addActionItem(save);
+page.fnOnShownModally = function (args) {
+    //args.closeCallback
+    var context = new ContextFS_1.ContextFS();
+    var plant = context.plant;
+    var record = context.record;
+    var schema = context.schema;
+    //**********************************
+    save.android.systemIcon = 'ic_menu_save';
+    save.on('tap', function (x) {
+        record.getAttribute("57c42f77c8307cd5b82f4486").value = plant.id;
+        record.espaldera = plant.espaldera;
+        record.hilera = plant.hilera;
+        record.posicion = plant.position;
+        console.log(JSON.stringify(record.data));
+        var saveRequest = new RecordService_1.SaveRecord(record);
+        saveRequest.save().then(function (s) {
+            console.log('Saved ....');
+            console.log(JSON.stringify(s));
+            //args.closeCallback(plant);
+            frame_1.topmost().navigate('PlantDashboard/HileraStatus/index');
+        });
+    });
     var tabsItems = [];
-    for (var index = 0; index < context.record.schema.listAttrIds.length; index++) {
+    var infoComp = new InfoComponent_1.InfoComponent();
+    infoComp.nameEvaluation = schema.name;
+    infoComp.ubicacion = plant.getUbicación();
+    var infoTab = new tab_view_1.TabViewItem();
+    infoTab.title = 'info';
+    infoTab.view = infoComp.getView();
+    tabsItems.push(infoTab);
+    for (var index = 0; index < record.schema.listAttrIds.length; index++) {
         //5808de89832db50010d3192c
-        var a = context.record.schema.listAttrIds[index];
+        var a = record.schema.listAttrIds[index];
         var item = new tab_view_1.TabViewItem();
-        var attr = context.record.getAttribute(a);
+        var attr = record.getAttribute(a);
         if (!attr) {
             continue;
         }
@@ -41,26 +63,23 @@ page.fnOnLoad = function () {
         switch (inputId) {
             //	selection_list
             case '57fe942a45be360010073dbc':
-                //context.record.getAttribute(a).value = 'basal';
-                view = new SelectionList_1.SelectionList(context.record.getAttribute(a));
+                view = new SelectionList_1.SelectionList(record.getAttribute(a));
                 break;
             // simple_text
             case '57c3202cc8307cd5b82f4465':
-                view = new SimpleText_1.SimpleText(context.record.getAttribute(a));
+                view = new SimpleText_1.SimpleText(record.getAttribute(a));
                 break;
             //	NumberList
             case '5808d0fdd48d17001006e43b':
-                //context.record.getAttribute(a).value  = 10;
-                view = new NumberList_1.NumberList(context.record.getAttribute(a));
+                view = new NumberList_1.NumberList(record.getAttribute(a));
                 break;
             //	MultipleSelection
             case '5808dc55832db50010d3192b':
-                //context.record.getAttribute(a).value = ['dead_pant']
-                view = new MultipleSelection_1.MultipleSelection(context.record.getAttribute(a));
+                view = new MultipleSelection_1.MultipleSelection(record.getAttribute(a));
                 break;
             //	Scann
             case '57c431d5c8307cd5b82f448a':
-                //view = new Scanner(context.record.getAttribute(a));
+                //view = new Scanner(record.getAttribute(a));
                 break;
         }
         if (view) {
@@ -68,30 +87,62 @@ page.fnOnLoad = function () {
             tabsItems.push(item);
         }
     }
+    var saveComp = new SaveComponent_1.SaveComponent();
+    var saveTab = new tab_view_1.TabViewItem();
+    saveTab.title = 'guardar';
+    saveTab.view = saveComp.getView();
+    tabsItems.push(saveTab);
+    saveComp.callback = function (ok) {
+        if (!ok) {
+            args.closeCallback();
+        }
+        else {
+            if (args.closeCallback) {
+                record.getAttribute("57c42f77c8307cd5b82f4486").value = plant.id;
+                record.espaldera = plant.espaldera;
+                record.hilera = plant.hilera;
+                record.posicion = plant.position;
+                console.log(JSON.stringify(record.data));
+                var options = {
+                    title: "Guardando el registro ...",
+                    message: "Estas seguro de guarda el registro?. " + attrValueChecker(record),
+                    okButtonText: "Si",
+                    cancelButtonText: "No",
+                    neutralButtonText: "Cancelar"
+                };
+                dialogs_1.confirm(options).then(function (result) {
+                    // result can be true/false/undefined
+                    console.log(result);
+                    if (result) {
+                        //args.closeCallback(plant);
+                        var saveRequest = new RecordService_1.SaveRecord(record);
+                        saveRequest.save().then(function (s) {
+                            args.closeCallback(plant);
+                        });
+                    }
+                });
+            }
+        }
+    };
+    function attrValueChecker(record) {
+        var attrs = record.schema.listAttrIds;
+        var list = [];
+        for (var index = 0; index < attrs.length; index++) {
+            var attr = attrs[index];
+            var value = record.getAttribute(attr).value;
+            if (value === undefined) {
+                list.push(record.getAttribute(attr).attrSchm.properties.shortName);
+            }
+        }
+        if (list.length) {
+            return 'Falta por registrar los siguientes atributos: \n' + list.join('\n');
+        }
+        else {
+            return '';
+        }
+    }
     tab.items = tabsItems;
-    page.setTitleActionBar(context.plant.getUbicación(), context.record.schema.schm.name);
+    page.setTitleActionBar(plant.getUbicación(), record.schema.schm.name);
 }; /*********** end fnOnLoad ********************/
-var save = new action_bar_1.ActionItem();
-save.android.systemIcon = 'ic_menu_save';
-save.on('tap', function (x) {
-    var context = page.page.navigationContext;
-    var plant = context.plant;
-    var record = context.record;
-    record.getAttribute("57c42f77c8307cd5b82f4486").value = plant.id;
-    record.espaldera = plant.getAttribute('5807af5f31f55d0010aaffe4').value;
-    record.hilera = plant.getAttribute('5807af9231f55d0010aaffe5').value;
-    record.posicion = plant.getAttribute('5807afe331f55d0010aaffe6').value;
-    console.log(JSON.stringify(record.data));
-    var saveRequest = new RecordService_1.SaveRecord(record);
-    saveRequest.save().then(function (s) {
-        console.log('Saved ....');
-        console.log(JSON.stringify(s));
-        frame_1.topmost().navigate({
-            moduleName: 'PlantDashboard/HileraStatus/index',
-            context: context
-        });
-    });
-});
-page.addActionItem(save);
 module.exports = page;
 //# sourceMappingURL=index.js.map

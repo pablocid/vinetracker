@@ -1,9 +1,17 @@
+import {ContextFS} from '../../factories/ContextFS';
 import {PlantTest} from '../../factories/DataTest';
-import {Hilera} from '../../factories/Hilera';
+import { HileraFactory } from '../../factories/Hilera';
 import {Plant} from '../../factories/Record';
 import {NoEvaluated} from '../Components/NoEvaluated';
 import {Filter, QueryConfig} from '../../factories/QueryParser';
-import {FindPlant, FindPlants, FindRecord, FindRecords} from '../../services/RecordService';
+import {
+    FindForEvaluation,
+    FindPlant,
+    FindPlantIds,
+    FindPlants,
+    FindRecord,
+    FindRecords
+} from '../../services/RecordService';
 import {List} from '../Components/List';
 import {Schema} from '../../factories/Schema';
 import {Context} from '../../factories/Context';
@@ -13,7 +21,7 @@ import {BasePage} from '../../factories/BasePage';
 import { TabView, TabViewItem } from "ui/tab-view";
 import { ActionItem } from 'ui/action-bar';
 import {topmost as Topmost} from 'ui/frame';
-
+import { Page } from 'ui/page';
 
 import { ObservableArray } from 'data/observable-array';
 import { Observable } from 'data/observable';
@@ -24,10 +32,10 @@ var lodash = require('lodash');
  */
 var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
  
-var loader = new LoadingIndicator();
+
 
 var options = {
-  message: 'preparando la evaluación ...',
+  message: 'cargando la evaluación ...',
   progress: 0.65,
   android: {
     indeterminate: true,
@@ -39,123 +47,141 @@ var options = {
     secondaryProgress: 1
   }
 };
-
-/******************** */
+var options2 = {
+  message: 'filtrando plantas disponibles ...',
+  progress: 0.65,
+  android: {
+    indeterminate: true,
+    cancelable: true,
+    max: 100,
+    progressNumberFormat: "%1d/%2d",
+    progressPercentFormat: 0.53,
+    progressStyle: 1,
+    secondaryProgress: 1
+  }
+};
+//********************
 var hileraPage = new BasePage();
 var tab = new TabView();
 hileraPage.mainContent = tab;
 
-/**************** ********************/
-function onload(){
 
-var hileraC = new Hilera();
+var desc = new ActionItem();
+desc.text = "orden descendente";
+desc.android.position = "popup";
 
-var evalTitle = 'evaluados';
-var noevTitle = 'no evaluados';
+hileraPage.addActionItem(desc);
 
-var context = <Context>hileraPage.page.navigationContext;
+var asc = new ActionItem();
+asc.text = "orden ascendente";
+asc.android.position = "popup";
 
-/**** for testing */
-/*
-var plantTest = new PlantTest();
-var context = new Context();
-context.plant = plantTest.getPlant();
-context.schema = plantTest.getSchm();
-*/
-/**** */
-var esp = context.plant.getAttribute("5807af5f31f55d0010aaffe4").value
-var hil = context.plant.getAttribute("5807af9231f55d0010aaffe5").value
-var evalName = context.schema.description;
-hileraPage.setTitleActionBar('E'+esp+' '+'H'+hil, evalName);
+hileraPage.addActionItem(asc);
 
-hileraC.plant = context.plant;
-hileraC.schmEvaluation = context.schema;
+//**************** *******************
+function onload(args){
+  var loader = new LoadingIndicator();
 
-hileraC.restriction = context.schema.properties.restriction//[{id:'schm', string:'57febcf1179c960010e41f66'}];
+  var contextFs = new ContextFS();
 
-var evTab = new TabViewItem();
-var evaluados = new List();
+  hileraPage.setTitleActionBar('Ubicación E'+contextFs.plant.espaldera+'H'+contextFs.plant.hilera);
+  var hilera = new HileraFactory(contextFs.hilera);
+  hilera.evTabTitle = 'evaluadas';
+  hilera.NoEvTabTitle = 'no evaluadas';
+  
+  desc.on('tap',x=>{
+    hilera.sort ='desc';
+  });
 
-evTab.view = evaluados.getView();
-evTab.title = evalTitle
+  asc.on('tap',x=>{
+    hilera.sort ='asc';
+  });
+  
 
-var noevTab = new TabViewItem();
-var noevaluados = new NoEvaluated();
-
-noevTab.view = noevaluados.getView();
-noevTab.title = noevTitle
-
-tab.items = [noevTab, evTab];
-
-
-
-/**********tap callbacks *****************/
-evaluados.callbackOnTap = function(index){
-  loader.show(options);
-  //console.log(evaluados.items[index].name);
-  context.plant = evaluados.items[index].plant;
-  let qc = new QueryConfig();
-  qc.id = context.plant.id;
-  qc.schm = context.schema.id;
-  qc.key = '57c42f77c8307cd5b82f4486';
-  qc.datatype = 'reference';
-
-  let req = new FindRecord(qc);
-  req.find().then(d=>{
-    context.record = d;
-    loader.hide();
-    Topmost().navigate({
-      moduleName:'PlantDashboard/Evaluation/index',
-      context : context
+  //****************** EVALUADAS
+  var evTab = new TabViewItem();
+  evTab.title = hilera.evTabTitle;
+  
+  var evList = new List();
+  evList.items = hilera.evaluated;
+  evTab.view = evList.getView();
+  evList.callbackOnTap = function(index){
+    loader.show(options);
+    //importante setear la planta porque desde ahí saca el ID y la Ubicación
+    contextFs.plant = hilera.evaluated.getItem(index);
+    let record = new FindForEvaluation();
+    record.record(contextFs.schema, contextFs.plant).then(d=>{
+      contextFs.record = d;
+      loader.hide();
+       var modalPageModule = 'PlantDashboard/Evaluation/index';
+       var context = "some custom context";
+       var fullscreen = true;
+       hileraPage.page.showModal(modalPageModule, context,  (plant:Plant) => {
+           console.log('closeCallback');
+           console.log('registro actualizado');
+       }, fullscreen);
     })
-  })
-}
+  }
 
-noevaluados.callbackOnTap = function(index){
-  loader.show(options);
-  //console.log(noevaluados.items[index].name);
-  context.plant = noevaluados.items[index].plant;
-  let qc = new QueryConfig();
-  qc.id = context.plant.id;
-  qc.schm = context.schema.id;
-  qc.key = '57c42f77c8307cd5b82f4486';
-  qc.datatype = 'reference';
+  //****************** NO EVALUADAS
+  var noEvTab = new TabViewItem();
+  noEvTab.title = hilera.NoEvTabTitle;
+  
+  var noEvList = new List();
+  noEvList.items = hilera.noEvaluated;
+  noEvList.callbackOnTap = function(index){
+    loader.show(options);
+    //importante setear la planta porque desde ahí saca el ID y la Ubicación
+    contextFs.plant = hilera.noEvaluated.getItem(index);
+    let record = new FindForEvaluation();
+    record.record(contextFs.schema, contextFs.plant).then(d=>{
+      contextFs.record = d;
+      loader.hide();
+       var modalPageModule = 'PlantDashboard/Evaluation/index';
+       var context = "some custom context";
+       var fullscreen = true;
+       hileraPage.page.showModal(modalPageModule, context,  (plant:Plant) => {
+           if(plant){
+              console.log('registro guardado. ID: '+plant.id);
+              hilera.addEvaluated = plant.id;
+           }
+       }, fullscreen);
 
-  let req = new FindRecord(qc);
-  req.find().then(d=>{
-    context.record = d;
-    loader.hide();
-    Topmost().navigate({
-      moduleName:'PlantDashboard/Evaluation/index',
-      context : context
     })
-  })
-}
+  }
+  noEvTab.view = noEvList.getView();
 
+  //*********** set TabViewItems
 
-  evaluados.loading = true;
-  noevaluados.loading = true;
-  /********* */
-  hileraC.getEvandNoev().then(r=>{
-      evaluados.items = r.evaluados;
-      evTab.title = r.evaluados.length+' '+evalTitle;
-      noevaluados.items = r.noEvaluados;
-      noevTab.title = r.noEvaluados.length+' '+noevTitle;
+  tab.items = [noEvTab, evTab];
+  
 
-      ///******
-      evaluados.loading = false;
-      noevaluados.loading = false;
+  hilera.callbackOnChangeList = function(){
+      evTab.title = hilera.evTabTitle;
+      noEvTab.title = hilera.NoEvTabTitle;
+  }
+
+  var findIds = new FindPlantIds();
+  
+  loader.show(options2);
+
+  findIds.getEvaluatedId(contextFs.schema, contextFs.plant).then(x=>{
+    loader.hide();
+    if(x && x.length){ hilera.idEvaluated = x; }
+  });
+  
+  //if(!contextFs.allowedPlantsId && contextFs.schema.properties.restriction && contextFs.schema.properties.restriction.length){
+    findIds.getRestrictionIds(contextFs.schema, contextFs.plant).then(x=>{
+      if(x && x.length){
+        hilera.idRestrictions = x;
+        contextFs.allowedPlantsId = x;
+      }
     });
-  /******** */
+  //}
+
 }/**************** end onLoad ********************/
 
 hileraPage.fnOnLoad = onload;
 
-var refresh = new ActionItem();
-refresh.text = "refresh";
-refresh.android.position = "popup";
-refresh.on('tap',x=>{
-  onload();
-});
-hileraPage.addActionItem(refresh)
+
 export =  hileraPage;

@@ -1,3 +1,7 @@
+import {Schema} from '../../factories/Schema';
+import {FindPlants, FindRecords} from '../../services/RecordService';
+import {Filter, QueryConfig} from '../../factories/QueryParser';
+import {ContextFS} from '../../factories/ContextFS';
 import {PlantTest} from '../../factories/DataTest';
 import {Plant} from '../../factories/Record';
 import {Context} from '../../factories/Context';
@@ -11,14 +15,28 @@ import { StackLayout } from 'ui/layouts/stack-layout';
 import { SumaryReport } from '../Components/EvaluationReport';
 import { PlantScanner } from '../Components/PlantScanner';
 
-/***test */
-/*
-var plantTest = new PlantTest();
-var schmTest = plantTest.getSchm();
-var context = new Context();
-context.schema = schmTest;
-*/
-/*** */
+/**
+ * Loader indicator
+ */
+var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
+ 
+var loader = new LoadingIndicator();
+
+var options = {
+  message: 'cargando la hilera en el sistema ...',
+  progress: 0.65,
+  android: {
+    indeterminate: true,
+    cancelable: true,
+    max: 100,
+    progressNumberFormat: "%1d/%2d",
+    progressPercentFormat: 0.53,
+    progressStyle: 1,
+    secondaryProgress: 1
+  }
+};
+
+var contextFS = new ContextFS();
 
 var localization = new BasePage();
 var tab = new TabView();
@@ -28,43 +46,68 @@ localization.setTitleActionBar('Localización','Elige la hilera que quires evalu
 /***************************onLoad ************************** */
 localization.fnOnLoad = function(){
 
-var resumenView = new SumaryReport();
-
-/**************** tabitems: SCAN ********************/
-var scan = new TabViewItem();
-scan.title = 'scan';
-var scanView = new PlantScanner();
-
-scan.view = scanView.getView();
-
-/**************** tabitems: Ubicacion ********************/
-var ubicacion = new TabViewItem();
-ubicacion.title = 'ubicación';
-var sl = new StackLayout();
-sl.addChild(Parse(`
-<StackLayout>
-    <Label text="Localization"></Label>
-</StackLayout>
-`))
-ubicacion.view = sl;
-
-/**************** tabitems: resumen ********************/
-var resumen = new TabViewItem();
-resumen.title = 'resumen';
-resumen.view = resumenView.getView();
-
-tab.items = [scan /*, ubicacion, resumen*/];
-
-
-scanView.callback = function(plant:Plant){
-    let context = <Context>localization.page.navigationContext;
-    context.plant = plant;
-    let navOpts = {
-        moduleName:'PlantDashboard/HileraStatus/index',
-        context:context
+    var resumenView = new SumaryReport();
+    
+    /**************** tabitems: SCAN ********************/
+    var scan = new TabViewItem();
+    scan.title = 'scan';
+    var scanView = new PlantScanner();
+    
+    scan.view = scanView.getView();
+    
+    /**************** tabitems: Ubicacion ********************/
+    var ubicacion = new TabViewItem();
+    ubicacion.title = 'ubicación';
+    var sl = new StackLayout();
+    sl.addChild(Parse(`
+    <StackLayout>
+        <Label text="Localization"></Label>
+    </StackLayout>
+    `))
+    ubicacion.view = sl;
+    
+    /**************** tabitems: resumen ********************/
+    var resumen = new TabViewItem();
+    resumen.title = 'resumen';
+    resumen.view = resumenView.getView();
+    
+    tab.items = [scan /*, ubicacion, resumen*/];
+    
+    function getMainList (plant:Plant){
+        var qc = new QueryConfig();
+        qc.items = "300";
+        qc.schm = "57a4e02ec830e2bdff1a1608";
+        // filtero espaldera
+        var filter_espaldera = new Filter();
+        filter_espaldera.key = "5807af5f31f55d0010aaffe4";
+        filter_espaldera.value = plant.getAttribute("5807af5f31f55d0010aaffe4").value;
+        filter_espaldera.datatype = "number";
+        
+        // filtero hilera
+        var filter_hilera = new Filter();
+        filter_hilera.key = "5807af9231f55d0010aaffe5";
+        filter_hilera.value = plant.getAttribute("5807af9231f55d0010aaffe5").value;
+        filter_hilera.datatype = "number";
+        
+        qc.filter = [ filter_espaldera, filter_hilera];
+        var plants = new FindPlants(qc);
+    
+        return plants.finds();
     }
-    Topmost().navigate(navOpts);
-}
+    
+    scanView.callback = function(plant:Plant){
+        loader.show(options);
+        contextFS.plant = plant;
+        console.log(contextFS.plant.id);
+        getMainList(contextFS.plant).then(p=>{
+            contextFS.hilera = p;
+            return p;
+        }).then(x=>{
+            loader.hide();
+            Topmost().navigate('PlantDashboard/HileraStatus/index');
+    
+        })
+    }
 
 
 }/*************************** END onLoad ************************** */

@@ -1,8 +1,9 @@
 "use strict";
 var Schema_1 = require('../../factories/Schema');
+var QueryParser_1 = require('../../factories/QueryParser');
 var Request_1 = require('../Request');
 var Record_1 = require('../../factories/Record');
-var QueryParser_1 = require('../../factories/QueryParser');
+var q = require('q');
 var BaseFind = (function () {
     function BaseFind(config, method) {
         this._config = config;
@@ -46,6 +47,13 @@ var Aggregate = (function (_super) {
         var r = new Request_1.Request(o);
         console.log(JSON.stringify(o.url));
         console.log(JSON.stringify(o.options));
+        return r.make();
+    };
+    Aggregate.prototype.raw = function () {
+        this._setQueryParser();
+        var url = this._queryParser.parse();
+        var o = new Request_1.RequestOpts(url, this._method);
+        var r = new Request_1.Request(o);
         return r.make();
     };
     Aggregate.prototype.exist = function () {
@@ -211,4 +219,88 @@ var SaveRecord = (function () {
     return SaveRecord;
 }());
 exports.SaveRecord = SaveRecord;
+var FindPlantIds = (function () {
+    function FindPlantIds() {
+    }
+    FindPlantIds.prototype.getEvaluatedId = function (schm, plant) {
+        var qcRecords = new QueryParser_1.QueryConfig();
+        qcRecords.items = "100";
+        // fenotipado 0
+        qcRecords.schm = schm.id;
+        var f0_espaldera = new QueryParser_1.Filter();
+        f0_espaldera.key = "espaldera";
+        f0_espaldera.value = plant.espaldera;
+        f0_espaldera.datatype = "number";
+        var f0_hilera = new QueryParser_1.Filter();
+        f0_hilera.key = 'hilera';
+        f0_hilera.value = plant.hilera;
+        f0_hilera.datatype = "number";
+        qcRecords.filter = [f0_espaldera, f0_hilera];
+        var records = new FindRecords(qcRecords);
+        //57c42f77c8307cd5b82f4486 es el individuo ref
+        return records.finds().then(function (x) { return x.map(function (i) { return i.getAttribute("57c42f77c8307cd5b82f4486").value; }); });
+    };
+    FindPlantIds.prototype._callgetRestricionIds = function (restriction, schm, plant) {
+        var qcRecords = new QueryParser_1.QueryConfig();
+        qcRecords.items = "100";
+        qcRecords.filter = [];
+        var f0_espaldera = new QueryParser_1.Filter();
+        f0_espaldera.key = "espaldera";
+        f0_espaldera.value = plant.espaldera;
+        f0_espaldera.datatype = "number";
+        qcRecords.filter.push(f0_espaldera);
+        var f0_hilera = new QueryParser_1.Filter();
+        f0_hilera.key = 'hilera';
+        f0_hilera.value = plant.hilera;
+        f0_hilera.datatype = "number";
+        qcRecords.filter.push(f0_hilera);
+        for (var index = 0; index < restriction.length; index++) {
+            var element = restriction[index];
+            if (element.id === 'schm') {
+                qcRecords.schm = element.string;
+            }
+            if (element.id === 'filter') {
+                var f = new QueryParser_1.Filter();
+                var set = element.string.split('|');
+                f.key = set[0];
+                f.value = set[1];
+                f.datatype = set[2];
+                qcRecords.filter.push(f);
+            }
+        }
+        var records = new FindRecords(qcRecords);
+        //57c42f77c8307cd5b82f4486 es el individuo ref
+        return records.finds()
+            .then(function (x) { return x.map(function (i) { return i.getAttribute("57c42f77c8307cd5b82f4486").value; }); });
+    };
+    FindPlantIds.prototype.getRestrictionIds = function (schm, plant) {
+        var def = q.defer();
+        var restrictions = schm.properties.restriction;
+        if (restrictions && restrictions.length) {
+            this._callgetRestricionIds(restrictions, schm, plant).then(function (x) {
+                def.resolve(x);
+            });
+        }
+        else {
+            def.resolve([]);
+        }
+        return def.promise;
+    };
+    return FindPlantIds;
+}());
+exports.FindPlantIds = FindPlantIds;
+var FindForEvaluation = (function () {
+    function FindForEvaluation() {
+    }
+    FindForEvaluation.prototype.record = function (schm, plant) {
+        var qc = new QueryParser_1.QueryConfig();
+        qc.id = plant.id;
+        qc.schm = schm.id;
+        qc.key = '57c42f77c8307cd5b82f4486';
+        qc.datatype = 'reference';
+        return new FindRecord(qc).find();
+    };
+    return FindForEvaluation;
+}());
+exports.FindForEvaluation = FindForEvaluation;
 //# sourceMappingURL=index.js.map

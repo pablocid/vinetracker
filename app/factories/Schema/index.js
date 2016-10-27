@@ -402,11 +402,22 @@ var InputSchm = (function (_super) {
 exports.InputSchm = InputSchm;
 var SchemaFull = (function () {
     function SchemaFull(schema) {
+        this._data = schema;
         this._setInputSchms(schema);
         this._setSchema(schema);
         // esta función requiere de que los _inputs esten seteados;
         this._setAttrSchms(schema);
     }
+    Object.defineProperty(SchemaFull.prototype, "data", {
+        get: function () {
+            return this._data;
+        },
+        set: function (value) {
+            this._data = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SchemaFull.prototype, "schm", {
         get: function () {
             return this._schm;

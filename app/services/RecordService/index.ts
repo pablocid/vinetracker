@@ -1,8 +1,9 @@
 import {Schema} from '../../factories/Schema';
+import {Filter, QueryConfig, QueryParser} from '../../factories/QueryParser';
 import {FindOneResponse, FindRecordsResponse} from '../../interfaces';
 import { RequestOpts, Request} from '../Request';
 import { Plant, Record} from '../../factories/Record';
-import { QueryConfig, QueryParser} from '../../factories/QueryParser';
+var q = require('q');
 
 export class BaseFind {
     protected _config : QueryConfig;
@@ -55,6 +56,16 @@ export class Aggregate extends BaseFind {
         let r = new Request(o);
         console.log(JSON.stringify(o.url))
         console.log(JSON.stringify(o.options))
+
+        return r.make();
+    }
+
+    public raw ():Promise<any>{
+
+        this._setQueryParser();
+        let url = this._queryParser.parse();
+        let o = new RequestOpts(url,this._method);
+        let r = new Request(o);
 
         return r.make();
     }
@@ -210,5 +221,98 @@ export class SaveRecord {
         let o = new RequestOpts(url,this._method, this._content);
         let r = new Request(o);
         return r.make()
+    }
+}
+
+export class FindPlantIds {
+
+    public getEvaluatedId(schm:Schema, plant:Plant):Promise<string[]>{
+        let qcRecords = new QueryConfig();
+        qcRecords.items = "100";
+        // fenotipado 0
+        qcRecords.schm = schm.id;
+        
+        let f0_espaldera = new Filter();
+        f0_espaldera.key = "espaldera";
+        f0_espaldera.value = plant.espaldera
+        f0_espaldera.datatype = "number";
+        
+        let f0_hilera = new Filter();
+        f0_hilera.key  = 'hilera';
+        f0_hilera.value = plant.hilera;
+        f0_hilera.datatype = "number";
+        qcRecords.filter = [f0_espaldera, f0_hilera];
+        
+        let records = new FindRecords(qcRecords);
+        //57c42f77c8307cd5b82f4486 es el individuo ref
+        return records.finds().then(x=>x.map(i=>i.getAttribute("57c42f77c8307cd5b82f4486").value));
+
+    }
+    
+    private _callgetRestricionIds(restriction:any[], schm:Schema, plant:Plant){
+        let qcRecords = new QueryConfig();
+            qcRecords.items = "100";
+            qcRecords.filter = [];
+            
+            let f0_espaldera = new Filter();
+            f0_espaldera.key = "espaldera";
+            f0_espaldera.value = plant.espaldera;
+            f0_espaldera.datatype = "number";
+            qcRecords.filter.push(f0_espaldera);
+            
+            let f0_hilera = new Filter();
+            f0_hilera.key  = 'hilera';
+            f0_hilera.value = plant.hilera;
+            f0_hilera.datatype = "number";
+            qcRecords.filter.push(f0_hilera);
+    
+            for (var index = 0; index < restriction.length; index++) {
+                var element = restriction[index];
+                if(element.id === 'schm'){
+                    qcRecords.schm = element.string;
+                }
+    
+                if(element.id==='filter'){
+                    let f = new Filter();
+                    let set = element.string.split('|');
+                    f.key =set[0];
+                    f.value=set[1];
+                    f.datatype = set[2];
+                    qcRecords.filter.push(f)
+                }
+                
+            }
+            
+            let records = new FindRecords(qcRecords);
+            //57c42f77c8307cd5b82f4486 es el individuo ref
+            return records.finds()
+                        .then(
+                            x=>x.map(i=>i.getAttribute("57c42f77c8307cd5b82f4486").value)
+                        );
+    }
+    public getRestrictionIds(schm:Schema, plant: Plant):any{
+        var def = q.defer();
+        var restrictions = schm.properties.restriction;
+        
+        if(restrictions && restrictions.length){
+            this._callgetRestricionIds(restrictions, schm, plant).then(x=>{
+                def.resolve(x);
+            })
+        }else{ def.resolve([]); }
+
+        return def.promise;
+    }
+}
+
+export class FindForEvaluation{
+    
+    public record(schm:Schema, plant:Plant):Promise<Record>{
+        let qc = new QueryConfig();
+        qc.id = plant.id;
+        qc.schm = schm.id;
+        qc.key = '57c42f77c8307cd5b82f4486';
+        qc.datatype = 'reference';
+      
+        return new FindRecord(qc).find();
     }
 }

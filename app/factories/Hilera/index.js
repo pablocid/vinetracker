@@ -1,223 +1,288 @@
 "use strict";
-var RecordService_1 = require('../../services/RecordService');
-var QueryParser_1 = require('../QueryParser');
-var Hilera = (function () {
-    function Hilera() {
-        /**** testing */
-        this._restriction = [{ id: 'schm', string: '580c05b412e1240010cd9d62' }];
-        /***** */
+var observable_array_1 = require('data/observable-array');
+var observable_1 = require('data/observable');
+var q = require('q');
+var HileraFactory = (function () {
+    function HileraFactory(list) {
+        var _this = this;
+        this._mainList = new observable_array_1.ObservableArray(list);
+        this._noEvaluated = new observable_array_1.ObservableArray(list);
+        this._evaluated = new observable_array_1.ObservableArray(this._mainList.getItem(0));
+        this._evaluated.pop();
+        this._observable = new observable_1.Observable();
+        this._observable.on(observable_1.Observable.propertyChangeEvent, function (args) {
+            //console.log('trigger propertyChangeEvent')
+            if (args.propertyName === 'idRestrictions' && _this._idRestrictions) {
+                //console.log('restricciones')
+                _this._applyingRestrictions();
+            }
+            if (args.propertyName === 'idEvaluated' && _this._idEvaluated) {
+                //console.log('idEvaluated')
+                _this._applyingEvaluated();
+            }
+            if (args.propertyName === 'sort') {
+                console.log('sortingggg ');
+                _this._sortList(_this._noEvaluated, _this.sort);
+                _this._sortList(_this._evaluated, _this.sort);
+            }
+            if (_this._callbackOnChangeList) {
+                _this._callbackOnChangeList();
+            }
+        });
+        this.sort = 'asc';
     }
-    Object.defineProperty(Hilera.prototype, "plant", {
-        get: function () {
-            return this._plant;
-        },
-        set: function (value) {
-            this._plant = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Hilera.prototype, "restriction", {
-        get: function () {
-            return this._restriction;
-        },
-        set: function (value) {
-            this._restriction = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Hilera.prototype, "schmEvaluation", {
-        get: function () {
-            return this._schmEvaluation;
-        },
-        set: function (value) {
-            this._schmEvaluation = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Hilera.prototype.ubicationSort = function (a, b) {
-        if (a.getAttribute('5807afe331f55d0010aaffe6').value > b.getAttribute('5807afe331f55d0010aaffe6').value) {
-            return 1;
-        }
-        else {
-            return -1;
-        }
-    };
-    Hilera.prototype.getMainList = function () {
+    HileraFactory.prototype._applyingRestrictions = function () {
         var _this = this;
-        if (!this._plant.id) {
-            throw new Error("Hilera Class: No se ha seteado 'plant' antes de llamar a getMainList");
-        }
-        if (!this._plant.getAttribute("5807af5f31f55d0010aaffe4").value === undefined) {
-            throw new Error("Hilera Class: 'plant' no tiene el attributo espaldera");
-        }
-        if (!this._plant.getAttribute("5807af9231f55d0010aaffe5").value === undefined) {
-            throw new Error("Hilera Class: 'plant' no tiene el attributo hilera");
-        }
-        var qc = new QueryParser_1.QueryConfig();
-        qc.items = "300";
-        qc.schm = "57a4e02ec830e2bdff1a1608";
-        // filtero espaldera
-        var filter_espaldera = new QueryParser_1.Filter();
-        filter_espaldera.key = "5807af5f31f55d0010aaffe4";
-        filter_espaldera.value = this._plant.getAttribute("5807af5f31f55d0010aaffe4").value;
-        filter_espaldera.datatype = "number";
-        // filtero hilera
-        var filter_hilera = new QueryParser_1.Filter();
-        filter_hilera.key = "5807af9231f55d0010aaffe5";
-        filter_hilera.value = this._plant.getAttribute("5807af9231f55d0010aaffe5").value;
-        filter_hilera.datatype = "number";
-        qc.filter = [filter_espaldera, filter_hilera];
-        var plants = new RecordService_1.FindPlants(qc);
-        return plants.finds().then(function (x) {
-            var a = x.sort(_this.ubicationSort);
-            //this._rowPlants = a;
-            return a;
-        }).then(function (x) {
-            console.log('applying restriction');
-            return _this._applyRestriction(x);
+        this.idRestrictions.forEach(function (d) {
+            var index = _this._noEvaluated.map(function (x) { return x.id; }).indexOf(d);
+            if (index !== -1) {
+                _this._noEvaluated.splice(index, 1);
+            }
         });
+        this._sortList(this._noEvaluated, this._observable.get('sort'));
     };
-    Hilera.prototype._applyRestriction = function (plants) {
+    HileraFactory.prototype._applyingEvaluated = function () {
         var _this = this;
-        if (!this._restriction || this._restriction.length === 0) {
-            this._rowPlants = plants;
-            return plants;
-        }
-        console.log('este esquema tiene restricciones restriction');
-        var qcRecords = new QueryParser_1.QueryConfig();
-        qcRecords.items = "100";
-        qcRecords.filter = [];
-        var f0_espaldera = new QueryParser_1.Filter();
-        f0_espaldera.key = "espaldera";
-        f0_espaldera.value = this._plant.getAttribute("5807af5f31f55d0010aaffe4").value;
-        ;
-        f0_espaldera.datatype = "number";
-        qcRecords.filter.push(f0_espaldera);
-        var f0_hilera = new QueryParser_1.Filter();
-        f0_hilera.key = 'hilera';
-        f0_hilera.value = this._plant.getAttribute("5807af9231f55d0010aaffe5").value;
-        ;
-        f0_hilera.datatype = "number";
-        qcRecords.filter.push(f0_hilera);
-        for (var index = 0; index < this._restriction.length; index++) {
-            var element = this._restriction[index];
-            if (element.id === 'schm') {
-                qcRecords.schm = element.string;
+        this.idEvaluated.forEach(function (d) {
+            //revisar si existe previamente la planta en la lista evaluados
+            var indexEv;
+            if (_this._evaluated && _this._evaluated.length) {
+                indexEv = _this._evaluated.map(function (x) { return x.id; }).indexOf(d);
             }
-            if (element.id === 'filter') {
-                var f = new QueryParser_1.Filter();
-                var set = element.string.split('|');
-                console.log('/*****************************************************************************/');
-                console.log(set);
-                f.key = set[0];
-                f.value = set[1];
-                f.datatype = set[2];
-                qcRecords.filter.push(f);
+            else {
+                indexEv = -1;
             }
+            //tomar planta desde main list
+            var indexMain = _this._mainList.map(function (x) { return x.id; }).indexOf(d);
+            var currentPlant;
+            if (indexMain !== -1) {
+                currentPlant = _this._mainList.getItem(indexMain);
+            }
+            //revisar y eliminar si la planta esta en la lista de no evaluados
+            var indexNoEv = _this._noEvaluated.map(function (x) { return x.id; }).indexOf(d);
+            if (indexNoEv !== -1) {
+                _this._noEvaluated.splice(indexNoEv, 1);
+            }
+            //insertar planta evaluada en lista evaluated
+            if (indexEv === -1) {
+                _this._evaluated.push(currentPlant);
+            }
+        });
+        this._sortList(this._evaluated, this._observable.get('sort'));
+    };
+    HileraFactory.prototype.reverse = function () {
+        this._noEvaluated.reverse();
+        this._noEvaluated.push(this._noEvaluated.getItem(0));
+        this._noEvaluated.pop();
+        this.evaluated.reverse();
+        this.evaluated.push(this.evaluated.getItem(0));
+        this.evaluated.pop();
+    };
+    HileraFactory.prototype._sortList = function (arr, direction) {
+        if (!arr || arr.length === 0) {
+            return;
         }
-        var records = new RecordService_1.FindRecords(qcRecords);
-        //57c42f77c8307cd5b82f4486 es el individuo ref
-        return records.finds()
-            .then(function (d) {
-            //console.log('respuesta*********************************************************************')
-            //console.log(JSON.stringify(d));
-            //console.log(d.length);
-            //console.log('/*****************************************************************************/')
-            return d;
-        })
-            .then(function (x) { return x.map(function (i) { return i.getAttribute("57c42f77c8307cd5b82f4486").value; }); }).then(function (r) {
-            var pass = [];
-            for (var w = 0; w < plants.length; w++) {
-                var index = r.indexOf(plants[w].id);
-                //console.log('/*****************************************************************************/')
-                //console.log('INDEX '+index);
-                if (index !== -1) {
-                    pass.push(plants[w]);
+        if (direction !== 'asc' && direction !== 'desc') {
+            direction = 'asc';
+        }
+        if (direction === 'asc') {
+            arr.sort(function (a, b) {
+                if (a.position < b.position) {
+                    return -1;
                 }
+                else {
+                    return 1;
+                }
+            });
+        }
+        if (direction === 'desc') {
+            arr.sort(function (a, b) {
+                if (a.position > b.position) {
+                    return -1;
+                }
+                else {
+                    return 1;
+                }
+            });
+        }
+        this._noEvaluated.push(this._noEvaluated.getItem(0));
+        this._noEvaluated.pop();
+    };
+    Object.defineProperty(HileraFactory.prototype, "sort", {
+        get: function () {
+            return this._observable.get('sort');
+        },
+        set: function (value) {
+            this._observable.set('sort', value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HileraFactory.prototype, "observable", {
+        get: function () {
+            return this._observable;
+        },
+        set: function (value) {
+            this._observable = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HileraFactory.prototype, "idRestrictions", {
+        get: function () {
+            return this._idRestrictions;
+        },
+        set: function (value) {
+            if (value && Array.isArray(value)) {
+                this._idRestrictions = new observable_array_1.ObservableArray(value);
+                for (var index = 0; index < this._idRestrictions.length; index++) {
+                    var element = this._idRestrictions.getItem(index);
+                    var indexNoEv = this._noEvaluated.map(function (x) { return x.id; }).indexOf(element);
+                    if (indexNoEv !== -1) {
+                        console.log('esta en la lista de no evaluados');
+                        this._noEvaluated.splice(indexNoEv, 1);
+                    }
+                }
+                this._noEvaluated.push(this._noEvaluated.getItem(0));
+                this._noEvaluated.pop();
+                if (this._callbackOnChangeList) {
+                    this._callbackOnChangeList();
+                }
+                this._sortList(this._noEvaluated, this._observable.get('sort'));
+                console.log(value);
             }
-            _this._rowPlants = pass;
-            return pass;
-        });
-    };
-    Hilera.prototype.getEvaluatedId = function () {
-        var qcRecords = new QueryParser_1.QueryConfig();
-        qcRecords.items = "100";
-        // fenotipado 0
-        qcRecords.schm = this._schmEvaluation.id;
-        var f0_espaldera = new QueryParser_1.Filter();
-        f0_espaldera.key = "espaldera";
-        f0_espaldera.value = this._plant.getAttribute("5807af5f31f55d0010aaffe4").value;
-        ;
-        f0_espaldera.datatype = "number";
-        var f0_hilera = new QueryParser_1.Filter();
-        f0_hilera.key = 'hilera';
-        f0_hilera.value = this._plant.getAttribute("5807af9231f55d0010aaffe5").value;
-        ;
-        f0_hilera.datatype = "number";
-        qcRecords.filter = [f0_espaldera, f0_hilera];
-        var records = new RecordService_1.FindRecords(qcRecords);
-        //57c42f77c8307cd5b82f4486 es el individuo ref
-        return records.finds().then(function (x) { return x.map(function (i) { return i.getAttribute("57c42f77c8307cd5b82f4486").value; }); });
-    };
-    Hilera.prototype.getEvandNoev = function () {
-        var _this = this;
-        if (this._rowPlants) {
-            return this.getEvaluatedId().then(function (ids) {
-                var ev = [];
-                var noev = [];
-                for (var e = 0; e < _this._rowPlants.length; e++) {
-                    var index = ids.indexOf(_this._rowPlants[e].id);
-                    var curr = {
-                        name: _this._rowPlants[e].getUbicación(),
-                        id: _this._rowPlants[e].id,
-                        position: _this._rowPlants[e].getAttribute('5807afe331f55d0010aaffe6').value,
-                        plant: _this._rowPlants[e]
-                    };
-                    if (index === -1) {
-                        noev.push(curr);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HileraFactory.prototype, "addEvaluated", {
+        set: function (value) {
+            this._idEvaluated.push(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HileraFactory.prototype, "idEvaluated", {
+        get: function () {
+            return this._idEvaluated;
+        },
+        set: function (value) {
+            var _this = this;
+            if (value && Array.isArray(value)) {
+                this._idEvaluated = new observable_array_1.ObservableArray(value);
+                //TODO: cambiar esto por for loop
+                this._idEvaluated.forEach(function (d) {
+                    //revisar si existe previamente la planta en la lista evaluados
+                    var indexEv;
+                    if (_this._evaluated && _this._evaluated.length) {
+                        indexEv = _this._evaluated.map(function (x) { return x.id; }).indexOf(d);
                     }
                     else {
-                        ev.push(curr);
+                        indexEv = -1;
                     }
-                }
-                return {
-                    evaluados: ev,
-                    noEvaluados: noev
-                };
-            });
-        }
-        else {
-            return this.getMainList().then(function (w) {
-                return _this.getEvaluatedId().then(function (ids) {
-                    var ev = [];
-                    var noev = [];
-                    for (var e = 0; e < _this._rowPlants.length; e++) {
-                        var index = ids.indexOf(_this._rowPlants[e].id);
-                        var curr = {
-                            name: _this._rowPlants[e].getUbicación(),
-                            id: _this._rowPlants[e].id,
-                            position: _this._rowPlants[e].getAttribute('5807afe331f55d0010aaffe6').value,
-                            plant: _this._rowPlants[e]
-                        };
-                        if (index === -1) {
-                            noev.push(curr);
-                        }
-                        else {
-                            ev.push(curr);
-                        }
+                    //tomar planta desde main list
+                    var indexMain = _this._mainList.map(function (x) { return x.id; }).indexOf(d);
+                    var currentPlant;
+                    if (indexMain !== -1) {
+                        currentPlant = _this._mainList.getItem(indexMain);
                     }
-                    return {
-                        evaluados: ev,
-                        noEvaluados: noev
-                    };
+                    //revisar y eliminar si la planta esta en la lista de no evaluados
+                    var indexNoEv = _this._noEvaluated.map(function (x) { return x.id; }).indexOf(d);
+                    if (indexNoEv !== -1) {
+                        _this._noEvaluated.splice(indexNoEv, 1);
+                    }
+                    //insertar planta evaluada en lista evaluated
+                    if (indexEv === -1 && currentPlant) {
+                        _this._evaluated.push(currentPlant);
+                    }
                 });
-            });
-        }
-    };
-    return Hilera;
+                if (this._callbackOnChangeList) {
+                    this._callbackOnChangeList();
+                }
+                this._sortList(this._evaluated, this._observable.get('sort'));
+                this._idEvaluated.on(observable_array_1.ObservableArray.propertyChangeEvent, function (args) {
+                    if (args.eventName === 'propertyChange') {
+                        _this._idEvaluated.forEach(function (d) {
+                            //revisar si existe previamente la planta en la lista evaluados
+                            var indexEv;
+                            if (_this._evaluated && _this._evaluated.length) {
+                                indexEv = _this._evaluated.map(function (x) { return x.id; }).indexOf(d);
+                            }
+                            else {
+                                indexEv = -1;
+                            }
+                            //tomar planta desde main list
+                            var indexMain = _this._mainList.map(function (x) { return x.id; }).indexOf(d);
+                            var currentPlant;
+                            if (indexMain !== -1) {
+                                currentPlant = _this._mainList.getItem(indexMain);
+                            }
+                            //revisar y eliminar si la planta esta en la lista de no evaluados
+                            var indexNoEv = _this._noEvaluated.map(function (x) { return x.id; }).indexOf(d);
+                            if (indexNoEv !== -1) {
+                                _this._noEvaluated.splice(indexNoEv, 1);
+                            }
+                            //insertar planta evaluada en lista evaluated
+                            if (indexEv === -1 && currentPlant) {
+                                _this._evaluated.push(currentPlant);
+                            }
+                        });
+                        if (_this._callbackOnChangeList) {
+                            _this._callbackOnChangeList();
+                        }
+                        _this._sortList(_this._evaluated, _this._observable.get('sort'));
+                    }
+                });
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HileraFactory.prototype, "evaluated", {
+        get: function () {
+            return this._evaluated;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HileraFactory.prototype, "noEvaluated", {
+        get: function () {
+            return this._noEvaluated;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HileraFactory.prototype, "evTabTitle", {
+        get: function () {
+            return this._evaluated.length + ' ' + this._evTabTitle;
+        },
+        set: function (value) {
+            this._evTabTitle = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HileraFactory.prototype, "NoEvTabTitle", {
+        get: function () {
+            return this._noEvaluated.length + ' ' + this._NoEvTabTitle;
+        },
+        set: function (value) {
+            this._NoEvTabTitle = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HileraFactory.prototype, "callbackOnChangeList", {
+        get: function () {
+            return this._callbackOnChangeList;
+        },
+        set: function (value) {
+            this._callbackOnChangeList = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return HileraFactory;
 }());
-exports.Hilera = Hilera;
+exports.HileraFactory = HileraFactory;
 //# sourceMappingURL=index.js.map

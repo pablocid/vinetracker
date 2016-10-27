@@ -1,3 +1,4 @@
+import {ContextFS} from '../../../factories/ContextFS';
 import {FindSchm} from '../../../services/RecordService';
 import {Schema} from '../../../factories/Schema';
 import { parse as Parse, load as Load, LoadOptions } from 'ui/builder';
@@ -10,6 +11,7 @@ import { Context } from '../../../factories/Context';
 import { QueryConfig, Filter } from '../../../factories/QueryParser';
 import {action as Action} from 'ui/dialogs';
 
+
 export class EvaluationListView {
 
     private _config:QueryConfig;
@@ -18,7 +20,7 @@ export class EvaluationListView {
     private _listItems: Schema[];
     private _theme:View;
     private _filter: Filter;
-    private _context: Context;
+    private _callbackOnSelection:any;
 
     constructor(){
 
@@ -27,7 +29,6 @@ export class EvaluationListView {
             path:'~/PlantDashboard/Components/EvaluationList'
         });
         this._config = new QueryConfig();
-        this._context = new Context();
 
         this._filter = new Filter();
         this._filter.key = 'attributes';
@@ -47,37 +48,9 @@ export class EvaluationListView {
 
     private _onTapItem(index) : void {
         var evaluacion = this._listItems[index];
-        this._context.schema = evaluacion;
-        //console.log("evaluacion.id "+evaluacion.id);
-
-        var msg = "Evaluar "+evaluacion.getAttr("listViewLabel", "string")+ ' por ...';
-        var opt1 = "hilera";
-        var opt2 = "planta (Código QR)";
-        
-        let navOpts = {
-            moduleName:"PlantDashboard/Localization/index",
-            context:this._context
+        if(this._callbackOnSelection){
+            this._callbackOnSelection(evaluacion);
         }
-        Topmost().navigate(navOpts);
-        /*
-        Action({
-          message: msg,
-          cancelButtonText: "cancelar",
-          actions: [opt1, opt2]
-        }).then(result => {
-            if(result === opt1){
-                console.log("La primera opción");
-                let navOpts = {
-                    moduleName:"PlantDashboard/Localization/index",
-                    context:this._context
-                }
-                Topmost().navigate(navOpts);
-            }
-            if(result === opt2){
-                console.log("La segunda opción")
-            }
-        });
-        */
      }
 
      private _setUpView(items : Schema[]) : void {
@@ -102,5 +75,15 @@ export class EvaluationListView {
 
          return grid;
      }
+
+
+	public get callbackOnSelection(): any {
+		return this._callbackOnSelection;
+	}
+
+	public set callbackOnSelection(value: any) {
+		this._callbackOnSelection = value;
+	}
+     
 
 }

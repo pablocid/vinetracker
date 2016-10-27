@@ -16,7 +16,7 @@ export class List extends BaseComponent{
 
     }
     public set items (value: any[]){
-        this._viewModel.set('items', value)
+        this._viewModel.set('items', value);
     }
     public get items ():any[]{
         return this._viewModel.get('items');

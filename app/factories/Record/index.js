@@ -135,6 +135,41 @@ var Plant = (function (_super) {
         }
         return 'ubicación ***';
     };
+    Object.defineProperty(Plant.prototype, "name", {
+        get: function () {
+            //console.log('Plant - getUbicación');
+            var espaldera = this.getAttribute('5807af5f31f55d0010aaffe4').value;
+            var hilera = this.getAttribute('5807af9231f55d0010aaffe5').value;
+            var posicion = this.getAttribute('5807afe331f55d0010aaffe6').value || '-';
+            if (espaldera && hilera) {
+                return "E" + espaldera + " H" + hilera + " P" + posicion;
+            }
+            return 'ubicación ***';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Plant.prototype, "position", {
+        get: function () {
+            return this.getAttribute('5807afe331f55d0010aaffe6').value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Plant.prototype, "hilera", {
+        get: function () {
+            return this.getAttribute('5807af9231f55d0010aaffe5').value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Plant.prototype, "espaldera", {
+        get: function () {
+            return this.getAttribute('5807af5f31f55d0010aaffe4').value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Plant;
 }(Record));
 exports.Plant = Plant;

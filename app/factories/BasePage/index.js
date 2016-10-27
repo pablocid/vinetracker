@@ -85,17 +85,31 @@ var BasePage = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(BasePage.prototype, "fnOnShownModally", {
+        get: function () {
+            return this._fnOnShownModally;
+        },
+        set: function (value) {
+            this._fnOnShownModally = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     BasePage.prototype.onNavigatedTo = function (args) {
         //console.log('onNavigatedTo');
-        if (this._fnOnLoad) {
-            this._fnOnLoad();
-        }
+        //if(this._fnOnLoad){ this._fnOnLoad(args); }
     };
     BasePage.prototype.onLoaded = function (args) {
         //console.log('onLoaded');
+        if (this._fnOnLoad) {
+            this._fnOnLoad(args);
+        }
     };
     BasePage.prototype.onShownModally = function (args) {
         //console.log('onShownModally');
+        if (this._fnOnShownModally) {
+            this._fnOnShownModally(args);
+        }
     };
     BasePage.prototype.onNavigatingTo = function (args) {
         //console.log('navigatingTo');
@@ -103,10 +117,10 @@ var BasePage = (function () {
     BasePage.prototype.createPage = function () {
         var _this = this;
         this._setMainContent();
-        this._page.on(page_1.Page.navigatedToEvent, function (x) { _this.onNavigatedTo(x); });
+        //this._page.on(Page.navigatedToEvent, x=>{ this.onNavigatedTo(x) });
         this._page.on(page_1.Page.loadedEvent, function (x) { _this.onLoaded(x); });
-        this._page.on(page_1.Page.shownModallyEvent, function (x) { _this.onLoaded(x); });
-        this._page.on(page_1.Page.navigatingToEvent, function (x) { _this.onNavigatingTo(x); });
+        this._page.on(page_1.Page.shownModallyEvent, function (x) { _this.onShownModally(x); });
+        //this._page.on(Page.navigatingToEvent, x=>{ this.onNavigatingTo(x) } );
         return this._page;
     };
     return BasePage;

@@ -323,8 +323,10 @@ export class SchemaFull {
     private _schm: Schema;
     private _attrSchms : AttrSchm[];
     private _inputs : InputSchm[];
+    private _data: any;
 
     constructor(schema:any[]){
+        this._data = schema;
         this._setInputSchms(schema);
         this._setSchema(schema);
 
@@ -332,6 +334,14 @@ export class SchemaFull {
         this._setAttrSchms(schema);
         
     }
+
+	public get data(): any {
+		return this._data;
+	}
+
+	public set data(value: any) {
+		this._data = value;
+	}
     
 
 	public get schm(): Schema {

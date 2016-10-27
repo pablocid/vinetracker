@@ -1,21 +1,18 @@
 "use strict";
+var ContextFS_1 = require('../../factories/ContextFS');
 var Hilera_1 = require('../../factories/Hilera');
-var NoEvaluated_1 = require('../Components/NoEvaluated');
-var QueryParser_1 = require('../../factories/QueryParser');
 var RecordService_1 = require('../../services/RecordService');
 var List_1 = require('../Components/List');
 var BasePage_1 = require('../../factories/BasePage');
 var tab_view_1 = require("ui/tab-view");
 var action_bar_1 = require('ui/action-bar');
-var frame_1 = require('ui/frame');
 var lodash = require('lodash');
 /**
  * Loader indicator
  */
 var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
-var loader = new LoadingIndicator();
 var options = {
-    message: 'preparando la evaluación ...',
+    message: 'cargando la evaluación ...',
     progress: 0.65,
     android: {
         indeterminate: true,
@@ -27,100 +24,116 @@ var options = {
         secondaryProgress: 1
     }
 };
-/******************** */
+var options2 = {
+    message: 'filtrando plantas disponibles ...',
+    progress: 0.65,
+    android: {
+        indeterminate: true,
+        cancelable: true,
+        max: 100,
+        progressNumberFormat: "%1d/%2d",
+        progressPercentFormat: 0.53,
+        progressStyle: 1,
+        secondaryProgress: 1
+    }
+};
+//********************
 var hileraPage = new BasePage_1.BasePage();
 var tab = new tab_view_1.TabView();
 hileraPage.mainContent = tab;
-/**************** ********************/
-function onload() {
-    var hileraC = new Hilera_1.Hilera();
-    var evalTitle = 'evaluados';
-    var noevTitle = 'no evaluados';
-    var context = hileraPage.page.navigationContext;
-    /**** for testing */
-    /*
-    var plantTest = new PlantTest();
-    var context = new Context();
-    context.plant = plantTest.getPlant();
-    context.schema = plantTest.getSchm();
-    */
-    /**** */
-    var esp = context.plant.getAttribute("5807af5f31f55d0010aaffe4").value;
-    var hil = context.plant.getAttribute("5807af9231f55d0010aaffe5").value;
-    var evalName = context.schema.description;
-    hileraPage.setTitleActionBar('E' + esp + ' ' + 'H' + hil, evalName);
-    hileraC.plant = context.plant;
-    hileraC.schmEvaluation = context.schema;
-    hileraC.restriction = context.schema.properties.restriction; //[{id:'schm', string:'57febcf1179c960010e41f66'}];
-    var evTab = new tab_view_1.TabViewItem();
-    var evaluados = new List_1.List();
-    evTab.view = evaluados.getView();
-    evTab.title = evalTitle;
-    var noevTab = new tab_view_1.TabViewItem();
-    var noevaluados = new NoEvaluated_1.NoEvaluated();
-    noevTab.view = noevaluados.getView();
-    noevTab.title = noevTitle;
-    tab.items = [noevTab, evTab];
-    /**********tap callbacks *****************/
-    evaluados.callbackOnTap = function (index) {
-        loader.show(options);
-        //console.log(evaluados.items[index].name);
-        context.plant = evaluados.items[index].plant;
-        var qc = new QueryParser_1.QueryConfig();
-        qc.id = context.plant.id;
-        qc.schm = context.schema.id;
-        qc.key = '57c42f77c8307cd5b82f4486';
-        qc.datatype = 'reference';
-        var req = new RecordService_1.FindRecord(qc);
-        req.find().then(function (d) {
-            context.record = d;
-            loader.hide();
-            frame_1.topmost().navigate({
-                moduleName: 'PlantDashboard/Evaluation/index',
-                context: context
-            });
-        });
-    };
-    noevaluados.callbackOnTap = function (index) {
-        loader.show(options);
-        //console.log(noevaluados.items[index].name);
-        context.plant = noevaluados.items[index].plant;
-        var qc = new QueryParser_1.QueryConfig();
-        qc.id = context.plant.id;
-        qc.schm = context.schema.id;
-        qc.key = '57c42f77c8307cd5b82f4486';
-        qc.datatype = 'reference';
-        var req = new RecordService_1.FindRecord(qc);
-        req.find().then(function (d) {
-            context.record = d;
-            loader.hide();
-            frame_1.topmost().navigate({
-                moduleName: 'PlantDashboard/Evaluation/index',
-                context: context
-            });
-        });
-    };
-    evaluados.loading = true;
-    noevaluados.loading = true;
-    /********* */
-    hileraC.getEvandNoev().then(function (r) {
-        evaluados.items = r.evaluados;
-        evTab.title = r.evaluados.length + ' ' + evalTitle;
-        noevaluados.items = r.noEvaluados;
-        noevTab.title = r.noEvaluados.length + ' ' + noevTitle;
-        ///******
-        evaluados.loading = false;
-        noevaluados.loading = false;
+var desc = new action_bar_1.ActionItem();
+desc.text = "orden descendente";
+desc.android.position = "popup";
+hileraPage.addActionItem(desc);
+var asc = new action_bar_1.ActionItem();
+asc.text = "orden ascendente";
+asc.android.position = "popup";
+hileraPage.addActionItem(asc);
+//**************** *******************
+function onload(args) {
+    var loader = new LoadingIndicator();
+    var contextFs = new ContextFS_1.ContextFS();
+    hileraPage.setTitleActionBar('Ubicación E' + contextFs.plant.espaldera + 'H' + contextFs.plant.hilera);
+    var hilera = new Hilera_1.HileraFactory(contextFs.hilera);
+    hilera.evTabTitle = 'evaluadas';
+    hilera.NoEvTabTitle = 'no evaluadas';
+    desc.on('tap', function (x) {
+        hilera.sort = 'desc';
     });
-    /******** */
+    asc.on('tap', function (x) {
+        hilera.sort = 'asc';
+    });
+    //****************** EVALUADAS
+    var evTab = new tab_view_1.TabViewItem();
+    evTab.title = hilera.evTabTitle;
+    var evList = new List_1.List();
+    evList.items = hilera.evaluated;
+    evTab.view = evList.getView();
+    evList.callbackOnTap = function (index) {
+        loader.show(options);
+        //importante setear la planta porque desde ahí saca el ID y la Ubicación
+        contextFs.plant = hilera.evaluated.getItem(index);
+        var record = new RecordService_1.FindForEvaluation();
+        record.record(contextFs.schema, contextFs.plant).then(function (d) {
+            contextFs.record = d;
+            loader.hide();
+            var modalPageModule = 'PlantDashboard/Evaluation/index';
+            var context = "some custom context";
+            var fullscreen = true;
+            hileraPage.page.showModal(modalPageModule, context, function (plant) {
+                console.log('closeCallback');
+                console.log('registro actualizado');
+            }, fullscreen);
+        });
+    };
+    //****************** NO EVALUADAS
+    var noEvTab = new tab_view_1.TabViewItem();
+    noEvTab.title = hilera.NoEvTabTitle;
+    var noEvList = new List_1.List();
+    noEvList.items = hilera.noEvaluated;
+    noEvList.callbackOnTap = function (index) {
+        loader.show(options);
+        //importante setear la planta porque desde ahí saca el ID y la Ubicación
+        contextFs.plant = hilera.noEvaluated.getItem(index);
+        var record = new RecordService_1.FindForEvaluation();
+        record.record(contextFs.schema, contextFs.plant).then(function (d) {
+            contextFs.record = d;
+            loader.hide();
+            var modalPageModule = 'PlantDashboard/Evaluation/index';
+            var context = "some custom context";
+            var fullscreen = true;
+            hileraPage.page.showModal(modalPageModule, context, function (plant) {
+                if (plant) {
+                    console.log('registro guardado. ID: ' + plant.id);
+                    hilera.addEvaluated = plant.id;
+                }
+            }, fullscreen);
+        });
+    };
+    noEvTab.view = noEvList.getView();
+    //*********** set TabViewItems
+    tab.items = [noEvTab, evTab];
+    hilera.callbackOnChangeList = function () {
+        evTab.title = hilera.evTabTitle;
+        noEvTab.title = hilera.NoEvTabTitle;
+    };
+    var findIds = new RecordService_1.FindPlantIds();
+    loader.show(options2);
+    findIds.getEvaluatedId(contextFs.schema, contextFs.plant).then(function (x) {
+        loader.hide();
+        if (x && x.length) {
+            hilera.idEvaluated = x;
+        }
+    });
+    //if(!contextFs.allowedPlantsId && contextFs.schema.properties.restriction && contextFs.schema.properties.restriction.length){
+    findIds.getRestrictionIds(contextFs.schema, contextFs.plant).then(function (x) {
+        if (x && x.length) {
+            hilera.idRestrictions = x;
+            contextFs.allowedPlantsId = x;
+        }
+    });
+    //}
 } /**************** end onLoad ********************/
 hileraPage.fnOnLoad = onload;
-var refresh = new action_bar_1.ActionItem();
-refresh.text = "refresh";
-refresh.android.position = "popup";
-refresh.on('tap', function (x) {
-    onload();
-});
-hileraPage.addActionItem(refresh);
 module.exports = hileraPage;
 //# sourceMappingURL=index.js.map

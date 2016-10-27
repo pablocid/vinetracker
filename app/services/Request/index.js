@@ -80,6 +80,7 @@ var Request = (function () {
             }
             else {
                 console.log('Error de codigo ' + err.statusCode + ' no manejado');
+                console.log(JSON.stringify(err));
                 throw new Error(err);
             }
         });
