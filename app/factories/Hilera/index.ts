@@ -164,20 +164,28 @@ export class HileraFactory{
 
 		if(value && Array.isArray(value)){
             this._idRestrictions = new ObservableArray(value);
-
+            let pass =[];
             for (var index = 0; index < this._idRestrictions.length; index++) {
                 var element = this._idRestrictions.getItem(index);
                 let indexNoEv = this._noEvaluated.map(x=>x.id).indexOf(element);
                 if(indexNoEv !== -1){
-                    console.log('esta en la lista de no evaluados')
-                    this._noEvaluated.splice(indexNoEv,1);
+                    pass.push(this._noEvaluated.getItem(indexNoEv));
                 }
                 
             }
 
+            while(this._noEvaluated.length){
+                this._noEvaluated.pop();
+            }
+
+            for (var i = 0; i < pass.length; i++) {
+                this._noEvaluated.push(pass[i]);
+                
+            }
+
             
-            this._noEvaluated.push(this._noEvaluated.getItem(0));
-            this._noEvaluated.pop();
+            //this._noEvaluated.push(this._noEvaluated.getItem(0));
+            //this._noEvaluated.pop();
             if(this._callbackOnChangeList){ this._callbackOnChangeList(); }
             this._sortList(this._noEvaluated,this._observable.get('sort'));
             console.log(value);

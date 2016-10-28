@@ -3,7 +3,8 @@ import { getString } from 'application-settings';
 import appSet = require("application-settings");
 var q = require('q');
 import { topmost as Topmost} from 'ui/frame';
-
+import {getConnectionType, connectionType} from 'connectivity';
+import {alert as Alert, AlertOptions} from 'ui/dialogs';
 export class RequestOpts{
 
     private _options: http.HttpRequestOptions;
@@ -41,6 +42,15 @@ export class Request{
         //console.log(JSON.stringify(this._requestOptions.options));
     }
     public make (){
+        let connection = getConnectionType();
+        if(connection === connectionType.none){
+            let alertOpt:AlertOptions = {};
+            alertOpt.cancelable = true;
+            alertOpt.message = 'el celular no tiene acceso a internet';
+            alertOpt.okButtonText = 'entendí';
+            alertOpt.title = 'Error de conexión';
+            Alert(alertOpt);
+        }
         var def = q.defer();
         http.request(this._requestOptions.options)
             .then(

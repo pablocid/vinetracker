@@ -16,15 +16,17 @@ var items = [
 ];
 function selectedOption(selectedArgs) {
     var index = selectedArgs.index;
-    var navOpts = {
+    var opt = {
         moduleName: items[index].link,
-        context: {
-            fn: function () {
-                console.log("en fn");
-            }
+        clearHistory: false,
+        animated: true,
+        transition: {
+            name: "slide",
+            duration: 380,
+            curve: "easeOut"
         }
     };
-    frame_1.topmost().navigate(navOpts);
+    frame_1.topmost().navigate(opt);
 }
 newView.setBindingContext({ items: items, selectedOption: selectedOption });
 var actionItem = new action_bar_1.ActionItem();
@@ -51,7 +53,7 @@ actionItem.on(action_bar_1.ActionItem.tapEvent, function (args) {
 });
 var b = new BasePage_1.BasePage();
 b.mainContent = newView.getContent();
-b.setTitleActionBar('PlantDashboard');
+b.setTitleActionBar('Plant Dashboard', 'menú principal de la aplicación');
 b.addActionItem(actionItem);
 module.exports = b;
 //# sourceMappingURL=index.js.map

@@ -21,7 +21,17 @@ var SideDrawerComponent = (function (_super) {
         this._viewModel.set('onTap', function (args) {
             //this._onTap(args.index);
             //console.log(JSON.stringify(args.index))
-            frame_1.topmost().navigate(_this._options[args.index].link);
+            var opt = {
+                moduleName: _this._options[args.index].link,
+                clearHistory: true,
+                animated: true,
+                transition: {
+                    name: "slideRight",
+                    duration: 380,
+                    curve: "easeOut"
+                }
+            };
+            frame_1.topmost().navigate(opt);
         });
     }
     SideDrawerComponent.prototype._onTap = function (index) {

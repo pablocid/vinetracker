@@ -27,13 +27,13 @@ var options = {
         secondaryProgress: 1
     }
 };
-var contextFS = new ContextFS_1.ContextFS();
 var localization = new BasePage_1.BasePage();
 var tab = new tab_view_1.TabView();
 localization.mainContent = tab;
 localization.setTitleActionBar('Localización', 'Elige la hilera que quires evaluar');
 /***************************onLoad ************************** */
 localization.fnOnLoad = function () {
+    var contextFS = new ContextFS_1.ContextFS();
     var resumenView = new EvaluationReport_1.SumaryReport();
     /**************** tabitems: SCAN ********************/
     var scan = new tab_view_1.TabViewItem();
@@ -78,7 +78,17 @@ localization.fnOnLoad = function () {
             return p;
         }).then(function (x) {
             loader.hide();
-            frame_1.topmost().navigate('PlantDashboard/HileraStatus/index');
+            var opt = {
+                moduleName: 'PlantDashboard/HileraStatus/index',
+                clearHistory: false,
+                animated: true,
+                transition: {
+                    name: "slide",
+                    duration: 380,
+                    curve: "easeOut"
+                }
+            };
+            frame_1.topmost().navigate(opt);
         });
     };
 }; /*************************** END onLoad ************************** */

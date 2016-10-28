@@ -18,9 +18,12 @@ export class ContextFS{
     private _data:DataJSON;
     private _file:File;
 
-    constructor(){        
+    constructor(){
         var documents = fs.knownFolders.documents();
         this._file = documents.getFile("schemas.json");
+        if(!this._file.readTextSync()){
+            this._file.writeTextSync('{}');
+        }
         this._data = <DataJSON>JSON.parse(this._file.readTextSync());
         if(!this._data.schema){
             this._data.schema = {};
@@ -35,7 +38,7 @@ export class ContextFS{
 
     public clean (){
         this._data = <DataJSON>{};
-        this._dataSaveToFile();
+        this._file.writeTextSync('{}');
     }
 
 	public get allowedPlantsId(): string[] {
@@ -71,7 +74,9 @@ export class ContextFS{
         this._dataSaveToFile();
     }
     public get schema():Schema{
-        return new Schema(this._data.schema);
+        if(this._data.schema){
+            return new Schema(this._data.schema);
+        }
     }
 
 	public get record(): Record {
@@ -91,8 +96,10 @@ export class ContextFS{
 	}
 
 	public get plant(): Plant {
-
-		return new Plant(this._data.plant.schm, this._data.plant.data);
+        if(this._data.plant && this._data.plant.schm){
+            return new Plant(this._data.plant.schm, this._data.plant.data);
+        }
+		
 	}
 
 	public set plant(value: Plant) {

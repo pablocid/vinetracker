@@ -6,11 +6,20 @@ var List_1 = require('../Components/List');
 var BasePage_1 = require('../../factories/BasePage');
 var tab_view_1 = require("ui/tab-view");
 var action_bar_1 = require('ui/action-bar');
+var frame_1 = require('ui/frame');
 var lodash = require('lodash');
 /**
  * Loader indicator
  */
 var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
+function contextChecker(schm, plant) {
+    if (!schm || !plant) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 var options = {
     message: 'cargando la evaluación ...',
     progress: 0.65,
@@ -50,10 +59,15 @@ asc.text = "orden ascendente";
 asc.android.position = "popup";
 hileraPage.addActionItem(asc);
 //**************** *******************
-function onload(args) {
+function onload() {
     var loader = new LoadingIndicator();
     var contextFs = new ContextFS_1.ContextFS();
-    hileraPage.setTitleActionBar('Ubicación E' + contextFs.plant.espaldera + 'H' + contextFs.plant.hilera);
+    if (contextChecker(contextFs.schema, contextFs.plant)) {
+        console.log("Topmost().navigate('PlantDashboard/Evaluations/index');");
+        frame_1.topmost().navigate('PlantDashboard/Evaluations/index');
+        return;
+    }
+    hileraPage.setTitleActionBar('Ubicación E' + contextFs.plant.espaldera + 'H' + contextFs.plant.hilera, contextFs.schema.properties.listViewLabel);
     var hilera = new Hilera_1.HileraFactory(contextFs.hilera);
     hilera.evTabTitle = 'evaluadas';
     hilera.NoEvTabTitle = 'no evaluadas';
@@ -119,21 +133,38 @@ function onload(args) {
     };
     var findIds = new RecordService_1.FindPlantIds();
     loader.show(options2);
+    var evStop = false;
     findIds.getEvaluatedId(contextFs.schema, contextFs.plant).then(function (x) {
-        loader.hide();
+        evStop = true;
+        stopLoader();
         if (x && x.length) {
             hilera.idEvaluated = x;
         }
     });
-    //if(!contextFs.allowedPlantsId && contextFs.schema.properties.restriction && contextFs.schema.properties.restriction.length){
+    var rStop = false;
     findIds.getRestrictionIds(contextFs.schema, contextFs.plant).then(function (x) {
+        rStop = true;
+        stopLoader();
         if (x && x.length) {
+            console.log('Restriciones ..........................................................................');
+            console.log(x);
             hilera.idRestrictions = x;
             contextFs.allowedPlantsId = x;
         }
     });
-    //}
+    function stopLoader() {
+        if (evStop && rStop) {
+            loader.hide();
+        }
+    }
 } /**************** end onLoad ********************/
+var update = new action_bar_1.ActionItem();
+update.text = "Actualizar información de las listas";
+update.android.position = "popup";
+update.on('tap', function (x) {
+    onload();
+});
+hileraPage.addActionItem(update);
 hileraPage.fnOnLoad = onload;
 module.exports = hileraPage;
 //# sourceMappingURL=index.js.map

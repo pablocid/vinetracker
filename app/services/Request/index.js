@@ -3,6 +3,8 @@ var http = require('http');
 var application_settings_1 = require('application-settings');
 var q = require('q');
 var frame_1 = require('ui/frame');
+var connectivity_1 = require('connectivity');
+var dialogs_1 = require('ui/dialogs');
 var RequestOpts = (function () {
     function RequestOpts(url, method, content) {
         if (url === '') {
@@ -49,6 +51,15 @@ var Request = (function () {
         //console.log(JSON.stringify(this._requestOptions.options));
     }
     Request.prototype.make = function () {
+        var connection = connectivity_1.getConnectionType();
+        if (connection === connectivity_1.connectionType.none) {
+            var alertOpt = {};
+            alertOpt.cancelable = true;
+            alertOpt.message = 'el celular no tiene acceso a internet';
+            alertOpt.okButtonText = 'entendí';
+            alertOpt.title = 'Error de conexión';
+            dialogs_1.alert(alertOpt);
+        }
         var def = q.defer();
         http.request(this._requestOptions.options)
             .then(function (res) {

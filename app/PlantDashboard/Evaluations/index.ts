@@ -14,21 +14,30 @@ import { StackLayout } from 'ui/layouts/stack-layout';
 import { parse as Parse, load as Load } from 'ui/builder';
 import fs = require("file-system");
 
-
-var context = new ContextFS();
-
-var evalListTab = new TabViewItem();
-var evalList = new EvaluationListView();
-
 var ePage = new BasePage();
+var evalList = new EvaluationListView();
 ePage.fnOnLoad = function(){
+    var context = new ContextFS();
     evalList.onLoadedPage();
+    context.clean();
+    evalList.callbackOnSelection = function(schema){
+        console.log(schema.name)
+        context.schema = schema;
+        let opt = {
+            moduleName:'PlantDashboard/Localization/index',
+            clearHistory: false,
+            animated: true,
+            transition: {
+                name: "slide",
+                duration: 380,
+                curve: "easeOut"
+            }
+        }
+        Topmost().navigate(opt);
+    }
 }
 ePage.mainContent = evalList.getView();
 ePage.setTitleActionBar('Evaluaciones','lista de evaluaciones disponibles');
 
-evalList.callbackOnSelection = function(schema){
-    context.schema = schema;
-    Topmost().navigate('PlantDashboard/Localization/index');
-}
+
 export = ePage;

@@ -1,12 +1,13 @@
   <GridLayout columns="*" rows="auto, *" >
     <Label text="{{description}}" row="0" col="0" backgroundColor="white" textWrap="true" 
     style="font-size:26; text-align:center; color:#616161; padding:15; margin-top:20;"/>
-    <GridLayout row="1" col="0" columns="auto, *" rows="100, 100,100, 100">
-        <Label col="0" row="0" text="Evaluación" style="font-size:20; margin-top:30; margin-left:20;" class="icon"/>
-        <Label col="1" row="0" text="{{evalName}}" style="font-size:20; text-align:center; margin-top:30; " class="icon"/>
+    <GridLayout row="1" col="0" columns="auto, *" rows="100, 50,100, 100" style="background-color: #f44242; color:white;">
 
-        <Label col="0" row="1" text="Ubicación" style="font-size:20; margin-top:30; margin-left:20;" class="icon"/>
-        <Label col="1" row="1" text="{{ubicacion}}" style="font-size:20; text-align:center; margin-top:30; " class="icon"/>
+        <Label col="0" row="1" text="Evaluación" style="font-size:20; margin-top:30; margin-left:20;" class="icon"/>
+        <Label col="1" row="1" text="{{evalName}}" style="font-size:20; text-align:center; margin-top:30; " class="icon" textWrap="true"/>
+
+        <Label col="0" row="2" text="Ubicación" style="font-size:20; margin-top:30; margin-left:20;" class="icon"/>
+        <Label col="1" row="2" text="{{ubicacion}}" style="font-size:20; text-align:center; margin-top:30; " class="icon" textWrap="true"/>
 
     </GridLayout>
   </GridLayout>

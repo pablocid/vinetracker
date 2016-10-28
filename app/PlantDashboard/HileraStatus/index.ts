@@ -32,7 +32,13 @@ var lodash = require('lodash');
  */
 var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
  
-
+function contextChecker(schm, plant){
+  if(!schm || !plant){
+    return true;
+  }else{
+    return false;
+  }
+}
 
 var options = {
   message: 'cargando la evaluación ...',
@@ -78,13 +84,19 @@ asc.android.position = "popup";
 
 hileraPage.addActionItem(asc);
 
+
 //**************** *******************
-function onload(args){
+function onload(){
   var loader = new LoadingIndicator();
 
   var contextFs = new ContextFS();
+  if(contextChecker(contextFs.schema, contextFs.plant)){
+    console.log("Topmost().navigate('PlantDashboard/Evaluations/index');")
+    Topmost().navigate('PlantDashboard/Evaluations/index');
+    return;
+  }
 
-  hileraPage.setTitleActionBar('Ubicación E'+contextFs.plant.espaldera+'H'+contextFs.plant.hilera);
+  hileraPage.setTitleActionBar('Ubicación E'+contextFs.plant.espaldera+'H'+contextFs.plant.hilera, contextFs.schema.properties.listViewLabel);
   var hilera = new HileraFactory(contextFs.hilera);
   hilera.evTabTitle = 'evaluadas';
   hilera.NoEvTabTitle = 'no evaluadas';
@@ -97,7 +109,6 @@ function onload(args){
     hilera.sort ='asc';
   });
   
-
   //****************** EVALUADAS
   var evTab = new TabViewItem();
   evTab.title = hilera.evTabTitle;
@@ -164,24 +175,44 @@ function onload(args){
   var findIds = new FindPlantIds();
   
   loader.show(options2);
-
-  findIds.getEvaluatedId(contextFs.schema, contextFs.plant).then(x=>{
-    loader.hide();
-    if(x && x.length){ hilera.idEvaluated = x; }
-  });
+  var evStop = false;
+    findIds.getEvaluatedId(contextFs.schema, contextFs.plant).then(x=>{
+      evStop =true;
+      stopLoader();
+      if(x && x.length){ hilera.idEvaluated = x; }
   
-  //if(!contextFs.allowedPlantsId && contextFs.schema.properties.restriction && contextFs.schema.properties.restriction.length){
-    findIds.getRestrictionIds(contextFs.schema, contextFs.plant).then(x=>{
-      if(x && x.length){
-        hilera.idRestrictions = x;
-        contextFs.allowedPlantsId = x;
-      }
     });
-  //}
-
+    var rStop= false;
+      findIds.getRestrictionIds(contextFs.schema, contextFs.plant).then(x=>{
+        rStop = true;
+        stopLoader();
+        if(x && x.length){
+          console.log('Restriciones ..........................................................................')
+          console.log(x);
+          hilera.idRestrictions = x;
+          contextFs.allowedPlantsId = x;
+        }
+      });
+  
+    function stopLoader(){
+      if(evStop && rStop){
+        loader.hide();
+      }
+    }
 }/**************** end onLoad ********************/
 
+
+var update = new ActionItem();
+update.text = "Actualizar información de las listas";
+update.android.position = "popup";
+update.on('tap', x=>{
+  onload();
+});
+
+hileraPage.addActionItem(update);
+
 hileraPage.fnOnLoad = onload;
+
 
 
 export =  hileraPage;

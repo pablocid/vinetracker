@@ -36,7 +36,7 @@ var options = {
   }
 };
 
-var contextFS = new ContextFS();
+
 
 var localization = new BasePage();
 var tab = new TabView();
@@ -45,7 +45,7 @@ localization.setTitleActionBar('Localización','Elige la hilera que quires evalu
 
 /***************************onLoad ************************** */
 localization.fnOnLoad = function(){
-
+    var contextFS = new ContextFS();
     var resumenView = new SumaryReport();
     
     /**************** tabitems: SCAN ********************/
@@ -104,7 +104,17 @@ localization.fnOnLoad = function(){
             return p;
         }).then(x=>{
             loader.hide();
-            Topmost().navigate('PlantDashboard/HileraStatus/index');
+            let opt = {
+                moduleName:'PlantDashboard/HileraStatus/index',
+                clearHistory: false,
+                animated: true,
+                transition: {
+                    name: "slide",
+                    duration: 380,
+                    curve: "easeOut"
+                }
+            }
+            Topmost().navigate(opt);
     
         })
     }

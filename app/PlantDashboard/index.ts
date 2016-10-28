@@ -49,15 +49,17 @@ var items = [
 ];
 function selectedOption(selectedArgs){
     let index = selectedArgs.index;
-    let navOpts = {
-        moduleName: items[index].link,
-        context:{
-            fn: function(){
-                console.log("en fn")
-            }
+    let opt = {
+        moduleName:items[index].link,
+        clearHistory: false,
+        animated: true,
+        transition: {
+            name: "slide",
+            duration: 380,
+            curve: "easeOut"
         }
     }
-    Topmost().navigate(navOpts);
+    Topmost().navigate(opt);
 }
 newView.setBindingContext({ items:items, selectedOption:selectedOption });
 
@@ -85,7 +87,7 @@ actionItem.on(ActionItem.tapEvent,(args:EventData)=>{
 })
 var b = new BasePage();
 b.mainContent = newView.getContent();
-b.setTitleActionBar('PlantDashboard');
+b.setTitleActionBar('Plant Dashboard', 'menú principal de la aplicación');
 b.addActionItem(actionItem);
 
 export = b;

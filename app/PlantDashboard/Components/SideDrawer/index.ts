@@ -25,7 +25,17 @@ export class SideDrawerComponent extends BaseComponent{
         this._viewModel.set('onTap', (args)=>{
             //this._onTap(args.index);
             //console.log(JSON.stringify(args.index))
-            Topmost().navigate(this._options[args.index].link)
+            let opt = {
+                moduleName:this._options[args.index].link,
+                clearHistory: true,
+                animated: true,
+                transition: {
+                    name: "slideRight",
+                    duration: 380,
+                    curve: "easeOut"
+                }
+            }
+            Topmost().navigate(opt)
         })
 
     }

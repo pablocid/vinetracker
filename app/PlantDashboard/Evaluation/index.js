@@ -41,10 +41,10 @@ page.fnOnShownModally = function (args) {
     });
     var tabsItems = [];
     var infoComp = new InfoComponent_1.InfoComponent();
-    infoComp.nameEvaluation = schema.name;
+    infoComp.nameEvaluation = schema.properties.listViewLabel;
     infoComp.ubicacion = plant.getUbicación();
     var infoTab = new tab_view_1.TabViewItem();
-    infoTab.title = 'info';
+    infoTab.title = 'información';
     infoTab.view = infoComp.getView();
     tabsItems.push(infoTab);
     for (var index = 0; index < record.schema.listAttrIds.length; index++) {
@@ -135,7 +135,7 @@ page.fnOnShownModally = function (args) {
             }
         }
         if (list.length) {
-            return 'Falta por registrar los siguientes atributos: \n' + list.join('\n');
+            return 'Falta por registrar los siguientes atributos: \n\n\n' + list.join('\n------------------------\n') + '\n------------------------';
         }
         else {
             return '';

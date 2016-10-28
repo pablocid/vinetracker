@@ -135,16 +135,22 @@ var HileraFactory = (function () {
         set: function (value) {
             if (value && Array.isArray(value)) {
                 this._idRestrictions = new observable_array_1.ObservableArray(value);
+                var pass = [];
                 for (var index = 0; index < this._idRestrictions.length; index++) {
                     var element = this._idRestrictions.getItem(index);
                     var indexNoEv = this._noEvaluated.map(function (x) { return x.id; }).indexOf(element);
                     if (indexNoEv !== -1) {
-                        console.log('esta en la lista de no evaluados');
-                        this._noEvaluated.splice(indexNoEv, 1);
+                        pass.push(this._noEvaluated.getItem(indexNoEv));
                     }
                 }
-                this._noEvaluated.push(this._noEvaluated.getItem(0));
-                this._noEvaluated.pop();
+                while (this._noEvaluated.length) {
+                    this._noEvaluated.pop();
+                }
+                for (var i = 0; i < pass.length; i++) {
+                    this._noEvaluated.push(pass[i]);
+                }
+                //this._noEvaluated.push(this._noEvaluated.getItem(0));
+                //this._noEvaluated.pop();
                 if (this._callbackOnChangeList) {
                     this._callbackOnChangeList();
                 }

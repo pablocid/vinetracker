@@ -6,6 +6,9 @@ var ContextFS = (function () {
     function ContextFS() {
         var documents = fs.knownFolders.documents();
         this._file = documents.getFile("schemas.json");
+        if (!this._file.readTextSync()) {
+            this._file.writeTextSync('{}');
+        }
         this._data = JSON.parse(this._file.readTextSync());
         if (!this._data.schema) {
             this._data.schema = {};
@@ -19,7 +22,7 @@ var ContextFS = (function () {
     }
     ContextFS.prototype.clean = function () {
         this._data = {};
-        this._dataSaveToFile();
+        this._file.writeTextSync('{}');
     };
     Object.defineProperty(ContextFS.prototype, "allowedPlantsId", {
         get: function () {
@@ -55,7 +58,9 @@ var ContextFS = (function () {
     };
     Object.defineProperty(ContextFS.prototype, "schema", {
         get: function () {
-            return new Schema_1.Schema(this._data.schema);
+            if (this._data.schema) {
+                return new Schema_1.Schema(this._data.schema);
+            }
         },
         set: function (schm) {
             this._data.schema = schm.data;
@@ -85,7 +90,9 @@ var ContextFS = (function () {
     });
     Object.defineProperty(ContextFS.prototype, "plant", {
         get: function () {
-            return new Record_1.Plant(this._data.plant.schm, this._data.plant.data);
+            if (this._data.plant && this._data.plant.schm) {
+                return new Record_1.Plant(this._data.plant.schm, this._data.plant.data);
+            }
         },
         set: function (value) {
             this._data.plant.data = value.data;

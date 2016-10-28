@@ -60,11 +60,11 @@ page.fnOnShownModally = function(args: ShownModallyData){
     var tabsItems = [];
 
     var infoComp = new InfoComponent();
-    infoComp.nameEvaluation = schema.name;
+    infoComp.nameEvaluation = schema.properties.listViewLabel;
     infoComp.ubicacion = plant.getUbicación();
 
     var infoTab = new TabViewItem();
-    infoTab.title = 'info';
+    infoTab.title = 'información';
     infoTab.view = infoComp.getView();
     tabsItems.push(infoTab);
         
@@ -160,7 +160,7 @@ page.fnOnShownModally = function(args: ShownModallyData){
             }
         }
         if(list.length){
-            return 'Falta por registrar los siguientes atributos: \n'+list.join('\n')
+            return 'Falta por registrar los siguientes atributos: \n\n\n'+list.join('\n------------------------\n')+'\n------------------------'
         }else{
             return '';
         }
