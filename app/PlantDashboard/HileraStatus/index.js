@@ -72,6 +72,13 @@ asc.on(action_bar_1.ActionItem.tapEvent, function () {
     hilera.setOrder('asc');
 });
 hileraPage.addActionItem(asc);
+var updateLists = new action_bar_1.ActionItem();
+updateLists.text = "actualizar listas";
+updateLists.android.position = "popup";
+updateLists.on(action_bar_1.ActionItem.tapEvent, function () {
+    makeView();
+});
+hileraPage.addActionItem(updateLists);
 //************** END: ActionItems **************
 var hilera = new HileraComponent_1.HileraComponent();
 hileraPage.mainContent = hilera.getView();
@@ -111,11 +118,12 @@ function load(newContext) {
         console.log('same');
         return;
     }
-    else {
-        console.log('not the same');
-        context = lodash.clone(newContext, true);
-        hilera.removeAllItems();
-    }
+    console.log('not the same');
+    context = lodash.clone(newContext, true);
+    makeView();
+}
+function makeView() {
+    hilera.removeAllItems();
     titlePage.set('title', 'Ubicación E' + context.plant.espaldera + 'H' + context.plant.hilera);
     titlePage.set('subTitle', context.schema.properties.listViewLabel + ' - En la hilera hay ' + context.hilera.length + ' plantas');
     hilera.mainList = context.hilera;
@@ -150,16 +158,14 @@ hilera.nonEvSelectItemCb = function (i, item) {
 };
 function onTapItem(i, item) {
     context.plant = item;
-    console.log(context.plant.id);
-    console.log(item.id);
+    console.log('onTapItem: plant id: ' + context.plant.id);
     loader.show(options);
     record.record(context.schema, item).then(function (d) {
         loader.hide();
         context.record = d;
-        var modalPageModule = 'PlantDashboard/Evaluation/evaluation-page';
+        var modalPageModule = 'PlantDashboard/EvaluationPage/evaluation-page';
         var fullscreen = true;
-        page.showModal(modalPageModule, context, function (status, id) {
-            page.closeModal();
+        hileraPage.page.showModal(modalPageModule, context, function (status, id) {
             console.log('closeCallback');
             console.log('registro actualizado');
             console.log(status);
