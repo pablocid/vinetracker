@@ -135,6 +135,13 @@ var Plant = (function (_super) {
         }
         return 'ubicación ***';
     };
+    Object.defineProperty(Plant.prototype, "ubicacion", {
+        get: function () {
+            return this.getUbicación();
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Plant.prototype, "name", {
         get: function () {
             //console.log('Plant - getUbicación');

@@ -255,7 +255,11 @@ export class PlantScanner{
         this._barcode = new BarcodeScanner();
 
         this._viewModel = new Observable();
-        this._viewModel.set('onScan',(args)=>{ this._onTapScan(args) });
+        this._viewModel.set('img','~/img/qrcode.png');
+        this._viewModel.set('onScan',(args)=>{
+            //console.log('onScan')
+            this._onTapScan(args) 
+        });
         this._viewModel.set('description', 'Escanea una planta para establecer la hilera');
         this._viewModel.set('loading', false);
         this._viewModel.set('code','');
@@ -358,6 +362,7 @@ export class PlantScanner{
 
     private _onTapScan(args){
         this._barcode.scan(this._barcordeOpts).then(r=>{
+            console.log('_onTapScan')
             this._findRecord(r);
         })
     }

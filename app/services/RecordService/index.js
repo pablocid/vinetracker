@@ -21,8 +21,8 @@ var BaseFind = (function () {
         var url = this._queryParser.parse();
         var o = new Request_1.RequestOpts(url, this._method);
         var r = new Request_1.Request(o);
-        console.log(JSON.stringify(o.url));
-        console.log(JSON.stringify(o.options));
+        //console.log(JSON.stringify(o.url))
+        //console.log(JSON.stringify(o.options))
         return r.make().then(function (a) {
             if (_this._factory) {
                 return _this.makeObj(a);
@@ -45,8 +45,8 @@ var Aggregate = (function (_super) {
         var url = this._queryParser.parse();
         var o = new Request_1.RequestOpts(url, this._method);
         var r = new Request_1.Request(o);
-        console.log(JSON.stringify(o.url));
-        console.log(JSON.stringify(o.options));
+        //console.log(JSON.stringify(o.url))
+        //console.log(JSON.stringify(o.options))
         return r.make();
     };
     Aggregate.prototype.raw = function () {
@@ -89,7 +89,7 @@ var FindPlant = (function (_super) {
     }
     FindPlant.prototype.makeObj = function (a) {
         var f = new Record_1.Plant(a.schema, a.record);
-        console.log(f.id);
+        //console.log(f.id);
         return f;
     };
     return FindPlant;
@@ -118,8 +118,8 @@ var FindPlants = (function (_super) {
         var url = this._queryParser.parse();
         var o = new Request_1.RequestOpts(url, this._method);
         var r = new Request_1.Request(o);
-        console.log(JSON.stringify(o.url));
-        console.log(JSON.stringify(o.options));
+        //console.log(JSON.stringify(o.url))
+        //console.log(JSON.stringify(o.options))
         return r.make().then(function (a) {
             if (_this._factory) {
                 return _this.makeObj(a);
@@ -152,8 +152,8 @@ var FindRecords = (function (_super) {
         var url = this._queryParser.parse();
         var o = new Request_1.RequestOpts(url, this._method);
         var r = new Request_1.Request(o);
-        console.log(JSON.stringify(o.url));
-        console.log(JSON.stringify(o.options));
+        //console.log(JSON.stringify(o.url))
+        //console.log(JSON.stringify(o.options))
         return r.make().then(function (a) {
             if (_this._factory) {
                 return _this.makeObj(a);

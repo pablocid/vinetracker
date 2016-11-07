@@ -1,9 +1,9 @@
 <StackLayout class="sidedrawer">
     <StackLayout>
-        <Label text="{{title}}" color="white" style=" text-align:center; font-size:40;"/>
+        <Label text="{{title}}" cssClass="sidedrawer-title"/>
         <ListView id="menuList" items="{{ items }}" itemTap="{{onTap}}">
             <ListView.itemTemplate>
-                <Label text="{{ label }}" color="white" textWrap="true" style="font-size:30; text-align:center; margin-top: 20;" />
+                <Label text="{{ label }}" textWrap="true" cssClass="sidedrawer-listitem" />
             </ListView.itemTemplate>
         </ListView>
     </StackLayout>

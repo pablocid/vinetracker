@@ -9,6 +9,7 @@ var appViewModel = new observable_1.Observable({ selectedPage: "home" });
 var sidedrawer = new sidedrawer_1.RadSideDrawer();
 var BasePage = (function () {
     function BasePage() {
+        var _this = this;
         this._page = new page_1.Page();
         this._sidedrawer = new sidedrawer_1.RadSideDrawer();
         this._navBtn = new action_bar_1.NavigationButton();
@@ -19,6 +20,22 @@ var BasePage = (function () {
         this._setActionBar();
         /*************** ADDING ITEMS *******************/
         this._setPageContent();
+        this._page.on(page_1.Page.shownModallyEvent, function (args) {
+            if (_this._fnOnShownModally) {
+                _this._fnOnShownModally(args);
+            }
+        });
+        this._page.on(page_1.Page.navigatingToEvent, (function (args) {
+            if (_this._fnOnLoad) {
+                _this._fnOnLoad(args);
+            }
+        }));
+        this._page.on(page_1.Page.unloadedEvent, function (args) {
+            if (_this._fnOnUnLoaded) {
+                _this._fnOnUnLoaded;
+            }
+        });
+        this._created = false;
     }
     Object.defineProperty(BasePage.prototype, "page", {
         get: function () {
@@ -27,13 +44,23 @@ var BasePage = (function () {
         enumerable: true,
         configurable: true
     });
-    BasePage.prototype.setTitleActionBar = function (title, subTitle) {
+    /**
+     * Parametros:
+     * el parametro viewModel debe tener las propiedades title y subTitle
+     */
+    BasePage.prototype.setTitleActionBar = function (title, subTitle, viewModel) {
         var theme;
         if (subTitle) {
-            theme = builder_1.parse("\n                    <StackLayout>\n                        <Label text=\"" + title + "\" style=\"font-size:18;\"/>\n                        <Label text=\"" + subTitle + "\" style=\"font-size:12;\"/>\n                    </StackLayout>\n            ");
+            theme = builder_1.parse("\n                    <StackLayout>\n                        <Label text=\"{{title}}\" style=\"font-size:18;\"/>\n                        <Label text=\"{{subTitle}}\" style=\"font-size:12;\"/>\n                    </StackLayout>\n            ");
         }
         else {
-            theme = builder_1.parse("\n                    <StackLayout>\n                        <Label text=\"" + title + "\" style=\"font-size:20;\"/>\n                    </StackLayout>\n            ");
+            theme = builder_1.parse("\n                    <StackLayout>\n                        <Label text=\"{{title}}\" style=\"font-size:20;\"/>\n                    </StackLayout>\n            ");
+        }
+        if (viewModel) {
+            theme.bindingContext = viewModel;
+        }
+        else {
+            theme.bindingContext = { title: title, subTitle: subTitle };
         }
         this._actionBar.titleView = theme;
     };
@@ -47,6 +74,7 @@ var BasePage = (function () {
         },
         set: function (value) {
             this._mainContent = value;
+            this._sidedrawer.mainContent = value;
         },
         enumerable: true,
         configurable: true
@@ -70,6 +98,9 @@ var BasePage = (function () {
     };
     BasePage.prototype._setMainContent = function () {
         this._sidedrawer.mainContent = this._mainContent;
+    };
+    BasePage.prototype.setMainContent = function () {
+        //this._setMainContent();
     };
     BasePage.prototype._setPageContent = function () {
         this._page.actionBar = this._actionBar;
@@ -95,32 +126,43 @@ var BasePage = (function () {
         enumerable: true,
         configurable: true
     });
-    BasePage.prototype.onNavigatedTo = function (args) {
+    Object.defineProperty(BasePage.prototype, "fnOnUnLoaded", {
+        get: function () {
+            return this._fnOnUnLoaded;
+        },
+        set: function (value) {
+            this._fnOnUnLoaded = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /*
+    onNavigatedTo (args:EventData){
         //console.log('onNavigatedTo');
         //if(this._fnOnLoad){ this._fnOnLoad(args); }
-    };
-    BasePage.prototype.onLoaded = function (args) {
+    }
+
+    onPageLoaded (args:EventData){
         //console.log('onLoaded');
-        if (this._fnOnLoad) {
-            this._fnOnLoad(args);
-        }
-    };
-    BasePage.prototype.onShownModally = function (args) {
+        if(this._fnOnLoad){ this._fnOnLoad(args); }
+    }
+    onShownModally ( args:EventData){
         //console.log('onShownModally');
-        if (this._fnOnShownModally) {
-            this._fnOnShownModally(args);
-        }
-    };
-    BasePage.prototype.onNavigatingTo = function (args) {
+        if(this._fnOnShownModally){ this._fnOnShownModally(args); }
+    }
+    onNavigatingTo ( args:EventData){
         //console.log('navigatingTo');
-    };
-    BasePage.prototype.createPage = function () {
-        var _this = this;
-        this._setMainContent();
+    }
+    */
+    BasePage.prototype.createPage = function (args) {
+        console.log(this._created);
+        if (!this._created) {
+            //this._setMainContent();
+            this._created = true;
+        }
+        console.log('creating a page: ---------------------------------------____> this._setMainContent();');
         //this._page.on(Page.navigatedToEvent, x=>{ this.onNavigatedTo(x) });
-        this._page.on(page_1.Page.loadedEvent, function (x) { _this.onLoaded(x); });
-        this._page.on(page_1.Page.shownModallyEvent, function (x) { _this.onShownModally(x); });
-        //this._page.on(Page.navigatingToEvent, x=>{ this.onNavigatingTo(x) } );
+        //this._page.on(Page.loadedEvent, x=>{ if(this._fnOnLoad){ this._fnOnLoad(x); } }) ;
         return this._page;
     };
     return BasePage;

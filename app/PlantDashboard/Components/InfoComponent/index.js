@@ -18,12 +18,26 @@ var InfoComponent = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(InfoComponent.prototype, "evalDescription", {
+        set: function (value) {
+            this._viewModel.set('evalDescript', value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(InfoComponent.prototype, "ubicacion", {
         get: function () {
             return this._viewModel.get('ubicacion');
         },
         set: function (value) {
             this._viewModel.set('ubicacion', value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfoComponent.prototype, "codigos", {
+        set: function (value) {
+            this._viewModel.set('codigos', value);
         },
         enumerable: true,
         configurable: true

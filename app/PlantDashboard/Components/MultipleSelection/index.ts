@@ -14,7 +14,20 @@ export class MultipleSelection extends BaseInputComponent {
     constructor(attr: RecordAttribute){
         super(attr);
         this._props = <SelectionListAttrProps>this._properties;
-        this._options = new ObservableArray(this._props.options.map( (x, i) =>{
+        let allowOptions = this._recordAttr.parent.schema.schm.properties['5808dc55832db50010d3192b'];
+        let opt = [];
+        if(allowOptions && allowOptions.length){
+            for (var i = 0; i < allowOptions.length; i++) {
+                var e = allowOptions[i];
+                let index = this._props.options.map(x=>x.id).indexOf(e);
+                if(index !== -1){
+                    opt.push(this._props.options[index]);
+                }
+            }
+        }else{
+            opt = this._props.options;
+        }
+        this._options = new ObservableArray(opt.map( (x, i) =>{
 
             let o = new Observable();
             o.set('checked', false);

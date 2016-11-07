@@ -1,6 +1,10 @@
 var application = require("application");
 var appSet = require("application-settings");
 
+var utils = require('utils/utils');
+
+
+
 
 application.start({ moduleName: "main-page" });
 
@@ -21,6 +25,7 @@ application.on("exit",function () {
 });
 
 application.on("lowMemory",function () {
+    utils.GC();
     console.log("Baja memoria");
 });
 
@@ -29,3 +34,4 @@ application.on("uncaughError",function () {
 });
 
 appSet.setString('baseUrl','https://pmg-restful-dev.herokuapp.com/');
+appSet.setString('bucketUrl','https://s3-sa-east-1.amazonaws.com/pmgv-files/');

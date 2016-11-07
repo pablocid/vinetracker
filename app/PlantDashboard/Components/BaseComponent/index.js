@@ -18,13 +18,13 @@ var BaseInputComponent = (function (_super) {
     function BaseInputComponent(attr) {
         _super.call(this);
         this._recordAttr = attr;
-        console.log(JSON.stringify(this._recordAttr.attrSchm.properties));
+        //console.log(JSON.stringify(this._recordAttr.attrSchm.properties))
         this._properties = this._recordAttr.attrSchm.properties;
         this._viewModel.set('label', this._properties.label);
     }
-    BaseInputComponent.prototype._callback = function () {
+    BaseInputComponent.prototype._callback = function (value) {
         if (this._onChangeDataCallback) {
-            this._onChangeDataCallback();
+            this._onChangeDataCallback(value);
         }
     };
     Object.defineProperty(BaseInputComponent.prototype, "onChangeDataCallback", {

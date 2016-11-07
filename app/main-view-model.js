@@ -28,7 +28,9 @@ function createViewModel() {
 
     //frame.topmost().navigate('login/index');
     //frame.topmost().navigate('PlantDashboard/Localization/index');
+    //frame.topmost().navigate('PlantDashboard/Localization/localization-page');
     //frame.topmost().navigate('PlantDashboard/HileraStatus/index');
+    //frame.topmost().navigate('PlantDashboard/HileraStatus/hstatus-page');
     //frame.topmost().navigate('PlantDashboard/Evaluation/index');
     
     //frame.topmost().navigate({moduleName:'evaluations/evaluation-records',context:{schema: "57c42f2fc8307cd5b82f4484",listViewAttr:"57c84628ab66902c2208a855"}});
@@ -38,8 +40,9 @@ function createViewModel() {
 
     /** Test routes */
     //frame.topmost().navigate("factories/DataTest/Test_selectionList/index");
-    
     //frame.topmost().navigate("factories/DataTest/Test_hilera/index");
+    //frame.topmost().navigate("factories/DataTest/Test_Picturecomponent/index");
+    //frame.topmost().navigate("factories/DataTest/Test_list/index");
     
     var viewModel = new Observable();
     var navigationEntry = {

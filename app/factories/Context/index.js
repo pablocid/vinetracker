@@ -32,6 +32,26 @@ var Context = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Context.prototype, "hilera", {
+        get: function () {
+            return this._hilera;
+        },
+        set: function (value) {
+            this._hilera = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Context.prototype, "espaldera", {
+        get: function () {
+            return this._espaldera;
+        },
+        set: function (value) {
+            this._espaldera = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Context;
 }());
 exports.Context = Context;

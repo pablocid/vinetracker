@@ -1,9 +1,7 @@
 "use strict";
 var frame_1 = require('ui/frame');
 var _1 = require("../services/helperViewer/");
-var action_bar_1 = require("ui/action-bar");
 var BasePage_1 = require('../factories/BasePage');
-var dialogs_1 = require('ui/dialogs');
 var newView = new _1.HelperViewer();
 var style = {
     paddingBT: 30,
@@ -19,7 +17,7 @@ function selectedOption(selectedArgs) {
     var opt = {
         moduleName: items[index].link,
         clearHistory: false,
-        animated: true,
+        animated: false,
         transition: {
             name: "slide",
             duration: 380,
@@ -29,31 +27,36 @@ function selectedOption(selectedArgs) {
     frame_1.topmost().navigate(opt);
 }
 newView.setBindingContext({ items: items, selectedOption: selectedOption });
-var actionItem = new action_bar_1.ActionItem();
+/*
+var actionItem = new ActionItem();
 actionItem.text = "option1";
 actionItem.android.position = "popup";
-actionItem.on(action_bar_1.ActionItem.tapEvent, function (args) {
+actionItem.on(ActionItem.tapEvent,(args:EventData)=>{
     var msg = "evaluar ...";
     var opt1 = "una hilera";
     var opt2 = "una planta (Código QR)";
-    dialogs_1.action({
-        message: msg,
-        cancelButtonText: "cancelar",
-        actions: [opt1, opt2]
-    }).then(function (result) {
-        if (result === opt1) {
-            console.log("La primera opci0ón");
+    Action({
+      message: msg,
+      cancelButtonText: "cancelar",
+      actions: [opt1, opt2]
+    }).then(result => {
+        if(result === opt1){
+            console.log("La primera opci0ón")
         }
-        if (result === opt2) {
-            console.log("La segunda opci0ón");
+        if(result === opt2){
+            console.log("La segunda opci0ón")
         }
-        //console.log("Dialog result: " + result)
+          //console.log("Dialog result: " + result)
     });
     console.log('tap on option1');
 });
+*/
 var b = new BasePage_1.BasePage();
 b.mainContent = newView.getContent();
-b.setTitleActionBar('Plant Dashboard', 'menú principal de la aplicación');
-b.addActionItem(actionItem);
-module.exports = b;
+b.setTitleActionBar('Plant Dashboard', 'inicio');
+//b.addActionItem(actionItem);
+function createPage() {
+    return b.page;
+}
+exports.createPage = createPage;
 //# sourceMappingURL=index.js.map

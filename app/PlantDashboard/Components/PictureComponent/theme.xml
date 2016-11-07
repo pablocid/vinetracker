@@ -1,0 +1,23 @@
+<GridLayout columns="*" rows="auto, *" xmlns:i="nativescript-image-cache-it" >
+    <Label text="{{description}}" row="0" col="0" backgroundColor="white" textWrap="true" 
+    style="font-size:26; text-align:center; color:#616161; padding:15; margin-top:20;"/>
+    <ScrollView row="1" col="0" >
+    <ListView items="{{ items }}" itemTap="{{ selectedOption }}">
+      <ListView.itemTemplate>
+        <StackLayout>
+
+          <GridLayout columns="70,*" rows="*">
+            <i:ImageCacheIt col="0" row="0"   centerCrop="true" resize="100,100" placeHolder="~/img/no_image.jpg" errorHolder="~/img/broken.png" imageUri="{{img}}"/>
+            <StackLayout col="1" row="0">
+              <Label text="{{ label }}" textWrap="true" style="margin:15;" />
+            </StackLayout>
+          </GridLayout>
+
+          <Label text="{{ status }}" textWrap="true" style="padding:15; text-align:center;" visibility="{{ status ? 'visible' : 'collapsed' }}" />
+          <Progress value="{{progress}}" maxValue="{{maxValue}}" visibility="{{ progress ? 'visible' : 'collapsed' }}"/>
+          
+        </StackLayout>
+      </ListView.itemTemplate>
+    </ListView>
+    </ScrollView> 
+</GridLayout>

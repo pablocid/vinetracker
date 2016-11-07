@@ -4,16 +4,21 @@
    font-size: 30;
 }
 .sidedrawer-listitem{
-    font-size:40;
-    margin-left: 50;
-    color:'white';
+    font-size:25; 
+    margin-top: 20;
+    margin-bottom: 10;
+    margin-left:50;
+    color:#fff;
 }
 .sidedrawer-title{
-    font-size: 30;
-    color:'white';
+    margin-left:50;
+    font-size:30; 
+    margin-top: 20; 
+    margin-bottom: 20;
+    color:#fff;
 }
 .sidedrawer{
-    background-color: #43A047;
+    background-color: #212121;
 }
 
 .rojo{

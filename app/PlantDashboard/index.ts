@@ -1,10 +1,9 @@
-import {ContextFS} from '../factories/ContextFS';
-import {SimpleText} from './Components/SimpleText';
+import { SimpleText } from './Components/SimpleText';
 
-import {BarcodeScanner} from 'nativescript-barcodescanner';
-import {PlantScanner, Scanner} from './Components/PlantScanner';
-import {MultipleSelection} from './Components/MultipleSelection';
-import {NumberList} from './Components/NumberList';
+import { BarcodeScanner } from 'nativescript-barcodescanner';
+import { PlantScanner, Scanner } from './Components/PlantScanner';
+import { MultipleSelection } from './Components/MultipleSelection';
+import { NumberList } from './Components/NumberList';
 /**
  * Esta seccion maneja la información de plantas y los datos que se evaluan relacionados a ellas.
  * Esta implementación es específica para plantas, por lo tanto el mainSchm corresponde al : 57a4e02ec830e2bdff1a1608
@@ -16,22 +15,22 @@ import {NumberList} from './Components/NumberList';
 import { Page, ShownModallyData } from 'ui/page';
 import { GridLayout } from 'ui/layouts/grid-layout';
 import { parse as Parse, load as Load } from 'ui/builder';
-import { EventData} from 'data/observable';
-import { topmost as Topmost} from 'ui/frame';
-import { HelperViewer } from  "../services/helperViewer/";
-import { NavigationButton, ActionItems, ActionItem ,ActionBar, AndroidActionBarSettings, AndroidActionItemSettings} from "ui/action-bar";
+import { EventData } from 'data/observable';
+import { topmost as Topmost } from 'ui/frame';
+import { HelperViewer } from "../services/helperViewer/";
+import { NavigationButton, ActionItems, ActionItem, ActionBar, AndroidActionBarSettings, AndroidActionItemSettings } from "ui/action-bar";
 import { RadSideDrawer } from 'nativescript-telerik-ui/sidedrawer';
 import { BasePage } from '../factories/BasePage';
 
-import { action as Action} from 'ui/dialogs';
+import { action as Action } from 'ui/dialogs';
 import { QueryParser, QueryConfig } from '../factories/QueryParser';
 import { Record } from '../factories/Record';
-import { FindSchm } from  "../services/record.service";
+import { FindSchm } from "../services/record.service";
 
 var newView = new HelperViewer();
 var style = {
-    paddingBT:30,
-    fontSize:20
+    paddingBT: 30,
+    fontSize: 20
 }
 newView.theme = `        
     <ListView items="{{ items }}" itemTap="{{selectedOption}}">
@@ -45,14 +44,14 @@ newView.theme = `
 `;
 var items = [
     //{name:"Consulta datos de una planta", link:""},
-    {name:"Evaluaciones disponibles", link:"PlantDashboard/Evaluations/index"}
+    { name: "Evaluaciones disponibles", link: "PlantDashboard/Evaluations/index" }
 ];
-function selectedOption(selectedArgs){
+function selectedOption(selectedArgs) {
     let index = selectedArgs.index;
     let opt = {
-        moduleName:items[index].link,
+        moduleName: items[index].link,
         clearHistory: false,
-        animated: true,
+        animated: false,
         transition: {
             name: "slide",
             duration: 380,
@@ -61,8 +60,10 @@ function selectedOption(selectedArgs){
     }
     Topmost().navigate(opt);
 }
-newView.setBindingContext({ items:items, selectedOption:selectedOption });
+newView.setBindingContext({ items: items, selectedOption: selectedOption });
 
+
+/*
 var actionItem = new ActionItem();
 actionItem.text = "option1";
 actionItem.android.position = "popup";
@@ -84,10 +85,14 @@ actionItem.on(ActionItem.tapEvent,(args:EventData)=>{
           //console.log("Dialog result: " + result)
     });
     console.log('tap on option1');
-})
+});
+*/
 var b = new BasePage();
-b.mainContent = newView.getContent();
-b.setTitleActionBar('Plant Dashboard', 'menú principal de la aplicación');
-b.addActionItem(actionItem);
 
-export = b;
+b.mainContent = newView.getContent();
+b.setTitleActionBar('Plant Dashboard', 'inicio');
+//b.addActionItem(actionItem);
+
+export function createPage(){
+    return b.page;
+}

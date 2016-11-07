@@ -10,6 +10,9 @@ var ContextFS = (function () {
             this._file.writeTextSync('{}');
         }
         this._data = JSON.parse(this._file.readTextSync());
+        if (!this._data) {
+            this._data = {};
+        }
         if (!this._data.schema) {
             this._data.schema = {};
         }

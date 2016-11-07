@@ -25,6 +25,9 @@ export class ContextFS{
             this._file.writeTextSync('{}');
         }
         this._data = <DataJSON>JSON.parse(this._file.readTextSync());
+        if(!this._data){
+            this._data = <DataJSON>{};
+        }
         if(!this._data.schema){
             this._data.schema = {};
         }

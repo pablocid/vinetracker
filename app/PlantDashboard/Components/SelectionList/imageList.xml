@@ -2,7 +2,7 @@
     <Label text="{{label}}" row="0" col="0" backgroundColor="white" textWrap="true" 
     style="font-size:26; text-align:center; color:#616161; padding:15; margin-top:20;"/>
 
-            <MDL:MaterialDropdownList row="1" col="0" itemsSeparatorColor="white" itemsRowHeight="500"
+            <MDL:MaterialDropdownList row="1" col="0" itemsSeparatorColor="white" itemsRowHeight="600"
                 items="{{ items }}" selectedIndex="{{ selectedIndex }}" >
             
                 <!--Prompt or Selected Item Template-->
@@ -19,7 +19,7 @@
             
                 <!--Template to pass to the ListView-->
                 <MDL:MaterialDropdownList.itemsTemplate>
-                    <GridLayout columns="*" rows="*, auto" style="background-color:white; padding:50;">
+                    <GridLayout columns="*" rows="*, auto" style="background-color:#E8EAF6; padding:50;">
                         <Image col="0" row="0" src="{{img}}"/>
                         <label col="0" row="1" style="background-color: gray; height: 1; margin-top:50;" />
                     </GridLayout>

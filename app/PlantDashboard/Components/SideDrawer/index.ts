@@ -6,7 +6,9 @@ import {Observable, EventData} from "data/observable";
 import {topmost as Topmost} from 'ui/frame';
 import {View} from 'ui/core/view';
 export class SideDrawerComponent extends BaseComponent{
+    
     private _options:any[];
+
     constructor(){
         super();
         this._theme.addChild(Load({
@@ -14,14 +16,14 @@ export class SideDrawerComponent extends BaseComponent{
             name:'theme.xml'
         }));
         this._options = [
-            {label:'Dashboard', link:'PlantDashboard/index'},
-            {label:'Evaluaciones', link:'PlantDashboard/Evaluations/index'},
-            {label:'Login', link:'login/index'},
+            {label:'dashboard', link:'PlantDashboard/index'},
+            {label:'evaluaciones', link:'PlantDashboard/Evaluations/index'},
+            {label:'login', link:'login/index'},
             //{label:'Logout', link:''},
         ];
         
         this._viewModel.set('items',this._options);
-        this._viewModel.set('title','Menú');
+        this._viewModel.set('title','menú');
         this._viewModel.set('onTap', (args)=>{
             //this._onTap(args.index);
             //console.log(JSON.stringify(args.index))
@@ -43,5 +45,3 @@ export class SideDrawerComponent extends BaseComponent{
         console.log(index);
     }
 }
-
-

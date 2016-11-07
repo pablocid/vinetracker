@@ -17,12 +17,20 @@ export class InfoComponent extends BaseComponent{
         return this._viewModel.get('evalName');
     }
 
+    public set evalDescription(value:string){
+        this._viewModel.set('evalDescript', value);
+    }
+
     public set ubicacion(value:string){
         this._viewModel.set('ubicacion', value);
     }
 
     public get ubicacion():string{
         return this._viewModel.get('ubicacion');
+    }
+
+    public set codigos (value:string){
+        this._viewModel.set('codigos',value);
     }
     
 }

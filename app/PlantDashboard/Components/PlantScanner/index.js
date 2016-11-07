@@ -201,7 +201,11 @@ var PlantScanner = (function () {
         this._theme = builder_1.load({ name: 'theme', path: '~/PlantDashboard/Components/PlantScanner' });
         this._barcode = new nativescript_barcodescanner_1.BarcodeScanner();
         this._viewModel = new observable_1.Observable();
-        this._viewModel.set('onScan', function (args) { _this._onTapScan(args); });
+        this._viewModel.set('img', '~/img/qrcode.png');
+        this._viewModel.set('onScan', function (args) {
+            //console.log('onScan')
+            _this._onTapScan(args);
+        });
         this._viewModel.set('description', 'Escanea una planta para establecer la hilera');
         this._viewModel.set('loading', false);
         this._viewModel.set('code', '');
@@ -319,6 +323,7 @@ var PlantScanner = (function () {
     PlantScanner.prototype._onTapScan = function (args) {
         var _this = this;
         this._barcode.scan(this._barcordeOpts).then(function (r) {
+            console.log('_onTapScan');
             _this._findRecord(r);
         });
     };

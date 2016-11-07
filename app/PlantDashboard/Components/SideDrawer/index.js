@@ -12,12 +12,12 @@ var SideDrawerComponent = (function (_super) {
             name: 'theme.xml'
         }));
         this._options = [
-            { label: 'Dashboard', link: 'PlantDashboard/index' },
-            { label: 'Evaluaciones', link: 'PlantDashboard/Evaluations/index' },
-            { label: 'Login', link: 'login/index' },
+            { label: 'dashboard', link: 'PlantDashboard/index' },
+            { label: 'evaluaciones', link: 'PlantDashboard/Evaluations/index' },
+            { label: 'login', link: 'login/index' },
         ];
         this._viewModel.set('items', this._options);
-        this._viewModel.set('title', 'Menú');
+        this._viewModel.set('title', 'menú');
         this._viewModel.set('onTap', function (args) {
             //this._onTap(args.index);
             //console.log(JSON.stringify(args.index))

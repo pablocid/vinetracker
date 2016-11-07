@@ -105,3 +105,8 @@ export interface NumberListAttrProps extends AttrProps{
     unit:string;
 }
 
+export interface PictureComponentProps extends AttrProps{
+    quality:number;
+    width:number;
+    numOfPics:number;
+}

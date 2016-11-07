@@ -30,8 +30,8 @@ export class BaseFind {
         let url = this._queryParser.parse();
         let o = new RequestOpts(url,this._method);
         let r = new Request(o);
-        console.log(JSON.stringify(o.url))
-        console.log(JSON.stringify(o.options))
+        //console.log(JSON.stringify(o.url))
+        //console.log(JSON.stringify(o.options))
 
         return r.make().then( (a)=>{
             if(this._factory){
@@ -54,8 +54,8 @@ export class Aggregate extends BaseFind {
         let url = this._queryParser.parse();
         let o = new RequestOpts(url,this._method);
         let r = new Request(o);
-        console.log(JSON.stringify(o.url))
-        console.log(JSON.stringify(o.options))
+        //console.log(JSON.stringify(o.url))
+        //console.log(JSON.stringify(o.options))
 
         return r.make();
     }
@@ -97,7 +97,7 @@ export class FindRecord extends BaseFind {
 export class FindPlant extends FindRecord {
     protected makeObj(a:FindOneResponse){
         let f = new Plant(a.schema, a.record );
-        console.log(f.id);
+        //console.log(f.id);
         return f
     }
 }
@@ -121,8 +121,8 @@ export class FindPlants extends FindRecord {
         let url = this._queryParser.parse();
         let o = new RequestOpts(url,this._method);
         let r = new Request(o);
-        console.log(JSON.stringify(o.url))
-        console.log(JSON.stringify(o.options))
+        //console.log(JSON.stringify(o.url))
+        //console.log(JSON.stringify(o.options))
 
         return r.make().then( (a)=>{
             if(this._factory){
@@ -150,8 +150,8 @@ export class FindRecords extends FindRecord {
         let url = this._queryParser.parse();
         let o = new RequestOpts(url,this._method);
         let r = new Request(o);
-        console.log(JSON.stringify(o.url))
-        console.log(JSON.stringify(o.options))
+        //console.log(JSON.stringify(o.url))
+        //console.log(JSON.stringify(o.options))
 
         return r.make().then( (a)=>{
             if(this._factory){

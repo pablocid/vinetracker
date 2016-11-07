@@ -1,0 +1,10 @@
+<ScrollView>
+    <ListView items="{{ items }}" itemTap="{{ selectedOption }}">
+        <ListView.itemTemplate>
+            <GridLayout columns="30, *" style="font-size:20; padding:10; padding-bottom:30; padding-top:30;">
+                <Label text="" col="0" />
+                <Label text="{{ ListViewPropertyLabel }}" col="0" textWrap="true" col="1"/>
+            </GridLayout>
+        </ListView.itemTemplate>
+    </ListView>
+</ScrollView>

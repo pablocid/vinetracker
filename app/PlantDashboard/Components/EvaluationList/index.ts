@@ -1,4 +1,3 @@
-import {ContextFS} from '../../../factories/ContextFS';
 import {FindSchm} from '../../../services/RecordService';
 import {Schema} from '../../../factories/Schema';
 import { parse as Parse, load as Load, LoadOptions } from 'ui/builder';

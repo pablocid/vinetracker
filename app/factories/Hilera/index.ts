@@ -1,6 +1,5 @@
 import {ObservableArray, ChangedData} from 'data/observable-array';
 import {Observable , PropertyChangeData,  EventData} from 'data/observable';
-import {ContextFS} from '../ContextFS';
 import {Schema} from '../Schema';
 import {FindPlants, FindRecords} from '../../services/RecordService';
 import {Filter, QueryConfig} from '../QueryParser';

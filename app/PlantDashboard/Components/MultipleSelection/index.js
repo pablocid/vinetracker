@@ -9,7 +9,21 @@ var MultipleSelection = (function (_super) {
         var _this = this;
         _super.call(this, attr);
         this._props = this._properties;
-        this._options = new observable_array_1.ObservableArray(this._props.options.map(function (x, i) {
+        var allowOptions = this._recordAttr.parent.schema.schm.properties['5808dc55832db50010d3192b'];
+        var opt = [];
+        if (allowOptions && allowOptions.length) {
+            for (var i = 0; i < allowOptions.length; i++) {
+                var e = allowOptions[i];
+                var index = this._props.options.map(function (x) { return x.id; }).indexOf(e);
+                if (index !== -1) {
+                    opt.push(this._props.options[index]);
+                }
+            }
+        }
+        else {
+            opt = this._props.options;
+        }
+        this._options = new observable_array_1.ObservableArray(opt.map(function (x, i) {
             var o = new observable_1.Observable();
             o.set('checked', false);
             o.set("value", x.string);

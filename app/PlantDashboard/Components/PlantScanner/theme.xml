@@ -1,9 +1,9 @@
-  <GridLayout columns="*" rows="auto, *" >
+  <GridLayout columns="*" rows="auto, *"  xmlns:i="nativescript-image-cache-it" >
     <Label text="{{description}}" row="0" col="0" backgroundColor="white" textWrap="true" 
     style="font-size:26; text-align:center; color:#616161; padding:15; margin-top:20;"/>
     <ScrollView row="1" col="0" >
         <GridLayout columns="*" rows="150, 100,100, 100">
-            <Image col="0" row="0" src="~/img/qrcode.png"/>
+            <i:ImageCacheIt col="0" row="0"   centerCrop="true" resize="100,100" placeHolder="~/img/no_image.jpg" errorHolder="~/img/broken.png" imageUri="{{img}}"/>
             <Button col="0" row="1" text="Scan" tap="{{onScan}}" style=" background-color:#0D47A1; color:white; border-radius:5; margin-top:32; font-size:25; width:300;"></Button>
             <Label col="0" row="2" text="{{ code }}" style="text-align:center;font-size:28; background-color:white; color:#616161; margin-top:50; padding: 5;"/>
             <Label col="0" row="3" text="{{ ubicacion }}" style="text-align:center;font-size:28; background-color:white; color:#616161; padding: 5;"/>

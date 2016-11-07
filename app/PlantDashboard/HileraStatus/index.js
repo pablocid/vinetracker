@@ -1,19 +1,24 @@
 "use strict";
-var ContextFS_1 = require('../../factories/ContextFS');
-var Hilera_1 = require('../../factories/Hilera');
+var HileraComponent_1 = require('../Components/HileraComponent');
 var RecordService_1 = require('../../services/RecordService');
-var List_1 = require('../Components/List');
 var BasePage_1 = require('../../factories/BasePage');
-var tab_view_1 = require("ui/tab-view");
 var action_bar_1 = require('ui/action-bar');
 var frame_1 = require('ui/frame');
+var observable_1 = require('data/observable');
 var lodash = require('lodash');
-/**
- * Loader indicator
- */
 var LoadingIndicator = require("nativescript-loading-indicator").LoadingIndicator;
-function contextChecker(schm, plant) {
-    if (!schm || !plant) {
+var loader = new LoadingIndicator();
+function contextChecker(schm, plant, hilera) {
+    if (!schm) {
+        console.log('undefined schm');
+    }
+    if (!plant) {
+        console.log('undefined plant');
+    }
+    if (!hilera) {
+        console.log('undefined hilera');
+    }
+    if (!schm || !plant || !hilera) {
         return true;
     }
     else {
@@ -48,108 +53,87 @@ var options2 = {
 };
 //********************
 var hileraPage = new BasePage_1.BasePage();
-var tab = new tab_view_1.TabView();
-hileraPage.mainContent = tab;
+var titlePage = new observable_1.Observable();
+titlePage.set('title', 'loading ...');
+titlePage.set('subTitle', 'loading ...');
+hileraPage.setTitleActionBar('ok', 'ok', titlePage);
+//************** ActionItems **************
 var desc = new action_bar_1.ActionItem();
 desc.text = "orden descendente";
 desc.android.position = "popup";
+desc.on(action_bar_1.ActionItem.tapEvent, function () {
+    hilera.setOrder('desc');
+});
 hileraPage.addActionItem(desc);
 var asc = new action_bar_1.ActionItem();
 asc.text = "orden ascendente";
 asc.android.position = "popup";
+asc.on(action_bar_1.ActionItem.tapEvent, function () {
+    hilera.setOrder('asc');
+});
 hileraPage.addActionItem(asc);
-//**************** *******************
-function onload() {
-    var loader = new LoadingIndicator();
-    var contextFs = new ContextFS_1.ContextFS();
-    if (contextChecker(contextFs.schema, contextFs.plant)) {
+//************** END: ActionItems **************
+var hilera = new HileraComponent_1.HileraComponent();
+hileraPage.mainContent = hilera.getView();
+var findIds = new RecordService_1.FindPlantIds();
+var context;
+var record = new RecordService_1.FindForEvaluation();
+var page;
+console.log('Creating hilera status page ...........................');
+hileraPage.fnOnLoad = function (args) {
+    var c = args.object.navigationContext;
+    console.log('schema : ------------------------ ' + c.schema.id);
+    console.log('plant : ------------------------ ' + c.plant.id);
+    console.log('hilera : ------------------------ ' + c.plant.hilera);
+    console.log('hilera length : ------------------------ ' + c.hilera.length);
+    load(c);
+}; //************* end fnOnLoad *****************************************
+function load(newContext) {
+    if (!newContext) {
+        console.log('undefined newContext');
+    }
+    if (!newContext || contextChecker(newContext.schema, newContext.plant, newContext.hilera)) {
         console.log("Topmost().navigate('PlantDashboard/Evaluations/index');");
         frame_1.topmost().navigate('PlantDashboard/Evaluations/index');
         return;
     }
-    hileraPage.setTitleActionBar('Ubicación E' + contextFs.plant.espaldera + 'H' + contextFs.plant.hilera, contextFs.schema.properties.listViewLabel);
-    var hilera = new Hilera_1.HileraFactory(contextFs.hilera);
-    hilera.evTabTitle = 'evaluadas';
-    hilera.NoEvTabTitle = 'no evaluadas';
-    desc.on('tap', function (x) {
-        hilera.sort = 'desc';
-    });
-    asc.on('tap', function (x) {
-        hilera.sort = 'asc';
-    });
-    //****************** EVALUADAS
-    var evTab = new tab_view_1.TabViewItem();
-    evTab.title = hilera.evTabTitle;
-    var evList = new List_1.List();
-    evList.items = hilera.evaluated;
-    evTab.view = evList.getView();
-    evList.callbackOnTap = function (index) {
-        loader.show(options);
-        //importante setear la planta porque desde ahí saca el ID y la Ubicación
-        contextFs.plant = hilera.evaluated.getItem(index);
-        var record = new RecordService_1.FindForEvaluation();
-        record.record(contextFs.schema, contextFs.plant).then(function (d) {
-            contextFs.record = d;
-            loader.hide();
-            var modalPageModule = 'PlantDashboard/Evaluation/index';
-            var context = "some custom context";
-            var fullscreen = true;
-            hileraPage.page.showModal(modalPageModule, context, function (plant) {
-                console.log('closeCallback');
-                console.log('registro actualizado');
-            }, fullscreen);
-        });
-    };
-    //****************** NO EVALUADAS
-    var noEvTab = new tab_view_1.TabViewItem();
-    noEvTab.title = hilera.NoEvTabTitle;
-    var noEvList = new List_1.List();
-    noEvList.items = hilera.noEvaluated;
-    noEvList.callbackOnTap = function (index) {
-        loader.show(options);
-        //importante setear la planta porque desde ahí saca el ID y la Ubicación
-        contextFs.plant = hilera.noEvaluated.getItem(index);
-        var record = new RecordService_1.FindForEvaluation();
-        record.record(contextFs.schema, contextFs.plant).then(function (d) {
-            contextFs.record = d;
-            loader.hide();
-            var modalPageModule = 'PlantDashboard/Evaluation/index';
-            var context = "some custom context";
-            var fullscreen = true;
-            hileraPage.page.showModal(modalPageModule, context, function (plant) {
-                if (plant) {
-                    console.log('registro guardado. ID: ' + plant.id);
-                    hilera.addEvaluated = plant.id;
-                }
-            }, fullscreen);
-        });
-    };
-    noEvTab.view = noEvList.getView();
-    //*********** set TabViewItems
-    tab.items = [noEvTab, evTab];
-    hilera.callbackOnChangeList = function () {
-        evTab.title = hilera.evTabTitle;
-        noEvTab.title = hilera.NoEvTabTitle;
-    };
-    var findIds = new RecordService_1.FindPlantIds();
+    if (context) {
+        console.log('context.schema.id === newContext.schema.id ' + (context.schema.id === newContext.schema.id) + '  ' + context.schema.id + ' vs ' + newContext.schema.id);
+        console.log('context.plant.hilera === newContext.plant.hilera ' + (context.plant.hilera === newContext.plant.hilera) + ' ' + context.plant.hilera + ' vs ' + newContext.plant.hilera);
+        console.log('context.plant.espaldera === newContext.plant.espaldera ' + (context.plant.espaldera === newContext.plant.espaldera) + ' ' + context.plant.espaldera + ' vs ' + newContext.plant.espaldera);
+        console.log('context.hilera.length === newContext.hilera.length ' + (context.hilera.length === newContext.hilera.length) + '   ' + context.hilera.length + ' vs ' + newContext.hilera.length);
+    }
+    if (context &&
+        context.schema.id === newContext.schema.id &&
+        context.plant.hilera === newContext.plant.hilera &&
+        context.plant.espaldera === newContext.plant.espaldera &&
+        context.hilera.length === newContext.hilera.length) {
+        console.log('same');
+        return;
+    }
+    else {
+        console.log('not the same');
+        context = lodash.clone(newContext, true);
+        hilera.removeAllItems();
+    }
+    titlePage.set('title', 'Ubicación E' + context.plant.espaldera + 'H' + context.plant.hilera);
+    titlePage.set('subTitle', context.schema.properties.listViewLabel + ' - En la hilera hay ' + context.hilera.length + ' plantas');
+    hilera.mainList = context.hilera;
     loader.show(options2);
     var evStop = false;
-    findIds.getEvaluatedId(contextFs.schema, contextFs.plant).then(function (x) {
+    findIds.getEvaluatedId(context.schema, context.plant).then(function (x) {
         evStop = true;
         stopLoader();
         if (x && x.length) {
-            hilera.idEvaluated = x;
+            hilera.evaluatedItems = x;
         }
     });
     var rStop = false;
-    findIds.getRestrictionIds(contextFs.schema, contextFs.plant).then(function (x) {
+    findIds.getRestrictionIds(context.schema, context.plant).then(function (x) {
         rStop = true;
         stopLoader();
         if (x && x.length) {
-            console.log('Restriciones ..........................................................................');
-            console.log(x);
-            hilera.idRestrictions = x;
-            contextFs.allowedPlantsId = x;
+            hilera.restrictionItems = x;
         }
     });
     function stopLoader() {
@@ -157,14 +141,39 @@ function onload() {
             loader.hide();
         }
     }
-} /**************** end onLoad ********************/
-var update = new action_bar_1.ActionItem();
-update.text = "Actualizar información de las listas";
-update.android.position = "popup";
-update.on('tap', function (x) {
-    onload();
-});
-hileraPage.addActionItem(update);
-hileraPage.fnOnLoad = onload;
-module.exports = hileraPage;
+}
+hilera.evSelectItemCb = function (i, item) {
+    onTapItem(i, item);
+};
+hilera.nonEvSelectItemCb = function (i, item) {
+    onTapItem(i, item);
+};
+function onTapItem(i, item) {
+    context.plant = item;
+    console.log(context.plant.id);
+    console.log(item.id);
+    loader.show(options);
+    record.record(context.schema, item).then(function (d) {
+        loader.hide();
+        context.record = d;
+        var modalPageModule = 'PlantDashboard/Evaluation/evaluation-page';
+        var fullscreen = true;
+        page.showModal(modalPageModule, context, function (status, id) {
+            page.closeModal();
+            console.log('closeCallback');
+            console.log('registro actualizado');
+            console.log(status);
+            console.log(id);
+            hilera.evaluatedItems = [id];
+        }, fullscreen);
+    });
+}
+hileraPage.fnOnUnLoaded = function () {
+    //context = <Context>{};
+};
+hileraPage.setMainContent();
+function createPage() {
+    return hileraPage.page;
+}
+exports.createPage = createPage;
 //# sourceMappingURL=index.js.map
