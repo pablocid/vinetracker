@@ -130,7 +130,7 @@ page.fnOnShownModally = function (args) {
                             });
                         }
                         else {
-                            args.closeCallback('error');
+                            saveComp.toggleSaveBtn();
                         }
                     });
                 }

@@ -1,9 +1,10 @@
 <ScrollView>
-    <ListView items="{{ items }}" itemTap="{{ selectedOption }}">
+    <ListView items="{{ items }}" itemTap="{{ selectedOption }}" filter="ListViewPropertyLabel === 'E4 H1 P1'">
         <ListView.itemTemplate>
-            <GridLayout columns="30, *" style="font-size:20; padding:10; padding-bottom:30; padding-top:30;">
+            <GridLayout columns="30, *, 30" style="font-size:20; padding:10; padding-bottom:30; padding-top:30;">
                 <Label text="" col="0" />
                 <Label text="{{ ListViewPropertyLabel }}" col="0" textWrap="true" col="1"/>
+                <Label text="{{ icon }}" class="icon" col="2" />
             </GridLayout>
         </ListView.itemTemplate>
     </ListView>

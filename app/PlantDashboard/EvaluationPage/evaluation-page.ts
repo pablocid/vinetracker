@@ -175,16 +175,15 @@ function makeView(args, context: Context): TabView {
                 };
 
                 Confirm(options).then((result: boolean) => {
-                    // result can be true/false/undefined
-                    //console.log(result);
+
                     if (result) {
                         let saveRequest = new SaveRecord(record);
                         saveRequest.save().then(s => {
                             context = <Context>{};
-                            args.closeCallback('ok', plant.id);
+                            args.closeCallback('ok', plant.id, record);
                         })
-                    } else {
-                        args.closeCallback('error');
+                    }else{
+                        saveComp.saveBtnEnabled();
                     }
                 });
             }

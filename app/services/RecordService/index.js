@@ -224,7 +224,7 @@ var FindPlantIds = (function () {
     }
     FindPlantIds.prototype.getEvaluatedId = function (schm, plant) {
         var qcRecords = new QueryParser_1.QueryConfig();
-        qcRecords.items = "100";
+        qcRecords.items = "500";
         // fenotipado 0
         qcRecords.schm = schm.id;
         var f0_espaldera = new QueryParser_1.Filter();
@@ -240,9 +240,26 @@ var FindPlantIds = (function () {
         //57c42f77c8307cd5b82f4486 es el individuo ref
         return records.finds().then(function (x) { return x.map(function (i) { return i.getAttribute("57c42f77c8307cd5b82f4486").value; }); });
     };
+    FindPlantIds.prototype.getEvaluated = function (schm, plant) {
+        var qcRecords = new QueryParser_1.QueryConfig();
+        qcRecords.items = "500";
+        // fenotipado 0
+        qcRecords.schm = schm.id;
+        var f0_espaldera = new QueryParser_1.Filter();
+        f0_espaldera.key = "espaldera";
+        f0_espaldera.value = plant.espaldera;
+        f0_espaldera.datatype = "number";
+        var f0_hilera = new QueryParser_1.Filter();
+        f0_hilera.key = 'hilera';
+        f0_hilera.value = plant.hilera;
+        f0_hilera.datatype = "number";
+        qcRecords.filter = [f0_espaldera, f0_hilera];
+        var records = new FindRecords(qcRecords);
+        return records.finds();
+    };
     FindPlantIds.prototype._callgetRestricionIds = function (restriction, schm, plant) {
         var qcRecords = new QueryParser_1.QueryConfig();
-        qcRecords.items = "100";
+        qcRecords.items = "500";
         qcRecords.filter = [];
         var f0_espaldera = new QueryParser_1.Filter();
         f0_espaldera.key = "espaldera";

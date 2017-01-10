@@ -228,7 +228,7 @@ export class FindPlantIds {
 
     public getEvaluatedId(schm:Schema, plant:Plant):Promise<string[]>{
         let qcRecords = new QueryConfig();
-        qcRecords.items = "100";
+        qcRecords.items = "500";
         // fenotipado 0
         qcRecords.schm = schm.id;
         
@@ -248,10 +248,32 @@ export class FindPlantIds {
         return records.finds().then(x=>x.map(i=>i.getAttribute("57c42f77c8307cd5b82f4486").value));
 
     }
+
+    public getEvaluated(schm:Schema, plant:Plant):Promise<Record[]>{
+        let qcRecords = new QueryConfig();
+        qcRecords.items = "500";
+        // fenotipado 0
+        qcRecords.schm = schm.id;
+        
+        let f0_espaldera = new Filter();
+        f0_espaldera.key = "espaldera";
+        f0_espaldera.value = plant.espaldera
+        f0_espaldera.datatype = "number";
+        
+        let f0_hilera = new Filter();
+        f0_hilera.key  = 'hilera';
+        f0_hilera.value = plant.hilera;
+        f0_hilera.datatype = "number";
+        qcRecords.filter = [f0_espaldera, f0_hilera];
+        
+        let records = new FindRecords(qcRecords);
+        return records.finds();
+
+    }
     
     private _callgetRestricionIds(restriction:any[], schm:Schema, plant:Plant){
         let qcRecords = new QueryConfig();
-            qcRecords.items = "100";
+            qcRecords.items = "500";
             qcRecords.filter = [];
             
             let f0_espaldera = new Filter();

@@ -117,6 +117,17 @@ var Record = (function (_super) {
             return this._attributes[index];
         }
     };
+    Record.prototype.isWarn = function () {
+        if (this._schema.schm.properties.isWarn) {
+            //console.log(this._schema.schm.properties.isWarn[0].string);
+            var id = this._schema.schm.properties.isWarn[0].id;
+            var filter = JSON.parse(this._schema.schm.properties.isWarn[0].string);
+            if (this.getAttribute(id).value < filter.$gte) {
+                return true;
+            }
+        }
+        return false;
+    };
     return Record;
 }(Schema_1.BaseSchema));
 exports.Record = Record;
@@ -125,6 +136,16 @@ var Plant = (function (_super) {
     function Plant() {
         _super.apply(this, arguments);
     }
+    Object.defineProperty(Plant.prototype, "record", {
+        get: function () {
+            return this._record;
+        },
+        set: function (value) {
+            this._record = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Plant.prototype.getUbicación = function () {
         //console.log('Plant - getUbicación');
         var espaldera = this.getAttribute('5807af5f31f55d0010aaffe4').value;

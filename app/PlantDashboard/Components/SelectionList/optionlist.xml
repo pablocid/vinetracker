@@ -1,4 +1,4 @@
-<GridLayout columns="*" rows="auto, *" >
+<GridLayout columns="*" rows="auto, *, 20, 50" >
     <Label text="{{label}}" row="0" col="0" backgroundColor="#388E3C" textWrap="true" color="white"
     style="font-size:26; text-align:center; padding:15;"/>
     <ScrollView row="1" col="0" id="scrollViewInsert">
@@ -10,4 +10,5 @@
             </ListView.itemTemplate>
         </ListView>
     </ScrollView> 
+    <button row="3" col="0" text="sin selección" tap="{{noSelection}}"></button>
 </GridLayout>

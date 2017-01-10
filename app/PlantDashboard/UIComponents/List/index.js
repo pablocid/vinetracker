@@ -84,6 +84,12 @@ var ListUIComponent = (function (_super) {
                 if (label) {
                     x.set('ListViewPropertyLabel', label);
                 }
+                if (x.get('item').record) {
+                    var record = x.get('item').record;
+                    if (record.isWarn()) {
+                        x.set('icon', String.fromCharCode(parseInt('f079', 16)));
+                    }
+                }
                 return x;
             });
         }
@@ -102,16 +108,39 @@ var ListUIComponent = (function (_super) {
         }
     };
     ListUIComponent.prototype.removeItems = function (items, property) {
+        if (!Array.isArray(items)) {
+            console.log('ListUIComponent.removeItems: el argumento "items" no es un Array');
+            return;
+        }
+        /*
+        items.forEach(item => {
+            let i = this._listRef.map(x => x.get('item')[property]).indexOf(item);
+            if (i !== -1) { this.removeItem(i); }
+        });*/
+        for (var index = 0; index < items.length; index++) {
+            var i = this._listRef.map(function (x) { return x.get('item')[property]; }).indexOf(items[index]);
+            if (i !== -1) {
+                this.removeItem(i);
+            }
+        }
+    };
+    ListUIComponent.prototype.skipThisItems = function (items, property) {
         var _this = this;
         if (!Array.isArray(items)) {
             console.log('ListUIComponent.removeItems: el argumento "items" no es un Array');
             return;
         }
-        items.forEach(function (item) {
-            var i = _this._listRef.map(function (x) { return x.get('item')[property]; }).indexOf(item);
-            if (i !== -1) {
-                _this.removeItem(i);
+        var fil = this._listRef.filter(function (x) {
+            for (var e = 0; e < items.length; e++) {
+                if (items[e] === x.get('item')[property]) {
+                    return true;
+                }
             }
+            return false;
+        });
+        this.removeAllItems();
+        fil.forEach(function (s) {
+            _this._listRef.push(s);
         });
     };
     ListUIComponent.prototype.removeAllItems = function () {
@@ -119,13 +148,38 @@ var ListUIComponent = (function (_super) {
         this._listRef.splice(0, length);
     };
     ListUIComponent.prototype.addItem = function (value) {
+        console.log('-------------------------------- addItem => ---------------------------------------');
         var item = new observable_1.Observable({ ListViewPropertyLabel: 'name', item: value });
-        var label = value.get('item')[this.labelProperty];
+        console.log('-------------------------------- addItem => ---------------------------------------');
+        var label = item.get('item')[this.labelProperty];
+        console.log('-------------------------------- addItem => ---------------------------------------');
         if (label) {
-            value.set('ListViewPropertyLabel', label);
+            item.set('ListViewPropertyLabel', label);
         }
-        this._listRef.push(value);
+        if (item.get('item').record) {
+            var record = item.get('item').record;
+            if (record.isWarn()) {
+                item.set('icon', String.fromCharCode(parseInt('f079', 16)));
+            }
+        }
+        console.log('-------------------------------- addItem => before push: ' + this.listRef.length);
+        this._listRef.push(item);
+        console.log(' -------------------------------- addItem => after push: ' + this.listRef.length);
         this._sortList();
+    };
+    ListUIComponent.prototype.updateItem = function (id, record) {
+        var index = this._listRef.map(function (x) { return x.get('item').id; }).indexOf(id);
+        if (index !== -1) {
+            var item = this._listRef.getItem(index);
+            var plant = item.get('item');
+            plant.record = record;
+            if (record.isWarn()) {
+                item.set('icon', String.fromCharCode(parseInt('f079', 16)));
+            }
+            else {
+                item.set('icon', '');
+            }
+        }
     };
     ListUIComponent.prototype.sortByProp = function (direction, property) {
         if (!direction) {

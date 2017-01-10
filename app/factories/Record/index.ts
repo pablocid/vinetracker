@@ -126,9 +126,30 @@ export class Record extends BaseSchema {
             return this._attributes[index];
         }
     }
+
+    public isWarn():boolean{
+        if(this._schema.schm.properties.isWarn){
+            //console.log(this._schema.schm.properties.isWarn[0].string);
+            let id = this._schema.schm.properties.isWarn[0].id; 
+            let filter = JSON.parse(this._schema.schm.properties.isWarn[0].string);
+            if(this.getAttribute(id).value < filter.$gte){
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 export class Plant extends Record {
+    private _record:Record;
+
+    public set record(value:Record){
+        this._record = value;
+    }
+
+    public get record () :Record{
+        return this._record;
+    }
     public getUbicación(): string {
         //console.log('Plant - getUbicación');
         let espaldera = this.getAttribute('5807af5f31f55d0010aaffe4').value;

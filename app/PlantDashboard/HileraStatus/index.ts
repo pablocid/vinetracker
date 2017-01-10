@@ -2,7 +2,7 @@ import { ContextFS } from '../../factories/ContextFS';
 import { HileraComponent } from '../Components/HileraComponent';
 import { PlantTest } from '../../factories/DataTest';
 import { HileraFactory } from '../../factories/Hilera';
-import { Plant } from '../../factories/Record';
+import { Plant, Record } from '../../factories/Record';
 import { NoEvaluated } from '../Components/NoEvaluated';
 import { Filter, QueryConfig } from '../../factories/QueryParser';
 import {
@@ -158,7 +158,7 @@ function load(newContext: Context) {
   }
   console.log('not the same')
   context = lodash.clone(newContext, true);
-  
+
   makeView();
 }
 
@@ -171,12 +171,19 @@ function makeView() {
 
   loader.show(options2);
   var evStop = false;
-
+/*
   findIds.getEvaluatedId(context.schema, context.plant).then(x => {
     evStop = true;
     stopLoader();
     if (x && x.length) { hilera.evaluatedItems = x; }
   });
+*/
+  findIds.getEvaluated(context.schema, context.plant).then(x=>{
+    evStop = true;
+    stopLoader();
+    if (x && x.length) { hilera.evaluatedItems2 = x; }
+  });
+
   var rStop = false;
   findIds.getRestrictionIds(context.schema, context.plant).then(x => {
     rStop = true;
@@ -209,12 +216,13 @@ function onTapItem(i, item) {
 
     var modalPageModule = 'PlantDashboard/EvaluationPage/evaluation-page';
     var fullscreen = true;
-    hileraPage.page.showModal(modalPageModule, context, (status: string, id: string) => {
+    hileraPage.page.showModal(modalPageModule, context, (status: string, id: string, svRecord?:Record) => {
       console.log('closeCallback');
-      console.log('registro actualizado');
-      console.log(status);
-      console.log(id);
-      hilera.evaluatedItems = [id];
+      
+      if(status){
+        console.log('registro actualizado');
+        hilera.evaluatedItem(id, svRecord);
+      }
     }, fullscreen);
   })
 }
@@ -228,3 +236,4 @@ hileraPage.setMainContent();
 export function createPage() {
   return hileraPage.page;
 }
+

@@ -18,6 +18,7 @@
     "nativescript-loading-indicator": "^2.0.1",
     "nativescript-materialdropdownlist": "^1.0.14",
     "nativescript-taskpie": "^1.0.5",
+    "nativescript-telephony": "^1.0.2",
     "nativescript-telerik-ui": "^1.4.1",
     "nativescript-unit-test-runner": "^0.3.3",
     "nativescript-wave-refresh": "^1.0.0",

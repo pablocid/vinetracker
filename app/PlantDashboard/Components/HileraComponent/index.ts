@@ -1,4 +1,4 @@
-import { Plant } from '../../../factories/Record';
+import { Plant, Record } from '../../../factories/Record';
 import { ListUIComponent, SelectItemListCallback } from '../../UIComponents/List';
 import { BaseComponent } from '../BaseComponent';
 import { TabView, TabViewItem } from "ui/tab-view";
@@ -130,13 +130,13 @@ export class HileraComponent extends BaseComponent {
     }
 
     public set restrictionItems(values: string[]) {
-        this._nonEvaluated.removeItems(values, '_id');
+        this._nonEvaluated.skipThisItems(values, 'id');
     }
 
     public set evaluatedItems(values: string[]) {
-
+        console.log('Largo de evaluadas: ------------------- '+values.length)
         if (!this._mainList || this._mainList.length === 0) { return; }
-        this._nonEvaluated.removeItems(values, '_id');
+        this._nonEvaluated.removeItems(values, 'id');
 
         let evList = this._mainList.map(x => x.id);
         let ev = [];
@@ -150,6 +150,46 @@ export class HileraComponent extends BaseComponent {
             }
         }
         this._evaluated.items = ev;
+    }
+    //las plantas registradas deberán tener el registro asociado en la propiedad 'record'
+    public set evaluatedItems2(values: Record[]) {
+        if (!this._mainList || this._mainList.length === 0) { return; }
+        this._nonEvaluated.removeItems(values.map(i=>i.getAttribute("57c42f77c8307cd5b82f4486").value), 'id');
+
+        let evList = this._mainList.map(x => x.id);
+        let ev = [];
+
+        for (var i = 0; i < values.length; i++) {
+            console.log(values[i].id)
+            let ei = evList.indexOf(values[i].getAttribute("57c42f77c8307cd5b82f4486").value);
+            if (ei !== -1) {
+                let plant = this._mainList[ei];
+                plant.record = values[i];
+                ev.push(plant);
+            }
+        }
+        console.log(ev.length)
+        this._evaluated.items = ev;
+    }
+
+
+    public evaluatedItem(value: string, record?:Record) {
+        if (!this._mainList || this._mainList.length === 0) { return; }
+        this._nonEvaluated.removeItems([value], 'id');
+
+        //**********************
+
+        let index = this._mainList.map(x => x.id).indexOf(value);
+        let evIndex = this._evaluated.listRef.map(x=>x.get('item')['id']).indexOf(value);
+
+        if(index !== -1 && evIndex === -1){
+            let plant = this._mainList[index];
+            plant.record = record;
+            this._evaluated.addItem(plant);
+        }
+        if(evIndex !== -1){
+            this._evaluated.updateItem(value,record);
+        }
     }
 
 }

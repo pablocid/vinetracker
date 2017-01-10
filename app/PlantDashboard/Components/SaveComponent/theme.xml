@@ -4,7 +4,7 @@
     <GridLayout row="1" col="0" columns="*" rows="150, 100,50, 100">
         <!--<Image col="0" row="0" src="~/img/qrcode.png"/>-->
         <Label col="0" row="0" text="&#xf0c7;" style="font-size:150; text-align:center; margin-top:30;" class="icon"/>
-        <Button col="0" row="1" text="Guardar" tap="{{onSave}}" style=" background-color:#0D47A1; color:white; border-radius:5; margin-top:32; font-size:25; width:300;"></Button>
+        <Button col="0" row="1" text="{{saveBtnText}}" tap="{{onSave}}" isEnabled="{{enabledBtn}}" backgroundColor="{{enabledBackground}}" color="{{enabledColor}}" style="border-radius:5; margin-top:32; font-size:25; width:300;"></Button>
         <Button col="0" row="3" text="Salir sin guardar" tap="{{onCancel}}" style=" background-color:red; color:white; border-radius:5; margin-top:32; font-size:25; width:300;"></Button>
     </GridLayout>
   </GridLayout>

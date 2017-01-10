@@ -129,11 +129,18 @@ function makeView() {
     hilera.mainList = context.hilera;
     loader.show(options2);
     var evStop = false;
-    findIds.getEvaluatedId(context.schema, context.plant).then(function (x) {
+    /*
+      findIds.getEvaluatedId(context.schema, context.plant).then(x => {
+        evStop = true;
+        stopLoader();
+        if (x && x.length) { hilera.evaluatedItems = x; }
+      });
+    */
+    findIds.getEvaluated(context.schema, context.plant).then(function (x) {
         evStop = true;
         stopLoader();
         if (x && x.length) {
-            hilera.evaluatedItems = x;
+            hilera.evaluatedItems2 = x;
         }
     });
     var rStop = false;
@@ -165,12 +172,12 @@ function onTapItem(i, item) {
         context.record = d;
         var modalPageModule = 'PlantDashboard/EvaluationPage/evaluation-page';
         var fullscreen = true;
-        hileraPage.page.showModal(modalPageModule, context, function (status, id) {
+        hileraPage.page.showModal(modalPageModule, context, function (status, id, svRecord) {
             console.log('closeCallback');
-            console.log('registro actualizado');
-            console.log(status);
-            console.log(id);
-            hilera.evaluatedItems = [id];
+            if (status) {
+                console.log('registro actualizado');
+                hilera.evaluatedItem(id, svRecord);
+            }
         }, fullscreen);
     });
 }

@@ -10,9 +10,13 @@ var SaveComponent = (function (_super) {
         this._viewModel.set('onSave', function () {
             if (_this._callback) {
                 console.log('on trigger callback');
+                _this.saveBtnDisabled();
                 _this._callback(true);
             }
         });
+        this._viewModel.set('enabledBackground', '#0D47A1');
+        this._viewModel.set('enabledColor', 'white');
+        this.saveBtnEnabled();
         this._viewModel.set('onCancel', function () {
             if (_this._callback) {
                 console.log('on trigger callback');
@@ -31,6 +35,24 @@ var SaveComponent = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    SaveComponent.prototype.saveBtnEnabled = function () {
+        this._viewModel.set('enabledBtn', true);
+        this._viewModel.set('saveBtnText', 'guardar');
+    };
+    SaveComponent.prototype.saveBtnDisabled = function () {
+        this._viewModel.set('enabledBtn', false);
+        this._viewModel.set('saveBtnText', 'guardando ...');
+    };
+    SaveComponent.prototype.toggleSaveBtn = function () {
+        if (this._viewModel.get('enabledBtn')) {
+            this._viewModel.set('enabledBtn', false);
+            this._viewModel.set('saveBtnText', 'guardando ...');
+        }
+        else {
+            this._viewModel.set('enabledBtn', true);
+            this._viewModel.set('saveBtnText', 'guardar');
+        }
+    };
     return SaveComponent;
 }(BaseComponent_1.BaseComponent));
 exports.SaveComponent = SaveComponent;

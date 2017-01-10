@@ -17,16 +17,28 @@ import { GridLayout } from 'ui/layouts/grid-layout';
 import { parse as Parse, load as Load } from 'ui/builder';
 import { EventData } from 'data/observable';
 import { topmost as Topmost } from 'ui/frame';
-import { HelperViewer } from "../services/helperViewer/";
-import { NavigationButton, ActionItems, ActionItem, ActionBar, AndroidActionBarSettings, AndroidActionItemSettings } from "ui/action-bar";
+import { HelperViewer } from '../services/helperViewer/';
+import { NavigationButton, ActionItems, ActionItem, ActionBar, AndroidActionBarSettings, AndroidActionItemSettings } from 'ui/action-bar';
 import { RadSideDrawer } from 'nativescript-telerik-ui/sidedrawer';
 import { BasePage } from '../factories/BasePage';
 
 import { action as Action } from 'ui/dialogs';
 import { QueryParser, QueryConfig } from '../factories/QueryParser';
 import { Record } from '../factories/Record';
-import { FindSchm } from "../services/record.service";
+import { FindSchm } from '../services/record.service';
+/*
+var Telephony = require('nativescript-telephony').Telephony;
+//import { Telephony } from 'nativescript-telephony';
 
+Telephony().then(function (resolved) {
+    console.log('resolved >', resolved)
+    console.log('deviceId: ',resolved.deviceId);
+    console.log('phoneNumber: ',resolved.phoneNumber);
+}).catch(function (error) {
+    console.error('error >', error)
+    console.dir(error);
+})
+*/
 var newView = new HelperViewer();
 var style = {
     paddingBT: 30,
@@ -93,6 +105,6 @@ b.mainContent = newView.getContent();
 b.setTitleActionBar('Plant Dashboard', 'inicio');
 //b.addActionItem(actionItem);
 
-export function createPage(){
+export function createPage() {
     return b.page;
 }

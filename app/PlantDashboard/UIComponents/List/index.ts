@@ -1,9 +1,11 @@
+import { Plant, Record } from '../../../factories/Record';
 import { ObservableArray, ChangedData } from 'data/observable-array';
 import { Observable, EventData, PropertyChangeData } from "data/observable";
 import { GridLayout } from 'ui/layouts/grid-layout';
 import { ItemEventData } from 'ui/list-view';
 import { View } from "ui/core/view";
 import { parse as Parse, load as Load } from 'ui/builder';
+import { ListView } from 'ui/list-view'
 
 export class BaseUIComponent {
     protected _viewModel: Observable;
@@ -25,8 +27,10 @@ interface ChangeListCallback {
 }
 
 export interface SelectItemListCallback {
+
     (index: number, item: Observable): void;
 }
+
 export class ListUIComponent extends BaseUIComponent {
     private _listRef: ObservableArray<Observable>;
     private _order: Observable;
@@ -56,7 +60,6 @@ export class ListUIComponent extends BaseUIComponent {
         })
     }
 
-
     public set items(value: any[]) {
         let itms = value.map(x => {
             return new Observable({ ListViewPropertyLabel: 'loading', item: x });
@@ -72,14 +75,14 @@ export class ListUIComponent extends BaseUIComponent {
     }
 
 
-	public get listRef(): ObservableArray<Observable> {
-		return this._listRef;
-	}
+    public get listRef(): ObservableArray<Observable> {
+        return this._listRef;
+    }
 
-	public set listRef(value: ObservableArray<Observable>) {
-		this._listRef = value;
-	}
-    
+    public set listRef(value: ObservableArray<Observable>) {
+        this._listRef = value;
+    }
+
 
     public get labelProperty(): string {
         return this._labelProperty.get('ListViewPropertyLabel');
@@ -94,6 +97,12 @@ export class ListUIComponent extends BaseUIComponent {
             this._listRef.map((x, i) => {
                 let label = x.get('item')[this.labelProperty];
                 if (label) { x.set('ListViewPropertyLabel', label); }
+                if (x.get('item').record) {
+                    let record = <Record>x.get('item').record;
+                    if (record.isWarn()) {
+                        x.set('icon', String.fromCharCode(parseInt('f079', 16)));
+                    }
+                }
                 return x;
             });
         }
@@ -118,24 +127,79 @@ export class ListUIComponent extends BaseUIComponent {
             console.log('ListUIComponent.removeItems: el argumento "items" no es un Array');
             return;
         }
+        /*
         items.forEach(item => {
             let i = this._listRef.map(x => x.get('item')[property]).indexOf(item);
             if (i !== -1) { this.removeItem(i); }
-        });
+        });*/
+        for (var index = 0; index < items.length; index++) {
+            let i = this._listRef.map(x => x.get('item')[property]).indexOf(items[index]);
+            if (i !== -1) { this.removeItem(i); }
+
+        }
     }
 
-    public removeAllItems(){
+    public skipThisItems(items: any[], property: string) {
+        if (!Array.isArray(items)) {
+            console.log('ListUIComponent.removeItems: el argumento "items" no es un Array');
+            return;
+        }
+
+        let fil = this._listRef.filter(x => {
+            for (let e = 0; e < items.length; e++) {
+                if (items[e] === x.get('item')[property]) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+        this.removeAllItems();
+
+        fil.forEach(s => {
+            this._listRef.push(s);
+        })
+
+    }
+
+    public removeAllItems() {
         let length = this._listRef.length;
-        this._listRef.splice(0,length);
+        this._listRef.splice(0, length);
     }
 
     public addItem(value: any) {
-        let item = new Observable({ListViewPropertyLabel:'name', item:value});
-        let label = value.get('item')[this.labelProperty];
-        if (label) { value.set('ListViewPropertyLabel', label); }
+        console.log('-------------------------------- addItem => ---------------------------------------')
+        let item = new Observable({ ListViewPropertyLabel: 'name', item: value });
+        console.log('-------------------------------- addItem => ---------------------------------------')
+        let label = item.get('item')[this.labelProperty];
+        console.log('-------------------------------- addItem => ---------------------------------------')
+        if (label) { item.set('ListViewPropertyLabel', label); }
 
-        this._listRef.push(value);
+        if (item.get('item').record) {
+            let record = <Record>item.get('item').record;
+            if (record.isWarn()) {
+                item.set('icon', String.fromCharCode(parseInt('f079', 16)));
+            }
+        }
+
+        console.log('-------------------------------- addItem => before push: ' + this.listRef.length)
+        this._listRef.push(item);
+        console.log(' -------------------------------- addItem => after push: ' + this.listRef.length)
         this._sortList();
+    }
+
+    public updateItem(id, record) {
+        let index = this._listRef.map(x => x.get('item').id).indexOf(id);
+        if (index !== -1) {
+            let item = this._listRef.getItem(index);
+            let plant = <Plant>item.get('item');
+            plant.record = record;
+            if (record.isWarn()) {
+                item.set('icon', String.fromCharCode(parseInt('f079', 16)));
+            }else{
+                item.set('icon', '');
+            }
+        }
     }
 
     public sortByProp(direction?: string, property?: string) {
@@ -181,6 +245,7 @@ export class ListUIComponent extends BaseUIComponent {
         array.push(new Observable());
         array.pop();
     }
+
     public get length(): number {
         return this._listRef.length;
     }

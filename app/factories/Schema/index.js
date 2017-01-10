@@ -79,13 +79,13 @@ var Attributes = (function () {
             if (this._string) {
                 data['string'] = this._string;
             }
-            if (this._boolean) {
+            if (this._boolean !== undefined) {
                 data['boolean'] = this._boolean;
             }
             if (this._date) {
                 data['date'] = this._date;
             }
-            if (this._number) {
+            if (this._number !== undefined) {
                 data['number'] = this._number;
             }
             if (this._reference) {

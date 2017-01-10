@@ -50,7 +50,7 @@ var SelectionList = (function (_super) {
             this._theme.addChild(optionList);
         }
         this._viewModel.on(observable_1.Observable.propertyChangeEvent, function (args) {
-            if (args.propertyName === 'selectedIndex') {
+            if (args.propertyName === 'selectedIndex' && args.value !== -1) {
                 //console.log("PropertyChangeDataPropertyChangeDataPropertyChangeData   "+this._viewModel.get('selectedIndex') )
                 var item = _this._options.getItem(_this._viewModel.get('selectedIndex'));
                 console.log('item --------------------' + item.key);
@@ -65,6 +65,12 @@ var SelectionList = (function (_super) {
         this._viewModel.set('selectedOption', function (args) {
             var index = args.index;
             _this._viewModel.set('selectedIndex', index);
+        });
+        this._viewModel.set('noSelection', function () {
+            console.log('no selection');
+            _this._recordAttr.value = '';
+            _this._viewModel.set('selectedIndex', -1);
+            _this._changeView();
         });
         this._setValue();
     }
@@ -84,10 +90,18 @@ var SelectionList = (function (_super) {
             x.backgroundColor = 'white';
             x.color = 'gray';
         });
-        var opt = this._options.getItem(index);
-        opt.color = 'white';
-        opt.backgroundColor = '#f44242';
-        this._options.setItem(index, opt);
+        if (index !== undefined) {
+            var opt = this._options.getItem(index);
+            opt.color = 'white';
+            opt.backgroundColor = '#f44242';
+            this._options.setItem(index, opt);
+        }
+        else {
+            var opt = this._options.getItem(0);
+            opt.color = 'gray';
+            opt.backgroundColor = 'white';
+            this._options.setItem(index, opt);
+        }
     };
     return SelectionList;
 }(BaseComponent_1.BaseInputComponent));

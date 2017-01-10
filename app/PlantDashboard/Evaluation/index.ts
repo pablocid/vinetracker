@@ -148,7 +148,8 @@ page.fnOnShownModally = function (args: ShownModallyData) {
                                 args.closeCallback('ok', plant.id);
                             })
                         } else {
-                            args.closeCallback('error');
+                            saveComp.toggleSaveBtn();
+                            //args.closeCallback('error');
                         }
                     });
                 }

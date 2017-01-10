@@ -150,17 +150,15 @@ function makeView(args, context) {
                     neutralButtonText: "Cancelar"
                 };
                 dialogs_1.confirm(options).then(function (result) {
-                    // result can be true/false/undefined
-                    //console.log(result);
                     if (result) {
                         var saveRequest = new RecordService_1.SaveRecord(record);
                         saveRequest.save().then(function (s) {
                             context = {};
-                            args.closeCallback('ok', plant.id);
+                            args.closeCallback('ok', plant.id, record);
                         });
                     }
                     else {
-                        args.closeCallback('error');
+                        saveComp.saveBtnEnabled();
                     }
                 });
             }

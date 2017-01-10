@@ -1,7 +1,20 @@
 "use strict";
 var frame_1 = require('ui/frame');
-var _1 = require("../services/helperViewer/");
+var _1 = require('../services/helperViewer/');
 var BasePage_1 = require('../factories/BasePage');
+/*
+var Telephony = require('nativescript-telephony').Telephony;
+//import { Telephony } from 'nativescript-telephony';
+
+Telephony().then(function (resolved) {
+    console.log('resolved >', resolved)
+    console.log('deviceId: ',resolved.deviceId);
+    console.log('phoneNumber: ',resolved.phoneNumber);
+}).catch(function (error) {
+    console.error('error >', error)
+    console.dir(error);
+})
+*/
 var newView = new _1.HelperViewer();
 var style = {
     paddingBT: 30,

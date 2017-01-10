@@ -108,17 +108,18 @@ var HileraComponent = (function (_super) {
     };
     Object.defineProperty(HileraComponent.prototype, "restrictionItems", {
         set: function (values) {
-            this._nonEvaluated.removeItems(values, '_id');
+            this._nonEvaluated.skipThisItems(values, 'id');
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(HileraComponent.prototype, "evaluatedItems", {
         set: function (values) {
+            console.log('Largo de evaluadas: ------------------- ' + values.length);
             if (!this._mainList || this._mainList.length === 0) {
                 return;
             }
-            this._nonEvaluated.removeItems(values, '_id');
+            this._nonEvaluated.removeItems(values, 'id');
             var evList = this._mainList.map(function (x) { return x.id; });
             var ev = [];
             var noev = [];
@@ -136,6 +137,47 @@ var HileraComponent = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(HileraComponent.prototype, "evaluatedItems2", {
+        //las plantas registradas deberán tener el registro asociado en la propiedad 'record'
+        set: function (values) {
+            if (!this._mainList || this._mainList.length === 0) {
+                return;
+            }
+            this._nonEvaluated.removeItems(values.map(function (i) { return i.getAttribute("57c42f77c8307cd5b82f4486").value; }), 'id');
+            var evList = this._mainList.map(function (x) { return x.id; });
+            var ev = [];
+            for (var i = 0; i < values.length; i++) {
+                console.log(values[i].id);
+                var ei = evList.indexOf(values[i].getAttribute("57c42f77c8307cd5b82f4486").value);
+                if (ei !== -1) {
+                    var plant = this._mainList[ei];
+                    plant.record = values[i];
+                    ev.push(plant);
+                }
+            }
+            console.log(ev.length);
+            this._evaluated.items = ev;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    HileraComponent.prototype.evaluatedItem = function (value, record) {
+        if (!this._mainList || this._mainList.length === 0) {
+            return;
+        }
+        this._nonEvaluated.removeItems([value], 'id');
+        //**********************
+        var index = this._mainList.map(function (x) { return x.id; }).indexOf(value);
+        var evIndex = this._evaluated.listRef.map(function (x) { return x.get('item')['id']; }).indexOf(value);
+        if (index !== -1 && evIndex === -1) {
+            var plant = this._mainList[index];
+            plant.record = record;
+            this._evaluated.addItem(plant);
+        }
+        if (evIndex !== -1) {
+            this._evaluated.updateItem(value, record);
+        }
+    };
     return HileraComponent;
 }(BaseComponent_1.BaseComponent));
 exports.HileraComponent = HileraComponent;
